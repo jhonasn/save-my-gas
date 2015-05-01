@@ -2,7 +2,7 @@
   "libs": [
     "browser",
     "ecma5",
-    "ecma6",
+    "ecma6"
   ],
   "loadEagerly": [
     "www/**/*.js"
