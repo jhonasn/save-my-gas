@@ -4,7 +4,7 @@
 // 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
 // the 2nd parameter is an array of 'requires'
 // 'starter.controllers' is found in controllers.js
-angular.module('starter', ['ionic', 'starter.controllers'])
+var app = angular.module('save-my-gas', ['ionic', 'save-my-gas.controllers'])
 
 .run(function($ionicPlatform) {
   $ionicPlatform.ready(function() {
@@ -22,50 +22,41 @@ angular.module('starter', ['ionic', 'starter.controllers'])
 
 .config(function($stateProvider, $urlRouterProvider) {
   $stateProvider
-
-  .state('app', {
-    url: "/app",
+  .state('menu', {
+    url: "/menu",
     abstract: true,
-    templateUrl: "templates/menu.html",
-    controller: 'AppCtrl'
+    templateUrl: "templates/menu.html"
   })
-
-  .state('app.search', {
-    url: "/search",
+  .state('menu.gas-station', {
+    url: "/gas-station-list",
     views: {
       'menuContent': {
-        templateUrl: "templates/search.html"
+        templateUrl: "templates/gas-station-list.html",
+        controller: 'GasStationCtrl'
       }
     }
   })
-
-  .state('app.browse', {
-    url: "/browse",
+  .state('menu.vehicle', {
+    url: '/vehicle-list',
     views: {
       'menuContent': {
-        templateUrl: "templates/browse.html"
+        templateUrl: 'templates/vehicle-list.html',
+        controller: 'VehicleCtrl'
       }
     }
   })
-    .state('app.playlists', {
-      url: "/playlists",
-      views: {
-        'menuContent': {
-          templateUrl: "templates/playlists.html",
-          controller: 'PlaylistsCtrl'
-        }
-      }
-    })
-
-  .state('app.single', {
-    url: "/playlists/:playlistId",
+  .state('menu.vehicle.edit', {
+    url: '/vehicle-edit',
     views: {
       'menuContent': {
-        templateUrl: "templates/playlist.html",
-        controller: 'PlaylistCtrl'
+        templateUrl: 'templates/vehicle-edit.html',
+        controller: 'VehicleCtrl'
       }
     }
   });
+
   // if none of the above states are matched, use this as the fallback
-  $urlRouterProvider.otherwise('/app/playlists');
+  $urlRouterProvider.otherwise('/menu/gas-station-list');
 });
+
+angular.module('save-my-gas.controllers', []);

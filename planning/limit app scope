@@ -1,0 +1,13 @@
+what our program will do:
+	get location and search the nearer gas stations
+	compare distance and how much will cost to point what is the most economical
+
+what our program need:
+	gps or browser geolocation
+	car info -> galons per kilometers
+		if user don't know, ask:
+			1 - car power
+			2 - the car model
+
+what our program won't need:
+	user info/login
