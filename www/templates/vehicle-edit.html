@@ -1,12 +1,7 @@
-<ion-modal-view>
-  <ion-header-bar>
-    <h1 class="title">Register Vehicle</h1>
-    <div class="buttons">
-      <button class="button button-clear" ng-click="closeVehicle()">Close</button>
-    </div>
-  </ion-header-bar>
+<ion-view view-title="Edit Vehicle">
   <ion-content>
-    <form ng-submit="doVeicleRegister()">
+
+    <form ng-submit="saveVehicle(vehicle)">
       <div class="list">
 
         <label class="item item-input">
@@ -21,17 +16,19 @@
             </div>
             <select ng-model="vehicle.power">
               ng-repeat-option?
-              <option>Blue</option>
-              <option selected>Green</option>
-              <option>Red</option>
+              <option>1.0</option>
+              <option selected>2.0</option>
+              <option>1.8</option>
             </select>
           </label>
         </div>
 
         <label class="item">
-          <button class="button button-block button-positive" type="submit">Register</button>
+          <button class="button button-block button-balanced" type="submit">Save</button>
         </label>
+
       </div>
     </form>
+    
   </ion-content>
-</ion-modal-view>
+</ion-view>

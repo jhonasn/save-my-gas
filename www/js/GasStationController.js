@@ -1,12 +1,9 @@
-var app = angular.module('save-my-gas.controllers');
+var app = angular.module('save-my-gas')
 
-app.controller('GasStationCtrl', function($scope) {
-  $scope.playlists = [
-    { title: 'gas station #1', id: 1 },
-    { title: 'gas station #2', id: 2 },
-    { title: 'gas station #3', id: 3 },
-    { title: 'gas station #4', id: 4 },
-    { title: 'gas station #5', id: 5 },
-    { title: 'gas station #6', id: 6 }
-  ];
-});
+app.controller('GasStationCtrl', function($scope, crud) {
+  $scope.gasStations = crud.getAll('station')
+})
+
+app.controller('GasStationEditCtrl', function($scope, $state, $stateParams, crud) {
+  $scope.station = crud.get('station', $stateParams.id)
+})

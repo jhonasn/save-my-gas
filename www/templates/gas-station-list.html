@@ -1,9 +1,11 @@
 <ion-view view-title="Gas Stations">
   <ion-content>
+
     <ion-list>
-      <ion-item ng-repeat="playlist in playlists" href="#/menu/playlists/{{playlist.id}}">
-        {{playlist.title}}
+      <ion-item ng-repeat="station in gasStations" ui-sref="app.station-edit({id: station.id})">
+        {{station.name}}
       </ion-item>
     </ion-list>
+
   </ion-content>
 </ion-view>
