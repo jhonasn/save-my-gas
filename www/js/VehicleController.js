@@ -7,9 +7,6 @@ app.controller('VehicleCtrl', function($scope, $state, crud) {
 app.controller('VehicleEditCtrl', function($scope, $state, $stateParams, crud) {
   $scope.vehicle = crud.get('vehicle', $stateParams.id)
 
-  // if(!$scope.vehicle)
-  //   $scope.vehicle = { id: 0, power: null, name: null}
-
   $scope.saveVehicle = function(vehicle) {
     var entity = angular.copy(vehicle)
 

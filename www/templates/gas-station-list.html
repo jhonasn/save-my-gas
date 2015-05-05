@@ -2,7 +2,7 @@
   <ion-content>
 
     <ion-list>
-      <ion-item ng-repeat="station in gasStations" ui-sref="app.station-edit({id: station.id})">
+      <ion-item ng-repeat="station in gasStations" ui-sref="app.station-view({id: station.id})">
         {{station.name}}
       </ion-item>
     </ion-list>

@@ -33,12 +33,12 @@ app.config(function($stateProvider, $urlRouterProvider) {
       }
     }
   })
-  .state('app.station-edit', {
+  .state('app.station-view', {
     url: '/edit/:id',
     views: {
       'menuContent': {
-        templateUrl: '/templates/gas-station-edit.html',
-        controller: 'GasStationEditCtrl'
+        templateUrl: '/templates/gas-station-view.html',
+        controller: 'GasStationViewCtrl'
       }
     }
   })
