@@ -66,43 +66,58 @@ app.config(function($stateProvider, $urlRouterProvider) {
 
 app.factory('crud', function() {
 
+  //implement get station from gmaps
+
   var db = {
-    station: [
-      { name: 'gas station #1', id: 1 },
-      { name: 'gas station #2', id: 2 },
-      { name: 'gas station #3', id: 3 },
-      { name: 'gas station #4', id: 4 },
-      { name: 'gas station #5', id: 5 },
-      { name: 'gas station #6', id: 6 }
-    ],
-    vehicle: [
-      { name: 'v1', power: 1.1, id: 1 },
-      { name: 'v2', power: 1.2, id: 2 },
-      { name: 'v3', power: 1.3, id: 3 },
-      { name: 'v4', power: 1.4, id: 4 },
-      { name: 'v5', power: 1.8, id: 5 },
-      { name: 'v6', power: 2.0, id: 6 }
-    ]
+    // start: function() {
+    //   for (var i = 0; i < localStorage.length; i++) {
+    //     this[localStorage.key(i)] = localStorage[localStorage.key(i)]
+    //   }
+    // },
+    getEntitiesNames: function() {
+      var names = []
+      for (var i = 0; i < localStorage.length; i++) {
+        names.push(localStorage.key(i))
+      }
+
+      return names
+    },
+    get: function(index) {
+      if(localStorage.hasOwnProperty(index))
+        return JSON.parse(localStorage[index])
+      else
+        return null
+    },
+    set: function (index, value) {
+      localStorage[index] = JSON.stringify(value)
+    }
   }
+
+  // db.start()
 
   return {
     getAll(type) {
-      for (var collection in db) {
-        if (db.hasOwnProperty(collection)) {
-          if(collection.toLowerCase() === type.toString().toLowerCase())
-            return db[collection]
+      var entitiesNames = db.getEntitiesNames()
+      for (var i in entitiesNames) {
+        var collectionName = entitiesNames[i]
+        if (db.get(collectionName) && collectionName.toLowerCase() === type.toString().toLowerCase()) {
+          return db.get(collectionName)
         }
       }
 
       return null
     },
     get(type, id) {
-      var results = this.getAll(type).filter(function (element) {
-        if('id' in element && typeof(element.id) === 'number' && element.id == id)
-          return true;
-      })
+      if(this.getAll(type) != null) {
+        var results = this.getAll(type).filter(function (element) {
+          if('id' in element && typeof(element.id) === 'number' && element.id == id)
+            return true;
+        })
 
-      return results[0]
+        return results[0]
+      } else {
+        return null
+      }
     },
     save(type, entity) {
       var prevEntity = this.get(type, entity.id)
@@ -111,8 +126,14 @@ app.factory('crud', function() {
         prevEntity = entity
       else {
         var entities = this.getAll(type)
+        if(!entities) {
+          db.set(type, [])
+          entities = this.getAll(type)
+        }
+
         entity.id = entities.length + 1
         entities.push(entity)
+        db.set(type, entities)
       }
 
       return true
