@@ -63,19 +63,21 @@ define(function(app) {
       save(type, entity) {
         var prevEntity = this.get(type, entity.id)
 
-        if(prevEntity)
-          prevEntity = entity
-        else {
-          var entities = this.getAll(type)
-          if(!entities) {
-            db.set(type, [])
-            entities = this.getAll(type)
-          }
 
-          entity.id = entities.length + 1
-          entities.push(entity)
-          db.set(type, entities)
+        var entities = this.getAll(type)
+        if(!entities) {
+          db.set(type, [])
+          entities = this.getAll(type)
         }
+
+				if(prevEntity && prevEntity.idx && prevEntity.idx > -1) {
+					entities[prevEntity.idx] = entity
+				} else {
+					entity.id = entities.length + 1
+	        entities.push(entity)
+				}
+
+        db.set(type, entities)
 
         return true
       },

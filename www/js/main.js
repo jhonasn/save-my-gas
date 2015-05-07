@@ -1,5 +1,5 @@
 require.config({
-	baseUrl: '/',
+	baseUrl: '',
 	paths: {
 		cordova: 'cordova',
 		ionic: 'lib/ionic/js/ionic.bundle',

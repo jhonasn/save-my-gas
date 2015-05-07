@@ -7,14 +7,14 @@ define(function(app) {
     .state('app', {
       url: '/app',
       abstract: true,
-      templateUrl: "/templates/menu.html"
+      templateUrl: "templates/menu.html"
     })
 
     .state('app.station', {
       url: '/station',
       views: {
         'menuContent': {
-          templateUrl: "/templates/gas-station-list.html",
+          templateUrl: "templates/gas-station-list.html",
           controller: 'GasStationCtrl'
         }
       }
@@ -23,7 +23,7 @@ define(function(app) {
       url: '/edit/:id',
       views: {
         'menuContent': {
-          templateUrl: '/templates/gas-station-view.html',
+          templateUrl: 'templates/gas-station-view.html',
           controller: 'GasStationViewCtrl'
         }
       }
@@ -34,7 +34,7 @@ define(function(app) {
 			cache: false,
       views: {
         'menuContent': {
-          templateUrl: '/templates/vehicle-list.html',
+          templateUrl: 'templates/vehicle-list.html',
           controller: 'VehicleCtrl'
         }
       }
@@ -43,7 +43,7 @@ define(function(app) {
       url: '/vehicle/:id',
       views: {
         'menuContent': {
-          templateUrl: '/templates/vehicle-edit.html',
+          templateUrl: 'templates/vehicle-edit.html',
           controller: 'VehicleEditCtrl'
         }
       }
