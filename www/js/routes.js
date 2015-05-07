@@ -31,6 +31,7 @@ define(function(app) {
 
     .state('app.vehicle', {
       url: '/vehicle',
+			cache: false,
       views: {
         'menuContent': {
           templateUrl: '/templates/vehicle-list.html',

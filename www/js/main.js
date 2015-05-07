@@ -1,4 +1,4 @@
-requirejs.config({
+require.config({
 	baseUrl: '/',
 	paths: {
 		cordova: 'cordova',
@@ -11,10 +11,10 @@ requirejs.config({
 		vehicleCtrl: 'js/controllers/VehicleController'
 	},
 	shim: {
-		// ionic: {
-		// 	exports: 'ionic',
-		// 	deps: ['cordova']
-		// },
+		ionic: {
+			exports: 'ionic',
+			deps: ['cordova']
+		},
 		app: { deps: ['ionic'] }
 	},
 	priority: [
@@ -23,5 +23,5 @@ requirejs.config({
 	deps: ['js/bootstrap']
 })
 
-requirejs(['app'],function(app) {
+require(['app'],function(app) {
 })
