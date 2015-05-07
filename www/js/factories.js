@@ -1,0 +1,86 @@
+define(function(app) {
+
+	var crudSvc = function () {
+
+    //implement get station from gmaps
+
+    var db = {
+      // start: function() {
+      //   for (var i = 0; i < localStorage.length; i++) {
+      //     this[localStorage.key(i)] = localStorage[localStorage.key(i)]
+      //   }
+      // },
+      getEntitiesNames: function() {
+        var names = []
+        for (var i = 0; i < localStorage.length; i++) {
+          names.push(localStorage.key(i))
+        }
+
+        return names
+      },
+      get: function(index) {
+        if(localStorage.hasOwnProperty(index))
+          return JSON.parse(localStorage[index])
+        else
+          return null
+      },
+      set: function (index, value) {
+        localStorage[index] = JSON.stringify(value)
+      }
+    }
+
+    // db.start()
+
+    return {
+      getAll(type) {
+        var entitiesNames = db.getEntitiesNames()
+        for (var i in entitiesNames) {
+          var collectionName = entitiesNames[i]
+          if (db.get(collectionName) && collectionName.toLowerCase() === type.toString().toLowerCase()) {
+            return db.get(collectionName)
+          }
+        }
+
+        return null
+      },
+      get(type, id) {
+        if(this.getAll(type) != null) {
+          var results = this.getAll(type).filter(function (element) {
+            if('id' in element && typeof(element.id) === 'number' && element.id == id)
+              return true;
+          })
+
+          return results[0]
+        } else {
+          return null
+        }
+      },
+      save(type, entity) {
+        var prevEntity = this.get(type, entity.id)
+
+        if(prevEntity)
+          prevEntity = entity
+        else {
+          var entities = this.getAll(type)
+          if(!entities) {
+            db.set(type, [])
+            entities = this.getAll(type)
+          }
+
+          entity.id = entities.length + 1
+          entities.push(entity)
+          db.set(type, entities)
+        }
+
+        return true
+      }
+    }
+  }
+
+	var module = {
+		crud: crudSvc
+	}
+
+	return module
+
+})
