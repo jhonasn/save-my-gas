@@ -10,7 +10,10 @@
   "plugins": {
     "complete_strings": {},
     "angular": {},
-    "requirejs": {},
+    "requirejs": {
+      "baseURL": "./www/",
+      "paths": {}
+    },
     "doc_comment": {
      "fullDocs": true
     }
