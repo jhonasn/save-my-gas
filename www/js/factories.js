@@ -45,10 +45,15 @@ define(function(app) {
       },
       get(type, id) {
         if(this.getAll(type) != null) {
-          var results = this.getAll(type).filter(function (element) {
+					var entities = this.getAll(type)
+          var results = entities.filter(function (element) {
             if('id' in element && typeof(element.id) === 'number' && element.id == id)
-              return true;
+              return true
           })
+
+					if(results.length > 0) {
+						results[0].idx = entities.indexOf(results[0])
+					}
 
           return results[0]
         } else {
@@ -73,7 +78,24 @@ define(function(app) {
         }
 
         return true
-      }
+      },
+			delete(type, entity) {
+				var prevEntity = this.get(type, entity.id)
+
+				if(prevEntity) {
+					var entities = this.getAll(type)
+
+					if(prevEntity.idx && prevEntity.idx > -1) {
+						prevEntity = entities.splice(prevEntity.idx, 1)
+						if(prevEntity) {
+							db.set(type, entities)
+							return true
+						}
+					}
+				}
+
+				return false
+			}
     }
   }
 

@@ -1,15 +1,20 @@
 <ion-view view-title="Vehicles">
   <ion-content>
 
-    <ion-list>
+    <ion-list class="vehicle">
       <ion-item class="item-balanced" ui-sref="app.vehicle-edit({id: 0})">
         Register Vehicle
       </ion-item>
 
-      <ion-item ng-repeat="vehicle in vehicles" ui-sref="app.vehicle-edit({id: vehicle.id})">
-        {{vehicle.name}}
+      <ion-item ng-repeat="vehicle in vehicles" class="item-icon-right" >
+          <span class="col col-75" ui-sref="app.vehicle-edit({id: vehicle.id})">
+            {{vehicle.name}}
+          </span>
+          <button class="button button-clear button-assertive icon ion-android-close delete" ng-click="delete(vehicle)"></button>
       </ion-item>
+
     </ion-list>
 
   </ion-content>
 </ion-view>
+<!-- button button-clear  icon ion-android-close -->
