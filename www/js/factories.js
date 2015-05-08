@@ -100,7 +100,7 @@ define(function(app) {
 			}
     }
   }
-
+	
 	var module = {
 		crud: crudSvc
 	}

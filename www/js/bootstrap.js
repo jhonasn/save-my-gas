@@ -4,6 +4,7 @@ define(['ionic', 'app', 'routes'], function (ionic, app) {
     'use strict'
 
     var onDeviceReady = function () {
+      //Initialize application
       angular.bootstrap(document, [app.name])
     }
 

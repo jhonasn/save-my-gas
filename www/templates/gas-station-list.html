@@ -1,9 +1,27 @@
 <ion-view view-title="Gas Stations">
   <ion-content>
 
+    <div class="card" ng-show="!connected">
+      <div class="item item-text-wrap">
+        You are disconnected!
+      </div>
+    </div>
+
+    <div class="card" ng-show="error">
+      <div class="item item-text-wrap">
+        Sorry! we had an error trying to get your geolocation!
+      </div>
+    </div>
+
     <ion-list>
       <ion-item ng-repeat="station in gasStations" ui-sref="app.station-view({id: station.id})">
         {{station.name}}
+      </ion-item>
+      <ion-item>
+        <button class="button col" ng-show="position.coords" ng-click="openUrl('geo:' + position.coords.latitude + ',' + position.coords.longitude)">Open my Geolocation</button>
+      </ion-item>
+      <ion-item>
+        <button class="button col" ng-click="loadStations()">Show geo!</button>
       </ion-item>
     </ion-list>
 

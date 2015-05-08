@@ -11,6 +11,7 @@ define(['app'], function(app) {
         // org.apache.cordova.statusbar required
         StatusBar.styleDefault()
       }
+			
     })
   }
 
