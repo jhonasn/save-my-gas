@@ -5,10 +5,13 @@ define(function(){
       $scope.gasStations = crud.getAll('station')
       //$scope.showGeolocation()
 
-      $scope.connected = true
+      $scope.connected = navigator.network.connection.type != Connection.NONE
 
       navigator.connection.getInfo(function(conntype){
         $scope.connected = conntype != Connection.NONE
+        if($scope.connected) {
+          $scope.loadStations()
+        }
       })
 
       $scope.openUrl = function (url) {
@@ -17,9 +20,9 @@ define(function(){
 
       $scope.loadStations = function() {
 
-        // if(navigator.network.connection.type == Connection.NONE) {
-        //   return
-        // }
+        if(!$scope.connected) {
+          return
+        }
 
         //test connection
         $http.get('http://google.com')
