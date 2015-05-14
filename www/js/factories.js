@@ -1,4 +1,4 @@
-define(function(app) {
+define(function() {
 
 	var crudSvc = function () {
 
@@ -32,7 +32,7 @@ define(function(app) {
     // db.start()
 
     return {
-      getAll(type) {
+      getAll: function(type) {
         var entitiesNames = db.getEntitiesNames()
         for (var i in entitiesNames) {
           var collectionName = entitiesNames[i]
@@ -43,7 +43,7 @@ define(function(app) {
 
         return null
       },
-      get(type, id) {
+      get: function(type, id) {
         if(this.getAll(type) != null) {
 					var entities = this.getAll(type)
           var results = entities.filter(function (element) {
@@ -60,7 +60,7 @@ define(function(app) {
           return null
         }
       },
-      save(type, entity) {
+      save: function(type, entity) {
         var prevEntity = this.get(type, entity.id)
 
 
@@ -81,7 +81,7 @@ define(function(app) {
 
         return true
       },
-			delete(type, entity) {
+			delete: function(type, entity) {
 				var prevEntity = this.get(type, entity.id)
 
 				if(prevEntity) {
@@ -100,7 +100,7 @@ define(function(app) {
 			}
     }
   }
-	
+
 	var module = {
 		crud: crudSvc
 	}

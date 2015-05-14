@@ -1,4 +1,4 @@
-define(['app'], function(app) {
+define(function() {
 
 	var readyRunner = function($ionicPlatform) {
     $ionicPlatform.ready(function() {
@@ -11,7 +11,7 @@ define(['app'], function(app) {
         // org.apache.cordova.statusbar required
         StatusBar.styleDefault()
       }
-			
+
     })
   }
 

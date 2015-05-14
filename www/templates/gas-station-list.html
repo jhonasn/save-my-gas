@@ -7,22 +7,30 @@
       </div>
     </div>
 
-    <div class="card" ng-show="error">
+    <div class="card" ng-show="geolocationError">
       <div class="item item-text-wrap">
-        Sorry! we had an error trying to get your geolocation!
+        There was an error trying to get your geolocation!
       </div>
     </div>
 
     <ion-list>
+
+      <ion-item ng-show="loadingGeolocation">
+        ...Loading your geolocation...
+      </ion-item>
+
+      <ion-item>
+        <button class="button col" ng-disabled="loadingGeolocation" ng-click="updateStations()">Update Stations</button>
+      </ion-item>
+
       <ion-item ng-repeat="station in gasStations" ui-sref="app.station-view({id: station.id})">
         {{station.name}}
       </ion-item>
+
       <ion-item>
-        <button class="button col" ng-show="position.coords" ng-click="openUrl('geo:' + position.coords.latitude + ',' + position.coords.longitude)">Open my Geolocation</button>
+        <button class="button col" ng-show="geolocation.coords" ng-click="openUrl('geo:' + geolocation.coords.latitude + ',' + geolocation.coords.longitude)">Open my Geolocation</button>
       </ion-item>
-      <ion-item>
-        <button class="button col" ng-click="loadStations()">Show geo!</button>
-      </ion-item>
+
     </ion-list>
 
   </ion-content>

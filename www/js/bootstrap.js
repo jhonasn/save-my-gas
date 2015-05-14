@@ -1,6 +1,6 @@
 /*global define, require, console, cordova, navigator */
 
-define(['ionic', 'app', 'routes'], function (ionic, app) {
+define(['ionic', 'app'], function (ionic, app) {
     'use strict'
 
     var onDeviceReady = function () {

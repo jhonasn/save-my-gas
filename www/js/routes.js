@@ -1,7 +1,11 @@
-define(function(app) {
+define(function() {
 
-	var config = function ($stateProvider, $urlRouterProvider) {
+	var config = function ($stateProvider, $urlRouterProvider, $httpProvider) {
     $urlRouterProvider.otherwise('app/station')
+
+		//try to make "cors" requests
+		$httpProvider.defaults.useXDomain = true
+    delete $httpProvider.defaults.headers.common['X-Requested-With']
 
     $stateProvider
     .state('app', {
@@ -51,7 +55,7 @@ define(function(app) {
 
   }
 
-	config.$inject = ['$stateProvider', '$urlRouterProvider']
+	config.$inject = ['$stateProvider', '$urlRouterProvider', '$httpProvider']
 
 	var module = {
 		routes: config

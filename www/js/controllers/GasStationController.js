@@ -2,17 +2,42 @@ define(function(){
 
   var module = {
     GasStationCtrl: function($scope, $http, crud, $log) {
-      $scope.gasStations = crud.getAll('station')
-      //$scope.showGeolocation()
-
       $scope.connected = navigator.network.connection.type != Connection.NONE
+      $scope.geolocation = null
+      $scope.loadingGeolocation = false
+      $scope.geolocationError = false
 
-      navigator.connection.getInfo(function(conntype){
+      //constantly refresh connected variable
+      /*navigator.connection.getInfo(function(conntype){
         $scope.connected = conntype != Connection.NONE
-        if($scope.connected) {
-          $scope.loadStations()
+      })*/
+      document.addEventListener("online", function() { $scope.connected = true }, false)
+      document.addEventListener("offline", function() { $scope.connected = false }, false)
+
+      $scope.updateStations = function() {
+        $scope.loadingGeolocation = true
+        //refresh geolocation
+        if (navigator.geolocation) {
+          navigator.geolocation.getCurrentPosition(
+            function success(pos) {
+              $scope.loadingGeolocation = false
+              $scope.geolocationError = false
+              $scope.geolocation = pos
+
+              //refresh stations
+              $scope.loadStations()
+            },
+            function error(error) {
+              $scope.loadingGeolocation = false
+              $scope.geolocationError = true
+              console.error(error)
+            },
+            { maximumAge: 3000, timeout: 30000, enableHighAccuracy: true }
+          )
+        } else {
+          $scope.geolocationError = true
         }
-      })
+      }
 
       $scope.openUrl = function (url) {
         window.open(url, '_system')
@@ -20,7 +45,7 @@ define(function(){
 
       $scope.loadStations = function() {
 
-        if(!$scope.connected) {
+        if(!$scope.connected || $scope.geolocation == null) {
           return
         }
 
@@ -29,28 +54,7 @@ define(function(){
         .success($log.info)
         .error($log.warn)
 
-        //first we need to get the position
-        if (navigator.geolocation) {
-          navigator.geolocation.getCurrentPosition(
-            function success(pos) {
-              $scope.position = pos
-              $scope.radius = 5000 //meters
-
-              //second step
-              getStations(pos)
-            },
-            function error(error) {
-              $scope.position = 404
-              console.error(error)
-            },
-            { maximumAge: 3000, timeout: 5000, enableHighAccuracy: true }
-          )
-        } else {
-          $scope.position = 404
-        }
-      }
-
-      function getStations(position) {
+        /*
         $http.get('https://maps.googleapis.com/maps/api/place/search/json',
         {
           params: {
@@ -72,7 +76,11 @@ define(function(){
         .error(function(data, status, headers, config) {
           $scope.position = 404
         })
+        */
       }
+
+      //start trying to get stations
+      $scope.updateStations()
     },
     GasStationViewCtrl: function($scope, $state, $stateParams, crud) {
       $scope.station = crud.get('station', $stateParams.id)
