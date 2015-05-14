@@ -1,37 +1,45 @@
 <ion-view view-title="Gas Stations">
-  <ion-content>
+    <ion-content>
 
-    <div class="card" ng-show="!connected">
-      <div class="item item-text-wrap">
-        You are disconnected!
-      </div>
-    </div>
+        <div class="card" ng-show="!connected">
+            <div class="item item-text-wrap">
+                You are disconnected!
+            </div>
+        </div>
 
-    <div class="card" ng-show="geolocationError">
-      <div class="item item-text-wrap">
-        There was an error trying to get your geolocation!
-      </div>
-    </div>
+        <div class="card" ng-show="geolocationError">
+            <div class="item item-text-wrap">
+                There was an error trying to get your geolocation!
+            </div>
+        </div>
 
-    <ion-list>
+        <div class="card" ng-show="gmapsError">
+            <div class="item item-text-wrap">
+                There was an error trying to get the gas stations!
+            </div>
+        </div>
 
-      <ion-item ng-show="loadingGeolocation">
-        ...Loading your geolocation...
-      </ion-item>
+        <p>Spring API Test: {{ springTest }}</p>
 
-      <ion-item>
-        <button class="button col" ng-disabled="loadingGeolocation" ng-click="updateStations()">Update Stations</button>
-      </ion-item>
+        <ion-list>
 
-      <ion-item ng-repeat="station in gasStations" ui-sref="app.station-view({id: station.id})">
-        {{station.name}}
-      </ion-item>
+            <ion-item ng-show="loadingGeolocation">
+                ...Loading your geolocation...
+            </ion-item>
 
-      <ion-item>
-        <button class="button col" ng-show="geolocation.coords" ng-click="openUrl('geo:' + geolocation.coords.latitude + ',' + geolocation.coords.longitude)">Open my Geolocation</button>
-      </ion-item>
+            <ion-item>
+                <button class="button col" ng-disabled="loadingGeolocation" ng-click="updateStations()">Update Stations</button>
+            </ion-item>
 
-    </ion-list>
+            <ion-item ng-repeat="station in gasStations" ui-sref="app.station-view({id: station.id})">
+                {{station.name}}
+            </ion-item>
 
-  </ion-content>
+            <ion-item>
+                <button class="button col" ng-show="geolocation.coords" ng-click="openUrl('geo:' + geolocation.coords.latitude + ',' + geolocation.coords.longitude)">Open my Geolocation</button>
+            </ion-item>
+
+        </ion-list>
+
+    </ion-content>
 </ion-view>

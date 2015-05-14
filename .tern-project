@@ -12,7 +12,16 @@
     "angular": {},
     "requirejs": {
       "baseURL": "./www/",
-      "paths": {}
+      "paths": [
+        "cordova",
+        "lib/ionic/js/ionic.bundle",
+        "js/app",
+        "js/runners",
+        "js/routes",
+        "js/factories",
+        "js/controllers/GasStationController",
+        "js/controllers/VehicleController"
+      ]
     },
     "doc_comment": {
      "fullDocs": true
