@@ -10,7 +10,6 @@ define([
         var app = angular.module('save-my-gas', ['ionic'])
             .run(runners.run)
             .factory('crud', factories.crud)
-            .service('testInternet', factories.testInternet)
             .config(routes.routes)
             .controller('GasStationCtrl', stationCtrl.GasStationCtrl)
             .controller('GasStationViewCtrl', stationCtrl.GasStationViewCtrl)

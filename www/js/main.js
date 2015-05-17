@@ -3,20 +3,22 @@ require.config({
     paths: {
         cordova: 'cordova',
         ionic: 'lib/ionic/js/ionic.bundle',
-        //async: 'lib/requirejs-plugins/src/async',
+        async: 'lib/requirejs-plugins/src/async',
         app: 'js/app',
         runners: 'js/runners',
         routes: 'js/routes',
         factories: 'js/factories',
         stationCtrl: 'js/controllers/GasStationController',
-        vehicleCtrl: 'js/controllers/VehicleController'
+        vehicleCtrl: 'js/controllers/VehicleController',
     },
     shim: {
         ionic: {
             exports: 'ionic',
             deps: ['cordova']
         },
-        app: { deps: ['ionic'] }
+        app: {
+            deps: ['ionic']
+        }
     },
     priority: [
         'ionic'
@@ -24,4 +26,4 @@ require.config({
     deps: ['js/bootstrap']
 })
 
-require(['app'],function() {})
+require(['app', 'async!http://maps.google.com/maps/api/js?sensor=true&libraries=places&key=AIzaSyC8__DNaaPmF5WSxjrhdnre8bJ_jdSyex8'], function () {})

@@ -20,6 +20,7 @@
         </div>
 
         <p>Spring API Test: {{ springTest }}</p>
+        <br>
 
         <ion-list>
 
@@ -29,10 +30,24 @@
 
             <ion-item>
                 <button class="button col" ng-disabled="loadingGeolocation" ng-click="updateStations()">Update Stations</button>
+                <button class="button col" ng-click="loadStations();">loadStations</button>
             </ion-item>
 
             <ion-item ng-repeat="station in gasStations" ui-sref="app.station-view({id: station.id})">
-                {{station.name}}
+                <h3>{{station.name}}</h3>
+                <ul>
+                    <li>{{station.address}}</li>
+                    <li>distance: {{station.distance.text}}</li>
+                    <li>time to arrive: {{station.duration.text}}</li>
+                    <li>precise address: {{station.addressPrecise}}</li>
+                    <li>galons: NEED TO DO</li>
+                </ul>
+                <ul>
+                    prices: i don't know if i can do this
+                    <li>gas: </li>
+                    <li>diesel: </li>
+                    <li>oxy gas: </li>
+                </ul>
             </ion-item>
 
             <ion-item>

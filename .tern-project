@@ -12,16 +12,16 @@
     "angular": {},
     "requirejs": {
       "baseURL": "./www/",
-      "paths": [
-        "cordova",
-        "lib/ionic/js/ionic.bundle",
-        "js/app",
-        "js/runners",
-        "js/routes",
-        "js/factories",
-        "js/controllers/GasStationController",
-        "js/controllers/VehicleController"
-      ]
+      "paths": {
+        "cordova": "cordova",
+        "ionic": "lib/ionic/js/ionic.bundle",
+        "app": "js/app",
+        "runners": "js/runners",
+        "routes": "js/routes",
+        "factories": "js/factories",
+        "GasStationController": "js/controllers/GasStationController",
+        "VehicleController": "js/controllers/VehicleController"
+      }
     },
     "doc_comment": {
      "fullDocs": true

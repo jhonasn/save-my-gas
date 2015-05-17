@@ -6,12 +6,13 @@
 - [x] make http requests work
 - [ ] work to get nearer gas stations implementing:
  - [x] get geolocation looking for nearer stations
- - [ ] google place api to get the gas stations
+ - [x] google place api to get the gas stations
  - [ ] google directions api to show the route to destination
 - [ ] make the computation to transform distance in galons and after in money
 - [ ] fix error messages, generalize it
-- [ ] fix cars not deleting cars
-- [ ] implement cars power
+- [ ] verify if register cars is really needed
+- [ ] *fix cars not deleting cars*
+- [ ] implement data to show all cars power
 
 ### Medium Priority
 *Tasks that maybe will be implemented or don't have high priority*
@@ -19,7 +20,7 @@
 - [ ] separate google maps requests from controllers (maybe)
 - [x] open a point in google maps app
 - [ ] open routes from directions in google maps app
-- [ ] enable cors with gmaps
+- [x] enable cors with gmaps
 
 ### Low Priority
 *Those tasks will be implemented on versions later 1.0*
@@ -27,6 +28,7 @@
 - [ ] implement vehicle reorder
 - [ ] implement search to another place in order to show how much fuel will spend to location
 - [ ] make places list in order to make a comparation where how much it will be spend
+- [ ] verify if is a good to use Crosswalk instead WebView
 
 ## Later Tasks
 *Tasks that will be implemented after the app goes to production or apply for the last*
