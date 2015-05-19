@@ -1,5 +1,7 @@
 {
     "jscodehints.detectedExclusions": [
-        "/home/jhonasn/Projects/save-my-gas/www/js/controllers/VehicleController.js"
+        "/home/jhonasn/Projects/save-my-gas/www/js/controllers/VehicleController.js",
+        "/home/jhonasn/Projects/save-my-gas/www/lib/google-maps/util.js",
+        "/home/jhonasn/Projects/save-my-gas/www/lib/google-maps/common.js"
     ]
 }

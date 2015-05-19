@@ -4,15 +4,19 @@
 *Those tasks will define the 1.0 version*
 
 - [x] make http requests work
-- [ ] work to get nearer gas stations implementing:
+- [x] work to get nearer gas stations implementing:
  - [x] get geolocation looking for nearer stations
  - [x] google place api to get the gas stations
- - [ ] google directions api to show the route to destination
+ - [x] google directions api to show the route to destination
+   - used directions/distancematrix api to get distance between user and gasstation)
 - [ ] make the computation to transform distance in galons and after in money
+ - [ ] make or get consumption average of vehicle per potency/power (there's some statistics in inmetro per year)
+- [ ] implement data to show all cars power
+- [ ] calculates with usage time the vehicle's fuel consumption
+- [ ] get gas stations princing
 - [ ] fix error messages, generalize it
 - [ ] verify if register cars is really needed
 - [ ] *fix cars not deleting cars*
-- [ ] implement data to show all cars power
 
 ### Medium Priority
 *Tasks that maybe will be implemented or don't have high priority*

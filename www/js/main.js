@@ -3,7 +3,6 @@ require.config({
     paths: {
         cordova: 'cordova',
         ionic: 'lib/ionic/js/ionic.bundle',
-        async: 'lib/requirejs-plugins/src/async',
         app: 'js/app',
         runners: 'js/runners',
         routes: 'js/routes',
@@ -26,4 +25,4 @@ require.config({
     deps: ['js/bootstrap']
 })
 
-require(['app', 'async!http://maps.google.com/maps/api/js?sensor=true&libraries=places&key=AIzaSyC8__DNaaPmF5WSxjrhdnre8bJ_jdSyex8'], function () {})
+require(['app'], function () {})

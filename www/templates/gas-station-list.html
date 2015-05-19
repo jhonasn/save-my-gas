@@ -48,6 +48,8 @@
                     <li>diesel: </li>
                     <li>oxy gas: </li>
                 </ul>
+
+                <button class="button col" ng-show="station.location && geolocation.coords" ng-click="openUrl('http://maps.google.com/maps?saddr={0},{1}&daddr={2},{3}'.replace('{0}',geolocation.coords.latitude).replace('{1}',geolocation.coords.longitude).replace('{2}',station.location.lat).replace('{3}',station.location.lng))">Open route to this gas station</button>
             </ion-item>
 
             <ion-item>

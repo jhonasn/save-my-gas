@@ -71,30 +71,24 @@ define(function () {
                     }
                 }
 
-                //                //for test internet connection//                $http.get('http://rest-service.guides.spring.io/greeting')
-                //                    .success(function (data) {
-                //                        $scope.springTest = data
-                //                    })
-                //                    .error(function (data, code) {
-                //                        $scope.springTest = 'Error! : ' + code
-                //                    })
+                var geolocaionStr = '{0},{1}'
+                    .replace('{0}', $scope.geolocation.coords.latitude)
+                    .replace('{1}', $scope.geolocation.coords.longitude)
 
-                var map = new google.maps.Map(document.createElement('div'))
-
-                var placesSvc = new google.maps.places.PlacesService(map)
-                var distanceSvc = new google.maps.DistanceMatrixService()
-
-                var geolocationLatLng = new google.maps.LatLng($scope.geolocation.coords.latitude, $scope.geolocation.coords.longitude)
-
-                placesSvc.nearbySearch({
-                        location: geolocationLatLng,
-                        //radius: $scope.radius,//pass radius or pass rankBy. max: 50 000 (meters)
-                        types: ['gas_station'],
-                        rankBy: google.maps.places.RankBy.DISTANCE
-                    },
-                    function (results, status) {
-                        if (status == google.maps.places.PlacesServiceStatus.OK) {
-                            $scope.gasStations = results.map(function (place, i) {
+                $http.get('https://maps.googleapis.com/maps/api/place/nearbysearch/json', {
+                        params: {
+                            key: 'AIzaSyAhxGIkGQ9Xi6fUi61W7_4fuiyQ6yMt6y8',
+                            location: geolocaionStr,
+                            radius: $scope.radius, //pass radius or pass rankBy. max: 50 000 (meters)
+                            types: 'gas_station',
+                            rankBy: 'distance',
+                        }
+                    })
+                    .success(function (data) {
+                        console.info('success places response')
+                        console.log(data)
+                        if (data.status == 'OK') {
+                            $scope.gasStations = data.results.map(function (place, i) {
                                 return {
                                     name: place.name,
                                     address: place.vicinity,
@@ -103,22 +97,29 @@ define(function () {
                             })
 
                             var destinationsPoints = $scope.gasStations.map(function (station) {
-                                return station.location
+                                return '{0}{1}'
+                                    .replace('{0}', station.location.lat)
+                                    .replace('{1}', station.location.lng)
                             })
 
-                            distanceSvc.getDistanceMatrix({
-                                    origins: [geolocationLatLng],
-                                    destinations: destinationsPoints,
-                                    travelMode: google.maps.TravelMode.DRIVING
-                                },
-                                function (responseDistance, statusDistance) {
-                                    if (statusDistance == google.maps.DistanceMatrixStatus.OK) {
-                                        var results = responseDistance.rows[0].elements
+                            $http.get('https://maps.googleapis.com/maps/api/distancematrix/json', {
+                                    params: {
+                                        origins: geolocaionStr,
+                                        destinations: destinationsPoints.join('|'),
+                                        travelMode: 'DRIVING'
+                                    }
+                                })
+                                .success(function (dataDist) {
+                                    console.info('success distance response')
+                                    console.log(dataDist)
+
+                                    if (dataDist.status == 'OK') {
+                                        var results = dataDist.rows[0].elements
 
                                         for (var i = 0; i < $scope.gasStations.length; i++) {
                                             $scope.gasStations[i].distance = results[i].distance
                                             $scope.gasStations[i].duration = results[i].duration
-                                            $scope.gasStations[i].addressPrecise = responseDistance.destinationAddresses[i]
+                                            $scope.gasStations[i].addressPrecise = dataDist.destination_addresses[i]
                                         }
 
                                         $scope.gasStations = $scope.gasStations.sort(function (a, b) {
@@ -126,13 +127,20 @@ define(function () {
                                         })
 
                                         console.info('gasStations updated')
-                                        console.log($scope.gasStations)
                                     }
                                 })
+                                .error(function (resDist, codeDist) {
+                                    $scope.gmapsError = true
+                                    console.error('error distance response: ' + code)
+                                    console.log(res)
+                                })
                         }
-                    }
-                )
-
+                    })
+                    .error(function (res, code) {
+                        $scope.gmapsError = true
+                        console.error('error places response: ' + code)
+                        console.log(res)
+                    })
             }
 
             //start trying to get stations
