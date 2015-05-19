@@ -20,10 +20,11 @@
 
 ### Medium Priority
 *Tasks that maybe will be implemented or don't have high priority*
+
 - [ ] separate connection verification from controllers
 - [ ] separate google maps requests from controllers (maybe)
 - [x] open a point in google maps app
-- [ ] open routes from directions in google maps app
+- [x] open routes from directions in google maps app
 - [x] enable cors with gmaps
 
 ### Low Priority
@@ -32,10 +33,11 @@
 - [ ] implement vehicle reorder
 - [ ] implement search to another place in order to show how much fuel will spend to location
 - [ ] make places list in order to make a comparation where how much it will be spend
-- [ ] verify if is a good to use Crosswalk instead WebView
 
 ## Later Tasks
 *Tasks that will be implemented after the app goes to production or apply for the last*
+
+- [ ] verify if is a good to use Crosswalk instead WebView
 - [ ] when application goes to production implement android google admob/adsense api
 - [ ] enable billing of google console
 - [ ] review design
