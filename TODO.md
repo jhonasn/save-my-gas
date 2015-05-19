@@ -36,5 +36,6 @@
 
 ## Later Tasks
 *Tasks that will be implemented after the app goes to production or apply for the last*
-- [ ] when application goes to production implement android google maps api
+- [ ] when application goes to production implement android google admob/adsense api
+- [ ] enable billing of google console
 - [ ] review design
