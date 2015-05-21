@@ -1,14 +1,15 @@
 require.config({
     baseUrl: '',
     paths: {
-        cordova: 'cordova',
-        ionic: 'lib/ionic/js/ionic.bundle',
-        app: 'js/app',
-        runners: 'js/runners',
-        routes: 'js/routes',
-        factories: 'js/factories',
-        stationCtrl: 'js/controllers/GasStationController',
-        vehicleCtrl: 'js/controllers/VehicleController',
+        'cordova': 'cordova',
+        'ionic': 'lib/ionic/js/ionic.bundle',
+        'app': 'js/app',
+        'runners': 'js/runners',
+        'routes': 'js/routes',
+        'crudSvc': 'js/services/crud',
+        'stationsSvc': 'js/services/stations',
+        'stationCtrl': 'js/controllers/GasStationController',
+        'vehicleCtrl': 'js/controllers/VehicleController',
     },
     shim: {
         ionic: {

@@ -11,17 +11,7 @@
     "complete_strings": {},
     "angular": {},
     "requirejs": {
-      "baseURL": "./www/",
-      "paths": {
-        "cordova": "cordova",
-        "ionic": "lib/ionic/js/ionic.bundle",
-        "app": "js/app",
-        "runners": "js/runners",
-        "routes": "js/routes",
-        "factories": "js/factories",
-        "GasStationController": "js/controllers/GasStationController",
-        "VehicleController": "js/controllers/VehicleController"
-      }
+      "baseURL": "./www/"
     },
     "doc_comment": {
      "fullDocs": true

@@ -1,6 +1,6 @@
 define(function () {
 
-    var config = function ($stateProvider, $urlRouterProvider, $httpProvider) {
+    var module = function ($stateProvider, $urlRouterProvider, $httpProvider) {
         $urlRouterProvider.otherwise('app/station')
 
         //allow CORS to browser tests
@@ -66,11 +66,7 @@ define(function () {
 
     }
 
-    config.$inject = ['$stateProvider', '$urlRouterProvider', '$httpProvider']
-
-    var module = {
-        routes: config
-    }
+    module.$inject = ['$stateProvider', '$urlRouterProvider', '$httpProvider']
 
     return module
 

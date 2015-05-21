@@ -1,6 +1,9 @@
 <ion-view view-title="Gas Stations">
     <ion-content>
 
+        <ion-refresher pulling-text="Pull to update gas near stations" on-refresh="updateStations(radius)">
+        </ion-refresher>
+
         <div class="card" ng-show="!connected">
             <div class="item item-text-wrap">
                 You are disconnected!
@@ -19,18 +22,16 @@
             </div>
         </div>
 
-        <p>Spring API Test: {{ springTest }}</p>
-        <br>
+        <label for="range">Search Radius</label>
+        <div class="range">
+            <input type="range" id="range" ng-model="radius" min="0" max="50000">
+        </div>
+        <span>{{radius/1000}} Km</span>
 
         <ion-list>
 
-            <ion-item ng-show="loadingGeolocation">
-                ...Loading your geolocation...
-            </ion-item>
-
-            <ion-item>
-                <button class="button col" ng-disabled="loadingGeolocation" ng-click="updateStations()">Update Stations</button>
-                <button class="button col" ng-click="loadStations();">loadStations</button>
+            <ion-item ng-show="loading">
+                ...Loading...
             </ion-item>
 
             <ion-item ng-repeat="station in gasStations" ui-sref="app.station-view({id: station.id})">
@@ -58,5 +59,5 @@
 
         </ion-list>
 
-    </ion-content>
+        <button ng-show="nextPage" ng-click="updateStations(nextPage)" </ion-content>
 </ion-view>

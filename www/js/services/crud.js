@@ -1,6 +1,6 @@
 define(function () {
 
-    var crudSvc = function () {
+    return function () {
 
         //implement get station from gmaps
 
@@ -98,11 +98,4 @@ define(function () {
             }
         }
     }
-
-    var module = {
-        crud: crudSvc
-    }
-
-    return module
-
 })

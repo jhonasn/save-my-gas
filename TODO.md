@@ -9,6 +9,9 @@
  - [x] google place api to get the gas stations
  - [x] google directions api to show the route to destination
    - used directions/distancematrix api to get distance between user and gasstation)
+- [ ] implement stations pagination (google maps token)
+- [ ] implement back to top button
+- [x] implement reload with list pull down refresher
 - [ ] make the computation to transform distance in galons and after in money
  - [ ] make or get consumption average of vehicle per potency/power (there's some statistics in inmetro per year)
 - [ ] implement data to show all cars power
@@ -22,7 +25,7 @@
 *Tasks that maybe will be implemented or don't have high priority*
 
 - [ ] separate connection verification from controllers
-- [ ] separate google maps requests from controllers (maybe)
+- [x] separate google maps requests from controllers (maybe)
 - [x] open a point in google maps app
 - [x] open routes from directions in google maps app
 - [x] enable cors with gmaps
