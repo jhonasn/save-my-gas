@@ -1,8 +1,8 @@
 bower_components/
+node_modules/
 .sass-cache/
 .tmp/
 coverage/
-hooks/
 merges/
 node_modules/
 platforms/

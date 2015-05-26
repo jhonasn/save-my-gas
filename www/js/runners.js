@@ -1,6 +1,8 @@
 define(function() {
 
-	var readyRunner = function($ionicPlatform) {
+	var module = {}
+
+	module.readyRunner = function($ionicPlatform) {
     $ionicPlatform.ready(function() {
       // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
       // for form inputs)
@@ -11,15 +13,10 @@ define(function() {
         // org.apache.cordova.statusbar required
         StatusBar.styleDefault()
       }
-
     })
   }
 
-	readyRunner.$inject = ['$ionicPlatform']
-
-	var module = {
-		run: readyRunner
-	}
+	module.readyRunner.$inject = ['$ionicPlatform']
 
 	return module
 

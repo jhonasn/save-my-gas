@@ -60,17 +60,20 @@ define(function () {
             navigator.geolocation.getCurrentPosition(success, error, options)
         } else {
             //for test
-            geolocation = {
+            var pos = {
                 coords: {
                     latitude: '-25.4544031',
                     longitude: '-49.560799,21'
                 }
             }
-            module.geolocaionStr = module.geolocationToString(pos)
-            module.getNearStations()
-            console.info('no geolocation accessible, using fake geolocation')
-                //for test end
 
+            module.defered.notify(new module.Notification(module.exports.notifications.geolocationGet, pos))
+
+            module.geolocaionStr = module.geolocationToString(pos)
+
+            console.info('no geolocation accessible, using fake geolocation')
+            module.getNearStations()
+                //for test end
 
             //for production
             //                console.error('no geolocation accessible')
@@ -93,7 +96,7 @@ define(function () {
                 pagetoken: nextPage
             }
         }
-        module.$http.get('https://maps.googleapis.com/maps/api/place/nearbysearch/json', {
+        module.$http.get('http://localhost:8100/google/places.search/json', {
                 params: parameters
             })
             .success(function (data) {
@@ -132,7 +135,7 @@ define(function () {
     }
 
     module.getDistanceStations = function (destinationsPoints) {
-        module.$http.get('https://maps.googleapis.com/maps/api/distancematrix/json', {
+        module.$http.get('http://localhost:8100/google/distance.matrix/json' , {
                 params: {
                     //key: this.gmAppKey,
                     origins: this.geolocaionStr,

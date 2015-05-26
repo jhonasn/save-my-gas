@@ -9,7 +9,7 @@ define([
 ],
     function (runners, routes, crudSvc, stationsSvc, convertersSvc, stationCtrl, vehicleCtrl) {
         var app = angular.module('save-my-gas', ['ionic'])
-            .run(runners.run)
+            .run(runners.readyRunner)
             .factory('crud', crudSvc)
             .factory('stations', stationsSvc)
             .factory('converters', convertersSvc)

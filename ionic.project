@@ -1,4 +1,16 @@
 {
   "name": "save-my-gas",
-  "app_id": "81275f1a"
+  "app_id": "81275f1a",
+  "gulpStartupTasks": ["add-proxy"],
+  "proxies": [
+    {
+      "path": "/google/places.search/",
+      "proxyUrl": "https://maps.googleapis.com/maps/api/place/nearbysearch/"
+    },
+    {
+      "path": "/google/distance.matrix/",
+      "proxyUrl": "https://maps.googleapis.com/maps/api/distancematrix/"
+    }
+  ],
+  "localhost": "http://localhost:8100"
 }

@@ -12,6 +12,7 @@
 - [ ] implement stations pagination (google maps token)
 - [ ] implement back to top button
 - [ ] implement android native scroll
+- [ ] show fuel consumption to each station
 - [x] implement length converters (km/ml)
 - [x] implement reload with list pull down refresher
 - [x] make the computation to show in galons per miles and convert to liters
@@ -36,6 +37,7 @@
 - [x] open a point in google maps app
 - [x] open routes from directions in google maps app
 - [x] enable cors with gmaps
+- [x] enable cors to debug via browser
 
 ### Low Priority
 *Those tasks will be implemented on versions later 1.0*

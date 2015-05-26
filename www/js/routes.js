@@ -3,18 +3,6 @@ define(function () {
     var module = function ($stateProvider, $urlRouterProvider, $httpProvider) {
         $urlRouterProvider.otherwise('app/station')
 
-        //allow CORS to browser tests
-        if (!window.device) {
-            $httpProvider.defaults.useXDomain = true;
-            $httpProvider.defaults.withCredentials = false;
-            delete $httpProvider.defaults.headers.common['X-Requested-With'];
-        }
-
-        //I don't know what is it but..
-        //$http.defaults.headers.common['Access-Control-Allow-Origin'] = '*';
-
-
-
         $stateProvider
 
             .state('app', {
@@ -34,7 +22,7 @@ define(function () {
         })
 
         .state('app.station-view', {
-            url: '/edit/:id',
+            url: '/station/:id',
             views: {
                 'menuContent': {
                     templateUrl: 'templates/gas-station-view.html',
