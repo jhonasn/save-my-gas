@@ -11,7 +11,6 @@ define(function () {
         noInternetError: 4
     }
 
-    module.gmAppKey = 'key'
     module.defered = null
     module.geolocaionStr = null
     module.stations = null
