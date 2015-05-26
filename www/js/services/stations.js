@@ -153,6 +153,19 @@ define(function () {
                         module.stations[i].distance = results[i].distance
                         module.stations[i].duration = results[i].duration
                         module.stations[i].addressPrecise = dataDist.destination_addresses[i]
+
+                        var distanceParams = [results[i].distance, module.car]
+                        if(!module.car || !module.car.unit) {
+                          module.stations[i].fuelSpend = 'select a car to see fuel spend'
+                        } else if(module.car.unit == module.converters.consumption.units.kpl) {
+                          module.stations[i].fuelSpend = module.converters.distance.distanceLitersConsumption.apply(null, distanceParams)
+                        } else if(module.car.unit == module.converters.consumption.units.mpg) {
+                          module.stations[i].fuelSpend = module.converters.distance.distanceGalonsConsumption.apply(null, distanceParams)
+                        } else if(module.car.unit == module.converters.consumption.units.mpgus) {
+                          module.stations[i].fuelSpend = module.converters.distance.distanceGalonsUsConsumption.apply(null,distdistanceParams)
+                        } else {
+                          module.stations[i].fuelSpend = 'select a car consumption unit to see fuel spend'
+                        }
                     }
 
                     module.stations = module.stations.sort(function (a, b) {
@@ -174,21 +187,23 @@ define(function () {
             })
     }
 
-    module.exports.get = function (radius, nextPage) {
+    module.exports.get = function (radius, car, nextPage) {
         module.defered = module.$q.defer()
         if (radius)
             module.radius = radius
+        module.car = car
         module.getGeolocation(nextPage)
         return module.defered.promise
     }
 
-    module.constructor = function ($http, $q) {
+    module.constructor = function ($http, $q, converters) {
         module.$q = $q
         module.$http = $http
+        module.converters = converters
         return module.exports
     }
 
-    module.constructor.$inject = ['$http', '$q']
+    module.constructor.$inject = ['$http', '$q', 'converters']
 
     return module.constructor
 })

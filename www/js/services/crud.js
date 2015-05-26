@@ -29,11 +29,11 @@ define(function () {
     }
 
     module.exports.getAll = function (type) {
-        var entitiesNames = db.getEntitiesNames()
+        var entitiesNames = module.db.getEntitiesNames()
         for (var i in entitiesNames) {
             var collectionName = entitiesNames[i]
-            if (db.get(collectionName) && collectionName.toLowerCase() === type.toString().toLowerCase()) {
-                return db.get(collectionName)
+            if (module.db.get(collectionName) && collectionName.toLowerCase() === type.toString().toLowerCase()) {
+                return module.db.get(collectionName)
             }
         }
 
@@ -64,18 +64,18 @@ define(function () {
 
         var entities = this.getAll(type)
         if (!entities) {
-            db.set(type, [])
+            module.db.set(type, [])
             entities = this.getAll(type)
         }
 
-        if (prevEntity && prevEntity.idx && prevEntity.idx > -1) {
+        if (prevEntity && typeof prevEntity.idx == 'number' && prevEntity.idx > -1) {
             entities[prevEntity.idx] = entity
         } else {
             entity.id = entities.length + 1
             entities.push(entity)
         }
 
-        db.set(type, entities)
+        module.db.set(type, entities)
 
         return true
     }
@@ -86,10 +86,10 @@ define(function () {
         if (prevEntity) {
             var entities = this.getAll(type)
 
-            if (prevEntity.idx && prevEntity.idx > -1) {
+            if (typeof prevEntity.idx == 'number' && prevEntity.idx > -1) {
                 prevEntity = entities.splice(prevEntity.idx, 1)
                 if (prevEntity) {
-                    db.set(type, entities)
+                    module.db.set(type, entities)
                     return true
                 }
             }

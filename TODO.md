@@ -25,7 +25,7 @@
 - [ ] fix error messages, generalize it
 - [x] verify if register cars is really needed
     - yes it is
-- [ ] fix cars not deleting cars
+- [x] fix cars not deleting cars
 - [ ] put consumption field at vehicle entity
 - [ ] put auto calculate fuel consumption field at vehicle entity
 
