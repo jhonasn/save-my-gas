@@ -12,6 +12,7 @@
 - [ ] implement stations pagination (google maps token)
 - [ ] implement back to top button
 - [ ] implement android native scroll
+- [x] implement length converters (km/ml)
 - [x] implement reload with list pull down refresher
 - [x] make the computation to show in galons per miles and convert to liters
 - [x] make the computation to transform distance in galons

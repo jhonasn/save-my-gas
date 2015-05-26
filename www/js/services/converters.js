@@ -57,6 +57,17 @@ define(function () {
         }
     }
 
+    module.exports.length = {
+        unit: 1.609344, //ml to km, standard with us and uk
+
+        kmToMl: function (value) {
+            return value / this.unit
+        },
+        mlToKm: function (value) {
+            return value * this.unit
+        }
+    }
+
     module.exports.distance = {
         distanceLitersConsumption: function (distance, car) {
             //distance will always use kilometers, the google default unit
