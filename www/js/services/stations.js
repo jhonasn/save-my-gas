@@ -104,6 +104,10 @@ define(function () {
             params: parameters
         })
         .success(function (data) {
+            //ZERO_RESULTS - no results
+            //OVER_QUERY_LIMIT - out of bound quota day limit
+            //REQUEST_DENIED - normaly caused by worg params
+            //INVALID_REQUEST - normaly caused by params fault
             console.info('success places response')
             if (data.status == 'OK') {
                 module.stations = data.results.map(function (place, i) {
@@ -148,8 +152,13 @@ define(function () {
             }
         })
         .success(function (dataDist) {
+            // OK indicates the response contains a valid result.
+            // INVALID_REQUEST indicates that the provided request was invalid.
+            // MAX_ELEMENTS_EXCEEDED indicates that the product of origins and destinations exceeds the per-query limit.
+            // OVER_QUERY_LIMIT indicates the service has received too many requests from your application within the allowed time period.
+            // REQUEST_DENIED indicates that the service denied use of the Distance Matrix service by your application.
+            // UNKNOWN_ERROR indicates a Distance Matrix request could not be processed due to a server error. The request may succeed if you try again.
             console.info('success distance response')
-
             if (dataDist.status == 'OK') {
                 var results = dataDist.rows[0].elements
 

@@ -31,6 +31,7 @@
         - http://www.dataonesoftware.com/;
 - [ ] get gas stations princing from someware updated, case this is very difficult ask prices for users in application
 - [ ] fix error messages, generalize it
+- [ ] implement google response errors
 - [x] verify if register vehicles is really needed
     - yes it is
 - [x] fix vehicles not deleting vehicles
