@@ -2,7 +2,7 @@ define(function () {
 
     var module = {}
 
-    module.GasStationCtrl = function ($scope, $http, $ionicScrollDelegate, crud, stations) {
+    module.GasStationCtrl = function ($scope, $http, $ionicPopup, $state, $ionicScrollDelegate, crud, stations) {
         if (navigator.network)
         $scope.connected = navigator.network.connection.type != Connection.NONE
         else
@@ -125,14 +125,28 @@ define(function () {
             // var fxu = $('#fixed-to-up')
         }
 
-        $scope.updateStations()
+        if($scope.vehicle)
+            $scope.updateStations()
+        else { //ask user to register a vehicle
+            $ionicPopup.confirm({
+                title: 'Please register a vehicle',
+                template: 'We need your vehicle information to show how much resources your trip will spend, althought you can view nearer gas stations with few information'
+            })
+            .then(function(yes) {
+                if(yes) {
+                    $state.go('app.vehicle-edit')
+                } else {
+                    $scope.updateStations()
+                }
+            })
+        }
     }
 
     module.GasStationViewCtrl = function ($scope, $state, $stateParams, crud) {
         $scope.station = crud.get('station', $stateParams.id)
     }
 
-    module.GasStationCtrl.$inject = ['$scope', '$http', '$ionicScrollDelegate', 'crud', 'stations']
+    module.GasStationCtrl.$inject = ['$scope', '$http', '$ionicPopup', '$state', '$ionicScrollDelegate', 'crud', 'stations']
     module.GasStationViewCtrl.$inject = ['$scope', '$state', '$stateParams', 'crud']
 
     return module

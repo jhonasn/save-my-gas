@@ -6,7 +6,7 @@ define(function(){
         $scope.vehicles = crud.getAll('vehicle')
 
         $scope.delete = function(vehicle) {
-            var confirmPopup = $ionicPopup.confirm({
+            $ionicPopup.confirm({
                 title: 'Delete',
                 template: 'Do you want delete this vehicle?'
             })
