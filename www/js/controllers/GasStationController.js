@@ -1,68 +1,68 @@
 define(function () {
 
-    var module = {
-        GasStationCtrl: function ($scope, $http, $ionicScrollDelegate, crud, stations) {
-            if (navigator.network)
-            $scope.connected = navigator.network.connection.type != Connection.NONE
-            else
-            $scope.connected = navigator.onLine
+    var module = {}
 
-            $scope.gasStations = []
-            $scope.geolocation = null
-            $scope.radius = 5000
-            var lastScroll = $ionicScrollDelegate.getScrollPosition()
-            if(lastScroll)
-            lastScroll = lastScroll.top
-            else
-            lastScroll = 0
+    module.GasStationCtrl = function ($scope, $http, $ionicScrollDelegate, crud, stations) {
+        if (navigator.network)
+        $scope.connected = navigator.network.connection.type != Connection.NONE
+        else
+        $scope.connected = navigator.onLine
 
-            $scope.vehicle = crud.getByProp('vehicle', 'selected', true)
+        $scope.gasStations = []
+        $scope.geolocation = null
+        $scope.radius = 5000
+        $scope.scrollPosition = 0
 
-            //constantly refresh connected variable
-            document.addEventListener("online", function () {
-                $scope.connected = true
-                console.log('online')
-            }, false)
-            document.addEventListener("offline", function () {
-                $scope.connected = false
-                console.log('offline')
-            }, false)
+        //fake data
+        for (var i = 0; i < 50; i++) {
+            $scope.gasStations.push({})
+        }
 
-            var updateLastScroll = function() {
-                lastScroll = $ionicScrollDelegate.getScrollPosition().top
-            }
+        $scope.vehicle = crud.getByProp('vehicle', 'selected', true)
 
-            var getStationsError = function (errorType) {
-                $scope.error = errorType
-                if (errorType == stations.notifications.geolocationError)
+        //constantly refresh connected variable
+        document.addEventListener("online", function () {
+            $scope.connected = true
+            console.log('online')
+        }, false)
+        document.addEventListener("offline", function () {
+            $scope.connected = false
+            console.log('offline')
+        }, false)
+
+        var getStationsError = function (errorType) {
+            $scope.error = errorType
+            if (errorType == stations.notifications.geolocationError)
                 $scope.geolocationError = true
-                else if (errorType == stations.notifications.stationError)
+            else if (errorType == stations.notifications.stationError)
                 $scope.gmapsError = true
-            }
-            var getStationsNotification = function (notification) {
-                if (notification.type == stations.notifications.geolocationGet) {
-                    if($scope.geolocation && $scope.geolocation.coords) {
-                        $scope.newGeolocation = !($scope.geolocation.coords.latitude == notification.value.coords.latitude && $scope.geolocation.coords.longitude == notification.value.coords.longitude)
-                    }
-                    $scope.geolocation = notification.value
+        }
+
+        var getStationsNotification = function (notification) {
+            if (notification.type == stations.notifications.geolocationGet) {
+                if($scope.geolocation && $scope.geolocation.coords) {
+                    $scope.newGeolocation = !($scope.geolocation.coords.latitude == notification.value.coords.latitude && $scope.geolocation.coords.longitude == notification.value.coords.longitude)
                 }
+                $scope.geolocation = notification.value
             }
-            var getStationsStart = function () {
-                $scope.loading = true
-                $scope.geolocationError = false
-                $scope.gmapsError = false
-            }
+        }
 
-            $scope.updateStations = function (radius) {
-                getStationsStart()
+        var getStationsStart = function () {
+            $scope.loading = true
+            $scope.geolocationError = false
+            $scope.gmapsError = false
+        }
 
-                stations.get(radius, $scope.vehicle)
-                .then(function (results) {
-                    $scope.gasStations = results
-                    updateLastScroll()
-                })
-                .catch(getStationsError)
-                .finally(function () {
+        $scope.updateStations = function (radius) {
+            getStationsStart()
+
+            stations.get(radius, $scope.vehicle)
+            .then(function (results) {
+                $scope.gasStations = results
+            })
+            .catch(getStationsError)
+            .finally(
+                function () {
                     $scope.loading = false
                     $scope.$broadcast('scroll.refreshComplete')
                 },
@@ -77,11 +77,9 @@ define(function () {
 
         $scope.nextResults = function(radius, gasStations) {
 
-            if($ionicScrollDelegate.getScrollPosition().top == lastScroll) {
+            if($ionicScrollDelegate.getScrollPosition().top == $scope.scrollPosition) {
                 $scope.$broadcast('scroll.infiniteScrollComplete')
                 return
-            } else {
-                updateLastScroll()
             }
 
             getStationsStart()
@@ -90,38 +88,53 @@ define(function () {
             .then(function (results) {
                 if($scope.newGeolocation) {
                     $scope.gasStations = results
-                    updateLastScroll()
-                }
-                else {
+                } else {
                     $scope.gasStations = $scope.gasStations.concat(results)
                     $scope.gasStations.nextPage = results.nextPage
                 }
             })
             .catch(getStationsError)
-            .finally(function () {
-                $scope.loading = false
-                $scope.$broadcast('scroll.infiniteScrollComplete')
-            },
-            getStationsNotification
-        )
+            .finally(
+                function () {
+                    $scope.loading = false
+                    $scope.$broadcast('scroll.infiniteScrollComplete')
+                },
+                getStationsNotification
+            )
+        }
+
+        $scope.openUrl = function (url) {
+            window.open(url, '_system')
+        }
+
+        $scope.scrollTop = function() {
+            $ionicScrollDelegate.scrollTop(true)
+        }
+
+        $scope.scrollUp = function () {
+            //scroll 30% setting scroll to 70% of current
+            var top = $scope.scrollPosition * .7
+            top = top > 0 ? top : 0
+            $ionicScrollDelegate.scrollTo(null, top, true)
+        }
+
+        $scope.scroll = function () {
+            $scope.scrollPosition = $ionicScrollDelegate.getScrollPosition().top
+            // $ = angular.element()
+            // var fxt = $('#fixed-to-top')
+            // var fxu = $('#fixed-to-up')
+        }
+
+        $scope.updateStations()
     }
 
-    $scope.openUrl = function (url) {
-        window.open(url, '_system')
+    module.GasStationViewCtrl = function ($scope, $state, $stateParams, crud) {
+        $scope.station = crud.get('station', $stateParams.id)
     }
 
-    //start trying to get stations
-    // $scope.$broadcast('scroll.infiniteScrollComplete')
-    $scope.updateStations()
-},
-GasStationViewCtrl: function ($scope, $state, $stateParams, crud) {
-    $scope.station = crud.get('station', $stateParams.id)
-}
-}
+    module.GasStationCtrl.$inject = ['$scope', '$http', '$ionicScrollDelegate', 'crud', 'stations']
+    module.GasStationViewCtrl.$inject = ['$scope', '$state', '$stateParams', 'crud']
 
-module.GasStationCtrl.$inject = ['$scope', '$http', '$ionicScrollDelegate', 'crud', 'stations']
-module.GasStationViewCtrl.$inject = ['$scope', '$state', '$stateParams', 'crud']
-
-return module
+    return module
 
 })

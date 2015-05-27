@@ -162,6 +162,11 @@ define(function () {
             if (dataDist.status == 'OK') {
                 var results = dataDist.rows[0].elements
 
+                // Element-level Status Codes
+                // OK indicates the response contains a valid result.
+                // NOT_FOUND indicates that the origin and/or destination of this pairing could not be geocoded.
+                // ZERO_RESULTS indicates no route could be found between the origin and destination.
+
                 for (var i = 0; i < module.stations.length; i++) {
                     module.stations[i].distance = results[i].distance
                     module.stations[i].duration = results[i].duration

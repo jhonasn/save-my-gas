@@ -6,3 +6,19 @@ div#vehicle-edit-avatar img {
 	max-height: 300px;
 	width: 100%;
 }
+
+a.fixed-scroll-up {
+	position: fixed;
+	opacity: 0.1;
+	right: 2%;
+	bottom: 3em;
+	z-index: 2;
+}
+
+a.fixed-scroll-up.activated {
+	opacity: 0.5;
+}
+
+a.fixed-scroll-up:last-child {
+	bottom: 7em;
+}

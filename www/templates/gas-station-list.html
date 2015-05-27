@@ -1,5 +1,5 @@
 <ion-view view-title="Gas Stations">
-    <ion-content>
+    <ion-content on-scroll="scroll()">
 
         <ion-refresher pulling-text="Pull to update gas near stations" on-refresh="updateStations(radius)">
         </ion-refresher>
@@ -28,6 +28,9 @@
         </div>
         <span>{{radius/1000}} Km</span>
 
+        <br>
+        <span>scroll: {{scrollPosition}}</span>
+
         <ion-list>
 
             <ion-item ng-show="loading">
@@ -38,16 +41,16 @@
                 <h3>{{station.name}}</h3>
                 <ul>
                     <li>{{station.address}}</li>
+                    <li>precise address: {{station.addressPrecise}}</li>
                     <li>distance: {{station.distance.text}}</li>
                     <li>time to arrive: {{station.duration.text}}</li>
-                    <li>precise address: {{station.addressPrecise}}</li>
                     <li>gallons: {{station.fuelSpend.toFixed(3)}}</li>
-                </ul>
-                <ul>
-                    prices: i don't know if i can do this
-                    <li>gas: </li>
-                    <li>diesel: </li>
-                    <li>oxy gas: </li>
+                    <ul>
+                        prices: i don't know if i can do this
+                        <li>gas: </li>
+                        <li>diesel: </li>
+                        <li>oxy gas: </li>
+                    </ul>
                 </ul>
 
                 <button class="button col" ng-show="station.location && geolocation.coords" ng-click="openUrl('http://maps.google.com/maps?saddr={0},{1}&daddr={2},{3}'.replace('{0}',geolocation.coords.latitude).replace('{1}',geolocation.coords.longitude).replace('{2}',station.location.lat).replace('{3}',station.location.lng))">Open route to this gas station</button>
@@ -58,6 +61,9 @@
             </ion-item>
 
         </ion-list>
+        <!-- ng-show="scrollPosition.top > 100" -->
+        <a id="fixed-to-top" title="scroll to top" class="button button-dark fixed-scroll-up" ng-click="scrollTop()"><i class="ion-arrow-up-b"></i></a>
+        <a id="fixed-to-up" title="scroll bunch upper" class="button button-dark fixed-scroll-up" ng-click="scrollUp()"><i class="ion-chevron-up"></i></a>
 
         <ion-infinite-scroll ng-if="gasStations.nextPage && !loading" distance="1%" on-infinite="nextResults(radius, gasStations)">
             <ion-spinner></ion-spinner>
