@@ -4,8 +4,8 @@ define(['ionic', 'app'], function (ionic, app) {
     'use strict'
 
     var onDeviceReady = function () {
-      //Initialize application
-      angular.bootstrap(document, [app.name])
+        //Initialize application
+        angular.bootstrap(document, [app.name])
     }
 
     document.addEventListener("deviceready", onDeviceReady, false)

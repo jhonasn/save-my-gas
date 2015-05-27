@@ -11,20 +11,20 @@ var fs = require('fs')
 var url = require('url')
 
 var paths = {
-  sass: ['./scss/**/*.scss']
+    sass: ['./scss/**/*.scss']
 }
 var replaceFiles = ['./www/js/services/stations.js']
 
 gulp.task('default', ['sass'])
 
 gulp.task('sass', function(done) {
-  gulp.src('./scss/ionic.app.scss')
+    gulp.src('./scss/ionic.app.scss')
     .pipe(sass({
-      errLogToConsole: true
+        errLogToConsole: true
     }))
     .pipe(gulp.dest('./www/css/'))
     .pipe(minifyCss({
-      keepSpecialComments: 0
+        keepSpecialComments: 0
     }))
     .pipe(rename({ extname: '.min.css' }))
     .pipe(gulp.dest('./www/css/'))
@@ -32,53 +32,53 @@ gulp.task('sass', function(done) {
 })
 
 gulp.task('watch', function() {
-  gulp.watch(paths.sass, ['sass'])
+    gulp.watch(paths.sass, ['sass'])
 })
 
 gulp.task('install', ['git-check'], function() {
-  return bower.commands.install()
+    return bower.commands.install()
     .on('log', function(data) {
-      gutil.log('bower', gutil.colors.cyan(data.id), data.message)
+        gutil.log('bower', gutil.colors.cyan(data.id), data.message)
     })
 })
 
 gulp.task('git-check', function(done) {
-  if (!sh.which('git')) {
-    console.log(
-      '  ' + gutil.colors.red('Git is not installed.'),
-      '\n  Git, the version control system, is required to download Ionic.',
-      '\n  Download git here:', gutil.colors.cyan('http://git-scm.com/downloads') + '.',
-      '\n  Once git is installed, run \'' + gutil.colors.cyan('gulp install') + '\' again.'
-    )
-    process.exit(1)
-  }
-  done()
+    if (!sh.which('git')) {
+        console.log(
+            '  ' + gutil.colors.red('Git is not installed.'),
+            '\n  Git, the version control system, is required to download Ionic.',
+            '\n  Download git here:', gutil.colors.cyan('http://git-scm.com/downloads') + '.',
+            '\n  Once git is installed, run \'' + gutil.colors.cyan('gulp install') + '\' again.'
+        )
+        process.exit(1)
+    }
+    done()
 })
 
 var ionicConfig = JSON.parse(fs.readFileSync('./ionic.project'))
 
 var replaceOpt = {
-  regex: null,
-  replacement: null,
-  paths: replaceFiles,
-  recursive: false,
-  silent: false,
+    regex: null,
+    replacement: null,
+    paths: replaceFiles,
+    recursive: false,
+    silent: false,
 }
 
 gulp.task('add-proxy', function() {
-  ionicConfig.proxies.forEach(function(obj, i) {
-    replaceOpt.regex = obj.proxyUrl
-    replaceOpt.replacement = url.resolve(ionicConfig.localhost, obj.path)
-    replace(replaceOpt)
-  })
-  return
+    ionicConfig.proxies.forEach(function(obj, i) {
+        replaceOpt.regex = obj.proxyUrl
+        replaceOpt.replacement = url.resolve(ionicConfig.localhost, obj.path)
+        replace(replaceOpt)
+    })
+    return
 })
 
 gulp.task('remove-proxy', function() {
-  ionicConfig.proxies.forEach(function(obj, i) {
-    replaceOpt.regex = url.resolve(ionicConfig.localhost, obj.path)
-    replaceOpt.replacement = obj.proxyUrl
-    replace(replaceOpt)
-  })
-  return
+    ionicConfig.proxies.forEach(function(obj, i) {
+        replaceOpt.regex = url.resolve(ionicConfig.localhost, obj.path)
+        replaceOpt.replacement = obj.proxyUrl
+        replace(replaceOpt)
+    })
+    return
 })

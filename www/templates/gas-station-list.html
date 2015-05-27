@@ -34,14 +34,14 @@
                 ...Loading...
             </ion-item>
 
-            <ion-item ng-repeat="station in gasStations" ui-sref="app.station-view({id: station.id})">
+            <ion-item ng-repeat="station in gasStations | orderBy: 'distance.value'" ui-sref="app.station-view({id: station.id})">
                 <h3>{{station.name}}</h3>
                 <ul>
                     <li>{{station.address}}</li>
                     <li>distance: {{station.distance.text}}</li>
                     <li>time to arrive: {{station.duration.text}}</li>
                     <li>precise address: {{station.addressPrecise}}</li>
-                    <li>gallons: {{station.fuelSpend}}</li>
+                    <li>gallons: {{station.fuelSpend.toFixed(3)}}</li>
                 </ul>
                 <ul>
                     prices: i don't know if i can do this
@@ -59,6 +59,10 @@
 
         </ion-list>
 
-        <button ng-show="nextPage" class="col" ng-click="updateStations(nextPage)">Next Page</button>
+        <ion-infinite-scroll ng-if="gasStations.nextPage && !loading" distance="1%" on-infinite="nextResults(radius, gasStations)">
+            <ion-spinner></ion-spinner>
+        </ion-infinite-scroll>
+
+
     </ion-content>
 </ion-view>

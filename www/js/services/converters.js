@@ -75,18 +75,18 @@ define(function () {
             var vehicleConsumption = 0
 
             //transform vehicle consumption unit to google unit (?)
-            if (vehicle.unit == unitEnum.km) {
+            if (vehicle.unit.value == module.exports.consumption.units.kpl.value) {
                 //unit ok do nothing
                 vehicleConsumption = vehicle.consumption
-            } else if (vehicle.unit == unitEnum.ml) {
+            } else if (vehicle.unit.value == module.exports.consumption.units.mpg.value) {
                 vehicleConsumption = MPGtoKPL(vehicle.consumption)
-            } else if (vehicle.unit == unitEnum.mlus) {
+            } else if (vehicle.unit.value == module.exports.consumption.units.mpgus.value) {
                 vehicleConsumption = MPGUStoKPL(vehicle.consumption)
             } else {
                 return 'Error: vehicle unit not recognized'
             }
 
-            return vehicleConsumption * distance
+            return vehicleConsumption * (distance.value / 1000)//distance come in meters
         },
 
         distanceGalonsConsumption: function (distance, vehicle) {

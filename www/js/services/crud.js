@@ -19,9 +19,9 @@ define(function () {
         },
         get: function (index) {
             if (localStorage.hasOwnProperty(index))
-                return JSON.parse(localStorage[index])
+            return JSON.parse(localStorage[index])
             else
-                return null
+            return null
         },
         set: function (index, value) {
             localStorage[index] = JSON.stringify(value)
@@ -45,12 +45,32 @@ define(function () {
             var entities = this.getAll(type)
             var results = entities.filter(function (element) {
                 if ('id' in element && typeof (element.id) === 'number' && element.id == id)
-                    return true
+                return true
             })
 
             if (results.length > 0) {
                 results[0].idx = entities.indexOf(results[0])
-            }
+            } else
+            return null
+
+            return results[0]
+        } else {
+            return null
+        }
+    }
+
+    module.exports.getByProp = function (type, prop, val) {
+        if (this.getAll(type) != null) {
+            var entities = this.getAll(type)
+            var results = entities.filter(function (element) {
+                if (prop in element && element[prop] == val)
+                return true
+            })
+
+            if (results.length > 0) {
+                results[0].idx = entities.indexOf(results[0])
+            } else
+            return null
 
             return results[0]
         } else {
@@ -60,7 +80,6 @@ define(function () {
 
     module.exports.save = function (type, entity) {
         var prevEntity = this.get(type, entity.id)
-
 
         var entities = this.getAll(type)
         if (!entities) {
