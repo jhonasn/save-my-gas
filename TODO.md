@@ -12,7 +12,8 @@
 - [x] implement stations pagination (google maps token)
    - used infinite scroll instead pagination
 - [ ] implement back to top button with an ~~directive~~
-- [ ] make the computation to transform distance galons consumption in money
+- [x] make the computation to transform distance galons consumption in money
+    - likely i'll need to reajust this, but ya, for now is ok
 - [x] lock user to use app when there isn't vehicle registered
 - [ ] calculates with usage time the vehicle's fuel consumption
 - [x] show fuel consumption to each station

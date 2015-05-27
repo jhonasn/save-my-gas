@@ -97,6 +97,33 @@ define(function () {
         distanceGalonsUsConsumption: function (distance, vehicle) {
             var distanceLiters = distanceLitersConsumption(distance, vehicle)
             return module.liquid.lToGalUs(distanceLiters)
+        },
+
+        fuelCostUs: function (fuelBasePrices, fuelQuantity, liquidUnit) {
+            //verify the default unit of fuel to make this computation
+            //we will assume galons (im) as default unit for now
+            var fuelGalons = 0
+            , fuelPriceAverage = 0
+
+            //do the average
+            if(fuelBasePrices.length && fuelBasePrices.length > 0) {
+                fuelPriceAverage = fuelBasePrices.reduce(function(prev, curr, i) {
+                    return prev + curr
+                })
+                fuelPriceAverage = fuelPriceAverage / fuelBasePrices.length
+            } else
+                fuelPriceAverage = fuelBasePrices
+
+            //normalize fuel unit
+            if(liquidUnit == module.exports.liquid.units.g) {
+                fuelGalons = fuelQuantity
+            } else if(liquidUnit == module.exports.liquid.units.gus) {
+                fuelGalons = module.exports.liquid.galUsToGal(fuelQuantity)
+            } else if(liquidUnit == module.exports.liquid.units.l) {
+                fuelGalons = module.exports.liquid.lToGal(fuelQuantity)
+            }//barrels ? <- :(
+
+            return fuelGalons * fuelPriceAverage
         }
     }
 
