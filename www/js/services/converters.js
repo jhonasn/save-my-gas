@@ -5,28 +5,28 @@ define(function () {
 
     module.exports.consumption = {
         units: {
-            kpl: 2.82481, //kpl to mpg
-            mpg: 0.832674, //mpg to mpgus
-            mpgus: 2.35215 //kpl to mpgus
+            kpl: { value: 2.82481, unit: 'km/l', description: 'kilometer per liter' }, //kpl to mpg
+            mpg: { value: 0.832674, unit: 'ml/g', description: 'milles per gallon' }, //mpg to mpgus
+            mpgus: { value: 2.35215, unit: 'ml/g (us)', description: 'milles per gallon (us)' }, //kpl to mpgus
         },
 
         mpgToKpl: function (value) {
-            return value / this.units.kpl
+            return value / this.units.kpl.value
         },
         kplToMpg: function (value) {
-            return value * this.units.kpl
+            return value * this.units.kpl.value
         },
         mpgToMpgUs: function (value) {
-            return value * this.units.mpg
+            return value * this.units.mpg.value
         },
         mpgUsToMpg: function (value) {
-            return value / this.units.mpg
+            return value / this.units.mpg.value
         },
         mpgUsToKpl: function (value) {
-            return value / this.units.mpgus
+            return value / this.units.mpgus.value
         },
         kplToMpgUs: function (value) {
-            return value * this.units.mpgus
+            return value * this.units.mpgus.value
         }
     }
 
@@ -69,33 +69,33 @@ define(function () {
     }
 
     module.exports.distance = {
-        distanceLitersConsumption: function (distance, car) {
+        distanceLitersConsumption: function (distance, vehicle) {
             //distance will always use kilometers, the google default unit
-            // carObjExpects = { unit: 'kpl ex.', consumption: '10(kpl)' }
-            var carConsumption = 0
+            // vehicleObjExpects = { unit: 'kpl ex.', consumption: '10(kpl)' }
+            var vehicleConsumption = 0
 
-            //transform car consumption unit to google unit (?)
-            if (car.unit == unitEnum.km) {
+            //transform vehicle consumption unit to google unit (?)
+            if (vehicle.unit == unitEnum.km) {
                 //unit ok do nothing
-                carConsumption = car.consumption
-            } else if (car.unit == unitEnum.ml) {
-                carConsumption = MPGtoKPL(car.consumption)
-            } else if (car.unit == unitEnum.mlus) {
-                carConsumption = MPGUStoKPL(car.consumption)
+                vehicleConsumption = vehicle.consumption
+            } else if (vehicle.unit == unitEnum.ml) {
+                vehicleConsumption = MPGtoKPL(vehicle.consumption)
+            } else if (vehicle.unit == unitEnum.mlus) {
+                vehicleConsumption = MPGUStoKPL(vehicle.consumption)
             } else {
-                return 'Error: car unit not recognized'
+                return 'Error: vehicle unit not recognized'
             }
 
-            return carConsumption * distance
+            return vehicleConsumption * distance
         },
 
-        distanceGalonsConsumption: function (distance, car) {
-            var distanceLiters = distanceLitersConsumption(distance, car)
+        distanceGalonsConsumption: function (distance, vehicle) {
+            var distanceLiters = distanceLitersConsumption(distance, vehicle)
             return module.liquid.lToGal(distanceLiters)
         },
 
-        distanceGalonsUsConsumption: function (distance, car) {
-            var distanceLiters = distanceLitersConsumption(distance, car)
+        distanceGalonsUsConsumption: function (distance, vehicle) {
+            var distanceLiters = distanceLitersConsumption(distance, vehicle)
             return module.liquid.lToGalUs(distanceLiters)
         }
     }

@@ -19,15 +19,21 @@
 - [x] make the computation to transform distance in galons
 - [ ] make the computation to transform distance galons consumption in money
 - [ ] make or get consumption average of vehicle per potency/power (there's some statistics in inmetro per year)
-- [ ] implement data to show all cars power
+- [ ] implement data to show all vehicles power - fock yeah some webservice to save my life: http://www.fueleconomy.gov/feg/ws/index.shtml; http://developer.edmunds.com/api-documentation/vehicle/;
+http://www.carqueryapi.com/;
+http://www.kbb.com/jsdata/2.1.37.1_40678/_modelsyears?vehicleclass=UsedCar;
+http://www.webservices.nl/en/product/vehicle-specificationsaccessories/;
+http://www.dataonesoftware.com/;
 - [ ] calculates with usage time the vehicle's fuel consumption
 - [ ] get gas stations princing from someware updated, case this is very difficult ask prices for users in application
 - [ ] fix error messages, generalize it
-- [x] verify if register cars is really needed
+- [x] verify if register vehicles is really needed
     - yes it is
-- [x] fix cars not deleting cars
-- [ ] put consumption field at vehicle entity
-- [ ] put auto calculate fuel consumption field at vehicle entity
+- [x] fix vehicles not deleting vehicles
+- [x] put consumption field at vehicle entity
+- [x] put auto calculate fuel consumption field at vehicle entity
+- [ ] implement vehicle consumption controller, problem when enter with comma
+- [ ] lock user to use app when there isn't vehicle registered
 
 ### Medium Priority
 *Tasks that maybe will be implemented or don't have high priority*

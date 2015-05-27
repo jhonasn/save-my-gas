@@ -4,24 +4,51 @@
     <form ng-submit="saveVehicle(vehicle)">
       <div class="list">
 
+        <div id="vehicle-edit-avatar" class="item item-input">
+          <img ng-src="/img/{{vehicle.img ? vehicle.img : vehicle.type.img}}" alt="Vehicle Picture" />
+        </div>
+
         <label class="item item-input">
-          <span class="input-label">Vehicle Name</span>
-          <input type="text" ng-model="vehicle.name">
+          <span class="input-label">Name</span>
+          <input type="text" ng-model="vehicle.name" placeholder="Name or Model">
         </label>
 
-        <div class="list">
+        <label class="item item-input item-select">
+          <div class="input-label">
+            Type
+          </div>
+          <select ng-model="vehicle.type" ng-options="item as item.name for item in vehicleType"></select>
+        </label>
+
           <label class="item item-input item-select">
             <div class="input-label">
-              Vehicle Power
+              Power
             </div>
-            <select ng-model="vehicle.power">
-              ng-repeat-option?
-              <option>1.0</option>
-              <option selected>2.0</option>
-              <option>1.8</option>
-            </select>
+            <select ng-model="vehicle.power" ng-options="item.value as item.label for item in powerVehicles"></select>
           </label>
+
+          <label class="item item-input item-select">
+            <div class="input-label">
+              Consumption Unit
+            </div>
+            <select ng-model="vehicle.unit"  ng-options="item as item.unit for item in consumptionUnits"></select>
+          </label>
+
+          <label class="item item-input">
+            <span class="input-label">Consumption <span ng-show="vehicle.unit">({{vehicle.unit.description}})</span></span>
+            <input type="number" ng-model="vehicle.consumption">
+          </label>
+
+        <div class="item item-checkbox">
+           <label class="checkbox">
+             <input type="checkbox" ng-model="vehicle.autoUpdateConsumption">
+           </label>
+           Auto Update vehicle consumption
         </div>
+
+
+        <br>
+        {{vehicle}}
 
         <label class="item">
           <button class="button button-block button-balanced" type="submit">Save</button>
@@ -29,6 +56,6 @@
 
       </div>
     </form>
-    
+
   </ion-content>
 </ion-view>
