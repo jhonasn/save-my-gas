@@ -27,7 +27,6 @@
             <input type="range" id="range" ng-model="radius" min="0" max="50000">
         </div>
         <span>{{radius/1000}} Km</span>
-
         <br>
         <span>scroll: {{scrollPosition}}</span>
 
@@ -61,14 +60,16 @@
             </ion-item>
 
         </ion-list>
-        <!-- ng-show="scrollPosition.top > 100" -->
-        <a id="fixed-to-top" title="scroll to top" class="button button-dark fixed-scroll-up" ng-click="scrollTop()"><i class="ion-arrow-up-b"></i></a>
-        <a id="fixed-to-up" title="scroll bunch upper" class="button button-dark fixed-scroll-up" ng-click="scrollUp()"><i class="ion-chevron-up"></i></a>
+
 
         <ion-infinite-scroll ng-if="gasStations.nextPage && !loading" distance="1%" on-infinite="nextResults(radius, gasStations)">
             <ion-spinner></ion-spinner>
         </ion-infinite-scroll>
 
-
     </ion-content>
+
+    <!-- ng-show="scrollPosition.top > 100" -->
+    <a id="fixed-to-top" title="scroll to top" class="button button-dark scroll-show-hide hide" show-percent="50" scroll-top="true"><i class="ion-arrow-up-a"></i></scroll-fixed>
+    <a id="fixed-to-up" show-percent="30" title="scroll bunch upper" class="button button-dark scroll-show-hide hide"><i class="ion-chevron-up"></i></a>
+
 </ion-view>

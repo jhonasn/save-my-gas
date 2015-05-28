@@ -11,12 +11,13 @@ define(function () {
         $scope.gasStations = []
         $scope.geolocation = null
         $scope.radius = 5000
-        $scope.scrollPosition = 0
 
-        //fake data
-        for (var i = 0; i < 50; i++) {
-            $scope.gasStations.push({})
-        }
+        var lastScroll = 0
+
+        //fake data for moments with no internet connection
+        // for (var i = 0; i < 50; i++) {
+        //     $scope.gasStations.push({})
+        // }
 
         $scope.vehicle = crud.getByProp('vehicle', 'selected', true)
 
@@ -77,9 +78,11 @@ define(function () {
 
         $scope.nextResults = function(radius, gasStations) {
 
-            if($ionicScrollDelegate.getScrollPosition().top == $scope.scrollPosition) {
+            if($ionicScrollDelegate.getScrollPosition().top == lastScroll) {
                 $scope.$broadcast('scroll.infiniteScrollComplete')
                 return
+            } else {
+                lastScroll = $ionicScrollDelegate.getScrollPosition().top
             }
 
             getStationsStart()
@@ -105,24 +108,6 @@ define(function () {
 
         $scope.openUrl = function (url) {
             window.open(url, '_system')
-        }
-
-        $scope.scrollTop = function() {
-            $ionicScrollDelegate.scrollTop(true)
-        }
-
-        $scope.scrollUp = function () {
-            //scroll 30% setting scroll to 70% of current
-            var top = $scope.scrollPosition * .7
-            top = top > 0 ? top : 0
-            $ionicScrollDelegate.scrollTo(null, top, true)
-        }
-
-        $scope.scroll = function () {
-            $scope.scrollPosition = $ionicScrollDelegate.getScrollPosition().top
-            // $ = angular.element()
-            // var fxt = $('#fixed-to-top')
-            // var fxu = $('#fixed-to-up')
         }
 
         if($scope.vehicle)

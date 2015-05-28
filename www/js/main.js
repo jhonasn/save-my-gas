@@ -6,6 +6,7 @@ require.config({
         app: 'js/app',
         runners: 'js/runners',
         routes: 'js/routes',
+        directives: 'js/directives',
         crudSvc: 'js/services/crud',
         stationsSvc: 'js/services/stations',
         convertersSvc: 'js/services/converters',

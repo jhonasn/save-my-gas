@@ -11,7 +11,8 @@
    - used directions/distancematrix api to get distance between user and gasstation)
 - [x] implement stations pagination (google maps token)
    - used infinite scroll instead pagination
-- [ ] implement back to top button with an ~~directive~~
+- [ ] get gas stations princing from someware updated, case this is very difficult ask prices for users in application
+- [x] implement back to top button with an directive
 - [x] make the computation to transform distance galons consumption in money
     - likely i'll need to reajust this, but ya, for now is ok
 - [x] lock user to use app when there isn't vehicle registered
@@ -30,7 +31,6 @@
         - http://www.kbb.com/jsdata/2.1.37.1_40678/_modelsyears?vehicleclass=UsedCar
         - http://www.webservices.nl/en/product/vehicle-specificationsaccessories/
         - http://www.dataonesoftware.com/;
-- [ ] get gas stations princing from someware updated, case this is very difficult ask prices for users in application
 - [ ] fix error messages, generalize it
 - [ ] implement google response errors
 - [x] verify if register vehicles is really needed
@@ -41,7 +41,7 @@
 - [ ] implement vehicle consumption field on edit, problem when enter with comma
 - [ ] put google search with distance filter and radius select on one popup option
 - [x] order station list with angular/ionic orderby
-- [ ] vehicle save error is not threated
+- [ ] on vehicle edit save errors isn't threated
 
 ### Medium Priority
 *Tasks that maybe will be implemented or don't have high priority*

@@ -7,7 +7,7 @@ div#vehicle-edit-avatar img {
 	width: 100%;
 }
 
-a.fixed-scroll-up {
+.scroll-show-hide {
 	position: fixed;
 	opacity: 0.1;
 	right: 2%;
@@ -15,10 +15,10 @@ a.fixed-scroll-up {
 	z-index: 2;
 }
 
-a.fixed-scroll-up.activated {
+.scroll-show-hide.activated {
 	opacity: 0.5;
 }
 
-a.fixed-scroll-up:last-child {
+.scroll-show-hide:last-child {
 	bottom: 7em;
 }
