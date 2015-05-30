@@ -1,7 +1,9 @@
 {
   "name": "save-my-gas",
   "app_id": "81275f1a",
-  "gulpStartupTasks": ["add-proxy"],
+  "gulpStartupTasks": [
+    "add-proxy"
+  ],
   "proxies": [
     {
       "path": "/google/places.search/",

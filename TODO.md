@@ -12,18 +12,19 @@
 - [x] implement stations pagination (google maps token)
    - used infinite scroll instead pagination
 - [ ] get gas stations princing from someware updated, case this is very difficult ask prices for users in application
+    -i can get brasilian prices from:
+        -http://www.anp.gov.br/ <- i can't found WS of that shit
+        -https://api.apontador.com.br
 - [x] implement back to top button with an directive
 - [x] make the computation to transform distance galons consumption in money
     - likely i'll need to reajust this, but ya, for now is ok
 - [x] lock user to use app when there isn't vehicle registered
-- [ ] calculates with usage time the vehicle's fuel consumption
 - [x] show fuel consumption to each station
 - [x] implement length converters (km/ml)
 - [x] implement reload with list pull down refresher
 - [x] make the computation to show in galons per miles and convert to liters
 - [x] make the computation to transform distance in galons
-- [ ] make or get consumption average of vehicle per potency/power (there's some statistics in inmetro per year)
-- [ ] implement data to show all vehicles power
+- [ ] make or get consumption average of vehicle (there's some statistics in inmetro per year)
     - fock yeah some webservice to save my life:
         - http://www.fueleconomy.gov/feg/ws/index.shtml
         - http://developer.edmunds.com/api-documentation/vehicle/
@@ -31,8 +32,8 @@
         - http://www.kbb.com/jsdata/2.1.37.1_40678/_modelsyears?vehicleclass=UsedCar
         - http://www.webservices.nl/en/product/vehicle-specificationsaccessories/
         - http://www.dataonesoftware.com/;
-- [ ] fix error messages, generalize it
-- [ ] implement google response errors
+- [ ] fix error messages, don't forget google response errors
+- [ ] on vehicle edit save errors isn't threated
 - [x] verify if register vehicles is really needed
     - yes it is
 - [x] fix vehicles not deleting vehicles
@@ -41,12 +42,13 @@
 - [ ] implement vehicle consumption field on edit, problem when enter with comma
 - [ ] put google search with distance filter and radius select on one popup option
 - [x] order station list with angular/ionic orderby
-- [ ] on vehicle edit save errors isn't threated
 
 ### Medium Priority
 *Tasks that maybe will be implemented or don't have high priority*
 
 - [ ] separate connection verification from controllers
+- [ ] calculates with usage time the vehicle's fuel consumption
+ - it's a bit complicated to implement, for now we get just the consumption from somewhere and the user will change this when he thinks that's appropriated
 - [x] separate google maps requests from controllers (maybe)
 - [x] open a point in google maps app
 - [x] open routes from directions in google maps app

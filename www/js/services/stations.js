@@ -33,13 +33,13 @@ define(function () {
 
                 module.geolocaionStr = module.geolocationToString(pos)
 
-                //                                        //verify internet connection
-                //                                    //for production
-                //                                        if (window.device) {
-                //                                            if (window.device.available && (!$scope.connected || $scope.geolocation == null)) {
-                //                                                module.defered.reject(module.exports.notifications.noInternetError)
-                //                                            }
-                //                                        }
+            //    //verify internet connection
+            //    //for production
+            //    if (window.device) {
+            //        if (window.device.available && (!$scope.connected || $scope.geolocation == null)) {
+            //            module.defered.reject(module.exports.notifications.noInternetError)
+            //        }
+            //    }
 
                 //refresh stations
                 module.getNearStations()
