@@ -11,11 +11,12 @@
    - used directions/distancematrix api to get distance between user and gasstation)
 - [x] implement stations pagination (google maps token)
    - used infinite scroll instead pagination
-- [ ] get gas stations princing from someware updated, case this is very difficult ask prices for users in application
+- [x] get gas stations princing from someware updated, case this is very difficult ask prices for users in application
     -i can get brasilian prices from:
         -http://www.anp.gov.br/ <- i can't found WS of that shit
-        -https://api.apontador.com.br
-- [ ] scratch data from anp.gov
+        -https://api.apontador.com.br <- maybe useful to get phone number of stations
+- [x] scratch data from anp.gov
+- [ ] implement data from anp.gov with geolocation
 - [ ] make db for stations info with scratched anp data
 - [x] implement back to top button with an directive
 - [x] make the computation to transform distance galons consumption in money
