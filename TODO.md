@@ -15,6 +15,8 @@
     -i can get brasilian prices from:
         -http://www.anp.gov.br/ <- i can't found WS of that shit
         -https://api.apontador.com.br
+- [ ] scratch data from anp.gov
+- [ ] make db for stations info with scratched anp data
 - [x] implement back to top button with an directive
 - [x] make the computation to transform distance galons consumption in money
     - likely i'll need to reajust this, but ya, for now is ok

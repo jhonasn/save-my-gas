@@ -10,6 +10,7 @@
         "gulp-rename": "^1.2.0",
         "replace": "~0.3.0"
     },
+    "main": "./lib/main",
     "devDependencies": {
         "bower": "^1.3.3",
         "gulp-util": "^2.2.14",
@@ -21,8 +22,7 @@
         "com.ionic.keyboard",
         "org.apache.cordova.geolocation",
         "org.apache.cordova.inappbrowser",
-        "org.apache.cordova.network-information",
-        "plugin.google.maps"
+        "org.apache.cordova.network-information"
     ],
     "cordovaPlatforms": []
 }
