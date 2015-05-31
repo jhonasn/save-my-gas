@@ -69,6 +69,8 @@ define(function () {
     }
 
     module.exports.distance = {
+        latLngDiag1Km: 0.00635204829695035,
+        latLng1Km: 0.008983152841195216238567855526753191953,//(1.0000000000000002 km)
         distanceLitersConsumption: function (distance, vehicle) {
             //distance will always use kilometers, the google default unit
             // vehicleObjExpects = { unit: 'kpl ex.', consumption: '10(kpl)' }
@@ -124,6 +126,22 @@ define(function () {
             }//barrels ? <- :(
 
             return fuelGalons * fuelPriceAverage
+        },
+
+        coordsToKm: function (coord1, coord2){  // generally used geo measurement function
+            var lat1 = coord1.latitude
+            , lon1 = coord1.longitude
+            , lat2 = coord2.latitude
+            , lon2 = coord2.longitude
+            var R = 6378.137 // Radius of earth in KM
+            var dLat = (lat2 - lat1) * Math.PI / 180
+            var dLon = (lon2 - lon1) * Math.PI / 180
+            var a = Math.sin(dLat/2) * Math.sin(dLat/2) +
+            Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) *
+            Math.sin(dLon/2) * Math.sin(dLon/2)
+            var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a))
+            var d = R * c
+            return d // km
         }
     }
 
