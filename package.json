@@ -24,5 +24,8 @@
         "org.apache.cordova.inappbrowser",
         "org.apache.cordova.network-information"
     ],
-    "cordovaPlatforms": []
+    "cordovaPlatforms": [],
+    "jshintConfig": {
+    	"asi": true
+    }
 }
