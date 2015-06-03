@@ -18,6 +18,7 @@
 - [x] scratch data from anp.gov
 - [ ] implement data from anp.gov with geolocation
 - [ ] make db for stations info with scratched anp data
+- [ ] implement service to auto update station from anp scratch
 - [x] implement back to top button with an directive
 - [x] make the computation to transform distance galons consumption in money
     - likely i'll need to reajust this, but ya, for now is ok
