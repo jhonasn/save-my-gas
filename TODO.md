@@ -12,9 +12,9 @@
 - [x] implement stations pagination (google maps token)
    - used infinite scroll instead pagination
 - [x] get gas stations princing from someware updated, case this is very difficult ask prices for users in application
-    -i can get brasilian prices from:
-        -http://www.anp.gov.br/ <- i can't found WS of that shit
-        -https://api.apontador.com.br <- maybe useful to get phone number of stations
+    - i can get brasilian prices from:
+        - http://www.anp.gov.br/ <- i can't found WS of that shit
+        - https://api.apontador.com.br <- maybe useful to get phone number of stations
 - [x] scratch data from anp.gov
 - [ ] implement data from anp.gov with geolocation
 - [ ] make db for stations info with scratched anp data
