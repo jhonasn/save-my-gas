@@ -16,7 +16,7 @@
         - http://www.anp.gov.br/ <- i can't found WS of that shit
         - https://api.apontador.com.br <- maybe useful to get phone number of stations
 - [x] scratch data from anp.gov
-- [ ] implement data from anp.gov with geolocation
+- [ ] implement data from anp.gov with geolocation - *doing this*
 - [ ] make db for stations info with scratched anp data
 - [ ] implement service to auto update station from anp scratch
 - [x] implement back to top button with an directive

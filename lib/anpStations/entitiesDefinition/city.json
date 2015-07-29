@@ -1,0 +1,4 @@
+{
+	"id": String,//Integer as String
+	"name": Integer
+}
