@@ -1,0 +1,13 @@
+{
+	"razaoSocial": String,
+	"endereco": String,
+	"bairro": String,
+	"distribuidora": String,
+	"invoiceOk": Bool,
+	"cityId": Integer,
+	"gasolina": FuelPrice,
+	"etanol": FuelPrice,
+	"diesel": FuelPrice,
+	"dieselS10": FuelPrice,
+	"glp": FuelPrice
+}

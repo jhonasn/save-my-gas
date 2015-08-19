@@ -1,0 +1,15 @@
+{
+	"razaoSocial": String,
+	"endereco": String,
+	"bairro": String,
+	"bandeira": String,
+	"precoVenda": String,
+	"precoCompra": String,
+	"modalidadecompra": String,
+	"fornecedorBBranca": String,
+	"dataColeta": Date//json string
+	"invoiceOk": Bool,
+	"cityId": String,
+	"fuelTypeId": Integer,
+	"unit": String,
+}
