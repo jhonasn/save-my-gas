@@ -1,0 +1,16 @@
+{
+  "libs": [
+    "browser",
+    "ecma6"
+  ],
+  "plugins": {
+    "node": {},
+    "angular": {},
+    "requirejs": {
+      "baseURL": "./www/"
+    },
+    "doc_comment": {
+     "fullDocs": true
+    }
+  }
+}
