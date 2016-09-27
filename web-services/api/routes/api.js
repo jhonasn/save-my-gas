@@ -4,14 +4,14 @@ var router = express.Router();
 /* GET home page. */
 router.get('/', function(req, res, next) {
   res.send([
-	  'valor 1',
-	  'valor 2',
-	  'valor 3'
-  ])
+	  'hello',
+	  'hi!',
+	  'bye!'
+  ]);
 });
 
-router.get('/teste', function(req, res, next) {
-  return 'retorno do teste'
-});
+router.put('/', function(req, res, next) {
+	res.send('this is a put response...');
+})
 
 module.exports = router;

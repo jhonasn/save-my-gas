@@ -13,7 +13,7 @@
     "main": "./lib/main",
     "devDependencies": {
         "bower": "^1.3.3",
-        "gulp-util": "^2.2.14",
+        "gulp-util": "^2.2.14"
     },
     "cordovaPlugins": [
         "org.apache.cordova.device",
@@ -25,6 +25,10 @@
     ],
     "cordovaPlatforms": [],
     "jshintConfig": {
-    	"asi": true
+        "curly": true,
+        "eqeqeq": true,
+        "undef": true,
+        "asi": true,
+        "globals": {}
     }
 }

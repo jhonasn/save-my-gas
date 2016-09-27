@@ -1,0 +1,30 @@
+{
+  "name": "save-my-gas",
+  "version": "1.0.0",
+  "description": "aplicativo que auxilia na economia de combustivel",
+  "main": "index.js",
+  "scripts": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jhonasn/save-my-gas.git"
+  },
+  "keywords": [
+    "gas",
+    "gasolina",
+    "station",
+    "posto",
+    "etanol",
+    "diesel",
+    "economia",
+    "saving",
+    "savings"
+  ],
+  "author": "Jhonas Nascimento <jhonasn@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/jhonasn/save-my-gas/issues"
+  },
+  "homepage": "https://github.com/jhonasn/save-my-gas#readme"
+}
