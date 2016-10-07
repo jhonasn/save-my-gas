@@ -1,3 +1,3 @@
 #!/bin/bash
 
-echo "[`date`] Teste TICK - every minute" >> /var/log/cron.log
+echo "[`date`] Teste a cada minuto" >> /var/log/cron.log
