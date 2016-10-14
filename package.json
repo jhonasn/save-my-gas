@@ -1,0 +1,41 @@
+{
+  "name": "save-my-gas",
+  "version": "1.0.0",
+  "description": "A simple android app that help people to economize on fuel costs",
+  "main": "web-api",
+  "scripts": {
+    "web": "lite-server -c lite-server.json & slc run web-api",
+	"api": "slc run ./web-api",
+	"arc": "slc arc ./web-api",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jhonasn/save-my-gas.git"
+  },
+  "keywords": [
+    "gas",
+    "gasolina",
+    "etanol",
+    "ethanol",
+    "fuel",
+    "combustível",
+    "combustíveis",
+    "diesel",
+    "save",
+    "economia",
+    "car",
+    "carro",
+    "alcool",
+    "alcohol"
+  ],
+  "author": "Jhonas",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/jhonasn/save-my-gas/issues"
+  },
+  "homepage": "https://github.com/jhonasn/save-my-gas#readme",
+  "devDependencies": {
+    "lite-server": "^2.2.2"
+  }
+}

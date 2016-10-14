@@ -1,22 +1,32 @@
 {
-  "name": "note",
-  "base": "PersistedModel",
-  "strict": false,
-  "idInjection": false,
-  "options": {
-    "validateUpsert": true
-  },
-  "properties": {
-    "title": {
-      "type": "string",
-      "required": true
-    },
-    "content": {
-      "type": "string"
-    }
-  },
-  "validations": [],
-  "relations": {},
-  "acls": [],
-  "methods": {}
+	"name": "note",
+	"base": "PersistedModel",
+	"strict": true,
+	"idInjection": false,
+	"options": {
+		"validateUpsert": true
+	},
+	"properties": {
+		"title": {
+			"type": "string",
+			"required": true
+		},
+		"content": {
+			"type": "string"
+		}
+	},
+	"validations": [],
+	"relations": {},
+	"acls": [{
+		"accessType": "*",
+		"principalType": "ROLE",
+		"principalId": "$authenticated",
+		"permission": "ALLOW"
+	}, {
+		"accessType": "*",
+		"principalType": "ROLE",
+		"principalId": "$unauthenticated",
+		"permission": "DENY"
+	}],
+	"methods": {}
 }
