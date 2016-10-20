@@ -13,5 +13,5 @@ module.exports = function (app) {
 	var passportProvidersConfig = require('../providers.js');
 
 	passportConfigurator.configureProvider('facebook-login', passportProvidersConfig['facebook-login']);
-	passportConfigurator.configureProvider('facebook-login', passportProvidersConfig['google-login']);
+	passportConfigurator.configureProvider('google-login', passportProvidersConfig['google-login']);
 };
