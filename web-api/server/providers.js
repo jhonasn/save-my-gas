@@ -9,20 +9,21 @@ module.exports = {
 	// 	"failureRedirect": "/login",
 	// 	"session": false
 	// },
-	// "google-login": {
-	// 	"provider": "google",
-	// 	"module": "passport-google-oauth",
-	// 	"strategy": "OAuth2Strategy",
-	// 	"clientID": process.env.GOOGLE_AUTH_PROVIDER_ID,
-	// 	"clientSecret": process.env.GOOGLE_AUTH_PROVIDER_SECRET,
-	// 	"callbackURL": "/auth/google/callback",
-	// 	"authPath": "/auth/google",
-	// 	"callbackPath": "/auth/google/callback",
-	// 	"successRedirect": "/api/users/success",
-	// 	"failureRedirect": "/login",
-	// 	"scope": ["email", "profile"],
-	// 	"session": false
-	// },
+	"google-login": {
+		"provider": "google",
+		"module": "passport-google-oauth",
+		"strategy": "OAuth2Strategy",
+		"clientID": process.env.GOOGLE_AUTH_PROVIDER_ID,
+		"clientSecret": process.env.GOOGLE_AUTH_PROVIDER_SECRET,
+		"callbackURL": "http://localhost:3000/auth/google/callback",
+		"authPath": "/auth/google",
+		"callbackPath": "/auth/google/callback",
+		"successRedirect": "/api/users/me",
+		"failureRedirect": "/login",
+		"scope": ["profile", "email"],
+		"session": false,
+		"json": true
+	},
 	// "google-link": {
 	// 	"provider": "google",
 	// 	"module": "passport-google-oauth",
