@@ -73,7 +73,7 @@ var app = {
 			});
 		}
 	},
-	vaiaranha: function () {
+	vaiaranha: function() {
 		var win = window.open('http://facebook.com', '_blank', 'location=no');
 	}
 };

@@ -39,7 +39,7 @@ node_modules/
 platforms/
 plugins/
 !plugins/fetch.json
-www/lib/
+mobile-app/www/lib/
 .DS_Store
 npm-debug.log
 info.json
