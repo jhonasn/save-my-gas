@@ -1,8 +1,8 @@
 angular.module('save-my-gas')
-.factory('ConverterServices',
+.factory('converterServices',
 function(
 ) {
-	var ConverterServices = {
+	var converterServices = {
 		consumption: {
 			units: {
 				kpl: {
@@ -159,5 +159,5 @@ function(
 		}
 	}
 
-	return ConverterServices
+	return converterServices
 })

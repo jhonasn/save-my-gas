@@ -1,0 +1,20 @@
+{
+	"name": "save-my-gas",
+
+	"env": "dev-local",
+
+	"dev": {
+		"urlDomain": "http://192.168.2.116:3000",
+		"urlApi": "http://192.168.2.116:3000/api"
+	},
+
+	"production": {
+		"urlApi": "https://rest-savemygas.getup.io/api",
+		"urlDomain": "https://rest-savemygas.getup.io"
+	},
+
+	"dev-local": {
+		"urlDomain": "http://localhost:3000",
+		"urlApi": "http://localhost:3000/api"
+	}
+}

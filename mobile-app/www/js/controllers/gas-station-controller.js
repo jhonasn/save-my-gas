@@ -1,5 +1,5 @@
 angular.module('save-my-gas')
-.controller('GasStationController',
+.controller('gasStationController',
 function(
 	$scope,
 	$http,

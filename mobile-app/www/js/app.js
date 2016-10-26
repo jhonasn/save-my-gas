@@ -1,5 +1,9 @@
-angular.module('save-my-gas', ['ngRoute', 'ui.materialize'])
+angular.module('save-my-gas', [
+	'ui.materialize',
+	'ngRoute',
+	'ngStorage'
+])
 
-.constant('appConstants', {
-	urlWebApi: 'localhost:3000'
+.run(function (authService) {
+	authService.start()
 })

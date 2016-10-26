@@ -1,9 +1,9 @@
 angular.module('save-my-gas')
-.factory('StationsService',
+.factory('stationsService',
 function(
 	$http, $q, ConverterServiceservices
 ) {
-	var StationsService = {
+	var stationsService = {
 		defered: null,
 		geolocaionStr: null,
 		stations: null,
@@ -227,4 +227,6 @@ function(
 			return module.exports
 		}
 	}
+
+	return stationsService
 })

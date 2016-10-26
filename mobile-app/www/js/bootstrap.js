@@ -1,21 +1,16 @@
-var appName = 'save-my-gas'
-var onDeviceReady = function() {
-	//Initialize application
-	angular.bootstrap(document, [appName])
-}
-
-document.addEventListener("deviceready", onDeviceReady, false)
-
-if (typeof cordova === 'undefined') {
-	//var el = angular.element(document.getElementsByTagName('html')[0])
-	angular.element().ready(function() {
-		try {
-			angular.bootstrap(document, [appName])
-		} catch (e) {
-			console.error(e.stack || e.message || e)
-		}
-	})
-}
+// var SaveMyGas = {
+// 	config: null,
+//
+// 	start: function () {
+// 		document.addEventListener("deviceready", SaveMyGas.configure, false)
+//
+// 		if (typeof cordova === 'undefined') {
+// 			angular.element(document).ready(SaveMyGas.configure)
+// 		}
+// 	}
+// }
+//
+// SaveMyGas.start()
 
 // $(document).ready(function() {
 // 	$(".button-collapse").sideNav()

@@ -1,11 +1,11 @@
 angular.module('save-my-gas')
-.controller('VehicleController',
+.controller('vehicleController',
 function(
 	$scope,
 	$state,
 	$ionicPopup,
 	crud,
-	converters
+	converterServices
 ) {
 	$scope.vehicles = crud.getAll('vehicle')
 
@@ -45,7 +45,7 @@ function(
 	$state,
 	$stateParams,
 	crud,
-	converters
+	converterServices
 ) {
 	var ObjToArray = function(obj) {
 		var asArray = []
@@ -61,9 +61,9 @@ function(
 	if (!$scope.vehicle) //set default values
 		$scope.vehicle = {
 		autoUpdateConsumption: true,
-		unit: converters.consumption.units.kpl //switch depending language
+		unit: converterServices.consumption.units.kpl //switch depending language
 	}
-	$scope.consumptionUnits = ObjToArray(converters.consumption.units)
+	$scope.consumptionUnits = ObjToArray(converterServices.consumption.units)
 	$scope.powerVehicles = [{
 		label: '1.0',
 		value: 1.0
