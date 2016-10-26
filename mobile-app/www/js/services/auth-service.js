@@ -2,6 +2,7 @@ angular.module('save-my-gas')
 .factory('authService',
 function(
 	$http,
+	$location,
 	$localStorage,
 	appConstants
 ) {
@@ -50,11 +51,13 @@ function(
 
 		gotoLogin: function() {
 			window.location.href = '/index.html'
+			// $location.url('/index.html')
 			return
 		},
 
 		gotoHome: function() {
 			window.location.href = '/main.html'
+			// $location.url('/main.html')
 			return
 		},
 

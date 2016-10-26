@@ -25,9 +25,9 @@
 	<link href="css/login.css" rel="stylesheet">
 </head>
 
-<body ng-app="save-my-gas">
+<body>
 
-	<main ng-view class="container valign-wrapper center" ng-style="{'min-height': screenHeight}">
+	<main class="container valign-wrapper center" ng-controller="authController" ng-style="{'min-height': screenHeight}">
 
 		<div class="valign">
 
@@ -102,21 +102,22 @@
 	<script src="lib/angular-materialize/src/angular-materialize.js" charset="utf-8"></script>
 
 	<!-- start app -->
-	<!-- <script src="js/bootstrap.js" charset="utf-8"></script> -->
 	<script type="text/javascript">
 	angular.module('save-my-gas', [
 		'ui.materialize',
 		'ngStorage'
 	])
 	</script>
-	<script src="js/controllers/auth-controller.js" charset="utf-8"></script>
 
 	<!-- services -->
 	<!-- <script src="js/services/lb-services.js" charset="utf-8"></script> -->
-	<script src="js/services/app-config-service.js" charset="utf-8"></script>
+	<!-- <script src="js/services/app-config-service.js" charset="utf-8"></script> -->
 	<script src="js/services/auth-service.js" charset="utf-8"></script>
 
 	<!-- controllers -->
+	<script src="js/controllers/auth-controller.js" charset="utf-8"></script>
+
+	<script src="js/bootstrap.js" charset="utf-8"></script>
 
 </body>
 

@@ -1,24 +1,4 @@
 angular.module('save-my-gas')
-.config(function ($routeProvider, $locationProvider) {
-	$routeProvider
-
-	.when('/', {
-		template: '',
-		controller: 'AuthController',
-		resolve: {
-			config: function(appConfigService) {
-				return appConfigService
-			}
-		}
-	})
-
-	.otherwise({
-        redirectTo: '/'
-    })
-})
-.run(function (authService) {
-	authService.start()
-})
 .controller('authController',
 function(
 	$scope,
