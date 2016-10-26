@@ -42,7 +42,6 @@ function(
 				var expiresDate = new Date(createdAt.valueOf() + (user.ttl * 1000))
 				if (now > expiresDate) {
 					authService.logout()
-					return;
 				} else {
 					authService.gotoHome()
 				}
@@ -51,18 +50,21 @@ function(
 			}
 		},
 
+		hereIsLogin: function () {
+			return $window.location.pathname === '/index.html' ||
+					$window.location.pathname === '/'
+		},
+
 		gotoLogin: function() {
-			if($window.location.href.indexOf('/index.html') === -1) {
+			if(!authService.hereIsLogin()) {
 				$window.location.href = '/index.html'
 			}
-			return
 		},
 
 		gotoHome: function() {
-			if($window.location.href.indexOf('views/main.html') === -1) {
-				$window.location.href = 'views/main.html'
+			if(authService.hereIsLogin()) {
+				$window.location.href = '/app.html'
 			}
-			return
 		},
 
 		signup: function(model) {

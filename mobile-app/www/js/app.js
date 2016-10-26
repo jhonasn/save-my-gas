@@ -4,16 +4,11 @@ angular.module('save-my-gas', [
     'ngStorage'
 ])
 
-.run(function (authService) {
-	authService.start()
-})
-
-.config(function ($locationProvider, $httpProvider, $localStorageProvider) {
+.config(function ($locationProvider, $httpProvider) {
 	$locationProvider.html5Mode(true);
 
 	// $httpProvider.defaults.withCredentials = true;
 	// $httpProvider.interceptors.push('LoginInterceptorService');
 	// $httpProvider.defaults.headers.commom.Authorization = null;
 
-	$localStorageProvider.setKeyPrefix('br.com.savemygas.')
 })
