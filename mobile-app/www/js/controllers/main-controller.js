@@ -1,10 +1,8 @@
 angular.module('save-my-gas')
 .controller('MainController',
 function (
+	$scope,
 	authService
 ) {
-	var user = authService.getUser()
-	if(!user) {
-		authService.gotoLogin()
-	}
+	$scope.user = authService.getUser()
 })

@@ -9,6 +9,7 @@ function(
 
 	$scope.showLogin = false
 	$scope.isSignup = false
+
 	$scope.toggleShowLogin = function () {
 		$scope.showLogin = !$scope.showLogin
 	}

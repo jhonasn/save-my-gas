@@ -2,7 +2,7 @@ angular.module('save-my-gas')
 .factory('authService',
 function(
 	$http,
-	$location,
+	$window,
 	$localStorage,
 	appConstants
 ) {
@@ -32,13 +32,15 @@ function(
 			return $localStorage.user
 		},
 
-		//inicia ciclo de login, coloca o usuario na sessão se estiver logado
+		//send user to proper screen depending on his browser info (localStorage)
+		//working on email provider
 		start: function() {
 			var user = authService.getUser()
 			if (user) {
-				var agora = new Date()
-				var dataExpira = new Date(user['.expires'])
-				if (agora > dataExpira) {
+				var now = new Date()
+				var createdAt = new Date(user.created)
+				var expiresDate = new Date(createdAt.valueOf() + (user.ttl * 1000))
+				if (now > expiresDate) {
 					authService.logout()
 					return;
 				} else {
@@ -50,18 +52,21 @@ function(
 		},
 
 		gotoLogin: function() {
-			window.location.href = '/index.html'
-			// $location.url('/index.html')
+			if($window.location.href.indexOf('/index.html') === -1) {
+				$window.location.href = '/index.html'
+			}
 			return
 		},
 
 		gotoHome: function() {
-			window.location.href = '/main.html'
-			// $location.url('/main.html')
+			if($window.location.href.indexOf('views/main.html') === -1) {
+				$window.location.href = 'views/main.html'
+			}
 			return
 		},
 
 		signup: function(model) {
+			var url = appConstants.urlApi + '/users'
 			$http.post(url, model).then(function(response) {
 				Materialize.toast('Cadastro Efetuado com sucesso!')
 				Materialize.toast('Faça o login')
@@ -78,14 +83,18 @@ function(
 					var user = response.data;
 					user.provider = provider
 
-					if (user['access_token']) {
-						_setUser(data)
+					if (user.id) {
+						_setUser(user)
+						authService.start()
 					} else {
-						Materialize.toast('Cadastro Efetuado com sucesso!')
-						Materialize.toast('Faça o login')
+						Materialize.toast('Ocorreu um problema ao fazer o login')
 					}
 				}).catch(function(err) {
-					Materialize.toast('Não foi possivel efetuar o login por ' + provider)
+					if(err.status === 401) {
+						Materialize.toast('Usuário ou senha incorretos')
+					} else {
+						Materialize.toast('Não foi possivel efetuar o login por ' + provider)
+					}
 				})
 			} else {
 				var url = appConstants.urlDomain + '/auth/' + provider
