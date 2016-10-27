@@ -4,13 +4,13 @@
 <head>
 	<meta charset="utf-8">
 
-	<meta http-equiv="Content-Security-Policy">
 	<meta name="format-detection" content="telephone=no">
 	<meta name="msapplication-tap-highlight" content="no">
 	<meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width">
 	<meta name="description" content="Save my gas">
 	<!-- inicial cordova -->
-	<!-- <meta http-equiv="Content-Security-Policy" content="default-src * data: gap: https://ssl.gstatic.com; style-src 'self' 'unsafe-inline'; script-src * 'unsafe-inline' 'unsafe-eval'"> -->
+	<meta http-equiv="Content-Security-Policy" content="default-src * data: gap: https://ssl.gstatic.com; style-src 'self' 'unsafe-inline'; script-src * 'unsafe-inline' 'unsafe-eval'">
+	<!-- <meta http-equiv="Content-Security-Policy"> -->
 
 	<title>Save my gas - Login</title>
 
@@ -52,7 +52,7 @@
 				</button>
 			</div>
 
-			<form novalidate name="loginForm" ng-show="showLogin" ng-submit="login(isSignup, 'email', model)">
+			<form novalidate name="loginForm" ng-show="showLogin" ng-submit="login('email', isSignup, model)">
 
 				<h4 ng-bind="isSignup ? 'Cadastre-se:' : 'Login:'"></h4>
 
@@ -78,7 +78,9 @@
 				</div>
 
 				<div class="row">
-					<a href="#" ng-click="toggleIsSignup(model)">ainda não possui conta? cadastre-se aqui</a>
+					<a href="#"
+					ng-click="toggleIsSignup(model)"
+					ng-bind="!isSignup ? 'ainda não possui conta? cadastre-se aqui' : 'Fazer login'"></a>
 				</div>
 
 			</form>
@@ -86,6 +88,26 @@
 		</div>
 
 	</main>
+
+	<!-- for teste pourposes -->
+	<div ng-show="true" class="col s12 m12 l12">
+		<hr>
+		<div class="row">
+			<a class="indigo darken-3 waves-effect waves-light btn col s10 offset-s1 m6 offset-m3 l4 offset-l4"
+			href="https://facebook.com">
+				<i class="left mdi mdi-facebook-box" style="font-size: 2rem;"></i>
+				Abrir o facebook
+			</a>
+		</div>
+
+		<div class="row">
+			<a class="red darken-3 waves-effect waves-light btn col s10 offset-s1 m6 offset-m3 l4 offset-l4"
+			href="https://google.com">
+				<i class="left mdi mdi-google-plus-box" style="font-size: 2rem;"></i>
+				Abrir o google
+			</a>
+		</div>
+	</div>
 
 	<!-- ### load scripts ### -->
 
@@ -97,6 +119,7 @@
 
 	<script src="lib/angular/angular.js" charset="utf-8"></script>
 	<script src="lib/angular-route/angular-route.js" charset="utf-8"></script>
+	<script src="lib/angular-cookies/angular-cookies.js" charset="utf-8"></script>
 	<!-- <script src="lib/angular-resource/angular-resource.js" charset="utf-8"></script> -->
 	<script src="lib/ngstorage/ngStorage.js" charset="utf-8"></script>
 	<!-- <script src="lib/ngCordova/dist/ng-cordova.js" charset="utf-8"></script> -->

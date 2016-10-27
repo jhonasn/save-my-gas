@@ -5,14 +5,19 @@ angular.module('save-my-gas')
     $routeProvider
 
     .when('/', {
-        templateUrl: '/views/main.html',
-        controller: 'MainController'
+        templateUrl: '/views/home.html',
+        controller: 'homeController'
     })
 
     // .when('/login', {
     //     templateUrl: '/views/auth.html',
     //     controller: 'AuthController'
     // })
+
+	.when('/logout', {
+		template: 'loggin out...',
+		controller: 'authLogoutController'
+	})
 
     .otherwise({
         redirectTo: '/'

@@ -26,13 +26,13 @@
 	<link href="/css/main.css" rel="stylesheet">
 </head>
 
-<body>
+<body ng-controller="mainController">
 
 	<header>
 		<!-- Dropdown usuário do nav superior -->
 		<ul id="ddlUsuario" class="dropdown-content">
-			<li><a href="#!">Editar Perfil</a></li>
-			<li><a href="#!">Sair</a></li>
+			<!-- <li><a href="#!">Editar Perfil</a></li> -->
+			<li><a href="/logout">Sair</a></li>
 		</ul>
 		<!-- Nav superior -->
 		<nav class="blue accent-1">
@@ -44,7 +44,7 @@
 					<ul class="right">
 						<li>
 							<a class="dropdown-button ddl-usuario" data-activates="ddlUsuario">
-								Usuário
+								{{user.displayName}}
 								<i class="material-icons right">arrow_drop_down</i>
 							</a>
 						</li>
@@ -96,12 +96,14 @@
 	<!-- services -->
 	<script src="/js/services/lb-services.js" charset="utf-8"></script>
 	<script src="/js/services/auth-service.js" charset="utf-8"></script>
+	<script src="/js/services/auth-interceptor-service.js" charset="utf-8"></script>
 	<script src="/js/services/converter-services.js" charset="utf-8"></script>
 	<script src="/js/services/stations-service.js" charset="utf-8"></script>
 
 	<!-- controllers -->
-	<!-- <script src="/js/controllers/auth-controller.js" charset="utf-8"></script> -->
+	<script src="/js/controllers/auth-controller.js" charset="utf-8"></script>
 	<script src="/js/controllers/main-controller.js" charset="utf-8"></script>
+	<script src="/js/controllers/home-controller.js" charset="utf-8"></script>
 	<script src="/js/controllers/gas-station-controller.js" charset="utf-8"></script>
 	<script src="/js/controllers/vehicle-controller.js" charset="utf-8"></script>
 

@@ -8,7 +8,7 @@ angular.module('save-my-gas', [
 	$locationProvider.html5Mode(true);
 
 	// $httpProvider.defaults.withCredentials = true;
-	// $httpProvider.interceptors.push('LoginInterceptorService');
+	$httpProvider.interceptors.push('authInterceptorService');
 	// $httpProvider.defaults.headers.commom.Authorization = null;
 
 })

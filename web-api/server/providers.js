@@ -1,4 +1,5 @@
-var serverPath = 'http://192.168.2.116:3000';
+// var serverPath = 'http://192.168.2.116:3000';
+var serverPath = 'http://localhost:3000';
 
 var env = process.env.NODE_ENV;
 if(typeof env === 'string' && env.toLowerCase() === 'production') {

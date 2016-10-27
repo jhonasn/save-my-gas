@@ -18,11 +18,23 @@ function(
 		$scope.isSignup = !$scope.isSignup
 	}
 
-	$scope.login = function(isSignup, provider, model) {
-		if(isSignup) {
-			authService.signup(model)
+	$scope.login = function(provider, isSignup, model) {
+		if(provider === 'email') {
+			if(isSignup) {
+				authService.signup(model)
+			} else {
+				authService.login(provider, model)
+			}
 		} else {
-			authService.login(provider, model)
+			authService.login(provider)
 		}
 	}
+})
+
+.controller('authLogoutController',
+function(
+	$scope,
+	authService
+) {
+	authService.logout()
 })

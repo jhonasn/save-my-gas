@@ -1,5 +1,5 @@
 angular.module('save-my-gas')
-.controller('MainController',
+.controller('mainController',
 function (
 	$scope,
 	authService

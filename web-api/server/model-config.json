@@ -23,7 +23,7 @@
   },
   "UserIdentity": {
     "dataSource": "mongodb",
-    "public": false
+    "public": true
   },
   "AccessToken": {
     "dataSource": "mongodb",
