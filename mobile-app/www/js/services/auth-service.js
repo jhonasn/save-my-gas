@@ -17,11 +17,17 @@ angular.module('save-my-gas')
 
 				setUserInfo: function(userInfo) {
 					$localStorage.user.info = userInfo
-					if ($localStorage.user.provider === 'email') {
-						$localStorage.user.displayName = userInfo.email
-					} else if($localStorage.user.provider === 'facebook') {
-						$localStorage.user.displayName = userInfo.profile.name.givenName +
-						' ' + userInfo.profile.name.familyName
+					switch ($localStorage.user.provider) {
+						case 'email':
+							$localStorage.user.displayName = userInfo.email
+							break;
+						case 'facebook':
+							$localStorage.user.displayName = userInfo.profile.name.givenName +
+								' ' + userInfo.profile.name.familyName
+							break;
+						case 'google':
+							$localStorage.user.displayName = userInfo.profile.displayName
+							break;
 					}
 				},
 
@@ -185,11 +191,7 @@ angular.module('save-my-gas')
 					var user = authService.getUser();
 					if (user) {
 						$http.post(
-								appConstants.urlDomain + '/api/Users/logout', {}, {
-									headers: {
-										"Authorization": user.access_token
-									}
-								}
+								appConstants.urlDomain + '/api/Users/logout', {}
 							).then(function() {
 								$localStorage.$reset()
 								authService.gotoLogin()
