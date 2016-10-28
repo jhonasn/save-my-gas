@@ -4,6 +4,7 @@ angular.module('save-my-gas')
 			$http,
 			$window,
 			$localStorage,
+			// rootRouteService,
 			appConstants
 		) {
 			var _setUser = function(user) {
@@ -17,17 +18,11 @@ angular.module('save-my-gas')
 
 				setUserInfo: function(userInfo) {
 					$localStorage.user.info = userInfo
-					switch ($localStorage.user.provider) {
-						case 'email':
-							$localStorage.user.displayName = userInfo.email
-							break;
-						case 'facebook':
-							$localStorage.user.displayName = userInfo.profile.name.givenName +
-								' ' + userInfo.profile.name.familyName
-							break;
-						case 'google':
-							$localStorage.user.displayName = userInfo.profile.displayName
-							break;
+					if ($localStorage.user.provider === 'email') {
+						$localStorage.user.displayName = userInfo.email
+					} else {
+						$localStorage.user.displayName = userInfo.profile.name.givenName +
+							' ' + userInfo.profile.name.familyName
 					}
 				},
 
@@ -90,13 +85,13 @@ angular.module('save-my-gas')
 
 				gotoLogin: function() {
 					if (!authService.hereIsLogin()) {
-						$window.location.href = '/index.html'
+						SaveMyGas.rootRoute.go('index.html')
 					}
 				},
 
 				gotoHome: function() {
 					if (authService.hereIsLogin()) {
-						$window.location.href = '/app.html'
+						SaveMyGas.rootRoute.go('app.html')
 					}
 				},
 
@@ -143,11 +138,7 @@ angular.module('save-my-gas')
 
 						var win = null
 
-						if (window.cordova) {
-							win = window.open(url, '_blank', 'location=no')
-						} else {
-							win = window.open(url, '_blank', 'location=no,menubar=no,resizable=yes,top=50,width=800,height=410')
-						}
+						win = window.open(url, '_blank', 'location=no')
 
 						var _getJson = function(win, innerHTML) {
 							var user = JSON.parse(innerHTML.match(/\{\".*\}/g)[0])

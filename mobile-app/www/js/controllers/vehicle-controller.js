@@ -2,41 +2,40 @@ angular.module('save-my-gas')
 .controller('vehicleController',
 function(
 	$scope,
-	$state,
-	$ionicPopup,
-	crud,
 	converterServices
 ) {
-	$scope.vehicles = crud.getAll('vehicle')
+	// $scope.vehicles = crud.getAll('vehicle')
+	//
+	// $scope.delete = function(vehicle) {
+	// 	$ionicPopup.confirm({
+	// 			title: 'Delete',
+	// 			template: 'Do you want delete this vehicle?'
+	// 		})
+	// 		.then(function(yes) {
+	// 			if (yes) {
+	//
+	// 				var data = {
+	// 					title: 'Result'
+	// 				}
+	// 				if (crud.delete('vehicle', vehicle)) {
+	// 					//show success message
+	// 					data.msg = 'deleted!'
+	// 					$scope.vehicles = crud.getAll('vehicle')
+	// 				} else {
+	// 					//show error message
+	// 					data.msg = '!error!'
+	// 				}
+	//
+	// 				//temporary message
+	// 				$ionicPopup.alert({
+	// 					title: data.title,
+	// 					template: data.msg
+	// 				})
+	// 			}
+	// 		})
+	// }
 
-	$scope.delete = function(vehicle) {
-		$ionicPopup.confirm({
-				title: 'Delete',
-				template: 'Do you want delete this vehicle?'
-			})
-			.then(function(yes) {
-				if (yes) {
-
-					var data = {
-						title: 'Result'
-					}
-					if (crud.delete('vehicle', vehicle)) {
-						//show success message
-						data.msg = 'deleted!'
-						$scope.vehicles = crud.getAll('vehicle')
-					} else {
-						//show error message
-						data.msg = '!error!'
-					}
-
-					//temporary message
-					$ionicPopup.alert({
-						title: data.title,
-						template: data.msg
-					})
-				}
-			})
-	}
+	$scope.hello = 'Hello! you\'re in vehicle screen!'
 })
 
 .controller('VehicleEditController',

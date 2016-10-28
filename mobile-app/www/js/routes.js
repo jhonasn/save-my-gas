@@ -5,8 +5,13 @@ angular.module('save-my-gas')
     $routeProvider
 
     .when('/', {
-        templateUrl: '/views/home.html',
+        templateUrl: SaveMyGas.rootRoute.getPath('/views/home.html'),
         controller: 'homeController'
+    })
+
+	.when('/vehicle', {
+        templateUrl: SaveMyGas.rootRoute.getPath('/views/vehicle-list.html'),
+        controller: 'vehicleController'
     })
 
     // .when('/login', {
