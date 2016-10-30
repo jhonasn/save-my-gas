@@ -1,59 +1,50 @@
-<ion-view view-title="Edit Vehicle">
-	<ion-content>
+<button type="button"
+	class="btn blue"
+ ng-click="createTestVehicle()">Criar veiculo fake</button>
 
-		<form ng-submit="saveVehicle(vehicle)">
-			<div class="list">
+<form ng-submit="saveVehicle(vehicle)">
+	<div class="list">
 
-				<div id="vehicle-edit-avatar" class="item item-input">
-					<img ng-src="/img/{{vehicle.img ? vehicle.img : vehicle.type.img}}" alt="Vehicle Picture" />
-				</div>
+		<div id="vehicle-edit-avatar" class="item item-input">
+			<img ng-src="/img/{{vehicle.img ? vehicle.img : vehicle.type.img}}" alt="Vehicle Picture" />
+		</div>
 
-				<label class="item item-input">
+		<label class="item item-input">
 					<span class="input-label">Name</span>
 					<input type="text" ng-model="vehicle.name" placeholder="Name or Model">
 				</label>
 
-				<label class="item item-input item-select">
+		<!-- <label class="item item-input item-select">
 					<div class="input-label">
 						Type
 					</div>
 					<select ng-model="vehicle.type" ng-options="item as item.name for item in vehicleType"></select>
-				</label>
+				</label> -->
 
-				<label class="item item-input item-select">
+		<label class="item item-input item-select">
 				<div class="input-label">
 					Power
 				</div>
 				<select ng-model="vehicle.power" ng-options="item.value as item.label for item in powerVehicles"></select>
 				</label>
 
-				<label class="item item-input item-select">
-					<div class="input-label">
-						Consumption Unit
-					</div>
-					<select ng-model="vehicle.unit" ng-options="item as item.unit for item in consumptionUnits"></select>
-				</label>
-
-				<label class="item item-input">
+		<label class="item item-input">
 <span class="input-label">Consumption <span ng-show="vehicle.unit">({{vehicle.unit.description}})</span></span>
 <input type="number" ng-model="vehicle.consumption">
 </label>
 
-				<div class="item item-checkbox">
+		<!-- <div class="item item-checkbox">
 					<label class="checkbox">
 <input type="checkbox" ng-model="vehicle.autoUpdateConsumption">
 </label> Auto Update vehicle consumption
-				</div>
+				</div> -->
 
-				<div class="item">
-					<div class="button-bar">
-						<a class="button button-positive" ui-sref="app.vehicle">Cancel</a>
-						<button type="submit" class="button button-balanced">Save</button>
-					</div>
-					</label>
+		<div class="item">
+			<div class="button-bar">
+				<a class="button button-positive" ui-sref="app.vehicle">Cancel</a>
+				<button type="submit" class="button button-balanced">Save</button>
+			</div>
+			</label>
 
-				</div>
-		</form>
-
-	</ion-content>
-</ion-view>
+		</div>
+</form>

@@ -19,12 +19,12 @@
     "vehicles": {
       "type": "hasMany",
       "model": "vehicle",
-      "foreignKey": ""
+      "foreignKey": "fuelTypeId"
     },
     "fuelPrices": {
       "type": "hasMany",
       "model": "fuelPrice",
-      "foreignKey": ""
+      "foreignKey": "fuelTypeId"
     }
   },
   "acls": [

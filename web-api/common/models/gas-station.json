@@ -42,7 +42,7 @@
     "fuelPrices": {
       "type": "hasMany",
       "model": "fuelPrice",
-      "foreignKey": ""
+      "foreignKey": "gasStationId"
     }
   },
   "acls": [

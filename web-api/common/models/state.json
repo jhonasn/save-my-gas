@@ -24,22 +24,22 @@
     "cities": {
       "type": "hasMany",
       "model": "city",
-      "foreignKey": ""
+      "foreignKey": "stateId"
     },
     "neighborhoods": {
       "type": "hasMany",
       "model": "neighborhood",
-      "foreignKey": ""
+      "foreignKey": "stateId"
     },
     "addresses": {
       "type": "hasMany",
       "model": "address",
-      "foreignKey": ""
+      "foreignKey": "stateId"
     },
     "gasStations": {
       "type": "hasMany",
       "model": "gasStation",
-      "foreignKey": ""
+      "foreignKey": "stateId"
     }
   },
   "acls": [

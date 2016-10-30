@@ -17,7 +17,7 @@
     "vehicles": {
       "type": "hasMany",
       "model": "vehicle",
-      "foreignKey": ""
+      "foreignKey": "vehicleTypeId"
     }
   },
   "acls": [

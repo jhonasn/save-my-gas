@@ -28,7 +28,7 @@
     "gasStations": {
       "type": "hasMany",
       "model": "gasStation",
-      "foreignKey": ""
+      "foreignKey": "addressId"
     },
     "city": {
       "type": "belongsTo",

@@ -187,11 +187,12 @@ angular.module('save-my-gas')
 								$localStorage.$reset()
 								authService.gotoLogin()
 							})
-							.catch(function() {
-								Materialize.toast('Não foi possível realizar o logout')
-									//should i logout from navigator anyway?
-									// $localStorage.$reset()
-									// authService.gotoLogin()
+							.catch(function(err) {
+								// Materialize.toast('Não foi possível realizar o logout')
+								console.error('Ocorreu um erro ao realizar o logout', err)
+								//should i logout from navigator anyway?
+								$localStorage.$reset()
+								authService.gotoLogin()
 							})
 					} else {
 						authService.gotoLogin()

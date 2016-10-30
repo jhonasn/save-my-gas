@@ -23,12 +23,12 @@
     "neighborhoods": {
       "type": "hasMany",
       "model": "neighborhood",
-      "foreignKey": ""
+      "foreignKey": "cityId"
     },
     "addresses": {
       "type": "hasMany",
       "model": "address",
-      "foreignKey": ""
+      "foreignKey": "cityId"
     },
     "state": {
       "type": "belongsTo",
@@ -38,7 +38,7 @@
     "gasStations": {
       "type": "hasMany",
       "model": "gasStation",
-      "foreignKey": ""
+      "foreignKey": "cityId"
     }
   },
   "acls": [

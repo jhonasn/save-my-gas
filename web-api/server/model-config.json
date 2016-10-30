@@ -15,7 +15,8 @@
     ]
   },
   "User": {
-    "dataSource": "mongodb"
+    "dataSource": "mongodb",
+    "public": false
   },
   "UserCredential": {
     "dataSource": "mongodb",
@@ -94,5 +95,9 @@
     "public": true,
     "$promise": {},
     "$resolved": true
+  },
+  "user": {
+    "dataSource": "mongodb",
+    "public": true
   }
 }

@@ -133,7 +133,7 @@ function(
 	}
 })
 
-.controller('GasStationViewController',
+.controller('gasStationViewController',
 function(
 	$scope,
 	$state,
