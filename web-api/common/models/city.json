@@ -1,0 +1,59 @@
+{
+  "name": "city",
+  "base": "PersistedModel",
+  "strict": false,
+  "idInjection": false,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "name": {
+      "type": "string",
+      "required": true
+    },
+    "anpId": {
+      "type": "string"
+    },
+    "stateId": {
+      "type": "string"
+    }
+  },
+  "validations": [],
+  "relations": {
+    "neighborhoods": {
+      "type": "hasMany",
+      "model": "neighborhood",
+      "foreignKey": ""
+    },
+    "addresses": {
+      "type": "hasMany",
+      "model": "address",
+      "foreignKey": ""
+    },
+    "state": {
+      "type": "belongsTo",
+      "model": "state",
+      "foreignKey": "stateId"
+    },
+    "gasStations": {
+      "type": "hasMany",
+      "model": "gasStation",
+      "foreignKey": ""
+    }
+  },
+  "acls": [
+    {
+      "accessType": "*",
+      "principalType": "ROLE",
+      "principalId": "$unauthenticated",
+      "permission": "DENY"
+    },
+    {
+      "accessType": "*",
+      "principalType": "ROLE",
+      "principalId": "$authenticated",
+      "permission": "ALLOW"
+    }
+  ],
+  "methods": {}
+}

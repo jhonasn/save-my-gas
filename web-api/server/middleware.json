@@ -41,9 +41,9 @@
     }
   },
   "files": {
-	  "loopback#static": {
-		  "params": "$!../../mobile-app/www"
-	  }
+    "loopback#static": {
+      "params": "$!../../mobile-app/www"
+    }
   },
   "final": {
     "loopback#urlNotFound": {}

@@ -1,35 +1,26 @@
 {
-  "name": "note",
-  "plural": "notes",
+  "name": "vehicleType",
   "base": "PersistedModel",
-  "idInjection": true,
+  "strict": false,
+  "idInjection": false,
   "options": {
     "validateUpsert": true
   },
   "properties": {
-    "title": {
+    "type": {
       "type": "string",
       "required": true
-    },
-    "content": {
-      "type": "string"
     }
   },
   "validations": [],
-  "relations": {},
+  "relations": {
+    "vehicles": {
+      "type": "hasMany",
+      "model": "vehicle",
+      "foreignKey": ""
+    }
+  },
   "acls": [
-    {
-      "accessType": "*",
-      "principalType": "ROLE",
-      "principalId": "$unauthenticated",
-      "permission": "DENY"
-    },
-    {
-      "accessType": "*",
-      "principalType": "ROLE",
-      "principalId": "$authenticated",
-      "permission": "ALLOW"
-    },
     {
       "accessType": "*",
       "principalType": "ROLE",

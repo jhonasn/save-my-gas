@@ -1,0 +1,63 @@
+{
+  "name": "gasStation",
+  "base": "PersistedModel",
+  "strict": false,
+  "idInjection": false,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "companyName": {
+      "type": "string"
+    },
+    "geolocation": {
+      "type": "geopoint"
+    },
+    "distributor": {
+      "type": "string"
+    },
+    "invoiceOk": {
+      "type": "boolean"
+    },
+    "addressId": {
+      "type": "string"
+    },
+    "neighborhoodId": {
+      "type": "string"
+    },
+    "cityId": {
+      "type": "string"
+    },
+    "stateId": {
+      "type": "string"
+    }
+  },
+  "validations": [],
+  "relations": {
+    "adress": {
+      "type": "belongsTo",
+      "model": "address",
+      "foreignKey": "addressId"
+    },
+    "fuelPrices": {
+      "type": "hasMany",
+      "model": "fuelPrice",
+      "foreignKey": ""
+    }
+  },
+  "acls": [
+    {
+      "accessType": "*",
+      "principalType": "ROLE",
+      "principalId": "$unauthenticated",
+      "permission": "DENY"
+    },
+    {
+      "accessType": "*",
+      "principalType": "ROLE",
+      "principalId": "$authenticated",
+      "permission": "ALLOW"
+    }
+  ],
+  "methods": {}
+}

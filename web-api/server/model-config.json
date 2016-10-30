@@ -41,8 +41,58 @@
     "dataSource": "mongodb",
     "public": false
   },
-  "note": {
+  "vehicle": {
     "dataSource": "mongodb",
-    "public": true
+    "public": true,
+    "$promise": {},
+    "$resolved": true
+  },
+  "vehicleType": {
+    "dataSource": "mongodb",
+    "public": true,
+    "$promise": {},
+    "$resolved": true
+  },
+  "fuelType": {
+    "dataSource": "mongodb",
+    "public": true,
+    "$promise": {},
+    "$resolved": true
+  },
+  "fuelPrice": {
+    "dataSource": "mongodb",
+    "public": true,
+    "$promise": {},
+    "$resolved": true
+  },
+  "gasStation": {
+    "dataSource": "mongodb",
+    "public": true,
+    "$promise": {},
+    "$resolved": true
+  },
+  "neighborhood": {
+    "dataSource": "mongodb",
+    "public": true,
+    "$promise": {},
+    "$resolved": true
+  },
+  "city": {
+    "dataSource": "mongodb",
+    "public": true,
+    "$promise": {},
+    "$resolved": true
+  },
+  "state": {
+    "dataSource": "mongodb",
+    "public": true,
+    "$promise": {},
+    "$resolved": true
+  },
+  "address": {
+    "dataSource": "mongodb",
+    "public": true,
+    "$promise": {},
+    "$resolved": true
   }
 }
