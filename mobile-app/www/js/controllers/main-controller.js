@@ -5,4 +5,5 @@ function (
 	authService
 ) {
 	$scope.user = authService.getUser()
+	$scope.cordova = !!window.cordova
 })

@@ -13,11 +13,21 @@
 			</button>
 		</div>
 
-		<div class="col s2">
-			<input type="file" name="photoAttachField" ng-show="false">
-			<button type="button" class="btn-floating btn-large blue" onclick="modelForm.photoAttachField.click()">
-					<i class="material-icons">attach_file</i>
-			</button>
+		<div ng-class="{ 'col s10': cordova, 'col s12': !cordova }">
+
+			<div class="file-field input-field">
+				<button type="button" class="btn btn-large blue">
+						<i class="material-icons">attach_file</i>
+						<input type="file" name="photoAttachField">
+				</button>
+				<!-- <div class="btn">
+					<span>File</span>
+					<input type="file" multiple>
+				</div> -->
+				<div class="file-path-wrapper">
+					<input class="file-path validate" type="text" placeholder="Upload one or more files">
+				</div>
+			</div>
 		</div>
 
 	</div>
@@ -25,75 +35,37 @@
 	<div class="row">
 
 		<div class="input-field">
-			<input type="text"
-			name="vehicleModelIdField"
-			id="vehicle-model-id-field"
-			class="validate"
-			ng-model="model.vehicleModelId"
-			ng-required="true">
+			<input type="text" name="vehicleModelIdField" id="vehicle-model-id-field" class="validate" ng-model="model.vehicleModelId" ng-required="true">
 			<label for="vehicle-model-id-field">Modelo</label>
 		</div>
 
 		<div class="input-field">
-			<input type="text"
-			name="vehicleBrandIdField"
-			id="vehicle-brand-id-field"
-			class="validate"
-			ng-model="model.vehicleBrandId"
-			ng-required="true">
+			<input type="text" name="vehicleBrandIdField" id="vehicle-brand-id-field" class="validate" ng-model="model.vehicleBrandId" ng-required="true">
 			<label for="vehicle-brand-id-field">Marca</label>
 		</div>
 
 		<div class="input-field">
-			<input type="text"
-			name="nickNameField"
-			id="nick-name-field"
-			class="validate"
-			ng-model="model.nickName"
-			ng-required="true">
+			<input type="text" name="nickNameField" id="nick-name-field" class="validate" ng-model="model.nickName" ng-required="true">
 			<label for="nick-name-field">Apelido do carango</label>
 		</div>
 
 		<div class="input-field">
-			<input type="number"
-			name="yearField"
-			id="year-field"
-			class="validate"
-			ng-model="model.year"
-			ng-min="1900"
-			ng-max="anoAtual">
+			<input type="number" name="yearField" id="year-field" class="validate" ng-model="model.year" ng-min="1900" ng-max="anoAtual">
 			<label for="year-field">Ano</label>
 		</div>
 
 		<div class="input-field">
-			<input type="number"
-			name="consumptionField"
-			id="consumption-field"
-			class="validate"
-			ng-model="model.consumption"
-			ng-required="true"
-			ng-min="0">
+			<input type="number" name="consumptionField" id="consumption-field" class="validate" ng-model="model.consumption" ng-required="true" ng-min="0">
 			<label for="consumption-field">Consumo (km/l)</label>
 		</div>
 
 		<div class="input-field">
-			<input type="number"
-			name="powerField"
-			id="power-field"
-			class="validate"
-			ng-model="model.power"
-			ng-required="true"
-			ng-min="0">
+			<input type="number" name="powerField" id="power-field" class="validate" ng-model="model.power" ng-required="true" ng-min="0">
 			<label for="power-field">Motor (ex.: 1.0-16v)</label>
 		</div>
 
 		<div class="input-field">
-			<input type="text"
-			name="vehicleTypeIdField"
-			id="vehicle-type-id-field"
-			class="validate"
-			ng-model="model.vehicleTypeId"
-			ng-required="true">
+			<input type="text" name="vehicleTypeIdField" id="vehicle-type-id-field" class="validate autocomplete" ng-model="model.vehicleTypeId" ng-required="true">
 			<label for="vehicle-type-id-field">Categoria</label>
 		</div>
 

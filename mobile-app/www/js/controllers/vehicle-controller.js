@@ -30,7 +30,6 @@ angular.module('save-my-gas')
 	) {
 		model.photo = { photo: SaveMyGas.rootRoute.getPath('/img/default-car.png') }
 		$scope.model = model
-		$scope.cordova = !!window.cordova
 		//vehicleService.getVehicleType
 		$scope.getVehicleType = ['teste 1', 'oi', 'hello', 'olá', 'bye', 'beijos']
 		$scope.anoAtual = (new Date()).getFullYear()
@@ -55,7 +54,6 @@ angular.module('save-my-gas')
 	) {
 		model.photo = model.photo || { photo: SaveMyGas.rootRoute.getPath('/img/default-car.png') }
 		$scope.model = model
-		$scope.cordova = !!window.cordova
 		$scope.getVehicleType = vehicleService.getVehicleType
 		$scope.anoAtual = (new Date()).getFullYear()
 
