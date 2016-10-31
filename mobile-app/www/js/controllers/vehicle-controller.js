@@ -42,10 +42,20 @@ angular.module('save-my-gas')
 		$scope.showCamera = false
 		var cameraInterval = null
 
+		$scope.setDirty = function (form) {
+			form.$setDirty()
+		}
+
 		$scope.photoAttachChanged = function(files) {
 			if (files.length) {
 				utilService.fileToB64(files[0]).then(function(img) {
-					$scope.model.photo.photo = img
+					if(img.indexOf('image') === -1) {
+						Materialize.toast('Escolha uma IMAGEM')
+						$scope.model.photo.photo = null
+					} else {
+						$scope.model.photo.photo = img
+						// $scope.model.photo.thumb = utilService.resizeImg(img, 100, 100)
+					}
 				})
 			}
 		}
@@ -56,7 +66,7 @@ angular.module('save-my-gas')
 				destinationType: Camera.DestinationType.DATA_URL,
 				sourceType: Camera.PictureSourceType.CAMERA,
 				allowEdit: true,
-				encodingType: Camera.EncodingType.PNG,
+				encodingType: Camera.EncodingType.JPEG,
 				// targetWidth: 100,
 				// targetHeight: 100,
 				popoverOptions: CameraPopoverOptions,
@@ -68,7 +78,11 @@ angular.module('save-my-gas')
 				$scope.model.photo.photo = "data:image/png;base64," + imageData;
 				$scope.showCamera = false
 			}, function(err) {
-				Materialize.toast('Ocorreu um problema ao tirar a foto :(')
+				if(typeof err === 'string' && err.indexOf('cancelled') > -1) {
+					console.info('tirar foto cancelado')
+				} else {
+					Materialize.toast('Ocorreu um problema ao tirar a foto :(')
+				}
 			});
 
 			if(cameraInterval) {
@@ -83,7 +97,17 @@ angular.module('save-my-gas')
 
 					buttonEl.attr('type', 'button')
 					buttonEl.addClass('btn-floating red right')
-					buttonEl.html('<i class="material-icons">photo</i>')
+					buttonEl.html('<i class="material-icons">camera</i>')
+
+					videoEl.removeAttr('width').removeAttr('height')
+					videoEl.css('width', '100%')
+
+					cameraEl.append(buttonEl)
+
+					cameraEl.append('<div class="row">')
+					cameraEl.find('.row').append(videoEl)
+					cameraEl.append('<div class="row camera-button">')
+					cameraEl.find('.row.camera-button').append(buttonEl)
 
 					var cameraAppendEl = angular.element('#camera')
 					cameraAppendEl.append(cameraEl)

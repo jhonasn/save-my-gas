@@ -1,4 +1,4 @@
-<form name="modelForm" ng-submit="save(model)">
+<form name="modelForm" ng-submit="modelForm.$valid && save(model)" novalidate>
 
 	<div class="parallax-container">
 		<div parallax><img ng-src="{{ model.photo.photo }}"></div>
@@ -26,7 +26,7 @@
 							onchange="angular.element(this).scope().photoAttachChanged(this.files)">
 					</button>
 					<div class="file-path-wrapper">
-						<input class="file-path validate" type="text" placeholder="Upload one or more files">
+						<input class="file-path validate" type="text" placeholder="Escolha uma foto...">
 					</div>
 				</div>
 			</div>
@@ -39,38 +39,99 @@
 		<div class="row">
 
 			<div class="input-field">
-				<input type="text" name="vehicleModelIdField" id="vehicle-model-id-field" class="validate" ng-model="model.vehicleModelId" ng-required="true">
+				<input type="text"
+				name="vehicleModelIdField"
+				id="vehicle-model-id-field"
+				ng-class="{ invalid: modelForm.vehicleModelIdField.$invalid }"
+				ng-model="model.vehicleModelId"
+				ng-required="true">
 				<label for="vehicle-model-id-field">Modelo</label>
+				<div ng-if="modelForm.vehicleModelIdField.$dirty || modelForm.$submitted" ng-messages="modelForm.vehicleModelIdField.$error" role="alert">
+					<span class="invalid" ng-message="required">Obrigatório</span>
+				</div>
 			</div>
 
 			<div class="input-field">
-				<input type="text" name="vehicleBrandIdField" id="vehicle-brand-id-field" class="validate" ng-model="model.vehicleBrandId" ng-required="true">
+				<input type="text"
+				name="vehicleBrandIdField"
+				id="vehicle-brand-id-field"
+				ng-class="{ invalid: modelForm.vehicleBrandIdField.$invalid }"
+				ng-model="model.vehicleBrandId"
+				ng-required="true">
 				<label for="vehicle-brand-id-field">Marca</label>
+				<div ng-if="modelForm.vehicleBrandIdField.$dirty || modelForm.$submitted" ng-messages="modelForm.vehicleBrandIdField.$error" role="alert">
+					<span class="invalid" ng-message="required">Obrigatório</span>
+				</div>
 			</div>
 
 			<div class="input-field">
-				<input type="text" name="nickNameField" id="nick-name-field" class="validate" ng-model="model.nickName" ng-required="true">
+				<input type="text"
+				name="nickNameField"
+				id="nick-name-field"
+				ng-class="{ invalid: modelForm.nickNameField.$invalid }"
+				ng-model="model.nickName"
+				ng-required="true">
 				<label for="nick-name-field">Apelido do carango</label>
+				<div ng-if="modelForm.nickNameField.$dirty || modelForm.$submitted" ng-messages="modelForm.nickNameField.$error" role="alert">
+					<span class="invalid" ng-message="required">Obrigatório</span>
+				</div>
 			</div>
 
 			<div class="input-field">
-				<input type="number" name="yearField" id="year-field" class="validate" ng-model="model.year" ng-min="1900" ng-max="anoAtual">
+				<input type="number"
+				name="yearField"
+				id="year-field"
+				ng-class="{ invalid: modelForm.yearField.$invalid }"
+				ng-model="model.year"
+				ng-min="1900"
+				ng-max="anoAtual">
 				<label for="year-field">Ano</label>
+				<div ng-if="modelForm.yearField.$dirty || modelForm.$submitted" ng-messages="modelForm.yearField.$error" role="alert">
+					<span class="invalid" ng-message="min">Mínimo aceito 1900</span>
+					<span class="invalid" ng-message="max">Maximo aceito {{ anoAtual }}</span>
+				</div>
 			</div>
 
 			<div class="input-field">
-				<input type="number" name="consumptionField" id="consumption-field" class="validate" ng-model="model.consumption" ng-required="true" ng-min="0">
+				<input type="number"
+				name="consumptionField"
+				id="consumption-field"
+				ng-class="{ invalid: modelForm.consumptionField.$invalid }"
+				ng-model="model.consumption"
+				ng-required="true"
+				ng-min="0">
 				<label for="consumption-field">Consumo (km/l)</label>
+				<div ng-if="modelForm.consumptionField.$dirty || modelForm.$submitted" ng-messages="modelForm.consumptionField.$error" role="alert">
+					<span class="invalid" ng-message="min">Mínimo aceito 0</span>
+				</div>
 			</div>
 
 			<div class="input-field">
-				<input type="number" name="powerField" id="power-field" class="validate" ng-model="model.power" ng-required="true" ng-min="0">
+				<input type="number"
+				name="powerField"
+				id="power-field"
+				ng-class="{ invalid: modelForm.powerField.$invalid }"
+				ng-model="model.power"
+				ng-required="true"
+				ng-min="0">
 				<label for="power-field">Motor (ex.: 1.0-16v)</label>
+				<div ng-if="modelForm.powerField.$dirty || modelForm.$submitted" ng-messages="modelForm.powerField.$error" role="alert">
+					<span class="invalid" ng-message="required">Obrigatório</span>
+					<span class="invalid" ng-message="min">Mínimo aceito 0</span>
+				</div>
 			</div>
 
 			<div class="input-field">
-				<input type="text" name="vehicleTypeIdField" id="vehicle-type-id-field" class="validate autocomplete" ng-model="model.vehicleTypeId" ng-required="true">
+				<input type="text"
+				name="vehicleTypeIdField"
+				id="vehicle-type-id-field"
+				ng-class="{ invalid: modelForm.vehicleTypeIdField.$invalid }"
+				ng-model="model.vehicleTypeId"
+				ng-required="true">
 				<label for="vehicle-type-id-field">Categoria</label>
+				<div ng-if="modelForm.vehicleTypeIdField.$dirty || modelForm.$submitted" ng-messages="modelForm.vehicleTypeIdField.$error" role="alert">
+					<span class="invalid" ng-message="required">Obrigatório</span>
+				</div>
 			</div>
 
 			<!-- <auto-complete-input name="vehicleTypeIdField"
@@ -85,7 +146,8 @@
 		</div>
 
 		<div class="row">
-			<button type="button" class="btn green waves-effect waves-light right">
+			<button type="submit"
+			class="btn green waves-effect waves-light right">
 				<i class="material-icons right">done</i>Salvar
 			</button>
 		</div>

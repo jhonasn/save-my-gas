@@ -59,7 +59,7 @@ angular.module('save-my-gas')
 									$http.get(appConstants.urlApi + '/useridentities', {
 											params: {
 												filter: {
-													userId: user.userId
+													where: { userId: user.userId }
 												}
 											}
 										})

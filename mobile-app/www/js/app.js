@@ -1,6 +1,7 @@
 angular.module('save-my-gas', [
 	'ui.materialize',
 	'ngRoute',
+	'ngMessages',
 	'lbServices',
 	'ngStorage',
 	'ngCordova',

@@ -142,3 +142,7 @@ body {
     background-color: rgba(0, 0, 0, 0) !important;
 }
 */
+
+[role="alert"] .invalid {
+	color: #B71C1C;
+}

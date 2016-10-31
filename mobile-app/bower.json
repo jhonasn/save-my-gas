@@ -10,7 +10,8 @@
     "ngstorage": "^0.3.11",
     "angular-resource": "^1.5.8",
     "mdi": "^1.7.22",
-    "AutoComplete": "angular-materialize-autocomplete#^1.0.2"
+    "AutoComplete": "angular-materialize-autocomplete#^1.0.2",
+    "angular-messages": "^1.5.8"
   },
   "homepage": "https://github.com/jhonasn/save-my-gas",
   "authors": [
