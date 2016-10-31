@@ -24,14 +24,22 @@ angular.module('save-my-gas')
 	function(
 		$scope,
 		$location,
+		utilService,
 		vehicleService,
 		Vehicle,
 		model
 	) {
 		model.photo = { photo: SaveMyGas.rootRoute.getPath('/img/default-car.png') }
 		$scope.model = model
-		//vehicleService.getVehicleType
 		$scope.anoAtual = (new Date()).getFullYear()
+
+		$scope.photoAttachChanged = function (files) {
+			if(files.length) {
+				utilService.fileToB64(files[0]).then(function (img) {
+					$scope.model.photo.photo = img
+				})
+			}
+		}
 
 		$scope.save = function(model) {
 			$scope.model = Vehicle.create(model)
@@ -53,7 +61,6 @@ angular.module('save-my-gas')
 	) {
 		model.photo = model.photo || { photo: SaveMyGas.rootRoute.getPath('/img/default-car.png') }
 		$scope.model = model
-		$scope.getVehicleType = vehicleService.getVehicleType
 		$scope.anoAtual = (new Date()).getFullYear()
 
 		$scope.save = function(model) {

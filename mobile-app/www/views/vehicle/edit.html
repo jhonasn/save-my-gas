@@ -1,6 +1,6 @@
 <form name="modelForm" ng-submit="save(model)">
 
-	<div class="parallax-container" style="height: 200px">
+	<div class="parallax-container">
 		<div parallax><img ng-src="{{ model.photo.photo }}"></div>
 	</div>
 
@@ -18,12 +18,11 @@
 			<div class="file-field input-field">
 				<button type="button" class="btn btn-large blue">
 						<i class="material-icons">attach_file</i>
-						<input type="file" name="photoAttachField">
+						<input type="file"
+						name="photoAttachField"
+						ng-model="model.photo.photo"
+						onchange="angular.element(this).scope().photoAttachChanged(this.files)">
 				</button>
-				<!-- <div class="btn">
-					<span>File</span>
-					<input type="file" multiple>
-				</div> -->
 				<div class="file-path-wrapper">
 					<input class="file-path validate" type="text" placeholder="Upload one or more files">
 				</div>
