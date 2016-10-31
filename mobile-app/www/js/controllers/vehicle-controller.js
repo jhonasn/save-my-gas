@@ -9,7 +9,9 @@ angular.module('save-my-gas')
 			$scope.collection = collection
 
 			$scope.delete = function(id) {
-				var model = Vehicle.deleteById({id: id})
+				var model = Vehicle.deleteById({
+					id: id
+				})
 				model.$promise.then(function() {
 						Materialize.toast('Veículo deletado')
 						$scope.collection = vehicleService.getCollection()
@@ -24,21 +26,74 @@ angular.module('save-my-gas')
 	function(
 		$scope,
 		$location,
+		$cordovaCamera,
+		$interval,
 		utilService,
 		vehicleService,
 		Vehicle,
 		model
 	) {
-		model.photo = { photo: SaveMyGas.rootRoute.getPath('/img/default-car.png') }
+		$scope.$parent.container = false
+		model.photo = {
+			photo: SaveMyGas.rootRoute.getPath('/img/default-car.png')
+		}
 		$scope.model = model
 		$scope.anoAtual = (new Date()).getFullYear()
+		$scope.showCamera = false
+		var cameraInterval = null
 
-		$scope.photoAttachChanged = function (files) {
-			if(files.length) {
-				utilService.fileToB64(files[0]).then(function (img) {
+		$scope.photoAttachChanged = function(files) {
+			if (files.length) {
+				utilService.fileToB64(files[0]).then(function(img) {
 					$scope.model.photo.photo = img
 				})
 			}
+		}
+
+		$scope.takeCarPicture = function() {
+			var options = {
+				quality: 50,
+				destinationType: Camera.DestinationType.DATA_URL,
+				sourceType: Camera.PictureSourceType.CAMERA,
+				allowEdit: true,
+				encodingType: Camera.EncodingType.PNG,
+				// targetWidth: 100,
+				// targetHeight: 100,
+				popoverOptions: CameraPopoverOptions,
+				saveToPhotoAlbum: false,
+				correctOrientation: true
+			};
+
+			$cordovaCamera.getPicture(options).then(function(imageData) {
+				$scope.model.photo.photo = "data:image/png;base64," + imageData;
+				$scope.showCamera = false
+			}, function(err) {
+				Materialize.toast('Ocorreu um problema ao tirar a foto :(')
+			});
+
+			if(cameraInterval) {
+				$interval.cancel(cameraInterval)
+			}
+
+			cameraInterval = $interval(function () {
+				var cameraEl = angular.element('.cordova-camera-capture')
+				if(cameraEl) {
+					var videoEl = cameraEl.find('video')
+					var buttonEl = cameraEl.find('button')
+
+					buttonEl.attr('type', 'button')
+					buttonEl.addClass('btn-floating red right')
+					buttonEl.html('<i class="material-icons">photo</i>')
+
+					var cameraAppendEl = angular.element('#camera')
+					cameraAppendEl.append(cameraEl)
+
+					$scope.showCamera = true
+
+					// $inteval.cancel(cameraInterval)//error
+					clearInterval(cameraInterval.$$intervalId)
+				}
+			}, 100);
 		}
 
 		$scope.save = function(model) {
@@ -59,7 +114,9 @@ angular.module('save-my-gas')
 		$location,
 		model
 	) {
-		model.photo = model.photo || { photo: SaveMyGas.rootRoute.getPath('/img/default-car.png') }
+		model.photo = model.photo || {
+			photo: SaveMyGas.rootRoute.getPath('/img/default-car.png')
+		}
 		$scope.model = model
 		$scope.anoAtual = (new Date()).getFullYear()
 

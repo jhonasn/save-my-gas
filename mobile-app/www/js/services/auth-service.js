@@ -75,12 +75,8 @@ angular.module('save-my-gas')
 				},
 
 				hereIsLogin: function() {
-					if (window.cordova) {
-						return $window.location.pathname.indexOf('/index.html') > -1
-					} else {
-						return $window.location.pathname === '/index.html' ||
-							$window.location.pathname === '/'
-					}
+					return $window.location.pathname === SaveMyGas.rootRoute.getPath('/index.html') ||
+						$window.location.pathname === SaveMyGas.rootRoute.getPath('/')
 				},
 
 				gotoLogin: function() {

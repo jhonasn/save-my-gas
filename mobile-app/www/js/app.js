@@ -3,6 +3,8 @@ angular.module('save-my-gas', [
 	'ngRoute',
 	'lbServices',
 	'ngStorage',
+	'ngCordova',
+	'ngCordova.plugins.camera',
 	'auto-complete'
 ])
 
