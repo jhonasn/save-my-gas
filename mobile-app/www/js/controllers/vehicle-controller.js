@@ -31,7 +31,6 @@ angular.module('save-my-gas')
 		model.photo = { photo: SaveMyGas.rootRoute.getPath('/img/default-car.png') }
 		$scope.model = model
 		//vehicleService.getVehicleType
-		$scope.getVehicleType = ['teste 1', 'oi', 'hello', 'olá', 'bye', 'beijos']
 		$scope.anoAtual = (new Date()).getFullYear()
 
 		$scope.save = function(model) {
