@@ -99,5 +99,17 @@
   "user": {
     "dataSource": "mongodb",
     "public": true
+  },
+  "vehicleBrand": {
+    "dataSource": "mongodb",
+    "public": true,
+    "$promise": {},
+    "$resolved": true
+  },
+  "vehicleModel": {
+    "dataSource": "mongodb",
+    "public": true,
+    "$promise": {},
+    "$resolved": true
   }
 }

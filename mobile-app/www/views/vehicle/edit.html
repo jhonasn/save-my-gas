@@ -1,50 +1,132 @@
-<button type="button"
-	class="btn blue"
- ng-click="createTestVehicle()">Criar veiculo fake</button>
+<form name="modelForm" ng-submit="save(model)">
 
-<form ng-submit="saveVehicle(vehicle)">
-	<div class="list">
+	<div class="parallax-container" style="height: 200px">
+		<div parallax><img ng-src="{{ model.photo.photo }}"></div>
+	</div>
 
-		<div id="vehicle-edit-avatar" class="item item-input">
-			<img ng-src="/img/{{vehicle.img ? vehicle.img : vehicle.type.img}}" alt="Vehicle Picture" />
+	<div class="row">
+		<p class="text-amber" ng-bind="(cordova ? 'Tire ou escolha' : 'Escolha') + ' uma foto do seu carro'"></p>
+
+		<div class="col s2" ng-if="cordova">
+			<button type="button" class="btn-floating btn-large blue" ng-click="alert('abrir camera')">
+					<i class="material-icons">photo</i>
+			</button>
 		</div>
 
-		<label class="item item-input">
-					<span class="input-label">Name</span>
-					<input type="text" ng-model="vehicle.name" placeholder="Name or Model">
-				</label>
-
-		<!-- <label class="item item-input item-select">
-					<div class="input-label">
-						Type
-					</div>
-					<select ng-model="vehicle.type" ng-options="item as item.name for item in vehicleType"></select>
-				</label> -->
-
-		<label class="item item-input item-select">
-				<div class="input-label">
-					Power
-				</div>
-				<select ng-model="vehicle.power" ng-options="item.value as item.label for item in powerVehicles"></select>
-				</label>
-
-		<label class="item item-input">
-<span class="input-label">Consumption <span ng-show="vehicle.unit">({{vehicle.unit.description}})</span></span>
-<input type="number" ng-model="vehicle.consumption">
-</label>
-
-		<!-- <div class="item item-checkbox">
-					<label class="checkbox">
-<input type="checkbox" ng-model="vehicle.autoUpdateConsumption">
-</label> Auto Update vehicle consumption
-				</div> -->
-
-		<div class="item">
-			<div class="button-bar">
-				<a class="button button-positive" ui-sref="app.vehicle">Cancel</a>
-				<button type="submit" class="button button-balanced">Save</button>
-			</div>
-			</label>
-
+		<div class="col s2">
+			<input type="file" name="photoAttachField" ng-show="false">
+			<button type="button" class="btn-floating btn-large blue" onclick="modelForm.photoAttachField.click()">
+					<i class="material-icons">attach_file</i>
+			</button>
 		</div>
+
+	</div>
+
+	<div class="row">
+
+		<div class="input-field">
+			<input type="text"
+			name="vehicleModelIdField"
+			id="vehicle-model-id-field"
+			class="validate"
+			ng-model="model.vehicleModelId"
+			ng-required="true">
+			<label for="vehicle-model-id-field">Modelo</label>
+		</div>
+
+		<div class="input-field">
+			<input type="text"
+			name="vehicleBrandIdField"
+			id="vehicle-brand-id-field"
+			class="validate"
+			ng-model="model.vehicleBrandId"
+			ng-required="true">
+			<label for="vehicle-brand-id-field">Marca</label>
+		</div>
+
+		<div class="input-field">
+			<input type="text"
+			name="nickNameField"
+			id="nick-name-field"
+			class="validate"
+			ng-model="model.nickName"
+			ng-required="true">
+			<label for="nick-name-field">Apelido do carango</label>
+		</div>
+
+		<div class="input-field">
+			<input type="number"
+			name="yearField"
+			id="year-field"
+			class="validate"
+			ng-model="model.year"
+			ng-min="1900"
+			ng-max="anoAtual">
+			<label for="year-field">Ano</label>
+		</div>
+
+		<div class="input-field">
+			<input type="number"
+			name="consumptionField"
+			id="consumption-field"
+			class="validate"
+			ng-model="model.consumption"
+			ng-required="true"
+			ng-min="0">
+			<label for="consumption-field">Consumo (km/l)</label>
+		</div>
+
+		<div class="input-field">
+			<input type="number"
+			name="powerField"
+			id="power-field"
+			class="validate"
+			ng-model="model.power"
+			ng-required="true"
+			ng-min="0">
+			<label for="power-field">Motor (ex.: 1.0-16v)</label>
+		</div>
+
+		<div class="input-field">
+			<input type="text"
+			name="vehicleTypeIdField"
+			id="vehicle-type-id-field"
+			class="validate"
+			ng-model="model.vehicleTypeId"
+			ng-required="true">
+			<label for="vehicle-type-id-field">Categoria</label>
+		</div>
+
+		<!-- <auto-complete-input name="vehicleTypeIdField"
+		id="vehicle-type-id-field"
+		class="validate"
+		auto-data="getVehicleType"
+		ac-title="'Categoria'"
+		color="color"
+		input-model="model.vehicleTypeId"
+		ng-required="true"></auto-complete-input> -->
+
+	</div>
+
+	<div class="row">
+		<button type="button" class="btn green waves-effect waves-light right">
+			<i class="material-icons right">done</i>Salvar
+		</button>
+	</div>
+
 </form>
+
+<!--
+nickName
+photo: {
+	photo
+	thumb
+},
+year
+consumption
+power
+vehicleTypeId
+vehicleModelId
+vehicleBrandId
+ownerId
+-->

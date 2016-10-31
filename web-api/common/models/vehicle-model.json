@@ -1,0 +1,39 @@
+{
+	"name": "vehicleModel",
+	"base": "PersistedModel",
+	"strict": false,
+	"idInjection": false,
+	"options": {
+		"validateUpsert": true
+	},
+	"properties": {
+		"name": {
+			"type": "string"
+		}
+	},
+	"validations": [],
+	"relations": {
+		"vehicles": {
+			"type": "hasMany",
+			"model": "vehicle",
+			"foreignKey": "vehicleModelId"
+		},
+		"vehicleBrand": {
+			"type": "belongsTo",
+			"model": "vehicleBrand",
+			"foreignKey": "vehicleBrandId"
+		}
+	},
+	"acls": [{
+		"accessType": "*",
+		"principalType": "ROLE",
+		"principalId": "$unauthenticated",
+		"permission": "DENY"
+	}, {
+		"accessType": "*",
+		"principalType": "ROLE",
+		"principalId": "$authenticated",
+		"permission": "ALLOW"
+	}],
+	"methods": {}
+}

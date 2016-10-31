@@ -1,8 +1,9 @@
 angular.module('save-my-gas', [
 	'ui.materialize',
 	'ngRoute',
+	'lbServices',
 	'ngStorage',
-	'lbServices'
+	'auto-complete'
 ])
 
 .config(function($locationProvider, $httpProvider) {

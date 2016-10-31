@@ -11,12 +11,32 @@ angular.module('save-my-gas')
 
 	.when('/vehicle', {
 		templateUrl: SaveMyGas.rootRoute.getPath('/views/vehicle/list.html'),
-		controller: 'vehicleController'
+		controller: 'vehicleController',
+		resolve: {
+			collection: function (vehicleService) {
+				return vehicleService.getCollection().$promise
+			}
+		}
 	})
 
-	.when('/vehicle/edit', {
+	.when('/vehicle/create', {
 		templateUrl: SaveMyGas.rootRoute.getPath('/views/vehicle/edit.html'),
-		controller: 'vehicleEditController'
+		controller: 'vehicleCreateController',
+		resolve: {
+			model: function(authService) {
+				return { ownerId: authService.getUser().userId }
+			}
+		}
+	})
+
+	.when('/vehicle/update/:id', {
+		templateUrl: SaveMyGas.rootRoute.getPath('/views/vehicle/edit.html'),
+		controller: 'vehicleCreateController',
+		resolve: {
+			model: function ($route, Vehicle) {
+				return Vehicle.findById($route.current.params.id)
+			}
+		}
 	})
 
 	.when('/gas-station', {

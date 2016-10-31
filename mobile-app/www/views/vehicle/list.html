@@ -1,26 +1,74 @@
-<button type="button" class="btn" ng-click="go()">buscar veiculos</button>
-<br>
-<a href="/vehicle/edit" class="btn">Edit</a>
+<h3 class="header text-amber" ng-bind="!collection ? 'Carregando...' : (collection.$resolved && collection.length ? 'Seus veículos cadastrados:' : 'Nenhum veículo cadastrado ainda')"></h3>
+
+<div class="row" ng-repeat="m in collection">
+	<div class="col s12">
+		<div class="card sticky-action hoverable">
+			<div class="card-image waves-effect waves-block waves-light">
+				<img class="activator" ng-src="{{ m.photo.thumb }}">
+			</div>
+			<div class="card-content">
+				<span class="card-title activator grey-text text-darken-4">
+					<span ng-bind="m.nickName"></span>
+					<i class="material-icons right">more_vert</i>
+				</span>
+			</div>
+			<div class="card-reveal">
+				<span class="card-title grey-text text-darken-4">
+					<span ng-bind="m.nickName"></span>
+				<i class="material-icons right">close</i>
+				</span>
+				<p>
+					<ul>
+						<li>
+							<b>Modelo:</b><span ng-bind="m.vehicleModelId"></span>
+						</li>
+						<li>
+							<b>Marca:</b><span ng-bind="m.vehicleBrandId"></span>
+						</li>
+						<li>
+							<b>Ano:</b><span ng-bind="m.year"></span>
+						</li>
+						<li>
+							<b>Consumo:</b><span ng-bind="m.consumption"></span>
+						</li>
+						<li>
+							<b>Motor:</b><span ng-bind="m.power"></span>
+						</li>
+						<li>
+							<b>Tipo:</b><span ng-bind="m.vehicleTypeId"></span>
+						</li>
+					</ul>
+				</p>
+			</div>
+			<div class="card-action">
+				<a ng-href="/vehicle/update/{{m.id}}" class="">Alterar</a>
+				<a href="#" ng-click="delete(m.id)" class="">Excluir</a>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="fixed-action-btn">
+	<a href="/vehicle/create"
+	class="btn-floating btn-large waves-effect waves-light red">
+		<i class="material-icons">add</i>
+	</a>
+</div>
 
 <hr>
 <pre ng-bind="collection | json"></pre>
-<!-- <ion-view view-title="Vehicles">
-	<ion-content>
 
-		<ion-list class="vehicle">
-			<ion-item class="item-balanced" ui-sref="app.vehicle-edit({id: 0})">
-				Register Vehicle
-			</ion-item>
-
-			<ion-item ng-repeat="vehicle in vehicles" class="item-icon-right">
-				<span class="col col-75" ui-sref="app.vehicle-edit({id: vehicle.id})">
-                    {{vehicle.name}}
-                </span>
-				<button class="button button-clear button-assertive icon ion-android-close delete" ng-click="delete(vehicle)"></button>
-			</ion-item>
-
-		</ion-list>
-
-	</ion-content>
-</ion-view> -->
-<!-- button button-clear  icon ion-android-close -->
+<!--
+nickName
+photo: {
+	photo
+	thumb
+},
+year
+consumption
+power
+vehicleTypeId
+vehicleModelId
+vehicleBrandId
+ownerId
+-->
