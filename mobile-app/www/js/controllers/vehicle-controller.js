@@ -41,20 +41,17 @@ angular.module('save-my-gas')
 		$scope.anoAtual = (new Date()).getFullYear()
 		$scope.showCamera = false
 		var cameraInterval = null
-
-		$scope.setDirty = function (form) {
-			form.$setDirty()
-		}
+		$scope.getVehicleType = vehicleService.getVehicleType
 
 		$scope.photoAttachChanged = function(files) {
 			if (files.length) {
 				utilService.fileToB64(files[0]).then(function(img) {
-					if(img.indexOf('image') === -1) {
+					if (img.indexOf('image') === -1) {
 						Materialize.toast('Escolha uma IMAGEM')
 						$scope.model.photo.photo = null
 					} else {
 						$scope.model.photo.photo = img
-						// $scope.model.photo.thumb = utilService.resizeImg(img, 100, 100)
+							// $scope.model.photo.thumb = utilService.resizeImg(img, 100, 100)
 					}
 				})
 			}
@@ -78,20 +75,20 @@ angular.module('save-my-gas')
 				$scope.model.photo.photo = "data:image/png;base64," + imageData;
 				$scope.showCamera = false
 			}, function(err) {
-				if(typeof err === 'string' && err.indexOf('cancelled') > -1) {
+				if (typeof err === 'string' && err.indexOf('cancelled') > -1) {
 					console.info('tirar foto cancelado')
 				} else {
 					Materialize.toast('Ocorreu um problema ao tirar a foto :(')
 				}
 			});
 
-			if(cameraInterval) {
+			if (cameraInterval) {
 				$interval.cancel(cameraInterval)
 			}
 
-			cameraInterval = $interval(function () {
+			cameraInterval = $interval(function() {
 				var cameraEl = angular.element('.cordova-camera-capture')
-				if(cameraEl) {
+				if (cameraEl) {
 					var videoEl = cameraEl.find('video')
 					var buttonEl = cameraEl.find('button')
 

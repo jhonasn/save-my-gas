@@ -44,6 +44,10 @@
 			"type": "string",
 			"required": true
 		},
+		"fuelTypeId": {
+			"type": "string",
+			"required": true
+		},
 		"ownerId": {
 			"type": "string",
 			"required": true
@@ -70,6 +74,11 @@
 			"type": "belongsTo",
 			"model": "vehicleModel",
 			"foreignKey": "vehicleModelId"
+		},
+		"fuelType": {
+			"type": "belongsTo",
+			"model": "fuelType",
+			"foreignKey": "fuelTypeId"
 		}
 	},
 	"acls": [{

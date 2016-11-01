@@ -5,8 +5,8 @@ angular.module('save-my-gas', [
 	'lbServices',
 	'ngStorage',
 	'ngCordova',
-	'ngCordova.plugins.camera',
-	'auto-complete'
+	'ui.bootstrap'
+	// 'ui.bootstrap.typeahead'
 ])
 
 .config(function($locationProvider, $httpProvider) {

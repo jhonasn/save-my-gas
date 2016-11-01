@@ -4,7 +4,13 @@ function (User, authService, VehicleType) {
 	return {
 		getCollection: function() {
 			var collection = User.vehicles({
-				id: authService.getUser().userId
+				id: authService.getUser().userId,
+				include: [
+					'vehicleBrand',
+					'vehicleModel',
+					'vehicleType',
+					'fuelType'
+				]
 			})
 
 			collection.$promise.then(function (collection) {
@@ -18,8 +24,13 @@ function (User, authService, VehicleType) {
 			return collection
 		},
 
-		getVehicleType: function() {
-			return VehicleType.find()
+		getVehicleType: function(search) {
+			return VehicleType.find({
+				filter: {
+					where: { type: { regexp: search } }
+					, limit: 10
+				}
+			}).$promise
 		}
 	}
 })
