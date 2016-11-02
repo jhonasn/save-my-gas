@@ -979,9 +979,27 @@ if (typeof module !== 'undefined' && typeof exports !== 'undefined' &&
               method: "GET",
             },
 
+            // INTERNAL. Use Vehicle.fuelType() instead.
+            "prototype$__get__fuelType": {
+              url: urlBase + "/vehicles/:id/fuelType",
+              method: "GET",
+            },
+
             // INTERNAL. Use Vehicle.user() instead.
             "prototype$__get__user": {
               url: urlBase + "/vehicles/:id/user",
+              method: "GET",
+            },
+
+            // INTERNAL. Use Vehicle.vehicleBrand() instead.
+            "prototype$__get__vehicleBrand": {
+              url: urlBase + "/vehicles/:id/vehicleBrand",
+              method: "GET",
+            },
+
+            // INTERNAL. Use Vehicle.vehicleModel() instead.
+            "prototype$__get__vehicleModel": {
+              url: urlBase + "/vehicles/:id/vehicleModel",
               method: "GET",
             },
 
@@ -1519,40 +1537,6 @@ if (typeof module !== 'undefined' && typeof exports !== 'undefined' &&
               method: "POST",
             },
 
-            /**
-             * @ngdoc method
-             * @name lbServices.Vehicle#myVehicles
-             * @methodOf lbServices.Vehicle
-             *
-             * @description
-             *
-             * <em>
-             * (The remote method definition does not provide any description.)
-             * </em>
-             *
-             * @param {Object=} parameters Request parameters.
-             *
-             *  - `userId` – `{string}` -
-             *
-             * @param {function(Object,Object)=} successCb
-             *   Success callback with two arguments: `value`, `responseHeaders`.
-             *
-             * @param {function(Object)=} errorCb Error callback with one argument:
-             *   `httpResponse`.
-             *
-             * @returns {Object} An empty reference that will be
-             *   populated with the actual data once the response is returned
-             *   from the server.
-             *
-             * Data properties:
-             *
-             *  - `success` – `{*=}` -
-             */
-            "myVehicles": {
-              url: urlBase + "/vehicles/myVehicles",
-              method: "GET",
-            },
-
             // INTERNAL. Use VehicleType.vehicles.findById() instead.
             "::findById::VehicleType::vehicles": {
               params: {
@@ -1562,33 +1546,11 @@ if (typeof module !== 'undefined' && typeof exports !== 'undefined' &&
               method: "GET",
             },
 
-            // INTERNAL. Use VehicleType.vehicles.updateById() instead.
-            "::updateById::VehicleType::vehicles": {
-              params: {
-                'fk': '@fk',
-              },
-              url: urlBase + "/vehicleTypes/:id/vehicles/:fk",
-              method: "PUT",
-            },
-
             // INTERNAL. Use VehicleType.vehicles() instead.
             "::get::VehicleType::vehicles": {
               isArray: true,
               url: urlBase + "/vehicleTypes/:id/vehicles",
               method: "GET",
-            },
-
-            // INTERNAL. Use VehicleType.vehicles.create() instead.
-            "::create::VehicleType::vehicles": {
-              url: urlBase + "/vehicleTypes/:id/vehicles",
-              method: "POST",
-            },
-
-            // INTERNAL. Use VehicleType.vehicles.createMany() instead.
-            "::createMany::VehicleType::vehicles": {
-              isArray: true,
-              url: urlBase + "/vehicleTypes/:id/vehicles",
-              method: "POST",
             },
 
             // INTERNAL. Use VehicleType.vehicles.count() instead.
@@ -1675,6 +1637,50 @@ if (typeof module !== 'undefined' && typeof exports !== 'undefined' &&
             // INTERNAL. Use User.vehicles.count() instead.
             "::count::User::vehicles": {
               url: urlBase + "/users/:id/vehicles/count",
+              method: "GET",
+            },
+
+            // INTERNAL. Use VehicleBrand.vehicles.findById() instead.
+            "::findById::VehicleBrand::vehicles": {
+              params: {
+                'fk': '@fk',
+              },
+              url: urlBase + "/vehicleBrands/:id/vehicles/:fk",
+              method: "GET",
+            },
+
+            // INTERNAL. Use VehicleBrand.vehicles() instead.
+            "::get::VehicleBrand::vehicles": {
+              isArray: true,
+              url: urlBase + "/vehicleBrands/:id/vehicles",
+              method: "GET",
+            },
+
+            // INTERNAL. Use VehicleBrand.vehicles.count() instead.
+            "::count::VehicleBrand::vehicles": {
+              url: urlBase + "/vehicleBrands/:id/vehicles/count",
+              method: "GET",
+            },
+
+            // INTERNAL. Use VehicleModel.vehicles.findById() instead.
+            "::findById::VehicleModel::vehicles": {
+              params: {
+                'fk': '@fk',
+              },
+              url: urlBase + "/vehicleModels/:id/vehicles/:fk",
+              method: "GET",
+            },
+
+            // INTERNAL. Use VehicleModel.vehicles() instead.
+            "::get::VehicleModel::vehicles": {
+              isArray: true,
+              url: urlBase + "/vehicleModels/:id/vehicles",
+              method: "GET",
+            },
+
+            // INTERNAL. Use VehicleModel.vehicles.count() instead.
+            "::count::VehicleModel::vehicles": {
+              url: urlBase + "/vehicleModels/:id/vehicles/count",
               method: "GET",
             },
           }
@@ -1961,6 +1967,42 @@ if (typeof module !== 'undefined' && typeof exports !== 'undefined' &&
 
             /**
              * @ngdoc method
+             * @name lbServices.Vehicle#fuelType
+             * @methodOf lbServices.Vehicle
+             *
+             * @description
+             *
+             * Fetches belongsTo relation fuelType.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `id` – `{*}` - PersistedModel id
+             *
+             *  - `refresh` – `{boolean=}` -
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * <em>
+             * (The remote method definition does not provide any description.
+             * This usually means the response is a `FuelType` object.)
+             * </em>
+             */
+        R.fuelType = function() {
+          var TargetResource = $injector.get("FuelType");
+          var action = TargetResource["::get::Vehicle::fuelType"];
+          return action.apply(R, arguments);
+        };
+
+            /**
+             * @ngdoc method
              * @name lbServices.Vehicle#user
              * @methodOf lbServices.Vehicle
              *
@@ -1992,6 +2034,78 @@ if (typeof module !== 'undefined' && typeof exports !== 'undefined' &&
         R.user = function() {
           var TargetResource = $injector.get("User");
           var action = TargetResource["::get::Vehicle::user"];
+          return action.apply(R, arguments);
+        };
+
+            /**
+             * @ngdoc method
+             * @name lbServices.Vehicle#vehicleBrand
+             * @methodOf lbServices.Vehicle
+             *
+             * @description
+             *
+             * Fetches belongsTo relation vehicleBrand.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `id` – `{*}` - PersistedModel id
+             *
+             *  - `refresh` – `{boolean=}` -
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * <em>
+             * (The remote method definition does not provide any description.
+             * This usually means the response is a `VehicleBrand` object.)
+             * </em>
+             */
+        R.vehicleBrand = function() {
+          var TargetResource = $injector.get("VehicleBrand");
+          var action = TargetResource["::get::Vehicle::vehicleBrand"];
+          return action.apply(R, arguments);
+        };
+
+            /**
+             * @ngdoc method
+             * @name lbServices.Vehicle#vehicleModel
+             * @methodOf lbServices.Vehicle
+             *
+             * @description
+             *
+             * Fetches belongsTo relation vehicleModel.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `id` – `{*}` - PersistedModel id
+             *
+             *  - `refresh` – `{boolean=}` -
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * <em>
+             * (The remote method definition does not provide any description.
+             * This usually means the response is a `VehicleModel` object.)
+             * </em>
+             */
+        R.vehicleModel = function() {
+          var TargetResource = $injector.get("VehicleModel");
+          var action = TargetResource["::get::Vehicle::vehicleModel"];
           return action.apply(R, arguments);
         };
 
@@ -2035,15 +2149,6 @@ if (typeof module !== 'undefined' && typeof exports !== 'undefined' &&
               method: "GET",
             },
 
-            // INTERNAL. Use VehicleType.vehicles.updateById() instead.
-            "prototype$__updateById__vehicles": {
-              params: {
-                'fk': '@fk',
-              },
-              url: urlBase + "/vehicleTypes/:id/vehicles/:fk",
-              method: "PUT",
-            },
-
             // INTERNAL. Use VehicleType.vehicles() instead.
             "prototype$__get__vehicles": {
               isArray: true,
@@ -2051,93 +2156,10 @@ if (typeof module !== 'undefined' && typeof exports !== 'undefined' &&
               method: "GET",
             },
 
-            // INTERNAL. Use VehicleType.vehicles.create() instead.
-            "prototype$__create__vehicles": {
-              url: urlBase + "/vehicleTypes/:id/vehicles",
-              method: "POST",
-            },
-
             // INTERNAL. Use VehicleType.vehicles.count() instead.
             "prototype$__count__vehicles": {
               url: urlBase + "/vehicleTypes/:id/vehicles/count",
               method: "GET",
-            },
-
-            /**
-             * @ngdoc method
-             * @name lbServices.VehicleType#create
-             * @methodOf lbServices.VehicleType
-             *
-             * @description
-             *
-             * Create a new instance of the model and persist it into the data source.
-             *
-             * @param {Object=} parameters Request parameters.
-             *
-             *   This method does not accept any parameters.
-             *   Supply an empty object or omit this argument altogether.
-             *
-             * @param {Object} postData Request data.
-             *
-             * This method expects a subset of model properties as request parameters.
-             *
-             * @param {function(Object,Object)=} successCb
-             *   Success callback with two arguments: `value`, `responseHeaders`.
-             *
-             * @param {function(Object)=} errorCb Error callback with one argument:
-             *   `httpResponse`.
-             *
-             * @returns {Object} An empty reference that will be
-             *   populated with the actual data once the response is returned
-             *   from the server.
-             *
-             * <em>
-             * (The remote method definition does not provide any description.
-             * This usually means the response is a `VehicleType` object.)
-             * </em>
-             */
-            "create": {
-              url: urlBase + "/vehicleTypes",
-              method: "POST",
-            },
-
-            /**
-             * @ngdoc method
-             * @name lbServices.VehicleType#createMany
-             * @methodOf lbServices.VehicleType
-             *
-             * @description
-             *
-             * Create a new instance of the model and persist it into the data source.
-             *
-             * @param {Object=} parameters Request parameters.
-             *
-             *   This method does not accept any parameters.
-             *   Supply an empty object or omit this argument altogether.
-             *
-             * @param {Object} postData Request data.
-             *
-             * This method expects a subset of model properties as request parameters.
-             *
-             * @param {function(Array.<Object>,Object)=} successCb
-             *   Success callback with two arguments: `value`, `responseHeaders`.
-             *
-             * @param {function(Object)=} errorCb Error callback with one argument:
-             *   `httpResponse`.
-             *
-             * @returns {Array.<Object>} An empty reference that will be
-             *   populated with the actual data once the response is returned
-             *   from the server.
-             *
-             * <em>
-             * (The remote method definition does not provide any description.
-             * This usually means the response is a `VehicleType` object.)
-             * </em>
-             */
-            "createMany": {
-              isArray: true,
-              url: urlBase + "/vehicleTypes",
-              method: "POST",
             },
 
             /**
@@ -2306,43 +2328,6 @@ if (typeof module !== 'undefined' && typeof exports !== 'undefined' &&
               method: "GET",
             },
 
-            /**
-             * @ngdoc method
-             * @name lbServices.VehicleType#createChangeStream
-             * @methodOf lbServices.VehicleType
-             *
-             * @description
-             *
-             * Create a change stream.
-             *
-             * @param {Object=} parameters Request parameters.
-             *
-             *   This method does not accept any parameters.
-             *   Supply an empty object or omit this argument altogether.
-             *
-             * @param {Object} postData Request data.
-             *
-             *  - `options` – `{object=}` -
-             *
-             * @param {function(Object,Object)=} successCb
-             *   Success callback with two arguments: `value`, `responseHeaders`.
-             *
-             * @param {function(Object)=} errorCb Error callback with one argument:
-             *   `httpResponse`.
-             *
-             * @returns {Object} An empty reference that will be
-             *   populated with the actual data once the response is returned
-             *   from the server.
-             *
-             * Data properties:
-             *
-             *  - `changes` – `{ReadableStream=}` -
-             */
-            "createChangeStream": {
-              url: urlBase + "/vehicleTypes/change-stream",
-              method: "POST",
-            },
-
             // INTERNAL. Use Vehicle.vehicleType() instead.
             "::get::Vehicle::vehicleType": {
               url: urlBase + "/vehicles/:id/vehicleType",
@@ -2452,82 +2437,6 @@ if (typeof module !== 'undefined' && typeof exports !== 'undefined' &&
 
             /**
              * @ngdoc method
-             * @name lbServices.VehicleType.vehicles#create
-             * @methodOf lbServices.VehicleType.vehicles
-             *
-             * @description
-             *
-             * Creates a new instance in vehicles of this model.
-             *
-             * @param {Object=} parameters Request parameters.
-             *
-             *  - `id` – `{*}` - PersistedModel id
-             *
-             * @param {Object} postData Request data.
-             *
-             * This method expects a subset of model properties as request parameters.
-             *
-             * @param {function(Object,Object)=} successCb
-             *   Success callback with two arguments: `value`, `responseHeaders`.
-             *
-             * @param {function(Object)=} errorCb Error callback with one argument:
-             *   `httpResponse`.
-             *
-             * @returns {Object} An empty reference that will be
-             *   populated with the actual data once the response is returned
-             *   from the server.
-             *
-             * <em>
-             * (The remote method definition does not provide any description.
-             * This usually means the response is a `Vehicle` object.)
-             * </em>
-             */
-        R.vehicles.create = function() {
-          var TargetResource = $injector.get("Vehicle");
-          var action = TargetResource["::create::VehicleType::vehicles"];
-          return action.apply(R, arguments);
-        };
-
-            /**
-             * @ngdoc method
-             * @name lbServices.VehicleType.vehicles#createMany
-             * @methodOf lbServices.VehicleType.vehicles
-             *
-             * @description
-             *
-             * Creates a new instance in vehicles of this model.
-             *
-             * @param {Object=} parameters Request parameters.
-             *
-             *  - `id` – `{*}` - PersistedModel id
-             *
-             * @param {Object} postData Request data.
-             *
-             * This method expects a subset of model properties as request parameters.
-             *
-             * @param {function(Array.<Object>,Object)=} successCb
-             *   Success callback with two arguments: `value`, `responseHeaders`.
-             *
-             * @param {function(Object)=} errorCb Error callback with one argument:
-             *   `httpResponse`.
-             *
-             * @returns {Array.<Object>} An empty reference that will be
-             *   populated with the actual data once the response is returned
-             *   from the server.
-             *
-             * <em>
-             * (The remote method definition does not provide any description.
-             * This usually means the response is a `Vehicle` object.)
-             * </em>
-             */
-        R.vehicles.createMany = function() {
-          var TargetResource = $injector.get("Vehicle");
-          var action = TargetResource["::createMany::VehicleType::vehicles"];
-          return action.apply(R, arguments);
-        };
-
-            /**
-             * @ngdoc method
              * @name lbServices.VehicleType.vehicles#findById
              * @methodOf lbServices.VehicleType.vehicles
              *
@@ -2559,46 +2468,6 @@ if (typeof module !== 'undefined' && typeof exports !== 'undefined' &&
         R.vehicles.findById = function() {
           var TargetResource = $injector.get("Vehicle");
           var action = TargetResource["::findById::VehicleType::vehicles"];
-          return action.apply(R, arguments);
-        };
-
-            /**
-             * @ngdoc method
-             * @name lbServices.VehicleType.vehicles#updateById
-             * @methodOf lbServices.VehicleType.vehicles
-             *
-             * @description
-             *
-             * Update a related item by id for vehicles.
-             *
-             * @param {Object=} parameters Request parameters.
-             *
-             *  - `id` – `{*}` - PersistedModel id
-             *
-             *  - `fk` – `{*}` - Foreign key for vehicles
-             *
-             * @param {Object} postData Request data.
-             *
-             * This method expects a subset of model properties as request parameters.
-             *
-             * @param {function(Object,Object)=} successCb
-             *   Success callback with two arguments: `value`, `responseHeaders`.
-             *
-             * @param {function(Object)=} errorCb Error callback with one argument:
-             *   `httpResponse`.
-             *
-             * @returns {Object} An empty reference that will be
-             *   populated with the actual data once the response is returned
-             *   from the server.
-             *
-             * <em>
-             * (The remote method definition does not provide any description.
-             * This usually means the response is a `Vehicle` object.)
-             * </em>
-             */
-        R.vehicles.updateById = function() {
-          var TargetResource = $injector.get("Vehicle");
-          var action = TargetResource["::updateById::VehicleType::vehicles"];
           return action.apply(R, arguments);
         };
 
@@ -2840,6 +2709,12 @@ if (typeof module !== 'undefined' && typeof exports !== 'undefined' &&
              */
             "count": {
               url: urlBase + "/fuelTypes/count",
+              method: "GET",
+            },
+
+            // INTERNAL. Use Vehicle.fuelType() instead.
+            "::get::Vehicle::fuelType": {
+              url: urlBase + "/vehicles/:id/fuelType",
               method: "GET",
             },
           }
@@ -8881,6 +8756,943 @@ if (typeof module !== 'undefined' && typeof exports !== 'undefined' &&
         R.identities.updateById = function() {
           var TargetResource = $injector.get("UserIdentity");
           var action = TargetResource["::updateById::User::identities"];
+          return action.apply(R, arguments);
+        };
+
+
+        return R;
+      }]);
+
+/**
+ * @ngdoc object
+ * @name lbServices.VehicleBrand
+ * @header lbServices.VehicleBrand
+ * @object
+ *
+ * @description
+ *
+ * A $resource object for interacting with the `VehicleBrand` model.
+ *
+ * ## Example
+ *
+ * See
+ * {@link http://docs.angularjs.org/api/ngResource.$resource#example $resource}
+ * for an example of using this object.
+ *
+ */
+  module.factory(
+    "VehicleBrand",
+    [
+      'LoopBackResource', 'LoopBackAuth', '$injector',
+      function(Resource, LoopBackAuth, $injector) {
+        var R = Resource(
+        urlBase + "/vehicleBrands/:id",
+          { 'id': '@id' },
+          {
+
+            // INTERNAL. Use VehicleBrand.vehicles.findById() instead.
+            "prototype$__findById__vehicles": {
+              params: {
+                'fk': '@fk',
+              },
+              url: urlBase + "/vehicleBrands/:id/vehicles/:fk",
+              method: "GET",
+            },
+
+            // INTERNAL. Use VehicleBrand.vehicleModels.findById() instead.
+            "prototype$__findById__vehicleModels": {
+              params: {
+                'fk': '@fk',
+              },
+              url: urlBase + "/vehicleBrands/:id/vehicleModels/:fk",
+              method: "GET",
+            },
+
+            // INTERNAL. Use VehicleBrand.vehicles() instead.
+            "prototype$__get__vehicles": {
+              isArray: true,
+              url: urlBase + "/vehicleBrands/:id/vehicles",
+              method: "GET",
+            },
+
+            // INTERNAL. Use VehicleBrand.vehicles.count() instead.
+            "prototype$__count__vehicles": {
+              url: urlBase + "/vehicleBrands/:id/vehicles/count",
+              method: "GET",
+            },
+
+            // INTERNAL. Use VehicleBrand.vehicleModels() instead.
+            "prototype$__get__vehicleModels": {
+              isArray: true,
+              url: urlBase + "/vehicleBrands/:id/vehicleModels",
+              method: "GET",
+            },
+
+            // INTERNAL. Use VehicleBrand.vehicleModels.count() instead.
+            "prototype$__count__vehicleModels": {
+              url: urlBase + "/vehicleBrands/:id/vehicleModels/count",
+              method: "GET",
+            },
+
+            /**
+             * @ngdoc method
+             * @name lbServices.VehicleBrand#exists
+             * @methodOf lbServices.VehicleBrand
+             *
+             * @description
+             *
+             * Check whether a model instance exists in the data source.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `id` – `{*}` - Model id
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * Data properties:
+             *
+             *  - `exists` – `{boolean=}` -
+             */
+            "exists": {
+              url: urlBase + "/vehicleBrands/:id/exists",
+              method: "GET",
+            },
+
+            /**
+             * @ngdoc method
+             * @name lbServices.VehicleBrand#findById
+             * @methodOf lbServices.VehicleBrand
+             *
+             * @description
+             *
+             * Find a model instance by {{id}} from the data source.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `id` – `{*}` - Model id
+             *
+             *  - `filter` – `{object=}` - Filter defining fields and include
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * <em>
+             * (The remote method definition does not provide any description.
+             * This usually means the response is a `VehicleBrand` object.)
+             * </em>
+             */
+            "findById": {
+              url: urlBase + "/vehicleBrands/:id",
+              method: "GET",
+            },
+
+            /**
+             * @ngdoc method
+             * @name lbServices.VehicleBrand#find
+             * @methodOf lbServices.VehicleBrand
+             *
+             * @description
+             *
+             * Find all instances of the model matched by filter from the data source.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `filter` – `{object=}` - Filter defining fields, where, include, order, offset, and limit
+             *
+             * @param {function(Array.<Object>,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Array.<Object>} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * <em>
+             * (The remote method definition does not provide any description.
+             * This usually means the response is a `VehicleBrand` object.)
+             * </em>
+             */
+            "find": {
+              isArray: true,
+              url: urlBase + "/vehicleBrands",
+              method: "GET",
+            },
+
+            /**
+             * @ngdoc method
+             * @name lbServices.VehicleBrand#findOne
+             * @methodOf lbServices.VehicleBrand
+             *
+             * @description
+             *
+             * Find first instance of the model matched by filter from the data source.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `filter` – `{object=}` - Filter defining fields, where, include, order, offset, and limit
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * <em>
+             * (The remote method definition does not provide any description.
+             * This usually means the response is a `VehicleBrand` object.)
+             * </em>
+             */
+            "findOne": {
+              url: urlBase + "/vehicleBrands/findOne",
+              method: "GET",
+            },
+
+            /**
+             * @ngdoc method
+             * @name lbServices.VehicleBrand#count
+             * @methodOf lbServices.VehicleBrand
+             *
+             * @description
+             *
+             * Count instances of the model matched by where from the data source.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `where` – `{object=}` - Criteria to match model instances
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * Data properties:
+             *
+             *  - `count` – `{number=}` -
+             */
+            "count": {
+              url: urlBase + "/vehicleBrands/count",
+              method: "GET",
+            },
+
+            // INTERNAL. Use Vehicle.vehicleBrand() instead.
+            "::get::Vehicle::vehicleBrand": {
+              url: urlBase + "/vehicles/:id/vehicleBrand",
+              method: "GET",
+            },
+
+            // INTERNAL. Use VehicleModel.vehicleBrand() instead.
+            "::get::VehicleModel::vehicleBrand": {
+              url: urlBase + "/vehicleModels/:id/vehicleBrand",
+              method: "GET",
+            },
+          }
+        );
+
+
+
+
+        /**
+        * @ngdoc property
+        * @name lbServices.VehicleBrand#modelName
+        * @propertyOf lbServices.VehicleBrand
+        * @description
+        * The name of the model represented by this $resource,
+        * i.e. `VehicleBrand`.
+        */
+        R.modelName = "VehicleBrand";
+
+    /**
+     * @ngdoc object
+     * @name lbServices.VehicleBrand.vehicles
+     * @header lbServices.VehicleBrand.vehicles
+     * @object
+     * @description
+     *
+     * The object `VehicleBrand.vehicles` groups methods
+     * manipulating `Vehicle` instances related to `VehicleBrand`.
+     *
+     * Call {@link lbServices.VehicleBrand#vehicles VehicleBrand.vehicles()}
+     * to query all related instances.
+     */
+
+
+            /**
+             * @ngdoc method
+             * @name lbServices.VehicleBrand#vehicles
+             * @methodOf lbServices.VehicleBrand
+             *
+             * @description
+             *
+             * Queries vehicles of vehicleBrand.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `id` – `{*}` - PersistedModel id
+             *
+             *  - `filter` – `{object=}` -
+             *
+             * @param {function(Array.<Object>,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Array.<Object>} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * <em>
+             * (The remote method definition does not provide any description.
+             * This usually means the response is a `Vehicle` object.)
+             * </em>
+             */
+        R.vehicles = function() {
+          var TargetResource = $injector.get("Vehicle");
+          var action = TargetResource["::get::VehicleBrand::vehicles"];
+          return action.apply(R, arguments);
+        };
+
+            /**
+             * @ngdoc method
+             * @name lbServices.VehicleBrand.vehicles#count
+             * @methodOf lbServices.VehicleBrand.vehicles
+             *
+             * @description
+             *
+             * Counts vehicles of vehicleBrand.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `id` – `{*}` - PersistedModel id
+             *
+             *  - `where` – `{object=}` - Criteria to match model instances
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * Data properties:
+             *
+             *  - `count` – `{number=}` -
+             */
+        R.vehicles.count = function() {
+          var TargetResource = $injector.get("Vehicle");
+          var action = TargetResource["::count::VehicleBrand::vehicles"];
+          return action.apply(R, arguments);
+        };
+
+            /**
+             * @ngdoc method
+             * @name lbServices.VehicleBrand.vehicles#findById
+             * @methodOf lbServices.VehicleBrand.vehicles
+             *
+             * @description
+             *
+             * Find a related item by id for vehicles.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `id` – `{*}` - PersistedModel id
+             *
+             *  - `fk` – `{*}` - Foreign key for vehicles
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * <em>
+             * (The remote method definition does not provide any description.
+             * This usually means the response is a `Vehicle` object.)
+             * </em>
+             */
+        R.vehicles.findById = function() {
+          var TargetResource = $injector.get("Vehicle");
+          var action = TargetResource["::findById::VehicleBrand::vehicles"];
+          return action.apply(R, arguments);
+        };
+    /**
+     * @ngdoc object
+     * @name lbServices.VehicleBrand.vehicleModels
+     * @header lbServices.VehicleBrand.vehicleModels
+     * @object
+     * @description
+     *
+     * The object `VehicleBrand.vehicleModels` groups methods
+     * manipulating `VehicleModel` instances related to `VehicleBrand`.
+     *
+     * Call {@link lbServices.VehicleBrand#vehicleModels VehicleBrand.vehicleModels()}
+     * to query all related instances.
+     */
+
+
+            /**
+             * @ngdoc method
+             * @name lbServices.VehicleBrand#vehicleModels
+             * @methodOf lbServices.VehicleBrand
+             *
+             * @description
+             *
+             * Queries vehicleModels of vehicleBrand.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `id` – `{*}` - PersistedModel id
+             *
+             *  - `filter` – `{object=}` -
+             *
+             * @param {function(Array.<Object>,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Array.<Object>} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * <em>
+             * (The remote method definition does not provide any description.
+             * This usually means the response is a `VehicleModel` object.)
+             * </em>
+             */
+        R.vehicleModels = function() {
+          var TargetResource = $injector.get("VehicleModel");
+          var action = TargetResource["::get::VehicleBrand::vehicleModels"];
+          return action.apply(R, arguments);
+        };
+
+            /**
+             * @ngdoc method
+             * @name lbServices.VehicleBrand.vehicleModels#count
+             * @methodOf lbServices.VehicleBrand.vehicleModels
+             *
+             * @description
+             *
+             * Counts vehicleModels of vehicleBrand.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `id` – `{*}` - PersistedModel id
+             *
+             *  - `where` – `{object=}` - Criteria to match model instances
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * Data properties:
+             *
+             *  - `count` – `{number=}` -
+             */
+        R.vehicleModels.count = function() {
+          var TargetResource = $injector.get("VehicleModel");
+          var action = TargetResource["::count::VehicleBrand::vehicleModels"];
+          return action.apply(R, arguments);
+        };
+
+            /**
+             * @ngdoc method
+             * @name lbServices.VehicleBrand.vehicleModels#findById
+             * @methodOf lbServices.VehicleBrand.vehicleModels
+             *
+             * @description
+             *
+             * Find a related item by id for vehicleModels.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `id` – `{*}` - PersistedModel id
+             *
+             *  - `fk` – `{*}` - Foreign key for vehicleModels
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * <em>
+             * (The remote method definition does not provide any description.
+             * This usually means the response is a `VehicleModel` object.)
+             * </em>
+             */
+        R.vehicleModels.findById = function() {
+          var TargetResource = $injector.get("VehicleModel");
+          var action = TargetResource["::findById::VehicleBrand::vehicleModels"];
+          return action.apply(R, arguments);
+        };
+
+
+        return R;
+      }]);
+
+/**
+ * @ngdoc object
+ * @name lbServices.VehicleModel
+ * @header lbServices.VehicleModel
+ * @object
+ *
+ * @description
+ *
+ * A $resource object for interacting with the `VehicleModel` model.
+ *
+ * ## Example
+ *
+ * See
+ * {@link http://docs.angularjs.org/api/ngResource.$resource#example $resource}
+ * for an example of using this object.
+ *
+ */
+  module.factory(
+    "VehicleModel",
+    [
+      'LoopBackResource', 'LoopBackAuth', '$injector',
+      function(Resource, LoopBackAuth, $injector) {
+        var R = Resource(
+        urlBase + "/vehicleModels/:id",
+          { 'id': '@id' },
+          {
+
+            // INTERNAL. Use VehicleModel.vehicles.findById() instead.
+            "prototype$__findById__vehicles": {
+              params: {
+                'fk': '@fk',
+              },
+              url: urlBase + "/vehicleModels/:id/vehicles/:fk",
+              method: "GET",
+            },
+
+            // INTERNAL. Use VehicleModel.vehicleBrand() instead.
+            "prototype$__get__vehicleBrand": {
+              url: urlBase + "/vehicleModels/:id/vehicleBrand",
+              method: "GET",
+            },
+
+            // INTERNAL. Use VehicleModel.vehicles() instead.
+            "prototype$__get__vehicles": {
+              isArray: true,
+              url: urlBase + "/vehicleModels/:id/vehicles",
+              method: "GET",
+            },
+
+            // INTERNAL. Use VehicleModel.vehicles.count() instead.
+            "prototype$__count__vehicles": {
+              url: urlBase + "/vehicleModels/:id/vehicles/count",
+              method: "GET",
+            },
+
+            /**
+             * @ngdoc method
+             * @name lbServices.VehicleModel#exists
+             * @methodOf lbServices.VehicleModel
+             *
+             * @description
+             *
+             * Check whether a model instance exists in the data source.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `id` – `{*}` - Model id
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * Data properties:
+             *
+             *  - `exists` – `{boolean=}` -
+             */
+            "exists": {
+              url: urlBase + "/vehicleModels/:id/exists",
+              method: "GET",
+            },
+
+            /**
+             * @ngdoc method
+             * @name lbServices.VehicleModel#findById
+             * @methodOf lbServices.VehicleModel
+             *
+             * @description
+             *
+             * Find a model instance by {{id}} from the data source.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `id` – `{*}` - Model id
+             *
+             *  - `filter` – `{object=}` - Filter defining fields and include
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * <em>
+             * (The remote method definition does not provide any description.
+             * This usually means the response is a `VehicleModel` object.)
+             * </em>
+             */
+            "findById": {
+              url: urlBase + "/vehicleModels/:id",
+              method: "GET",
+            },
+
+            /**
+             * @ngdoc method
+             * @name lbServices.VehicleModel#find
+             * @methodOf lbServices.VehicleModel
+             *
+             * @description
+             *
+             * Find all instances of the model matched by filter from the data source.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `filter` – `{object=}` - Filter defining fields, where, include, order, offset, and limit
+             *
+             * @param {function(Array.<Object>,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Array.<Object>} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * <em>
+             * (The remote method definition does not provide any description.
+             * This usually means the response is a `VehicleModel` object.)
+             * </em>
+             */
+            "find": {
+              isArray: true,
+              url: urlBase + "/vehicleModels",
+              method: "GET",
+            },
+
+            /**
+             * @ngdoc method
+             * @name lbServices.VehicleModel#findOne
+             * @methodOf lbServices.VehicleModel
+             *
+             * @description
+             *
+             * Find first instance of the model matched by filter from the data source.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `filter` – `{object=}` - Filter defining fields, where, include, order, offset, and limit
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * <em>
+             * (The remote method definition does not provide any description.
+             * This usually means the response is a `VehicleModel` object.)
+             * </em>
+             */
+            "findOne": {
+              url: urlBase + "/vehicleModels/findOne",
+              method: "GET",
+            },
+
+            /**
+             * @ngdoc method
+             * @name lbServices.VehicleModel#count
+             * @methodOf lbServices.VehicleModel
+             *
+             * @description
+             *
+             * Count instances of the model matched by where from the data source.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `where` – `{object=}` - Criteria to match model instances
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * Data properties:
+             *
+             *  - `count` – `{number=}` -
+             */
+            "count": {
+              url: urlBase + "/vehicleModels/count",
+              method: "GET",
+            },
+
+            // INTERNAL. Use Vehicle.vehicleModel() instead.
+            "::get::Vehicle::vehicleModel": {
+              url: urlBase + "/vehicles/:id/vehicleModel",
+              method: "GET",
+            },
+
+            // INTERNAL. Use VehicleBrand.vehicleModels.findById() instead.
+            "::findById::VehicleBrand::vehicleModels": {
+              params: {
+                'fk': '@fk',
+              },
+              url: urlBase + "/vehicleBrands/:id/vehicleModels/:fk",
+              method: "GET",
+            },
+
+            // INTERNAL. Use VehicleBrand.vehicleModels() instead.
+            "::get::VehicleBrand::vehicleModels": {
+              isArray: true,
+              url: urlBase + "/vehicleBrands/:id/vehicleModels",
+              method: "GET",
+            },
+
+            // INTERNAL. Use VehicleBrand.vehicleModels.count() instead.
+            "::count::VehicleBrand::vehicleModels": {
+              url: urlBase + "/vehicleBrands/:id/vehicleModels/count",
+              method: "GET",
+            },
+          }
+        );
+
+
+
+
+        /**
+        * @ngdoc property
+        * @name lbServices.VehicleModel#modelName
+        * @propertyOf lbServices.VehicleModel
+        * @description
+        * The name of the model represented by this $resource,
+        * i.e. `VehicleModel`.
+        */
+        R.modelName = "VehicleModel";
+
+    /**
+     * @ngdoc object
+     * @name lbServices.VehicleModel.vehicles
+     * @header lbServices.VehicleModel.vehicles
+     * @object
+     * @description
+     *
+     * The object `VehicleModel.vehicles` groups methods
+     * manipulating `Vehicle` instances related to `VehicleModel`.
+     *
+     * Call {@link lbServices.VehicleModel#vehicles VehicleModel.vehicles()}
+     * to query all related instances.
+     */
+
+
+            /**
+             * @ngdoc method
+             * @name lbServices.VehicleModel#vehicles
+             * @methodOf lbServices.VehicleModel
+             *
+             * @description
+             *
+             * Queries vehicles of vehicleModel.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `id` – `{*}` - PersistedModel id
+             *
+             *  - `filter` – `{object=}` -
+             *
+             * @param {function(Array.<Object>,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Array.<Object>} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * <em>
+             * (The remote method definition does not provide any description.
+             * This usually means the response is a `Vehicle` object.)
+             * </em>
+             */
+        R.vehicles = function() {
+          var TargetResource = $injector.get("Vehicle");
+          var action = TargetResource["::get::VehicleModel::vehicles"];
+          return action.apply(R, arguments);
+        };
+
+            /**
+             * @ngdoc method
+             * @name lbServices.VehicleModel.vehicles#count
+             * @methodOf lbServices.VehicleModel.vehicles
+             *
+             * @description
+             *
+             * Counts vehicles of vehicleModel.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `id` – `{*}` - PersistedModel id
+             *
+             *  - `where` – `{object=}` - Criteria to match model instances
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * Data properties:
+             *
+             *  - `count` – `{number=}` -
+             */
+        R.vehicles.count = function() {
+          var TargetResource = $injector.get("Vehicle");
+          var action = TargetResource["::count::VehicleModel::vehicles"];
+          return action.apply(R, arguments);
+        };
+
+            /**
+             * @ngdoc method
+             * @name lbServices.VehicleModel.vehicles#findById
+             * @methodOf lbServices.VehicleModel.vehicles
+             *
+             * @description
+             *
+             * Find a related item by id for vehicles.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `id` – `{*}` - PersistedModel id
+             *
+             *  - `fk` – `{*}` - Foreign key for vehicles
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * <em>
+             * (The remote method definition does not provide any description.
+             * This usually means the response is a `Vehicle` object.)
+             * </em>
+             */
+        R.vehicles.findById = function() {
+          var TargetResource = $injector.get("Vehicle");
+          var action = TargetResource["::findById::VehicleModel::vehicles"];
+          return action.apply(R, arguments);
+        };
+
+            /**
+             * @ngdoc method
+             * @name lbServices.VehicleModel#vehicleBrand
+             * @methodOf lbServices.VehicleModel
+             *
+             * @description
+             *
+             * Fetches belongsTo relation vehicleBrand.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `id` – `{*}` - PersistedModel id
+             *
+             *  - `refresh` – `{boolean=}` -
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * <em>
+             * (The remote method definition does not provide any description.
+             * This usually means the response is a `VehicleBrand` object.)
+             * </em>
+             */
+        R.vehicleBrand = function() {
+          var TargetResource = $injector.get("VehicleBrand");
+          var action = TargetResource["::get::VehicleModel::vehicleBrand"];
           return action.apply(R, arguments);
         };
 

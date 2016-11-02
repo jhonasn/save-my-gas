@@ -1,0 +1,26 @@
+<div id="autocomplete-container">
+	<ul class="autocomplete-content dropdown-content"
+					role="listbox">
+		<li class="uib-typeahead-match"
+						ng-repeat="match in matches track by $index"
+						ng-class="{active: isActive($index) }"
+						ng-mouseenter="selectActive($index)"
+						ng-click="selectMatch($index)"
+						role="option"
+						id="{{::match.id}}">
+			<span uib-typeahead-match
+							index="$index"
+							match="match"
+							query="query"
+							template-url="'autocomplete-item.html'"></span>
+		</li>
+	</ul>
+
+	<script type="text/ng-template"
+					id="autocomplete-item.html">
+		<img ng-if="match.img" class="right circle"
+						ng-src="match.img">
+		<span class="autocomplete-item"
+						ng-bind-html="match.label | uibTypeaheadHighlight:query"></span>
+	</script>
+</div>

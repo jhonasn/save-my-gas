@@ -2,23 +2,13 @@ angular.module('save-my-gas')
 	.controller('vehicleController',
 		function(
 			$scope,
-			Vehicle,
 			vehicleService,
 			collection
 		) {
 			$scope.collection = collection
 
 			$scope.delete = function(id) {
-				var model = Vehicle.deleteById({
-					id: id
-				})
-				model.$promise.then(function() {
-						Materialize.toast('Veículo deletado')
-						$scope.collection = vehicleService.getCollection()
-					})
-					.catch(function(err) {
-						Materialize.toast('Não foi possível deletar o veículo')
-					})
+				vehicleService.deleteById(id)
 			}
 		})
 
@@ -41,7 +31,18 @@ angular.module('save-my-gas')
 		$scope.anoAtual = (new Date()).getFullYear()
 		$scope.showCamera = false
 		var cameraInterval = null
-		$scope.getVehicleType = vehicleService.getVehicleType
+		$scope.autocomplete = vehicleService.autocomplete
+
+		$scope.teste = function () {
+			angular.element('#vehicle-type-id-field').after(
+				angular.element('[for="vehicle-type-id-field"]')
+			)
+		}
+
+		$scope.formatLabel = function ($item, $model, $label, $event) {
+			$model = $item.id
+			$label = $item.type
+		}
 
 		$scope.photoAttachChanged = function(files) {
 			if (files.length) {
