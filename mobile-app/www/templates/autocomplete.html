@@ -1,26 +1,49 @@
-<div id="autocomplete-container">
-	<ul class="autocomplete-content dropdown-content"
-					role="listbox">
-		<li class="uib-typeahead-match"
-						ng-repeat="match in matches track by $index"
-						ng-class="{active: isActive($index) }"
-						ng-mouseenter="selectActive($index)"
-						ng-click="selectMatch($index)"
-						role="option"
-						id="{{::match.id}}">
-			<span uib-typeahead-match
-							index="$index"
-							match="match"
-							query="query"
-							template-url="'autocomplete-item.html'"></span>
-		</li>
-	</ul>
+<div class="autocomplete-container">
+
+	<script type="text/ng-template"
+					id="autocomplete-popup.html">
+		<ul class="autocomplete-content dropdown-content"
+						role="listbox">
+			<li class="uib-typeahead-match"
+							ng-repeat="match in matches track by $index"
+							ng-class="{active: isActive($index) }"
+							ng-mouseenter="selectActive($index)"
+							ng-click="selectMatch($index)"
+							role="option"
+							id="{{::match.id}}">
+				<span uib-typeahead-match
+								index="$index"
+								match="match"
+								query="query"
+								template-url="'autocomplete-item.html'"></span>
+			</li>
+		</ul>
+	</script>
 
 	<script type="text/ng-template"
 					id="autocomplete-item.html">
-		<img ng-if="match.img" class="right circle"
+		<img ng-if="match.img"
+						class="right circle"
 						ng-src="match.img">
 		<span class="autocomplete-item"
 						ng-bind-html="match.label | uibTypeaheadHighlight:query"></span>
 	</script>
+
+	<input type="text"
+					id="initial-autocomplete-element"
+					class="autocomplete"
+					ng-model="ngModel"
+					uib-typeahead="o.id as o.label for o in search($viewValue)"
+					typeahead-on-select="select($item, $model, $label, $event)"
+					typeahead-show-hint="true"
+					typeahead-min-length="0"
+					typeahead-wait-ms="500"
+					typeahead-loading="loading"
+					typeahead-popup-template-url="autocomplete-popup.html"
+					typeahead-input-formatter="formatLabel($model)" />
+	<a href="#" ng-click="clear()"
+					ng-disabled="loading"
+					style="position: absolute; top: 0; right: 0">
+		<i class="material-icons grey-text text-darken-3">backspace</i>
+	</a>
 </div>

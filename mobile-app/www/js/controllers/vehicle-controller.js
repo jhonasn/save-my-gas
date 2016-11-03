@@ -33,16 +33,16 @@ angular.module('save-my-gas')
 		var cameraInterval = null
 		$scope.autocomplete = vehicleService.autocomplete
 
-		$scope.teste = function () {
-			angular.element('#vehicle-type-id-field').after(
-				angular.element('[for="vehicle-type-id-field"]')
-			)
-		}
+		// $scope.autocompleteInit = function () {
+		// 	angular.element('#vehicle-type-id-field').after(
+		// 		angular.element('[for="vehicle-type-id-field"]')
+		// 	)
+		// }
 
-		$scope.formatLabel = function ($item, $model, $label, $event) {
-			$model = $item.id
-			$label = $item.type
-		}
+		// $scope.formatLabel = function ($item, $model, $label, $event) {
+		// 	$model = $item.id
+		// 	$label = $item.type
+		// }
 
 		$scope.photoAttachChanged = function(files) {
 			if (files.length) {

@@ -12,6 +12,9 @@
 		"eqeqeq": true,
 		"undef": true,
 		"asi": true,
-		"globals": {}
+		"globals": {
+			"angular",
+			"SaveMyGas"
+		}
 	}
 }

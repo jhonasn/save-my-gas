@@ -17,7 +17,7 @@
 				<button type="button"
 								class="btn-floating btn-large blue"
 								ng-click="takeCarPicture()">
-						<i class="material-icons">camera</i>
+						<i class="material-icons">camera_alt</i>
 				</button>
 			</div>
 
@@ -50,12 +50,13 @@
 		<div class="row">
 
 			<div class="input-field">
-				<input type="text"
+				<autocomplete id="vehicle-model-id-field"
 								name="vehicleModelIdField"
-								id="vehicle-model-id-field"
 								ng-class="{ invalid: modelForm.vehicleModelIdField.$invalid }"
+								label="name"
+								url="/vehiclemodels"
 								ng-model="model.vehicleModelId"
-								ng-required="true">
+								ng-required="true"></autocomplete>
 				<label for="vehicle-model-id-field">Modelo</label>
 				<div ng-if="modelForm.vehicleModelIdField.$dirty || modelForm.$submitted"
 								ng-messages="modelForm.vehicleModelIdField.$error"
@@ -66,12 +67,13 @@
 			</div>
 
 			<div class="input-field">
-				<input type="text"
+				<autocomplete id="vehicle-brand-id-field"
 								name="vehicleBrandIdField"
-								id="vehicle-brand-id-field"
+								label="name"
+								url="/vehiclebrands"
 								ng-class="{ invalid: modelForm.vehicleBrandIdField.$invalid }"
 								ng-model="model.vehicleBrandId"
-								ng-required="true">
+								ng-required="true"></autocomplete>
 				<label for="vehicle-brand-id-field">Marca</label>
 				<div ng-if="modelForm.vehicleBrandIdField.$dirty || modelForm.$submitted"
 								ng-messages="modelForm.vehicleBrandIdField.$error"
@@ -86,15 +88,8 @@
 								name="nickNameField"
 								id="nick-name-field"
 								ng-class="{ invalid: modelForm.nickNameField.$invalid }"
-								ng-model="model.nickName"
-								ng-required="true">
+								ng-model="model.nickName">
 				<label for="nick-name-field">Apelido do carango</label>
-				<div ng-if="modelForm.nickNameField.$dirty || modelForm.$submitted"
-								ng-messages="modelForm.nickNameField.$error"
-								role="alert">
-					<span class="invalid"
-									ng-message="required">Obrigatório</span>
-				</div>
 			</div>
 
 			<div class="input-field">
@@ -152,53 +147,22 @@
 				</div>
 			</div>
 
-			<!-- <div class="input-field">
-				<input type="text"
-				name="vehicleTypeIdField"
-				id="vehicle-type-id-field"
-				class="autocomplete"
-				ng-class="{ invalid: modelForm.vehicleTypeIdField.$invalid }"
-				ng-model="model.vehicleTypeId"
-				ng-required="true">
-				<label for="vehicle-type-id-field">Categoria</label>
-				<div ng-if="modelForm.vehicleTypeIdField.$dirty || modelForm.$submitted" ng-messages="modelForm.vehicleTypeIdField.$error" role="alert">
-					<span class="invalid" ng-message="required">Obrigatório</span>
-				</div>
-			</div> -->
-
 			<div class="input-field">
-				<div class="col s10" style="padding-left: 0">
-					<input type="text"
-									id="vehicle-type-id-field"
-									class="autocomplete"
-									ng-model="model.vehicleTypeId"
-									uib-typeahead="o as o.type for o in autocomplete.vehicleType($viewValue)"
-									typeahead-show-hint="true"
-									typeahead-min-length="0"
-									typeahead-wait-ms="500"
-									typeahead-loading="loading"
-									typeahead-on-select=""
-									typeahead-popup-template-url="../../templates/autocomplete.html"
-									ng-init="teste()"/>
-					<label for="vehicle-type-id-field" style="position: absolute; top: 0; left: 0;">Categoria</label>
-				</div>
-				<div class="col s2">
-					<button type="button"
-									class="btn-floating grey darken-3"
-									ng-click="model.vehicleTypeId = null">
-						<i class="material-icons">close</i>
-					</button>
+				<autocomplete id="vehicle-type-id-field"
+								name="vehicleTypeIdField"
+								ng-class="{ invalid: modelForm.vehicleTypeIdField.$invalid }"
+								label="type"
+								url="/vehicletypes"
+								ng-model="model.vehicleTypeId"
+								ng-required="true"></autocomplete>
+				<label for="vehicle-type-id-field">Categoria</label>
+				<div ng-if="modelForm.vehicleTypeIdField.$dirty || modelForm.$submitted"
+								ng-messages="modelForm.vehicleTypeIdField.$error"
+								role="alert">
+					<span class="invalid"
+									ng-message="required">Obrigatório</span>
 				</div>
 			</div>
-
-			<!-- <auto-complete-input name="vehicleTypeIdField"
-			id="vehicle-type-id-field"
-			class="validate"
-			auto-data="getVehicleType"
-			ac-title="'Categoria'"
-			color="color"
-			input-model="model.vehicleTypeId"
-			ng-required="true"></auto-complete-input> -->
 
 		</div>
 
@@ -212,18 +176,3 @@
 	</div>
 
 </form>
-
-<!--
-nickName
-photo: {
-	photo
-	thumb
-},
-year
-consumption
-power
-vehicleTypeId
-vehicleModelId
-vehicleBrandId
-ownerId
--->
