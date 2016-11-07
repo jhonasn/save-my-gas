@@ -18,10 +18,20 @@
       "model": "vehicle",
       "foreignKey": "vehicleModelId"
     },
+    "vehicleType": {
+      "type": "belongsTo",
+      "model": "vehicleType",
+      "foreignKey": "vehicleTypeId"
+    },
     "vehicleBrand": {
       "type": "belongsTo",
       "model": "vehicleBrand",
       "foreignKey": "vehicleBrandId"
+    },
+    "vehicleEngine": {
+      "type": "belongsTo",
+      "model": "vehicleEngine",
+      "foreignKey": "vehicleEngineId"
     }
   },
   "acls": [

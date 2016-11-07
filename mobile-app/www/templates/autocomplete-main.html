@@ -1,0 +1,11 @@
+<input type="text"
+				class="autocomplete"
+				ng-model="model"
+				uib-typeahead="o.id as o.label for o in search($viewValue)"
+				typeahead-on-select="select($item, $model, $label, $event)"
+				typeahead-show-hint="true"
+				typeahead-min-length="0"
+				typeahead-wait-ms="500"
+				typeahead-loading="loading"
+				typeahead-popup-template-url="autocomplete-popup.html"
+				typeahead-input-formatter="formatLabel($model)" />

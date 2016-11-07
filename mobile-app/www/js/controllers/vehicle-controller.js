@@ -33,17 +33,6 @@ angular.module('save-my-gas')
 		var cameraInterval = null
 		$scope.autocomplete = vehicleService.autocomplete
 
-		// $scope.autocompleteInit = function () {
-		// 	angular.element('#vehicle-type-id-field').after(
-		// 		angular.element('[for="vehicle-type-id-field"]')
-		// 	)
-		// }
-
-		// $scope.formatLabel = function ($item, $model, $label, $event) {
-		// 	$model = $item.id
-		// 	$label = $item.type
-		// }
-
 		$scope.photoAttachChanged = function(files) {
 			if (files.length) {
 				utilService.fileToB64(files[0]).then(function(img) {
@@ -59,74 +48,40 @@ angular.module('save-my-gas')
 		}
 
 		$scope.takeCarPicture = function() {
-			var options = {
-				quality: 50,
-				destinationType: Camera.DestinationType.DATA_URL,
-				sourceType: Camera.PictureSourceType.CAMERA,
-				allowEdit: true,
-				encodingType: Camera.EncodingType.JPEG,
-				// targetWidth: 100,
-				// targetHeight: 100,
-				popoverOptions: CameraPopoverOptions,
-				saveToPhotoAlbum: false,
-				correctOrientation: true
-			};
+			vehicleService.takeCarPicture($scope)
+		}
 
-			$cordovaCamera.getPicture(options).then(function(imageData) {
-				$scope.model.photo.photo = "data:image/png;base64," + imageData;
-				$scope.showCamera = false
-			}, function(err) {
-				if (typeof err === 'string' && err.indexOf('cancelled') > -1) {
-					console.info('tirar foto cancelado')
-				} else {
-					Materialize.toast('Ocorreu um problema ao tirar a foto :(')
-				}
-			});
-
-			if (cameraInterval) {
-				$interval.cancel(cameraInterval)
+		$scope.vehicleModelSelected = function($item) {
+			if ($item.vehicleBrand) {
+				$scope.model.vehicleBrand = $item.vehicleBrand
 			}
+		}
 
-			cameraInterval = $interval(function() {
-				var cameraEl = angular.element('.cordova-camera-capture')
-				if (cameraEl) {
-					var videoEl = cameraEl.find('video')
-					var buttonEl = cameraEl.find('button')
-
-					buttonEl.attr('type', 'button')
-					buttonEl.addClass('btn-floating red right')
-					buttonEl.html('<i class="material-icons">camera</i>')
-
-					videoEl.removeAttr('width').removeAttr('height')
-					videoEl.css('width', '100%')
-
-					cameraEl.append(buttonEl)
-
-					cameraEl.append('<div class="row">')
-					cameraEl.find('.row').append(videoEl)
-					cameraEl.append('<div class="row camera-button">')
-					cameraEl.find('.row.camera-button').append(buttonEl)
-
-					var cameraAppendEl = angular.element('#camera')
-					cameraAppendEl.append(cameraEl)
-
-					$scope.showCamera = true
-
-					// $inteval.cancel(cameraInterval)//error
-					clearInterval(cameraInterval.$$intervalId)
-				}
-			}, 100);
+		$scope.formatEngine = function(vehicleEngine) {
+			return vehicleEngine.power + ' - ' + vehicleEngine.valve + 'v'
 		}
 
 		$scope.save = function(model) {
-			$scope.model = Vehicle.create(model)
-			$scope.model.$promise.then(function() {
-					Materialize.toast('Veículo salvo')
-					$location.path('/vehicle')
-				})
-				.catch(function(err) {
-					Materialize.toast('Não foi possível salvar o veículo')
-				})
+			vehicleService.save(model)
+		}
+
+		$scope.vehicleEngineParamsMake = function(searchTerm) {
+			return {
+				filter: {
+					where: {
+						or: [{
+							power: {
+								like: searchTerm
+							}
+						}, {
+							valve: {
+								like: searchTerm
+							}
+						}]
+					},
+					limit: 10
+				}
+			}
 		}
 	})
 

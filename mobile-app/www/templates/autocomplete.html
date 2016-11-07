@@ -33,14 +33,15 @@
 					id="initial-autocomplete-element"
 					class="autocomplete"
 					ng-model="ngModel"
-					uib-typeahead="o.id as o.label for o in search($viewValue)"
+					uib-typeahead="o.id as o[label] for o in search($viewValue)"
 					typeahead-on-select="select($item, $model, $label, $event)"
 					typeahead-show-hint="true"
 					typeahead-min-length="0"
 					typeahead-wait-ms="500"
 					typeahead-loading="loading"
 					typeahead-popup-template-url="autocomplete-popup.html"
-					typeahead-input-formatter="formatLabel($model)" />
+					typeahead-input-formatter="formatLabel($model)"
+					autocomplete="off" />
 	<a href="#" ng-click="clear()"
 					ng-disabled="loading"
 					style="position: absolute; top: 0; right: 0">

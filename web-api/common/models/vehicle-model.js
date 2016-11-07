@@ -18,4 +18,10 @@ module.exports = function(VehicleModel) {
 	VehicleModel.disableRemoteMethod('__delete__vehicles', false)
 	VehicleModel.disableRemoteMethod('__destroyById__vehicles', false)
 	VehicleModel.disableRemoteMethod('__updateById__vehicles', false)
+
+	//not expose crud related models methods
+	VehicleModel.disableRemoteMethod('__create__vehicleEngines', false)
+	VehicleModel.disableRemoteMethod('__delete__vehicleEngines', false)
+	VehicleModel.disableRemoteMethod('__destroyById__vehicleEngines', false)
+	VehicleModel.disableRemoteMethod('__updateById__vehicleEngines', false)
 };

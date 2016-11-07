@@ -50,13 +50,24 @@
 		<div class="row">
 
 			<div class="input-field">
+				<input type="text"
+								name="nickNameField"
+								id="nick-name-field"
+								ng-class="{ invalid: modelForm.nickNameField.$invalid }"
+								ng-model="model.nickName">
+				<label for="nick-name-field">Apelido do carango</label>
+			</div>
+
+			<div class="input-field">
 				<autocomplete id="vehicle-model-id-field"
 								name="vehicleModelIdField"
 								ng-class="{ invalid: modelForm.vehicleModelIdField.$invalid }"
 								label="name"
 								url="/vehiclemodels"
+								on-select="vehicleModelSelected"
 								ng-model="model.vehicleModelId"
 								ng-required="true"></autocomplete>
+				<!-- url-params="{ filter: { where: { name: { regexp: searchTerm } }, include: [ 'vehicleBrand', 'vehicleType' ] } }" -->
 				<label for="vehicle-model-id-field">Modelo</label>
 				<div ng-if="modelForm.vehicleModelIdField.$dirty || modelForm.$submitted"
 								ng-messages="modelForm.vehicleModelIdField.$error"
@@ -84,12 +95,37 @@
 			</div>
 
 			<div class="input-field">
-				<input type="text"
-								name="nickNameField"
-								id="nick-name-field"
-								ng-class="{ invalid: modelForm.nickNameField.$invalid }"
-								ng-model="model.nickName">
-				<label for="nick-name-field">Apelido do carango</label>
+				<autocomplete id="vehicle-type-id-field"
+								name="vehicleTypeIdField"
+								ng-class="{ invalid: modelForm.vehicleTypeIdField.$invalid }"
+								label="type"
+								url="/vehicletypes"
+								ng-model="model.vehicleTypeId"
+								ng-required="true"></autocomplete>
+				<label for="vehicle-type-id-field">Categoria</label>
+				<div ng-if="modelForm.vehicleTypeIdField.$dirty || modelForm.$submitted"
+								ng-messages="modelForm.vehicleTypeIdField.$error"
+								role="alert">
+					<span class="invalid"
+									ng-message="required">Obrigatório</span>
+				</div>
+			</div>
+
+			<div class="input-field">
+				<autocomplete id="fuel-type-id-field"
+								name="fuelTypeIdField"
+								ng-class="{ invalid: modelForm.fuelTypeIdField.$invalid }"
+								label="name"
+								url="/fueltypes"
+								ng-model="model.fuelTypeId"
+								ng-required="true"></autocomplete>
+				<label for="fuel-type-id-field">Combustível</label>
+				<div ng-if="modelForm.fuelTypeIdField.$dirty || modelForm.$submitted"
+								ng-messages="modelForm.fuelTypeIdField.$error"
+								role="alert">
+					<span class="invalid"
+									ng-message="required">Obrigatório</span>
+				</div>
 			</div>
 
 			<div class="input-field">
@@ -129,38 +165,23 @@
 			</div>
 
 			<div class="input-field">
-				<input type="number"
-								name="powerField"
-								id="power-field"
-								ng-class="{ invalid: modelForm.powerField.$invalid }"
-								ng-model="model.power"
-								ng-required="true"
-								ng-min="0">
-				<label for="power-field">Motor (ex.: 1.0-16v)</label>
-				<div ng-if="modelForm.powerField.$dirty || modelForm.$submitted"
-								ng-messages="modelForm.powerField.$error"
+				<autocomplete id="vehicle-engine-id-field"
+								name="vehicleEngineIdField"
+								ng-class="{ invalid: modelForm.vehicleEngineIdField.$invalid }"
+								label="engine"
+								url="/vehicleengines"
+								url-params-make="vehicleEngineParamsMake"
+								format="formatEngine"
+								ng-model="model.vehicleEngineId"
+								ng-required="true"></autocomplete>
+				<label for="vehicle-engine-id-field">Motor</label>
+				<div ng-if="modelForm.vehicleEngineIdField.$dirty || modelForm.$submitted"
+								ng-messages="modelForm.vehicleEngineIdField.$error"
 								role="alert">
 					<span class="invalid"
 									ng-message="required">Obrigatório</span>
 					<span class="invalid"
 									ng-message="min">Mínimo aceito 0</span>
-				</div>
-			</div>
-
-			<div class="input-field">
-				<autocomplete id="vehicle-type-id-field"
-								name="vehicleTypeIdField"
-								ng-class="{ invalid: modelForm.vehicleTypeIdField.$invalid }"
-								label="type"
-								url="/vehicletypes"
-								ng-model="model.vehicleTypeId"
-								ng-required="true"></autocomplete>
-				<label for="vehicle-type-id-field">Categoria</label>
-				<div ng-if="modelForm.vehicleTypeIdField.$dirty || modelForm.$submitted"
-								ng-messages="modelForm.vehicleTypeIdField.$error"
-								role="alert">
-					<span class="invalid"
-									ng-message="required">Obrigatório</span>
 				</div>
 			</div>
 

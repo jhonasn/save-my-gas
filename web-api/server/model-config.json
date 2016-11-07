@@ -111,5 +111,9 @@
     "public": true,
     "$promise": {},
     "$resolved": true
+  },
+  "vehicleEngine": {
+    "dataSource": "mongodb",
+    "public": true
   }
 }

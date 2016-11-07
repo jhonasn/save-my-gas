@@ -152,3 +152,7 @@ body {
 .autocomplete-item strong {
     color: #444;
 }
+.invalid .autocomplete {
+	border-bottom: 1px solid #F44336;
+	box-shadow: 0 1px 0 0 #F44336;
+}

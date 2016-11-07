@@ -18,4 +18,9 @@ module.exports = function(VehicleType) {
 	VehicleType.disableRemoteMethod('__delete__vehicles', false)
 	VehicleType.disableRemoteMethod('__destroyById__vehicles', false)
 	VehicleType.disableRemoteMethod('__updateById__vehicles', false)
+
+	VehicleType.disableRemoteMethod('__create__vehicleModels', false)
+	VehicleType.disableRemoteMethod('__delete__vehicleModels', false)
+	VehicleType.disableRemoteMethod('__destroyById__vehicleModels', false)
+	VehicleType.disableRemoteMethod('__updateById__vehicleModels', false)
 };
