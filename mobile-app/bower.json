@@ -14,7 +14,8 @@
     "angular-messages": "^1.5.8",
     "angular-ui": "https://github.com/angular-ui",
     "bootstrap": "https://github.com/angular-ui/bootstrap",
-    "angular-bootstrap": "^2.2.0"
+    "angular-bootstrap": "^2.2.0",
+    "angular-file-upload": "^2.3.4"
   },
   "homepage": "https://github.com/jhonasn/save-my-gas",
   "authors": [

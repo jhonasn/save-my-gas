@@ -1003,6 +1003,36 @@ if (typeof module !== 'undefined' && typeof exports !== 'undefined' &&
               method: "GET",
             },
 
+            // INTERNAL. Use Vehicle.vehicleEngine() instead.
+            "prototype$__get__vehicleEngine": {
+              url: urlBase + "/vehicles/:id/vehicleEngine",
+              method: "GET",
+            },
+
+            // INTERNAL. Use Vehicle.vehiclePhotos() instead.
+            "prototype$__get__vehiclePhotos": {
+              url: urlBase + "/vehicles/:id/vehiclePhotos",
+              method: "GET",
+            },
+
+            // INTERNAL. Use Vehicle.vehiclePhotos.create() instead.
+            "prototype$__create__vehiclePhotos": {
+              url: urlBase + "/vehicles/:id/vehiclePhotos",
+              method: "POST",
+            },
+
+            // INTERNAL. Use Vehicle.vehiclePhotos.update() instead.
+            "prototype$__update__vehiclePhotos": {
+              url: urlBase + "/vehicles/:id/vehiclePhotos",
+              method: "PUT",
+            },
+
+            // INTERNAL. Use Vehicle.vehiclePhotos.destroy() instead.
+            "prototype$__destroy__vehiclePhotos": {
+              url: urlBase + "/vehicles/:id/vehiclePhotos",
+              method: "DELETE",
+            },
+
             /**
              * @ngdoc method
              * @name lbServices.Vehicle#create
@@ -1683,6 +1713,28 @@ if (typeof module !== 'undefined' && typeof exports !== 'undefined' &&
               url: urlBase + "/vehicleModels/:id/vehicles/count",
               method: "GET",
             },
+
+            // INTERNAL. Use VehicleEngine.vehicles.findById() instead.
+            "::findById::VehicleEngine::vehicles": {
+              params: {
+                'fk': '@fk',
+              },
+              url: urlBase + "/vehicleEngines/:id/vehicles/:fk",
+              method: "GET",
+            },
+
+            // INTERNAL. Use VehicleEngine.vehicles() instead.
+            "::get::VehicleEngine::vehicles": {
+              isArray: true,
+              url: urlBase + "/vehicleEngines/:id/vehicles",
+              method: "GET",
+            },
+
+            // INTERNAL. Use VehicleEngine.vehicles.count() instead.
+            "::count::VehicleEngine::vehicles": {
+              url: urlBase + "/vehicleEngines/:id/vehicles/count",
+              method: "GET",
+            },
           }
         );
 
@@ -2109,6 +2161,237 @@ if (typeof module !== 'undefined' && typeof exports !== 'undefined' &&
           return action.apply(R, arguments);
         };
 
+            /**
+             * @ngdoc method
+             * @name lbServices.Vehicle#vehicleEngine
+             * @methodOf lbServices.Vehicle
+             *
+             * @description
+             *
+             * Fetches belongsTo relation vehicleEngine.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `id` – `{*}` - PersistedModel id
+             *
+             *  - `refresh` – `{boolean=}` -
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * <em>
+             * (The remote method definition does not provide any description.
+             * This usually means the response is a `VehicleEngine` object.)
+             * </em>
+             */
+        R.vehicleEngine = function() {
+          var TargetResource = $injector.get("VehicleEngine");
+          var action = TargetResource["::get::Vehicle::vehicleEngine"];
+          return action.apply(R, arguments);
+        };
+    /**
+     * @ngdoc object
+     * @name lbServices.Vehicle.vehiclePhotos
+     * @header lbServices.Vehicle.vehiclePhotos
+     * @object
+     * @description
+     *
+     * The object `Vehicle.vehiclePhotos` groups methods
+     * manipulating `VehiclePhoto` instances related to `Vehicle`.
+     *
+     * Call {@link lbServices.Vehicle#vehiclePhotos Vehicle.vehiclePhotos()}
+     * to query all related instances.
+     */
+
+
+            /**
+             * @ngdoc method
+             * @name lbServices.Vehicle#vehiclePhotos
+             * @methodOf lbServices.Vehicle
+             *
+             * @description
+             *
+             * Fetches hasOne relation vehiclePhotos.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `id` – `{*}` - PersistedModel id
+             *
+             *  - `refresh` – `{boolean=}` -
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * <em>
+             * (The remote method definition does not provide any description.
+             * This usually means the response is a `VehiclePhoto` object.)
+             * </em>
+             */
+        R.vehiclePhotos = function() {
+          var TargetResource = $injector.get("VehiclePhoto");
+          var action = TargetResource["::get::Vehicle::vehiclePhotos"];
+          return action.apply(R, arguments);
+        };
+
+            /**
+             * @ngdoc method
+             * @name lbServices.Vehicle.vehiclePhotos#create
+             * @methodOf lbServices.Vehicle.vehiclePhotos
+             *
+             * @description
+             *
+             * Creates a new instance in vehiclePhotos of this model.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `id` – `{*}` - PersistedModel id
+             *
+             * @param {Object} postData Request data.
+             *
+             * This method expects a subset of model properties as request parameters.
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * <em>
+             * (The remote method definition does not provide any description.
+             * This usually means the response is a `VehiclePhoto` object.)
+             * </em>
+             */
+        R.vehiclePhotos.create = function() {
+          var TargetResource = $injector.get("VehiclePhoto");
+          var action = TargetResource["::create::Vehicle::vehiclePhotos"];
+          return action.apply(R, arguments);
+        };
+
+            /**
+             * @ngdoc method
+             * @name lbServices.Vehicle.vehiclePhotos#createMany
+             * @methodOf lbServices.Vehicle.vehiclePhotos
+             *
+             * @description
+             *
+             * Creates a new instance in vehiclePhotos of this model.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `id` – `{*}` - PersistedModel id
+             *
+             * @param {Object} postData Request data.
+             *
+             * This method expects a subset of model properties as request parameters.
+             *
+             * @param {function(Array.<Object>,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Array.<Object>} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * <em>
+             * (The remote method definition does not provide any description.
+             * This usually means the response is a `VehiclePhoto` object.)
+             * </em>
+             */
+        R.vehiclePhotos.createMany = function() {
+          var TargetResource = $injector.get("VehiclePhoto");
+          var action = TargetResource["::createMany::Vehicle::vehiclePhotos"];
+          return action.apply(R, arguments);
+        };
+
+            /**
+             * @ngdoc method
+             * @name lbServices.Vehicle.vehiclePhotos#destroy
+             * @methodOf lbServices.Vehicle.vehiclePhotos
+             *
+             * @description
+             *
+             * Deletes vehiclePhotos of this model.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `id` – `{*}` - PersistedModel id
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * This method returns no data.
+             */
+        R.vehiclePhotos.destroy = function() {
+          var TargetResource = $injector.get("VehiclePhoto");
+          var action = TargetResource["::destroy::Vehicle::vehiclePhotos"];
+          return action.apply(R, arguments);
+        };
+
+            /**
+             * @ngdoc method
+             * @name lbServices.Vehicle.vehiclePhotos#update
+             * @methodOf lbServices.Vehicle.vehiclePhotos
+             *
+             * @description
+             *
+             * Update vehiclePhotos of this model.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `id` – `{*}` - PersistedModel id
+             *
+             * @param {Object} postData Request data.
+             *
+             * This method expects a subset of model properties as request parameters.
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * <em>
+             * (The remote method definition does not provide any description.
+             * This usually means the response is a `VehiclePhoto` object.)
+             * </em>
+             */
+        R.vehiclePhotos.update = function() {
+          var TargetResource = $injector.get("VehiclePhoto");
+          var action = TargetResource["::update::Vehicle::vehiclePhotos"];
+          return action.apply(R, arguments);
+        };
+
 
         return R;
       }]);
@@ -2149,6 +2432,15 @@ if (typeof module !== 'undefined' && typeof exports !== 'undefined' &&
               method: "GET",
             },
 
+            // INTERNAL. Use VehicleType.vehicleModels.findById() instead.
+            "prototype$__findById__vehicleModels": {
+              params: {
+                'fk': '@fk',
+              },
+              url: urlBase + "/vehicleTypes/:id/vehicleModels/:fk",
+              method: "GET",
+            },
+
             // INTERNAL. Use VehicleType.vehicles() instead.
             "prototype$__get__vehicles": {
               isArray: true,
@@ -2159,6 +2451,19 @@ if (typeof module !== 'undefined' && typeof exports !== 'undefined' &&
             // INTERNAL. Use VehicleType.vehicles.count() instead.
             "prototype$__count__vehicles": {
               url: urlBase + "/vehicleTypes/:id/vehicles/count",
+              method: "GET",
+            },
+
+            // INTERNAL. Use VehicleType.vehicleModels() instead.
+            "prototype$__get__vehicleModels": {
+              isArray: true,
+              url: urlBase + "/vehicleTypes/:id/vehicleModels",
+              method: "GET",
+            },
+
+            // INTERNAL. Use VehicleType.vehicleModels.count() instead.
+            "prototype$__count__vehicleModels": {
+              url: urlBase + "/vehicleTypes/:id/vehicleModels/count",
               method: "GET",
             },
 
@@ -2333,6 +2638,12 @@ if (typeof module !== 'undefined' && typeof exports !== 'undefined' &&
               url: urlBase + "/vehicles/:id/vehicleType",
               method: "GET",
             },
+
+            // INTERNAL. Use VehicleModel.vehicleType() instead.
+            "::get::VehicleModel::vehicleType": {
+              url: urlBase + "/vehicleModels/:id/vehicleType",
+              method: "GET",
+            },
           }
         );
 
@@ -2468,6 +2779,127 @@ if (typeof module !== 'undefined' && typeof exports !== 'undefined' &&
         R.vehicles.findById = function() {
           var TargetResource = $injector.get("Vehicle");
           var action = TargetResource["::findById::VehicleType::vehicles"];
+          return action.apply(R, arguments);
+        };
+    /**
+     * @ngdoc object
+     * @name lbServices.VehicleType.vehicleModels
+     * @header lbServices.VehicleType.vehicleModels
+     * @object
+     * @description
+     *
+     * The object `VehicleType.vehicleModels` groups methods
+     * manipulating `VehicleModel` instances related to `VehicleType`.
+     *
+     * Call {@link lbServices.VehicleType#vehicleModels VehicleType.vehicleModels()}
+     * to query all related instances.
+     */
+
+
+            /**
+             * @ngdoc method
+             * @name lbServices.VehicleType#vehicleModels
+             * @methodOf lbServices.VehicleType
+             *
+             * @description
+             *
+             * Queries vehicleModels of vehicleType.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `id` – `{*}` - PersistedModel id
+             *
+             *  - `filter` – `{object=}` -
+             *
+             * @param {function(Array.<Object>,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Array.<Object>} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * <em>
+             * (The remote method definition does not provide any description.
+             * This usually means the response is a `VehicleModel` object.)
+             * </em>
+             */
+        R.vehicleModels = function() {
+          var TargetResource = $injector.get("VehicleModel");
+          var action = TargetResource["::get::VehicleType::vehicleModels"];
+          return action.apply(R, arguments);
+        };
+
+            /**
+             * @ngdoc method
+             * @name lbServices.VehicleType.vehicleModels#count
+             * @methodOf lbServices.VehicleType.vehicleModels
+             *
+             * @description
+             *
+             * Counts vehicleModels of vehicleType.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `id` – `{*}` - PersistedModel id
+             *
+             *  - `where` – `{object=}` - Criteria to match model instances
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * Data properties:
+             *
+             *  - `count` – `{number=}` -
+             */
+        R.vehicleModels.count = function() {
+          var TargetResource = $injector.get("VehicleModel");
+          var action = TargetResource["::count::VehicleType::vehicleModels"];
+          return action.apply(R, arguments);
+        };
+
+            /**
+             * @ngdoc method
+             * @name lbServices.VehicleType.vehicleModels#findById
+             * @methodOf lbServices.VehicleType.vehicleModels
+             *
+             * @description
+             *
+             * Find a related item by id for vehicleModels.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `id` – `{*}` - PersistedModel id
+             *
+             *  - `fk` – `{*}` - Foreign key for vehicleModels
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * <em>
+             * (The remote method definition does not provide any description.
+             * This usually means the response is a `VehicleModel` object.)
+             * </em>
+             */
+        R.vehicleModels.findById = function() {
+          var TargetResource = $injector.get("VehicleModel");
+          var action = TargetResource["::findById::VehicleType::vehicleModels"];
           return action.apply(R, arguments);
         };
 
@@ -9310,9 +9742,21 @@ if (typeof module !== 'undefined' && typeof exports !== 'undefined' &&
               method: "GET",
             },
 
+            // INTERNAL. Use VehicleModel.vehicleType() instead.
+            "prototype$__get__vehicleType": {
+              url: urlBase + "/vehicleModels/:id/vehicleType",
+              method: "GET",
+            },
+
             // INTERNAL. Use VehicleModel.vehicleBrand() instead.
             "prototype$__get__vehicleBrand": {
               url: urlBase + "/vehicleModels/:id/vehicleBrand",
+              method: "GET",
+            },
+
+            // INTERNAL. Use VehicleModel.vehicleEngine() instead.
+            "prototype$__get__vehicleEngine": {
+              url: urlBase + "/vehicleModels/:id/vehicleEngine",
               method: "GET",
             },
 
@@ -9501,6 +9945,28 @@ if (typeof module !== 'undefined' && typeof exports !== 'undefined' &&
               method: "GET",
             },
 
+            // INTERNAL. Use VehicleType.vehicleModels.findById() instead.
+            "::findById::VehicleType::vehicleModels": {
+              params: {
+                'fk': '@fk',
+              },
+              url: urlBase + "/vehicleTypes/:id/vehicleModels/:fk",
+              method: "GET",
+            },
+
+            // INTERNAL. Use VehicleType.vehicleModels() instead.
+            "::get::VehicleType::vehicleModels": {
+              isArray: true,
+              url: urlBase + "/vehicleTypes/:id/vehicleModels",
+              method: "GET",
+            },
+
+            // INTERNAL. Use VehicleType.vehicleModels.count() instead.
+            "::count::VehicleType::vehicleModels": {
+              url: urlBase + "/vehicleTypes/:id/vehicleModels/count",
+              method: "GET",
+            },
+
             // INTERNAL. Use VehicleBrand.vehicleModels.findById() instead.
             "::findById::VehicleBrand::vehicleModels": {
               params: {
@@ -9520,6 +9986,65 @@ if (typeof module !== 'undefined' && typeof exports !== 'undefined' &&
             // INTERNAL. Use VehicleBrand.vehicleModels.count() instead.
             "::count::VehicleBrand::vehicleModels": {
               url: urlBase + "/vehicleBrands/:id/vehicleModels/count",
+              method: "GET",
+            },
+
+            // INTERNAL. Use VehicleEngine.vehicleModels.findById() instead.
+            "::findById::VehicleEngine::vehicleModels": {
+              params: {
+                'fk': '@fk',
+              },
+              url: urlBase + "/vehicleEngines/:id/vehicleModels/:fk",
+              method: "GET",
+            },
+
+            // INTERNAL. Use VehicleEngine.vehicleModels.destroyById() instead.
+            "::destroyById::VehicleEngine::vehicleModels": {
+              params: {
+                'fk': '@fk',
+              },
+              url: urlBase + "/vehicleEngines/:id/vehicleModels/:fk",
+              method: "DELETE",
+            },
+
+            // INTERNAL. Use VehicleEngine.vehicleModels.updateById() instead.
+            "::updateById::VehicleEngine::vehicleModels": {
+              params: {
+                'fk': '@fk',
+              },
+              url: urlBase + "/vehicleEngines/:id/vehicleModels/:fk",
+              method: "PUT",
+            },
+
+            // INTERNAL. Use VehicleEngine.vehicleModels() instead.
+            "::get::VehicleEngine::vehicleModels": {
+              isArray: true,
+              url: urlBase + "/vehicleEngines/:id/vehicleModels",
+              method: "GET",
+            },
+
+            // INTERNAL. Use VehicleEngine.vehicleModels.create() instead.
+            "::create::VehicleEngine::vehicleModels": {
+              url: urlBase + "/vehicleEngines/:id/vehicleModels",
+              method: "POST",
+            },
+
+            // INTERNAL. Use VehicleEngine.vehicleModels.createMany() instead.
+            "::createMany::VehicleEngine::vehicleModels": {
+              isArray: true,
+              url: urlBase + "/vehicleEngines/:id/vehicleModels",
+              method: "POST",
+            },
+
+            // INTERNAL. Use VehicleEngine.vehicleModels.destroyAll() instead.
+            "::delete::VehicleEngine::vehicleModels": {
+              url: urlBase + "/vehicleEngines/:id/vehicleModels",
+              method: "DELETE",
+            },
+
+            // INTERNAL. Use VehicleEngine.vehicleModels.count() instead.
+            "::count::VehicleEngine::vehicleModels": {
+              url: urlBase + "/vehicleEngines/:id/vehicleModels/count",
               method: "GET",
             },
           }
@@ -9662,6 +10187,42 @@ if (typeof module !== 'undefined' && typeof exports !== 'undefined' &&
 
             /**
              * @ngdoc method
+             * @name lbServices.VehicleModel#vehicleType
+             * @methodOf lbServices.VehicleModel
+             *
+             * @description
+             *
+             * Fetches belongsTo relation vehicleType.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `id` – `{*}` - PersistedModel id
+             *
+             *  - `refresh` – `{boolean=}` -
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * <em>
+             * (The remote method definition does not provide any description.
+             * This usually means the response is a `VehicleType` object.)
+             * </em>
+             */
+        R.vehicleType = function() {
+          var TargetResource = $injector.get("VehicleType");
+          var action = TargetResource["::get::VehicleModel::vehicleType"];
+          return action.apply(R, arguments);
+        };
+
+            /**
+             * @ngdoc method
              * @name lbServices.VehicleModel#vehicleBrand
              * @methodOf lbServices.VehicleModel
              *
@@ -9695,6 +10256,1556 @@ if (typeof module !== 'undefined' && typeof exports !== 'undefined' &&
           var action = TargetResource["::get::VehicleModel::vehicleBrand"];
           return action.apply(R, arguments);
         };
+
+            /**
+             * @ngdoc method
+             * @name lbServices.VehicleModel#vehicleEngine
+             * @methodOf lbServices.VehicleModel
+             *
+             * @description
+             *
+             * Fetches belongsTo relation vehicleEngine.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `id` – `{*}` - PersistedModel id
+             *
+             *  - `refresh` – `{boolean=}` -
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * <em>
+             * (The remote method definition does not provide any description.
+             * This usually means the response is a `VehicleEngine` object.)
+             * </em>
+             */
+        R.vehicleEngine = function() {
+          var TargetResource = $injector.get("VehicleEngine");
+          var action = TargetResource["::get::VehicleModel::vehicleEngine"];
+          return action.apply(R, arguments);
+        };
+
+
+        return R;
+      }]);
+
+/**
+ * @ngdoc object
+ * @name lbServices.VehicleEngine
+ * @header lbServices.VehicleEngine
+ * @object
+ *
+ * @description
+ *
+ * A $resource object for interacting with the `VehicleEngine` model.
+ *
+ * ## Example
+ *
+ * See
+ * {@link http://docs.angularjs.org/api/ngResource.$resource#example $resource}
+ * for an example of using this object.
+ *
+ */
+  module.factory(
+    "VehicleEngine",
+    [
+      'LoopBackResource', 'LoopBackAuth', '$injector',
+      function(Resource, LoopBackAuth, $injector) {
+        var R = Resource(
+        urlBase + "/vehicleEngines/:id",
+          { 'id': '@id' },
+          {
+
+            // INTERNAL. Use VehicleEngine.vehicles.findById() instead.
+            "prototype$__findById__vehicles": {
+              params: {
+                'fk': '@fk',
+              },
+              url: urlBase + "/vehicleEngines/:id/vehicles/:fk",
+              method: "GET",
+            },
+
+            // INTERNAL. Use VehicleEngine.vehicleModels.findById() instead.
+            "prototype$__findById__vehicleModels": {
+              params: {
+                'fk': '@fk',
+              },
+              url: urlBase + "/vehicleEngines/:id/vehicleModels/:fk",
+              method: "GET",
+            },
+
+            // INTERNAL. Use VehicleEngine.vehicleModels.destroyById() instead.
+            "prototype$__destroyById__vehicleModels": {
+              params: {
+                'fk': '@fk',
+              },
+              url: urlBase + "/vehicleEngines/:id/vehicleModels/:fk",
+              method: "DELETE",
+            },
+
+            // INTERNAL. Use VehicleEngine.vehicleModels.updateById() instead.
+            "prototype$__updateById__vehicleModels": {
+              params: {
+                'fk': '@fk',
+              },
+              url: urlBase + "/vehicleEngines/:id/vehicleModels/:fk",
+              method: "PUT",
+            },
+
+            // INTERNAL. Use VehicleEngine.vehicles() instead.
+            "prototype$__get__vehicles": {
+              isArray: true,
+              url: urlBase + "/vehicleEngines/:id/vehicles",
+              method: "GET",
+            },
+
+            // INTERNAL. Use VehicleEngine.vehicles.count() instead.
+            "prototype$__count__vehicles": {
+              url: urlBase + "/vehicleEngines/:id/vehicles/count",
+              method: "GET",
+            },
+
+            // INTERNAL. Use VehicleEngine.vehicleModels() instead.
+            "prototype$__get__vehicleModels": {
+              isArray: true,
+              url: urlBase + "/vehicleEngines/:id/vehicleModels",
+              method: "GET",
+            },
+
+            // INTERNAL. Use VehicleEngine.vehicleModels.create() instead.
+            "prototype$__create__vehicleModels": {
+              url: urlBase + "/vehicleEngines/:id/vehicleModels",
+              method: "POST",
+            },
+
+            // INTERNAL. Use VehicleEngine.vehicleModels.destroyAll() instead.
+            "prototype$__delete__vehicleModels": {
+              url: urlBase + "/vehicleEngines/:id/vehicleModels",
+              method: "DELETE",
+            },
+
+            // INTERNAL. Use VehicleEngine.vehicleModels.count() instead.
+            "prototype$__count__vehicleModels": {
+              url: urlBase + "/vehicleEngines/:id/vehicleModels/count",
+              method: "GET",
+            },
+
+            /**
+             * @ngdoc method
+             * @name lbServices.VehicleEngine#exists
+             * @methodOf lbServices.VehicleEngine
+             *
+             * @description
+             *
+             * Check whether a model instance exists in the data source.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `id` – `{*}` - Model id
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * Data properties:
+             *
+             *  - `exists` – `{boolean=}` -
+             */
+            "exists": {
+              url: urlBase + "/vehicleEngines/:id/exists",
+              method: "GET",
+            },
+
+            /**
+             * @ngdoc method
+             * @name lbServices.VehicleEngine#findById
+             * @methodOf lbServices.VehicleEngine
+             *
+             * @description
+             *
+             * Find a model instance by {{id}} from the data source.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `id` – `{*}` - Model id
+             *
+             *  - `filter` – `{object=}` - Filter defining fields and include
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * <em>
+             * (The remote method definition does not provide any description.
+             * This usually means the response is a `VehicleEngine` object.)
+             * </em>
+             */
+            "findById": {
+              url: urlBase + "/vehicleEngines/:id",
+              method: "GET",
+            },
+
+            /**
+             * @ngdoc method
+             * @name lbServices.VehicleEngine#find
+             * @methodOf lbServices.VehicleEngine
+             *
+             * @description
+             *
+             * Find all instances of the model matched by filter from the data source.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `filter` – `{object=}` - Filter defining fields, where, include, order, offset, and limit
+             *
+             * @param {function(Array.<Object>,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Array.<Object>} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * <em>
+             * (The remote method definition does not provide any description.
+             * This usually means the response is a `VehicleEngine` object.)
+             * </em>
+             */
+            "find": {
+              isArray: true,
+              url: urlBase + "/vehicleEngines",
+              method: "GET",
+            },
+
+            /**
+             * @ngdoc method
+             * @name lbServices.VehicleEngine#findOne
+             * @methodOf lbServices.VehicleEngine
+             *
+             * @description
+             *
+             * Find first instance of the model matched by filter from the data source.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `filter` – `{object=}` - Filter defining fields, where, include, order, offset, and limit
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * <em>
+             * (The remote method definition does not provide any description.
+             * This usually means the response is a `VehicleEngine` object.)
+             * </em>
+             */
+            "findOne": {
+              url: urlBase + "/vehicleEngines/findOne",
+              method: "GET",
+            },
+
+            /**
+             * @ngdoc method
+             * @name lbServices.VehicleEngine#count
+             * @methodOf lbServices.VehicleEngine
+             *
+             * @description
+             *
+             * Count instances of the model matched by where from the data source.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `where` – `{object=}` - Criteria to match model instances
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * Data properties:
+             *
+             *  - `count` – `{number=}` -
+             */
+            "count": {
+              url: urlBase + "/vehicleEngines/count",
+              method: "GET",
+            },
+
+            // INTERNAL. Use Vehicle.vehicleEngine() instead.
+            "::get::Vehicle::vehicleEngine": {
+              url: urlBase + "/vehicles/:id/vehicleEngine",
+              method: "GET",
+            },
+
+            // INTERNAL. Use VehicleModel.vehicleEngine() instead.
+            "::get::VehicleModel::vehicleEngine": {
+              url: urlBase + "/vehicleModels/:id/vehicleEngine",
+              method: "GET",
+            },
+          }
+        );
+
+
+
+
+        /**
+        * @ngdoc property
+        * @name lbServices.VehicleEngine#modelName
+        * @propertyOf lbServices.VehicleEngine
+        * @description
+        * The name of the model represented by this $resource,
+        * i.e. `VehicleEngine`.
+        */
+        R.modelName = "VehicleEngine";
+
+    /**
+     * @ngdoc object
+     * @name lbServices.VehicleEngine.vehicles
+     * @header lbServices.VehicleEngine.vehicles
+     * @object
+     * @description
+     *
+     * The object `VehicleEngine.vehicles` groups methods
+     * manipulating `Vehicle` instances related to `VehicleEngine`.
+     *
+     * Call {@link lbServices.VehicleEngine#vehicles VehicleEngine.vehicles()}
+     * to query all related instances.
+     */
+
+
+            /**
+             * @ngdoc method
+             * @name lbServices.VehicleEngine#vehicles
+             * @methodOf lbServices.VehicleEngine
+             *
+             * @description
+             *
+             * Queries vehicles of vehicleEngine.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `id` – `{*}` - PersistedModel id
+             *
+             *  - `filter` – `{object=}` -
+             *
+             * @param {function(Array.<Object>,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Array.<Object>} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * <em>
+             * (The remote method definition does not provide any description.
+             * This usually means the response is a `Vehicle` object.)
+             * </em>
+             */
+        R.vehicles = function() {
+          var TargetResource = $injector.get("Vehicle");
+          var action = TargetResource["::get::VehicleEngine::vehicles"];
+          return action.apply(R, arguments);
+        };
+
+            /**
+             * @ngdoc method
+             * @name lbServices.VehicleEngine.vehicles#count
+             * @methodOf lbServices.VehicleEngine.vehicles
+             *
+             * @description
+             *
+             * Counts vehicles of vehicleEngine.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `id` – `{*}` - PersistedModel id
+             *
+             *  - `where` – `{object=}` - Criteria to match model instances
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * Data properties:
+             *
+             *  - `count` – `{number=}` -
+             */
+        R.vehicles.count = function() {
+          var TargetResource = $injector.get("Vehicle");
+          var action = TargetResource["::count::VehicleEngine::vehicles"];
+          return action.apply(R, arguments);
+        };
+
+            /**
+             * @ngdoc method
+             * @name lbServices.VehicleEngine.vehicles#findById
+             * @methodOf lbServices.VehicleEngine.vehicles
+             *
+             * @description
+             *
+             * Find a related item by id for vehicles.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `id` – `{*}` - PersistedModel id
+             *
+             *  - `fk` – `{*}` - Foreign key for vehicles
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * <em>
+             * (The remote method definition does not provide any description.
+             * This usually means the response is a `Vehicle` object.)
+             * </em>
+             */
+        R.vehicles.findById = function() {
+          var TargetResource = $injector.get("Vehicle");
+          var action = TargetResource["::findById::VehicleEngine::vehicles"];
+          return action.apply(R, arguments);
+        };
+    /**
+     * @ngdoc object
+     * @name lbServices.VehicleEngine.vehicleModels
+     * @header lbServices.VehicleEngine.vehicleModels
+     * @object
+     * @description
+     *
+     * The object `VehicleEngine.vehicleModels` groups methods
+     * manipulating `VehicleModel` instances related to `VehicleEngine`.
+     *
+     * Call {@link lbServices.VehicleEngine#vehicleModels VehicleEngine.vehicleModels()}
+     * to query all related instances.
+     */
+
+
+            /**
+             * @ngdoc method
+             * @name lbServices.VehicleEngine#vehicleModels
+             * @methodOf lbServices.VehicleEngine
+             *
+             * @description
+             *
+             * Queries vehicleModels of vehicleEngine.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `id` – `{*}` - PersistedModel id
+             *
+             *  - `filter` – `{object=}` -
+             *
+             * @param {function(Array.<Object>,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Array.<Object>} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * <em>
+             * (The remote method definition does not provide any description.
+             * This usually means the response is a `VehicleModel` object.)
+             * </em>
+             */
+        R.vehicleModels = function() {
+          var TargetResource = $injector.get("VehicleModel");
+          var action = TargetResource["::get::VehicleEngine::vehicleModels"];
+          return action.apply(R, arguments);
+        };
+
+            /**
+             * @ngdoc method
+             * @name lbServices.VehicleEngine.vehicleModels#count
+             * @methodOf lbServices.VehicleEngine.vehicleModels
+             *
+             * @description
+             *
+             * Counts vehicleModels of vehicleEngine.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `id` – `{*}` - PersistedModel id
+             *
+             *  - `where` – `{object=}` - Criteria to match model instances
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * Data properties:
+             *
+             *  - `count` – `{number=}` -
+             */
+        R.vehicleModels.count = function() {
+          var TargetResource = $injector.get("VehicleModel");
+          var action = TargetResource["::count::VehicleEngine::vehicleModels"];
+          return action.apply(R, arguments);
+        };
+
+            /**
+             * @ngdoc method
+             * @name lbServices.VehicleEngine.vehicleModels#create
+             * @methodOf lbServices.VehicleEngine.vehicleModels
+             *
+             * @description
+             *
+             * Creates a new instance in vehicleModels of this model.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `id` – `{*}` - PersistedModel id
+             *
+             * @param {Object} postData Request data.
+             *
+             * This method expects a subset of model properties as request parameters.
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * <em>
+             * (The remote method definition does not provide any description.
+             * This usually means the response is a `VehicleModel` object.)
+             * </em>
+             */
+        R.vehicleModels.create = function() {
+          var TargetResource = $injector.get("VehicleModel");
+          var action = TargetResource["::create::VehicleEngine::vehicleModels"];
+          return action.apply(R, arguments);
+        };
+
+            /**
+             * @ngdoc method
+             * @name lbServices.VehicleEngine.vehicleModels#createMany
+             * @methodOf lbServices.VehicleEngine.vehicleModels
+             *
+             * @description
+             *
+             * Creates a new instance in vehicleModels of this model.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `id` – `{*}` - PersistedModel id
+             *
+             * @param {Object} postData Request data.
+             *
+             * This method expects a subset of model properties as request parameters.
+             *
+             * @param {function(Array.<Object>,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Array.<Object>} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * <em>
+             * (The remote method definition does not provide any description.
+             * This usually means the response is a `VehicleModel` object.)
+             * </em>
+             */
+        R.vehicleModels.createMany = function() {
+          var TargetResource = $injector.get("VehicleModel");
+          var action = TargetResource["::createMany::VehicleEngine::vehicleModels"];
+          return action.apply(R, arguments);
+        };
+
+            /**
+             * @ngdoc method
+             * @name lbServices.VehicleEngine.vehicleModels#destroyAll
+             * @methodOf lbServices.VehicleEngine.vehicleModels
+             *
+             * @description
+             *
+             * Deletes all vehicleModels of this model.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `id` – `{*}` - PersistedModel id
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * This method returns no data.
+             */
+        R.vehicleModels.destroyAll = function() {
+          var TargetResource = $injector.get("VehicleModel");
+          var action = TargetResource["::delete::VehicleEngine::vehicleModels"];
+          return action.apply(R, arguments);
+        };
+
+            /**
+             * @ngdoc method
+             * @name lbServices.VehicleEngine.vehicleModels#destroyById
+             * @methodOf lbServices.VehicleEngine.vehicleModels
+             *
+             * @description
+             *
+             * Delete a related item by id for vehicleModels.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `id` – `{*}` - PersistedModel id
+             *
+             *  - `fk` – `{*}` - Foreign key for vehicleModels
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * This method returns no data.
+             */
+        R.vehicleModels.destroyById = function() {
+          var TargetResource = $injector.get("VehicleModel");
+          var action = TargetResource["::destroyById::VehicleEngine::vehicleModels"];
+          return action.apply(R, arguments);
+        };
+
+            /**
+             * @ngdoc method
+             * @name lbServices.VehicleEngine.vehicleModels#findById
+             * @methodOf lbServices.VehicleEngine.vehicleModels
+             *
+             * @description
+             *
+             * Find a related item by id for vehicleModels.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `id` – `{*}` - PersistedModel id
+             *
+             *  - `fk` – `{*}` - Foreign key for vehicleModels
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * <em>
+             * (The remote method definition does not provide any description.
+             * This usually means the response is a `VehicleModel` object.)
+             * </em>
+             */
+        R.vehicleModels.findById = function() {
+          var TargetResource = $injector.get("VehicleModel");
+          var action = TargetResource["::findById::VehicleEngine::vehicleModels"];
+          return action.apply(R, arguments);
+        };
+
+            /**
+             * @ngdoc method
+             * @name lbServices.VehicleEngine.vehicleModels#updateById
+             * @methodOf lbServices.VehicleEngine.vehicleModels
+             *
+             * @description
+             *
+             * Update a related item by id for vehicleModels.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `id` – `{*}` - PersistedModel id
+             *
+             *  - `fk` – `{*}` - Foreign key for vehicleModels
+             *
+             * @param {Object} postData Request data.
+             *
+             * This method expects a subset of model properties as request parameters.
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * <em>
+             * (The remote method definition does not provide any description.
+             * This usually means the response is a `VehicleModel` object.)
+             * </em>
+             */
+        R.vehicleModels.updateById = function() {
+          var TargetResource = $injector.get("VehicleModel");
+          var action = TargetResource["::updateById::VehicleEngine::vehicleModels"];
+          return action.apply(R, arguments);
+        };
+
+
+        return R;
+      }]);
+
+/**
+ * @ngdoc object
+ * @name lbServices.VehiclePhoto
+ * @header lbServices.VehiclePhoto
+ * @object
+ *
+ * @description
+ *
+ * A $resource object for interacting with the `VehiclePhoto` model.
+ *
+ * ## Example
+ *
+ * See
+ * {@link http://docs.angularjs.org/api/ngResource.$resource#example $resource}
+ * for an example of using this object.
+ *
+ */
+  module.factory(
+    "VehiclePhoto",
+    [
+      'LoopBackResource', 'LoopBackAuth', '$injector',
+      function(Resource, LoopBackAuth, $injector) {
+        var R = Resource(
+        urlBase + "/vehiclesPhotos/:id",
+          { 'id': '@id' },
+          {
+
+            /**
+             * @ngdoc method
+             * @name lbServices.VehiclePhoto#getContainers
+             * @methodOf lbServices.VehiclePhoto
+             *
+             * @description
+             *
+             * <em>
+             * (The remote method definition does not provide any description.)
+             * </em>
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *   This method does not accept any parameters.
+             *   Supply an empty object or omit this argument altogether.
+             *
+             * @param {function(Array.<Object>,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Array.<Object>} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * <em>
+             * (The remote method definition does not provide any description.
+             * This usually means the response is a `VehiclePhoto` object.)
+             * </em>
+             */
+            "getContainers": {
+              isArray: true,
+              url: urlBase + "/vehiclesPhotos",
+              method: "GET",
+            },
+
+            /**
+             * @ngdoc method
+             * @name lbServices.VehiclePhoto#createContainer
+             * @methodOf lbServices.VehiclePhoto
+             *
+             * @description
+             *
+             * <em>
+             * (The remote method definition does not provide any description.)
+             * </em>
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *   This method does not accept any parameters.
+             *   Supply an empty object or omit this argument altogether.
+             *
+             * @param {Object} postData Request data.
+             *
+             * This method expects a subset of model properties as request parameters.
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * <em>
+             * (The remote method definition does not provide any description.
+             * This usually means the response is a `VehiclePhoto` object.)
+             * </em>
+             */
+            "createContainer": {
+              url: urlBase + "/vehiclesPhotos",
+              method: "POST",
+            },
+
+            /**
+             * @ngdoc method
+             * @name lbServices.VehiclePhoto#destroyContainer
+             * @methodOf lbServices.VehiclePhoto
+             *
+             * @description
+             *
+             * <em>
+             * (The remote method definition does not provide any description.)
+             * </em>
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `container` – `{string=}` -
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * Data properties:
+             *
+             *  - `` – `{undefined=}` -
+             */
+            "destroyContainer": {
+              url: urlBase + "/vehiclesPhotos/:container",
+              method: "DELETE",
+            },
+
+            /**
+             * @ngdoc method
+             * @name lbServices.VehiclePhoto#getContainer
+             * @methodOf lbServices.VehiclePhoto
+             *
+             * @description
+             *
+             * <em>
+             * (The remote method definition does not provide any description.)
+             * </em>
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `container` – `{string=}` -
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * <em>
+             * (The remote method definition does not provide any description.
+             * This usually means the response is a `VehiclePhoto` object.)
+             * </em>
+             */
+            "getContainer": {
+              url: urlBase + "/vehiclesPhotos/:container",
+              method: "GET",
+            },
+
+            /**
+             * @ngdoc method
+             * @name lbServices.VehiclePhoto#getFiles
+             * @methodOf lbServices.VehiclePhoto
+             *
+             * @description
+             *
+             * <em>
+             * (The remote method definition does not provide any description.)
+             * </em>
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `container` – `{string=}` -
+             *
+             * @param {function(Array.<Object>,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Array.<Object>} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * <em>
+             * (The remote method definition does not provide any description.
+             * This usually means the response is a `VehiclePhoto` object.)
+             * </em>
+             */
+            "getFiles": {
+              isArray: true,
+              url: urlBase + "/vehiclesPhotos/:container/files",
+              method: "GET",
+            },
+
+            /**
+             * @ngdoc method
+             * @name lbServices.VehiclePhoto#getFile
+             * @methodOf lbServices.VehiclePhoto
+             *
+             * @description
+             *
+             * <em>
+             * (The remote method definition does not provide any description.)
+             * </em>
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `container` – `{string=}` -
+             *
+             *  - `file` – `{string=}` -
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * <em>
+             * (The remote method definition does not provide any description.
+             * This usually means the response is a `VehiclePhoto` object.)
+             * </em>
+             */
+            "getFile": {
+              url: urlBase + "/vehiclesPhotos/:container/files/:file",
+              method: "GET",
+            },
+
+            /**
+             * @ngdoc method
+             * @name lbServices.VehiclePhoto#removeFile
+             * @methodOf lbServices.VehiclePhoto
+             *
+             * @description
+             *
+             * <em>
+             * (The remote method definition does not provide any description.)
+             * </em>
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `container` – `{string=}` -
+             *
+             *  - `file` – `{string=}` -
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * Data properties:
+             *
+             *  - `` – `{undefined=}` -
+             */
+            "removeFile": {
+              url: urlBase + "/vehiclesPhotos/:container/files/:file",
+              method: "DELETE",
+            },
+
+            /**
+             * @ngdoc method
+             * @name lbServices.VehiclePhoto#upload
+             * @methodOf lbServices.VehiclePhoto
+             *
+             * @description
+             *
+             * <em>
+             * (The remote method definition does not provide any description.)
+             * </em>
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *   This method does not accept any parameters.
+             *   Supply an empty object or omit this argument altogether.
+             *
+             * @param {Object} postData Request data.
+             *
+             *  - `req` – `{object=}` -
+             *
+             *  - `res` – `{object=}` -
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * Data properties:
+             *
+             *  - `result` – `{object=}` -
+             */
+            "upload": {
+              url: urlBase + "/vehiclesPhotos/:container/upload",
+              method: "POST",
+            },
+
+            /**
+             * @ngdoc method
+             * @name lbServices.VehiclePhoto#download
+             * @methodOf lbServices.VehiclePhoto
+             *
+             * @description
+             *
+             * <em>
+             * (The remote method definition does not provide any description.)
+             * </em>
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `container` – `{string=}` -
+             *
+             *  - `file` – `{string=}` -
+             *
+             *  - `req` – `{object=}` -
+             *
+             *  - `res` – `{object=}` -
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * This method returns no data.
+             */
+            "download": {
+              url: urlBase + "/vehiclesPhotos/:container/download/:file",
+              method: "GET",
+            },
+
+            // INTERNAL. Use Vehicle.vehiclePhotos() instead.
+            "::get::Vehicle::vehiclePhotos": {
+              url: urlBase + "/vehicles/:id/vehiclePhotos",
+              method: "GET",
+            },
+
+            // INTERNAL. Use Vehicle.vehiclePhotos.create() instead.
+            "::create::Vehicle::vehiclePhotos": {
+              url: urlBase + "/vehicles/:id/vehiclePhotos",
+              method: "POST",
+            },
+
+            // INTERNAL. Use Vehicle.vehiclePhotos.createMany() instead.
+            "::createMany::Vehicle::vehiclePhotos": {
+              isArray: true,
+              url: urlBase + "/vehicles/:id/vehiclePhotos",
+              method: "POST",
+            },
+
+            // INTERNAL. Use Vehicle.vehiclePhotos.update() instead.
+            "::update::Vehicle::vehiclePhotos": {
+              url: urlBase + "/vehicles/:id/vehiclePhotos",
+              method: "PUT",
+            },
+
+            // INTERNAL. Use Vehicle.vehiclePhotos.destroy() instead.
+            "::destroy::Vehicle::vehiclePhotos": {
+              url: urlBase + "/vehicles/:id/vehiclePhotos",
+              method: "DELETE",
+            },
+          }
+        );
+
+
+
+
+        /**
+        * @ngdoc property
+        * @name lbServices.VehiclePhoto#modelName
+        * @propertyOf lbServices.VehiclePhoto
+        * @description
+        * The name of the model represented by this $resource,
+        * i.e. `VehiclePhoto`.
+        */
+        R.modelName = "VehiclePhoto";
+
+
+
+        return R;
+      }]);
+
+/**
+ * @ngdoc object
+ * @name lbServices.GasStationPhoto
+ * @header lbServices.GasStationPhoto
+ * @object
+ *
+ * @description
+ *
+ * A $resource object for interacting with the `GasStationPhoto` model.
+ *
+ * ## Example
+ *
+ * See
+ * {@link http://docs.angularjs.org/api/ngResource.$resource#example $resource}
+ * for an example of using this object.
+ *
+ */
+  module.factory(
+    "GasStationPhoto",
+    [
+      'LoopBackResource', 'LoopBackAuth', '$injector',
+      function(Resource, LoopBackAuth, $injector) {
+        var R = Resource(
+        urlBase + "/gasStationsPhotos/:id",
+          { 'id': '@id' },
+          {
+
+            /**
+             * @ngdoc method
+             * @name lbServices.GasStationPhoto#getContainers
+             * @methodOf lbServices.GasStationPhoto
+             *
+             * @description
+             *
+             * <em>
+             * (The remote method definition does not provide any description.)
+             * </em>
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *   This method does not accept any parameters.
+             *   Supply an empty object or omit this argument altogether.
+             *
+             * @param {function(Array.<Object>,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Array.<Object>} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * <em>
+             * (The remote method definition does not provide any description.
+             * This usually means the response is a `GasStationPhoto` object.)
+             * </em>
+             */
+            "getContainers": {
+              isArray: true,
+              url: urlBase + "/gasStationsPhotos",
+              method: "GET",
+            },
+
+            /**
+             * @ngdoc method
+             * @name lbServices.GasStationPhoto#createContainer
+             * @methodOf lbServices.GasStationPhoto
+             *
+             * @description
+             *
+             * <em>
+             * (The remote method definition does not provide any description.)
+             * </em>
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *   This method does not accept any parameters.
+             *   Supply an empty object or omit this argument altogether.
+             *
+             * @param {Object} postData Request data.
+             *
+             * This method expects a subset of model properties as request parameters.
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * <em>
+             * (The remote method definition does not provide any description.
+             * This usually means the response is a `GasStationPhoto` object.)
+             * </em>
+             */
+            "createContainer": {
+              url: urlBase + "/gasStationsPhotos",
+              method: "POST",
+            },
+
+            /**
+             * @ngdoc method
+             * @name lbServices.GasStationPhoto#destroyContainer
+             * @methodOf lbServices.GasStationPhoto
+             *
+             * @description
+             *
+             * <em>
+             * (The remote method definition does not provide any description.)
+             * </em>
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `container` – `{string=}` -
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * Data properties:
+             *
+             *  - `` – `{undefined=}` -
+             */
+            "destroyContainer": {
+              url: urlBase + "/gasStationsPhotos/:container",
+              method: "DELETE",
+            },
+
+            /**
+             * @ngdoc method
+             * @name lbServices.GasStationPhoto#getContainer
+             * @methodOf lbServices.GasStationPhoto
+             *
+             * @description
+             *
+             * <em>
+             * (The remote method definition does not provide any description.)
+             * </em>
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `container` – `{string=}` -
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * <em>
+             * (The remote method definition does not provide any description.
+             * This usually means the response is a `GasStationPhoto` object.)
+             * </em>
+             */
+            "getContainer": {
+              url: urlBase + "/gasStationsPhotos/:container",
+              method: "GET",
+            },
+
+            /**
+             * @ngdoc method
+             * @name lbServices.GasStationPhoto#getFiles
+             * @methodOf lbServices.GasStationPhoto
+             *
+             * @description
+             *
+             * <em>
+             * (The remote method definition does not provide any description.)
+             * </em>
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `container` – `{string=}` -
+             *
+             * @param {function(Array.<Object>,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Array.<Object>} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * <em>
+             * (The remote method definition does not provide any description.
+             * This usually means the response is a `GasStationPhoto` object.)
+             * </em>
+             */
+            "getFiles": {
+              isArray: true,
+              url: urlBase + "/gasStationsPhotos/:container/files",
+              method: "GET",
+            },
+
+            /**
+             * @ngdoc method
+             * @name lbServices.GasStationPhoto#getFile
+             * @methodOf lbServices.GasStationPhoto
+             *
+             * @description
+             *
+             * <em>
+             * (The remote method definition does not provide any description.)
+             * </em>
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `container` – `{string=}` -
+             *
+             *  - `file` – `{string=}` -
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * <em>
+             * (The remote method definition does not provide any description.
+             * This usually means the response is a `GasStationPhoto` object.)
+             * </em>
+             */
+            "getFile": {
+              url: urlBase + "/gasStationsPhotos/:container/files/:file",
+              method: "GET",
+            },
+
+            /**
+             * @ngdoc method
+             * @name lbServices.GasStationPhoto#removeFile
+             * @methodOf lbServices.GasStationPhoto
+             *
+             * @description
+             *
+             * <em>
+             * (The remote method definition does not provide any description.)
+             * </em>
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `container` – `{string=}` -
+             *
+             *  - `file` – `{string=}` -
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * Data properties:
+             *
+             *  - `` – `{undefined=}` -
+             */
+            "removeFile": {
+              url: urlBase + "/gasStationsPhotos/:container/files/:file",
+              method: "DELETE",
+            },
+
+            /**
+             * @ngdoc method
+             * @name lbServices.GasStationPhoto#upload
+             * @methodOf lbServices.GasStationPhoto
+             *
+             * @description
+             *
+             * <em>
+             * (The remote method definition does not provide any description.)
+             * </em>
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *   This method does not accept any parameters.
+             *   Supply an empty object or omit this argument altogether.
+             *
+             * @param {Object} postData Request data.
+             *
+             *  - `req` – `{object=}` -
+             *
+             *  - `res` – `{object=}` -
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * Data properties:
+             *
+             *  - `result` – `{object=}` -
+             */
+            "upload": {
+              url: urlBase + "/gasStationsPhotos/:container/upload",
+              method: "POST",
+            },
+
+            /**
+             * @ngdoc method
+             * @name lbServices.GasStationPhoto#download
+             * @methodOf lbServices.GasStationPhoto
+             *
+             * @description
+             *
+             * <em>
+             * (The remote method definition does not provide any description.)
+             * </em>
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `container` – `{string=}` -
+             *
+             *  - `file` – `{string=}` -
+             *
+             *  - `req` – `{object=}` -
+             *
+             *  - `res` – `{object=}` -
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * This method returns no data.
+             */
+            "download": {
+              url: urlBase + "/gasStationsPhotos/:container/download/:file",
+              method: "GET",
+            },
+          }
+        );
+
+
+
+
+        /**
+        * @ngdoc property
+        * @name lbServices.GasStationPhoto#modelName
+        * @propertyOf lbServices.GasStationPhoto
+        * @description
+        * The name of the model represented by this $resource,
+        * i.e. `GasStationPhoto`.
+        */
+        R.modelName = "GasStationPhoto";
+
 
 
         return R;

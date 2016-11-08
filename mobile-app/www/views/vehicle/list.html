@@ -4,7 +4,7 @@
 	<div class="col s12">
 		<div class="card sticky-action hoverable">
 			<div class="card-image waves-effect waves-block waves-light">
-				<img class="activator" ng-src="{{ m.photo.thumb }}">
+				<img class="activator" ng-src="{{ m.img }}">
 			</div>
 			<div class="card-content">
 				<span class="card-title activator grey-text text-darken-4">
@@ -32,7 +32,10 @@
 							<b>Consumo:</b><span ng-bind="m.consumption"></span>
 						</li>
 						<li>
-							<b>Motor:</b><span ng-bind="m.power"></span>
+							<b>Motor:</b><span ng-bind="m.vehicleEngine.power + ' - ' + m.vehicleEngine.valve + 'v'"></span>
+						</li>
+						<li>
+							<b>Combsustível: </b><span ng-bind="m.fuelType.name"></span>
 						</li>
 						<li>
 							<b>Tipo:</b><span ng-bind="m.vehicleType.type"></span>
@@ -54,21 +57,3 @@
 		<i class="material-icons">add</i>
 	</a>
 </div>
-
-<hr>
-<pre ng-bind="collection | json"></pre>
-
-<!--
-nickName
-photo: {
-	photo
-	thumb
-},
-year
-consumption
-power
-vehicleTypeId
-vehicleModelId
-vehicleBrandId
-ownerId
--->

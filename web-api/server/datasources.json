@@ -9,5 +9,11 @@
     "database": "savemygas",
     "name": "mongodb",
     "connector": "mongodb"
+  },
+  "fileStorage": {
+    "name": "fileStorage",
+    "connector": "loopback-component-storage",
+    "provider": "filesystem",
+    "root": "/home/jhonasn/tmp/lb-file-storage"
   }
 }

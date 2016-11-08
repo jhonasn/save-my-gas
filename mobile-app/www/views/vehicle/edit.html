@@ -3,7 +3,7 @@
 				novalidate>
 
 	<div class="parallax-container">
-		<div parallax><img ng-src="{{ model.photo.photo }}"></div>
+		<div parallax><img ng-src="{{ vehiclePhoto }}"></div>
 	</div>
 
 	<div class="container">
@@ -29,7 +29,6 @@
 							<i class="material-icons">image</i>
 							<input type="file"
 							name="photoAttachField"
-							ng-model="model.photo.photo"
 							onchange="angular.element(this).scope().photoAttachChanged(this.files)">
 					</button>
 					<div class="file-path-wrapper">
@@ -48,7 +47,6 @@
 		</div>
 
 		<div class="row">
-
 			<div class="input-field">
 				<input type="text"
 								name="nickNameField"
@@ -64,10 +62,13 @@
 								ng-class="{ invalid: modelForm.vehicleModelIdField.$invalid }"
 								label="name"
 								url="/vehiclemodels"
-								on-select="vehicleModelSelected"
 								ng-model="model.vehicleModelId"
 								ng-required="true"></autocomplete>
-				<!-- url-params="{ filter: { where: { name: { regexp: searchTerm } }, include: [ 'vehicleBrand', 'vehicleType' ] } }" -->
+				<!--
+				params for improve ux combo select
+				on-select="vehicleModelSelected"
+				url-params="{ filter: { where: { name: { regexp: searchTerm } }, include: [ 'vehicleBrand', 'vehicleType' ] } }"
+				-->
 				<label for="vehicle-model-id-field">Modelo</label>
 				<div ng-if="modelForm.vehicleModelIdField.$dirty || modelForm.$submitted"
 								ng-messages="modelForm.vehicleModelIdField.$error"

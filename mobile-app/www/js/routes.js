@@ -21,7 +21,7 @@ angular.module('save-my-gas')
 
 	.when('/vehicle/create', {
 		templateUrl: SaveMyGas.rootRoute.getPath('/views/vehicle/edit.html'),
-		controller: 'vehicleCreateController',
+		controller: 'vehicleEditController',
 		resolve: {
 			model: function(authService) {
 				return { ownerId: authService.getUser().userId }
@@ -31,10 +31,10 @@ angular.module('save-my-gas')
 
 	.when('/vehicle/update/:id', {
 		templateUrl: SaveMyGas.rootRoute.getPath('/views/vehicle/edit.html'),
-		controller: 'vehicleCreateController',
+		controller: 'vehicleEditController',
 		resolve: {
-			model: function ($route, Vehicle) {
-				return Vehicle.findById($route.current.params.id)
+			model: function ($route, vehicleService) {
+				return  vehicleService.findById($route.current.params.id).$promise
 			}
 		}
 	})

@@ -7,17 +7,23 @@ angular.module('save-my-gas')
 			VehicleType,
 			VehicleModel,
 			VehicleBrand,
-			FuelType
+			FuelType,
+			fileStorageService,
+			appConstants
 		) {
-			return {
+			var _user = authService.getUser()
+			var _userId = authService.getUser().userId
+
+			var vehicleService = {
 				getCollection: function() {
 					var collection = User.vehicles({
-						id: authService.getUser().userId,
+						id: _userId,
 						filter: {
 							include: [
 								'vehicleBrand',
 								'vehicleModel',
 								'vehicleType',
+								'vehicleEngine',
 								'fuelType'
 							]
 						}
@@ -28,17 +34,24 @@ angular.module('save-my-gas')
 							m.photo = m.photo || {}
 							m.photo.thumb = m.photo.thumb || SaveMyGas.rootRoute.getPath('/img/default-car.png')
 							m.nickName = m.nickName || '\xa0'
+							m.img = vehicleService.getVehiclePhotoPath(m)
 						})
 					})
 
 					return collection
 				},
 
-				save: function (model) {
-					if(model.$save) {
+				findById: function (id) {
+					return User.vehicles.findById({id: _userId, fk: id})
+				},
+
+				save: function(model) {
+					if (model.$save) {
 						model.$save()
 					} else {
-						model = User.vehicles.create({ id: model.ownerId }, model)
+						model = User.vehicles.create({
+							id: model.ownerId
+						}, model)
 					}
 					model.$promise.then(function() {
 							Materialize.toast('Veículo salvo')
@@ -110,18 +123,51 @@ angular.module('save-my-gas')
 				},
 
 				deleteById: function(id) {
-					User.vehicles({
-							id: authService.getUser().userId,
+					return User.vehicles.destroyById({
+							id: _userId,
 							fk: id
 						})
 						.$promise
 						.then(function() {
 							Materialize.toast('Veículo deletado')
-							$scope.collection = vehicleService.getCollection()
 						})
 						.catch(function(err) {
 							Materialize.toast('Não foi possível deletar o veículo')
 						})
+				},
+
+				uploadPhoto: function(file, model) {
+					fileStorageService.upload('vehiclesPhotos', _userId, file, 'vehiclePhoto')
+						.then(function(response) {
+							if(
+								response.data &&
+								response.data.result &&
+								response.data.result.files &&
+								response.data.result.files.file &&
+								response.data.result.files.file.length
+							) {
+								model.photo.photo = response.data.result.files.file[0].name
+								Materialize.toast('A foto do seu carango foi salva')
+							} else {
+								Materialize.toast('Não foi possível salvar a foto do seu veículo :(')
+							}
+
+						})
+						.catch(function(err) {
+							if (!err.specified) {
+								Materialize.toast('Ocorreu um erro ao salvar a foto do seu arquivo')
+							}
+						})
+				},
+
+				getVehiclePhotoPath: function(model) {
+					return fileStorageService.getFilePath(
+						'vehiclesPhotos',
+						_userId,
+						model.photo.photo
+					)
 				}
 			}
+
+			return vehicleService
 		})

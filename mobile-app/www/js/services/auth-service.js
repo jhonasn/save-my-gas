@@ -4,7 +4,6 @@ angular.module('save-my-gas')
 			$http,
 			$window,
 			$localStorage,
-			// rootRouteService,
 			appConstants
 		) {
 			var _setUser = function(user) {
