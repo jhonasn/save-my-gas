@@ -13,10 +13,11 @@ angular.module('save-my-gas')
 				label: '@',
 				format: '=',
 				urlParamsMake: '=',
+				initWith: '=',
 				onSelect: '=',
 				onClear: '='
 			},
-			link: function(scope, element, attributes, ngModel) {
+			link: function(scope, element, attributes, ngModelController) {
 				var _results = []
 				var _urlParams = null
 				var _isInitialized = false
@@ -29,8 +30,8 @@ angular.module('save-my-gas')
 							.find('#initial-autocomplete-element')
 							.after(labelEl)
 						labelEl.css('position', 'absolute')
-						labelEl.css('top', 0)
 						labelEl.css('left', 0)
+							// labelEl.css('top', 0)
 					}
 				}
 
@@ -58,69 +59,83 @@ angular.module('save-my-gas')
 					_url = _url[_url.length - 1] === '/' ?
 						_url.substr(0, (_url.length - 1)) :
 						_url
-					$http.get(appConstants.urlApi + _url + '/' + id).then(function(data) {
-						scope.ngModel = data[0]
-						_isInitialized = true
-						if (scope.onSelect) {
-							scope.onSelect(scope.ngModel)
-						}
-					}).catch(function(err) {
-						if (!err.specified) {
-							var autocompleteName = ''
-							if (attributes.name) {
-								autocompleteName = ' de ' + attributes.name
+					$http.get(appConstants.urlApi + _url + '/' + id).then(function(response) {
+							scope.ngModel = response.data
+							if (scope.onSelect) {
+								scope.onSelect(scope.ngModel)
 							}
-							alert('Erro ao carregar autocomplete' + autocompleteName)
-						}
-						_isInitialized = true
-					})
+						})
+						.catch(function(err) {
+							if (!err.specified) {
+								var autocompleteName = ''
+								if (attributes.name) {
+									autocompleteName = ' de ' + attributes.name
+								}
+								Materialize.toast('Erro ao carregar autocomplete' + autocompleteName)
+							}
+							//initialize with error? yes for while..
+							_isInitialized = true
+						})
 				}
 
 				scope.clear = function() {
-					scope.ngModel = null
+					ngModelController.$setViewValue(null)
 					if (scope.onClear) {
 						scope.onClear()
 					}
 				}
 
 				scope.search = function(searchTerm) {
-					var defered = $q.defer()
+					if (_isInitialized) {
+						var defered = $q.defer()
 
-					if (!searchTerm) {
-						searchTerm = ''
-					}
-					if (!scope.urlParamsMake) {
-						_urlParams.filter.where[scope.label].regexp = searchTerm
-					} else {
-						_urlParams = scope.urlParamsMake(searchTerm)
-					}
-
-					var _url = scope.url[0] === '/' ? scope.url : '/' + scope.url
-					$http.get(appConstants.urlApi + _url, {
-						params: _urlParams
-					}).then(function(result) {
-						if (Array.isArray(result.data) && scope.format) {
-							result.data.forEach(function(item, i) {
-								var label = scope.label || 'autocompleteCustomLabel'
-								item[scope.label] = scope.format(item)
-							})
+						if (!searchTerm) {
+							searchTerm = ''
 						}
-						_results = result.data
+						if (!scope.urlParamsMake) {
+							_urlParams.filter.where[scope.label].regexp = searchTerm
+						} else {
+							_urlParams = scope.urlParamsMake(searchTerm)
+						}
 
-						defered.resolve(result.data)
-					}).catch(function(err) {
-						console.error('Error on autocomplete', err)
-						defered.reject(err)
-					})
+						var _url = scope.url[0] === '/' ? scope.url : '/' + scope.url
+						$http.get(appConstants.urlApi + _url, {
+							params: _urlParams
+						}).then(function(result) {
+							if (Array.isArray(result.data) && scope.format) {
+								result.data.forEach(function(item, i) {
+									var label = scope.label || 'autocompleteCustomLabel'
+									item[scope.label] = scope.format(item)
+								})
+							}
+							_results = result.data
 
-					_urlParams = JSON.stringify(_urlParams)
+							defered.resolve(result.data)
+						}).catch(function(err) {
+							console.error('Error on autocomplete', err)
+							defered.reject(err)
+						})
 
-					return defered.promise
+						return defered.promise
+					}
 				}
 
 				scope.formatLabel = function($model) {
+					var id = null
+					if ($model && $model.id) {
+						var _model = angular.copy($model)
+						if (scope.format) {
+							_model[scope.label] = scope.format(_model)
+						}
+						_results = [_model]
+						id = $model.id
+						scope.ngModel = id
+						_isInitialized = true
+					} else {
+						id = $model
+					}
 					var o = _results.filter(function(o) {
-						return o.id === $model
+						return o.id === id
 					})
 					if (o.length) {
 						o = o[0]
@@ -130,23 +145,18 @@ angular.module('save-my-gas')
 					}
 				}
 
-				// var _isSelection = false
-
 				scope.select = function($item, $model, $label, $event) {
-					// _isSelection = true
 					if (scope.onSelect) {
 						scope.onSelect($item, $model, $label, $event)
 					}
-					// _isSelection = false
 				}
 
-				// scope.$watch('ngModel', function (newVal, oldVal) {
-				// 	if(_isInitialized && !_isSelection && oldVal !== newVal) {
-				// 		edit(newVal)
-				// 	}
-				// })
-
-				if (scope.ngModel) {
+				if (
+					scope.initWith &&
+					scope.initWith.id) {
+					//initialize on formatLabel
+					scope.ngModel = scope.initWith
+				} else if (scope.ngModel) {
 					edit(scope.ngModel)
 				} else {
 					_isInitialized = true

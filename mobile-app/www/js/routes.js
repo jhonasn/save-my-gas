@@ -60,7 +60,9 @@ angular.module('save-my-gas')
 	})
 
 	.otherwise({
-		redirectTo: '/'
+		// redirectTo: '/'
+		// temporary
+		redirectTo: '/vehicle'
 	})
 
 })

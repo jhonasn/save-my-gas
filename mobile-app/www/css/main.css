@@ -146,13 +146,28 @@ body {
 */
 
 [role="alert"] .invalid {
-    color: #B71C1C;
+    /*color: #B71C1C;*/
+    /*from materialize ::after*/
+    /*content: attr(data-error);*/
+    color: #F44336;
+    /*display: block;
+    position: absolute;
+    top: 50px;*/
+    /*transition: .2s opacity ease-out, .2s color ease-out;*/
 }
 
 .autocomplete-item strong {
     color: #444;
 }
+
 .invalid .autocomplete {
-	border-bottom: 1px solid #F44336;
-	box-shadow: 0 1px 0 0 #F44336;
+    border-bottom: 1px solid #F44336;
+    box-shadow: 0 1px 0 0 #F44336;
+}
+
+.toast:hover {
+	cursor: pointer;
+}
+.toast:active {
+	cursor: move;
 }

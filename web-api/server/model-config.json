@@ -117,11 +117,11 @@
 		"public": true
 	},
 	"vehiclePhoto": {
-		"dataSource": "fileStorage",
+		"dataSource": "vehicleContainer",
 		"public": true
 	},
 	"gasStationPhoto": {
-		"dataSource": "fileStorage",
+		"dataSource": "gasStationContainer",
 		"public": true
 	}
 }

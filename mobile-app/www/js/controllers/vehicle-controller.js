@@ -25,14 +25,14 @@ angular.module('save-my-gas')
 		vehicleService,
 		model
 	) {
-		model.photo = model.photo || {
-			photo: null
-		}
-		
 		if (model.photo) {
 			$scope.vehiclePhoto = vehicleService.getVehiclePhotoPath(model)
 		} else {
 			$scope.vehiclePhoto = SaveMyGas.rootRoute.getPath('/img/default-car.png')
+		}
+
+		model.photo = model.photo || {
+			photo: null
 		}
 
 		$scope.model = model
@@ -60,12 +60,17 @@ angular.module('save-my-gas')
 			vehicleService.takeCarPicture($scope)
 		}
 
-		//ux improvment
-		// $scope.vehicleModelSelected = function($item) {
-		// 	if ($item.vehicleBrand) {
-		// 		$scope.model.vehicleBrand = $item.vehicleBrand
-		// 	}
-		// }
+		$scope.vehicleModelSelected = function($item) {
+			if ($item.vehicleBrand) {
+				$scope.model.vehicleBrandId = $item.vehicleBrand
+			}
+			if ($item.vehicleType) {
+				$scope.model.vehicleTypeId = $item.vehicleType
+			}
+			if ($item.vehicleEngine) {
+				$scope.model.vehicleEngineId = $item.vehicleEngine
+			}
+		}
 
 		$scope.formatEngine = function(vehicleEngine) {
 			return vehicleEngine.power + ' - ' + vehicleEngine.valve + 'v'
@@ -93,6 +98,13 @@ angular.module('save-my-gas')
 				}
 			}
 		}
+
+		//remove relations to get the relation of fk selected by the autocomplete
+		delete model.vehicleBrand
+		delete model.vehicleModel
+		delete model.vehicleType
+		delete model.vehicleEngine
+		delete model.fuelType
 	})
 
 // .controller('vehicleUpdateController',

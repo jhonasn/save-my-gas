@@ -62,13 +62,11 @@
 								ng-class="{ invalid: modelForm.vehicleModelIdField.$invalid }"
 								label="name"
 								url="/vehiclemodels"
+								on-select="vehicleModelSelected"
+								url-params="{ filter: { where: { name: { regexp: searchTerm } }, include: [ 'vehicleBrand', 'vehicleType', 'vehicleEngine' ] } }"
+								init-with="model.vehicleModel"
 								ng-model="model.vehicleModelId"
 								ng-required="true"></autocomplete>
-				<!--
-				params for improve ux combo select
-				on-select="vehicleModelSelected"
-				url-params="{ filter: { where: { name: { regexp: searchTerm } }, include: [ 'vehicleBrand', 'vehicleType' ] } }"
-				-->
 				<label for="vehicle-model-id-field">Modelo</label>
 				<div ng-if="modelForm.vehicleModelIdField.$dirty || modelForm.$submitted"
 								ng-messages="modelForm.vehicleModelIdField.$error"
@@ -81,9 +79,10 @@
 			<div class="input-field">
 				<autocomplete id="vehicle-brand-id-field"
 								name="vehicleBrandIdField"
+								ng-class="{ invalid: modelForm.vehicleBrandIdField.$invalid }"
 								label="name"
 								url="/vehiclebrands"
-								ng-class="{ invalid: modelForm.vehicleBrandIdField.$invalid }"
+								init-with="model.vehicleBrand"
 								ng-model="model.vehicleBrandId"
 								ng-required="true"></autocomplete>
 				<label for="vehicle-brand-id-field">Marca</label>
@@ -101,6 +100,7 @@
 								ng-class="{ invalid: modelForm.vehicleTypeIdField.$invalid }"
 								label="type"
 								url="/vehicletypes"
+								init-with="model.vehicleType"
 								ng-model="model.vehicleTypeId"
 								ng-required="true"></autocomplete>
 				<label for="vehicle-type-id-field">Categoria</label>
@@ -118,6 +118,7 @@
 								ng-class="{ invalid: modelForm.fuelTypeIdField.$invalid }"
 								label="name"
 								url="/fueltypes"
+								init-with="model.fuelType"
 								ng-model="model.fuelTypeId"
 								ng-required="true"></autocomplete>
 				<label for="fuel-type-id-field">Combustível</label>
@@ -173,6 +174,7 @@
 								url="/vehicleengines"
 								url-params-make="vehicleEngineParamsMake"
 								format="formatEngine"
+								init-with="model.vehicleEngine"
 								ng-model="model.vehicleEngineId"
 								ng-required="true"></autocomplete>
 				<label for="vehicle-engine-id-field">Motor</label>

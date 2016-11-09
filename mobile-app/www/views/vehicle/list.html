@@ -1,59 +1,81 @@
-<h3 class="header text-amber" ng-bind="!collection ? 'Carregando...' : (collection.$resolved && collection.length ? 'Seus veículos cadastrados:' : 'Nenhum veículo cadastrado ainda')"></h3>
+<div class="container">
+	<h3 class="header text-amber"
+					ng-bind="!collection ? 'Carregando...' : (collection.$resolved && collection.length ? 'Seus veículos cadastrados:' : 'Nenhum veículo cadastrado ainda')"></h3>
 
-<div class="row" ng-repeat="m in collection">
-	<div class="col s12">
-		<div class="card sticky-action hoverable">
-			<div class="card-image waves-effect waves-block waves-light">
-				<img class="activator" ng-src="{{ m.img }}">
-			</div>
-			<div class="card-content">
-				<span class="card-title activator grey-text text-darken-4">
-					<span ng-bind="m.nickName"></span>
+	<div class="row"
+					ng-repeat="m in collection">
+		<div class="col s12">
+			<div class="card sticky-action hoverable">
+				<div class="card-image waves-effect waves-block waves-light">
+					<img class="activator"
+									ng-src="{{ m.img }}">
+				</div>
+				<div class="card-content">
+					<span class="card-title activator grey-text text-darken-4">
+						<span ng-bind="m.nickName"></span>
 					<i class="material-icons right">more_vert</i>
-				</span>
-			</div>
-			<div class="card-reveal">
-				<span class="card-title grey-text text-darken-4">
-					<span ng-bind="m.nickName"></span>
-				<i class="material-icons right">close</i>
-				</span>
-				<p>
-					<ul>
-						<li>
-							<b>Modelo:</b><span ng-bind="m.vehicleModel.name"></span>
-						</li>
-						<li>
-							<b>Marca:</b><span ng-bind="m.vehicleBrand.name"></span>
-						</li>
-						<li>
-							<b>Ano:</b><span ng-bind="m.year"></span>
-						</li>
-						<li>
-							<b>Consumo:</b><span ng-bind="m.consumption"></span>
-						</li>
-						<li>
-							<b>Motor:</b><span ng-bind="m.vehicleEngine.power + ' - ' + m.vehicleEngine.valve + 'v'"></span>
-						</li>
-						<li>
-							<b>Combsustível: </b><span ng-bind="m.fuelType.name"></span>
-						</li>
-						<li>
-							<b>Tipo:</b><span ng-bind="m.vehicleType.type"></span>
-						</li>
-					</ul>
-				</p>
-			</div>
-			<div class="card-action">
-				<a ng-href="/vehicle/update/{{m.id}}" class="">Alterar</a>
-				<a href="#" ng-click="delete(m.id)" class="">Excluir</a>
+					</span>
+				</div>
+				<div class="card-reveal">
+					<span class="card-title grey-text text-darken-4">
+						<span ng-bind="m.nickName"></span>
+					<i class="material-icons right">close</i>
+					</span>
+					<p>
+						<ul class="collection">
+							<li class="collection-item row">
+								<b class="col s5">Modelo:</b>
+								<span class="col s7"
+												ng-bind="m.vehicleModel.name"></span>
+							</li class="collection-item row">
+							<li class="collection-item row">
+								<b class="col s5">Marca:</b>
+								<span class="col s7"
+												ng-bind="m.vehicleBrand.name"></span>
+							</li class="collection-item row">
+							<li class="collection-item row">
+								<b class="col s5">Ano:</b>
+								<span class="col s7"
+												ng-bind="m.year"></span>
+							</li>
+							<li class="collection-item row">
+								<b class="col s5">Consumo:</b>
+								<span class="col s7"
+												ng-bind="m.consumption"></span>
+							</li>
+							<li class="collection-item row">
+								<b class="col s5">Motor:</b>
+								<span class="col s7"
+												ng-bind="m.vehicleEngine.power + ' - ' + m.vehicleEngine.valve + 'v'"></span>
+							</li>
+							<li class="collection-item row">
+								<b class="col s5">Combsustível: </b>
+								<span class="col s7"
+												ng-bind="m.fuelType.name"></span>
+							</li>
+							<li class="collection-item row">
+								<b class="col s5">Tipo:</b>
+								<span class="col s7"
+												ng-bind="m.vehicleType.type"></span>
+							</li>
+						</ul>
+					</p>
+				</div>
+				<div class="card-action">
+					<a ng-href="/vehicle/update/{{m.id}}"
+									class="">Alterar</a>
+					<a href="#"
+									ng-click="delete(m.id)"
+									class="">Excluir</a>
+				</div>
 			</div>
 		</div>
 	</div>
-</div>
 
-<div class="fixed-action-btn">
-	<a href="/vehicle/create"
-	class="btn-floating btn-large waves-effect waves-light red">
-		<i class="material-icons">add</i>
-	</a>
+	<div class="fixed-action-btn">
+		<a href="/vehicle/create"
+						class="btn-floating btn-large waves-effect waves-light red">
+			<i class="material-icons">add</i>
+		</a>
+	</div>
 </div>

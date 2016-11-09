@@ -10,6 +10,8 @@ angular.module('save-my-gas')
 				$localStorage.user = user
 			}
 
+			var _nextRequestWithoutMessage = false
+
 			var authService = {
 				getUser: function() {
 					return $localStorage.user
@@ -178,20 +180,32 @@ angular.module('save-my-gas')
 					if (user) {
 						$http.post(
 								appConstants.urlDomain + '/api/Users/logout', {}
-							).then(function() {
-								$localStorage.$reset()
-								authService.gotoLogin()
-							})
+							)
 							.catch(function(err) {
 								// Materialize.toast('Não foi possível realizar o logout')
 								console.error('Ocorreu um erro ao realizar o logout', err)
+							})
+							.finally(function () {
 								//should i logout from navigator anyway?
+								//yes!
 								$localStorage.$reset()
 								authService.gotoLogin()
 							})
 					} else {
 						authService.gotoLogin()
 					}
+				},
+
+				skipMessageNextRequests: function() {
+					_nextRequestWithoutMessage = true
+				},
+
+				isRequestWithoutMessage: function() {
+					return _nextRequestWithoutMessage
+				},
+
+				requestsWithoutMessageCompleted: function () {
+					_nextRequestWithoutMessage = false
 				}
 			}
 

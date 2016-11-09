@@ -4,6 +4,7 @@ angular.module('save-my-gas')
 			$location,
 			User,
 			authService,
+			Vehicle,
 			VehicleType,
 			VehicleModel,
 			VehicleBrand,
@@ -41,8 +42,19 @@ angular.module('save-my-gas')
 					return collection
 				},
 
-				findById: function (id) {
-					return User.vehicles.findById({id: _userId, fk: id})
+				findById: function(id) {
+					return Vehicle.findById({
+						id: id,
+						filter: {
+							include: [
+								'vehicleBrand',
+								'vehicleModel',
+								'vehicleType',
+								'vehicleEngine',
+								'fuelType'
+							]
+						}
+					})
 				},
 
 				save: function(model) {
@@ -59,6 +71,20 @@ angular.module('save-my-gas')
 						})
 						.catch(function(err) {
 							Materialize.toast('Não foi possível salvar o veículo')
+						})
+				},
+
+				deleteById: function(id) {
+					return User.vehicles.destroyById({
+							id: _userId,
+							fk: id
+						})
+						.$promise
+						.then(function() {
+							Materialize.toast('Veículo deletado')
+						})
+						.catch(function(err) {
+							Materialize.toast('Não foi possível deletar o veículo')
 						})
 				},
 
@@ -122,24 +148,14 @@ angular.module('save-my-gas')
 					}, 100);
 				},
 
-				deleteById: function(id) {
-					return User.vehicles.destroyById({
-							id: _userId,
-							fk: id
-						})
-						.$promise
-						.then(function() {
-							Materialize.toast('Veículo deletado')
-						})
-						.catch(function(err) {
-							Materialize.toast('Não foi possível deletar o veículo')
-						})
-				},
-
 				uploadPhoto: function(file, model) {
-					fileStorageService.upload('vehiclesPhotos', _userId, file, 'vehiclePhoto')
+					//not naming photo yet
+					//i need to put a calculated name here to avoid conflicts
+					//with other vehicle photo names.
+					//old name 'vehiclePhoto'
+					fileStorageService.upload('vehiclesPhotos', _userId, file)
 						.then(function(response) {
-							if(
+							if (
 								response.data &&
 								response.data.result &&
 								response.data.result.files &&
@@ -151,7 +167,6 @@ angular.module('save-my-gas')
 							} else {
 								Materialize.toast('Não foi possível salvar a foto do seu veículo :(')
 							}
-
 						})
 						.catch(function(err) {
 							if (!err.specified) {
