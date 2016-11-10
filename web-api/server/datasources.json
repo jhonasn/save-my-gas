@@ -1,25 +1,25 @@
 {
-	"db": {
-		"name": "db",
-		"connector": "memory"
-	},
-	"mongodb": {
-		"host": "localhost",
-		"port": 27017,
-		"database": "savemygas",
-		"name": "mongodb",
-		"connector": "mongodb"
-	},
-	"vehicleContainer": {
-		"name": "vehicleContainer",
-		"connector": "loopback-component-storage",
-		"provider": "filesystem",
-		"root": "/home/jhonasn/tmp/lb-file-storage/vehicle-container"
-	},
-	"gasStationContainer": {
-		"name": "gasStationContainer",
-		"connector": "loopback-component-storage",
-		"provider": "filesystem",
-		"root": "/home/jhonasn/tmp/lb-file-storage/gas-station-container"
-	}
+  "db": {
+    "name": "db",
+    "connector": "memory"
+  },
+  "mongodb": {
+    "host": "localhost",
+    "port": 27017,
+    "database": "savemygas",
+    "name": "mongodb",
+    "connector": "mongodb"
+  },
+  "vehicleContainer": {
+    "name": "vehicleContainer",
+    "connector": "loopback-component-storage",
+    "provider": "filesystem",
+    "root": "/home/jhonasn/tmp/lb-file-storage/vehicle-container"
+  },
+  "gasStationContainer": {
+    "name": "gasStationContainer",
+    "connector": "loopback-component-storage",
+    "provider": "filesystem",
+    "root": "/home/jhonasn/tmp/lb-file-storage/gas-station-container"
+  }
 }

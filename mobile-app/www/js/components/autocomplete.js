@@ -28,7 +28,7 @@ angular.module('save-my-gas')
 					if (labelEl.length > 0) {
 						angular.element('#' + attributes.id)
 							.find('#initial-autocomplete-element')
-							.after(labelEl)
+							.before(labelEl)
 						labelEl.css('position', 'absolute')
 						labelEl.css('left', 0)
 							// labelEl.css('top', 0)

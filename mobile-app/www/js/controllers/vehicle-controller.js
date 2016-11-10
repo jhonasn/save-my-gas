@@ -18,9 +18,7 @@ angular.module('save-my-gas')
 .controller('vehicleEditController',
 	function(
 		$scope,
-		$location,
 		$cordovaCamera,
-		$interval,
 		utilService,
 		vehicleService,
 		model
@@ -37,7 +35,6 @@ angular.module('save-my-gas')
 
 		$scope.model = model
 		$scope.anoAtual = (new Date()).getFullYear()
-		$scope.showCamera = false
 
 		$scope.photoAttachChanged = function(files) {
 			if (files.length) {
@@ -57,7 +54,30 @@ angular.module('save-my-gas')
 		}
 
 		$scope.takeCarPicture = function() {
-			vehicleService.takeCarPicture($scope)
+			var options = {
+				quality: 80,
+				destinationType: Camera.DestinationType.DATA_URL,
+				sourceType: Camera.PictureSourceType.CAMERA,
+				allowEdit: true,
+				encodingType: Camera.EncodingType.JPEG,
+				targetWidth: 1280,
+				targetHeight: 960,
+				popoverOptions: CameraPopoverOptions,
+				saveToPhotoAlbum: false,
+				correctOrientation: true
+			};
+
+			$cordovaCamera.getPicture(options).then(function(imageData) {
+				$scope.vehiclePhoto = "data:image/jpeg;base64," + imageData
+				var file = utilService.B64ToFile($scope.vehiclePhoto)
+				vehicleService.uploadPhoto(file, $scope.model, $scope.model.id )
+			}, function(err) {
+				if (typeof err === 'string' && err.indexOf('cancelled') > -1) {
+					console.info('tirar foto cancelado')
+				} else {
+					Materialize.toast('Ocorreu um problema ao tirar a foto :(')
+				}
+			})
 		}
 
 		$scope.vehicleModelSelected = function($item) {
@@ -106,26 +126,3 @@ angular.module('save-my-gas')
 		delete model.vehicleEngine
 		delete model.fuelType
 	})
-
-// .controller('vehicleUpdateController',
-// 	function(
-// 		$scope,
-// 		$location,
-// 		vehicleService,
-// 		model
-// 	) {
-// 		$scope.model = model
-// 		$scope.anoAtual = (new Date()).getFullYear()
-// 		$scope.showCamera = false
-//
-// 		$scope.save = function(model) {
-// 			$scope.model.$save()
-// 			$scope.model.$promise.then(function() {
-// 					Materialize.toast('Veículo salvo')
-// 					$location.path('/vehicle')
-// 				})
-// 				.catch(function(err) {
-// 					Materialize.toast('Não foi possível salvar o veículo')
-// 				})
-// 		}
-// 	})
