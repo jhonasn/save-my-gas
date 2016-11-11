@@ -1,6 +1,5 @@
 var path = require('path')
 var fs = require('fs')
-var entitiesPath = path.join(rootPath, 'lib', 'tempData')
 
 module.exports.entities = {
 	states: [],
@@ -11,39 +10,43 @@ module.exports.entities = {
 	sellPrices: [],
 }
 
-module.exports.readStationsFiles = function() {
-	if(fs.existsSync(entitiesPath)) {
+module.exports.readStationsFiles = function(entitiesPath) {
+	if (!entitiesPath) {
+		entitiesPath = path.join(rootPath, 'lib', 'tempData')
+	}
+
+	if (fs.existsSync(entitiesPath)) {
 
 		var pathJson = path.join(entitiesPath, 'fuelTypes.json')
-		if(fs.existsSync(pathJson)) {
+		if (fs.existsSync(pathJson)) {
 			module.exports.entities.fuelTypes = JSON.parse(fs.readFileSync(pathJson, 'utf-8'))
 		}
 
 		pathJson = path.join(entitiesPath, 'states.json')
-		if(fs.existsSync(pathJson)) {
+		if (fs.existsSync(pathJson)) {
 			module.exports.entities.states = JSON.parse(fs.readFileSync(pathJson, 'utf-8'))
 		}
 
 		pathJson = path.join(entitiesPath, 'cities.json')
-		if(fs.existsSync(pathJson)) {
+		if (fs.existsSync(pathJson)) {
 			module.exports.entities.cities = JSON.parse(fs.readFileSync(pathJson, 'utf-8'))
 		}
 
 		pathJson = path.join(entitiesPath, 'ppStations.json')
-		if(fs.existsSync(pathJson)) {
+		if (fs.existsSync(pathJson)) {
 			module.exports.entities.stations = JSON.parse(fs.readFileSync(pathJson, 'utf-8'))
 		}
 
-		if(!module.exports.entities.stations || module.exports.entities.stations.length === 0) {
+		if (!module.exports.entities.stations || module.exports.entities.stations.length === 0) {
 			pathJson = path.join(entitiesPath, 'stations.json')
-			if(fs.existsSync(pathJson)) {
+			if (fs.existsSync(pathJson)) {
 				module.exports.entities.stations = JSON.parse(fs.readFileSync(pathJson, 'utf-8'))
 			}
 		}
 
 		return true
 	} else {
-		if(fs.mkdirSync(entitiesPath)) {
+		if (fs.mkdirSync(entitiesPath)) {
 			return false
 		}
 	}
@@ -70,16 +73,16 @@ module.exports.delete = function(type) {
 module.exports.deleteOldFiles = function() {
 	var files = fs.readdirSync(entitiesPath)
 
-	for(var file in files) {
+	for (var file in files) {
 		file = files[file]
 		file = path.join(entitiesPath, file)
-		if(!fs.statSync(file).isDirectory()) {
+		if (!fs.statSync(file).isDirectory()) {
 			fs.unlinkSync(file)
 		}
 	}
 
-	for(var entity in module.exports.entities) {
-		if(Array.isArray(module.exports.entities[entity])) {
+	for (var entity in module.exports.entities) {
+		if (Array.isArray(module.exports.entities[entity])) {
 			module.exports.entities[entity] = []
 		}
 	}
@@ -90,7 +93,7 @@ module.exports.getStationCity = function(station) {
 		return city.id == station.cityId
 	})
 
-	if(cities.length > 0) {
+	if (cities.length > 0) {
 		return cities[0]
 	} else {
 		return null
@@ -99,11 +102,11 @@ module.exports.getStationCity = function(station) {
 
 module.exports.getStationState = function(station) {
 	var states = module.exports.entities.states.filter(function(state) {
-	return state.cities.some(function(c) {
-		return c.id == station.cityId
+		return state.cities.some(function(c) {
+			return c.id == station.cityId
+		})
 	})
-})
-	if(states.length > 0) {
+	if (states.length > 0) {
 		return states[0]
 	} else {
 		return null

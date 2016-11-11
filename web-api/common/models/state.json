@@ -14,9 +14,6 @@
     "fu": {
       "type": "string",
       "required": true
-    },
-    "anpId": {
-      "type": "string"
     }
   },
   "validations": [],
