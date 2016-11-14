@@ -11,7 +11,7 @@
       "type": "string"
     },
     "anpId": {
-      "type": "number"
+      "type": "string"
     }
   },
   "validations": [],

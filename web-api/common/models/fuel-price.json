@@ -19,7 +19,7 @@
     "date": {
       "type": "date"
     },
-    "anpId": {
+    "unit": {
       "type": "string"
     },
     "fuelTypeId": {

@@ -11,9 +11,6 @@
       "type": "string",
       "required": true
     },
-    "anpId": {
-      "type": "string"
-    },
     "cityId": {
       "type": "string"
     },
