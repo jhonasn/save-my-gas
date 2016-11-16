@@ -1,43 +1,41 @@
 {
-  "name": "user",
-  "base": "User",
-  "idInjection": true,
-  "options": {
-    "validateUpsert": true
-  },
-  "properties": {},
-  "validations": [],
-  "relations": {
-    "vehicles": {
-      "type": "hasMany",
-      "model": "vehicle",
-      "foreignKey": "ownerId"
-    }
-  },
-  "acls": [
-    {
-      "accessType": "*",
-      "principalType": "ROLE",
-      "principalId": "$owner",
-      "permission": "ALLOW"
-    },
-    {
-      "accessType": "EXECUTE",
-      "principalType": "ROLE",
-      "principalId": "$everyone",
-      "permission": "ALLOW",
-      "property": "generateId"
-    }
-  ],
-  "methods": {
-    "generateId": {
-      "returns": {
-        "arg": "id",
-        "type": "string"
-      },
-      "http": {
-        "verb": "get"
-      }
-    }
-  }
+	"name": "user",
+	"base": "User",
+	"idInjection": true,
+	"options": {
+		"validateUpsert": true
+	},
+	"properties": {},
+	"validations": [],
+	"relations": {
+		"vehicles": {
+			"type": "hasMany",
+			"model": "vehicle",
+			"foreignKey": "ownerId"
+		}
+	},
+	"acls": [{
+		"accessType": "*",
+		"principalType": "ROLE",
+		"principalId": "$owner",
+		"permission": "ALLOW"
+	}, {
+		"accessType": "EXECUTE",
+		"principalType": "ROLE",
+		"principalId": "$everyone",
+		"permission": "ALLOW",
+		"property": "generateId"
+	}],
+	"methods": {
+		"generateId": {
+			"returns": {
+				"arg": "id",
+				"type": "string"
+			},
+			"http": {
+				"verb": "get"
+			},
+			"isStatic": true
+		}
+	}
 }

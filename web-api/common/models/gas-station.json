@@ -13,16 +13,19 @@
     "geolocation": {
       "type": "geopoint"
     },
+	"flag": {
+      "type": "string"
+    },
     "distributor": {
       "type": "string"
     },
     "invoiceOk": {
       "type": "boolean"
     },
-    "addressId": {
+    "address": {
       "type": "string"
     },
-    "neighborhoodId": {
+    "neighborhood": {
       "type": "string"
     },
     "cityId": {

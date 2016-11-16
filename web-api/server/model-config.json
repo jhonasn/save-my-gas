@@ -72,12 +72,6 @@
     "$promise": {},
     "$resolved": true
   },
-  "neighborhood": {
-    "dataSource": "mongodb",
-    "public": true,
-    "$promise": {},
-    "$resolved": true
-  },
   "city": {
     "dataSource": "mongodb",
     "public": true,
@@ -85,12 +79,6 @@
     "$resolved": true
   },
   "state": {
-    "dataSource": "mongodb",
-    "public": true,
-    "$promise": {},
-    "$resolved": true
-  },
-  "address": {
     "dataSource": "mongodb",
     "public": true,
     "$promise": {},

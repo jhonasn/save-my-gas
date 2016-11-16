@@ -1,55 +1,55 @@
 {
-  "name": "fuelPrice",
-  "base": "PersistedModel",
-  "strict": false,
-  "idInjection": false,
-  "options": {
-    "validateUpsert": true
-  },
-  "properties": {
-    "sale": {
-      "type": "number"
-    },
-    "purchase": {
-      "type": "number"
-    },
-    "supplierWhiteFlag": {
-      "type": "boolean"
-    },
-    "date": {
-      "type": "date"
-    },
-    "unit": {
-      "type": "string"
-    },
-    "fuelTypeId": {
-      "type": "string"
-    },
-    "gasStationId": {
-      "type": "string"
-    }
-  },
-  "validations": [],
-  "relations": {
-    "gasStation": {
-      "type": "belongsTo",
-      "model": "gasStation",
-      "foreignKey": "gasStationId"
-    }
-  },
-  "acls": [
-    {
-      "accessType": "*",
-      "principalType": "ROLE",
-      "principalId": "$unauthenticated",
-      "permission": "DENY"
-    },
-    {
-      "accessType": "*",
-      "principalType": "ROLE",
-      "principalId": "$authenticated",
-      "permission": "ALLOW"
-    }
-  ],
-  "methods": {}
+	"name": "fuelPrice",
+	"base": "PersistedModel",
+	"strict": false,
+	"idInjection": false,
+	"options": {
+		"validateUpsert": true
+	},
+	"properties": {
+		"sale": {
+			"type": "number"
+		},
+		"purchase": {
+			"type": "number"
+		},
+		"supplierWhiteFlag": {
+			"type": "string"
+		},
+		"purchaseMode": {
+			"type": "string"
+		},
+		"date": {
+			"type": "date"
+		},
+		"unit": {
+			"type": "string"
+		},
+		"fuelTypeId": {
+			"type": "string"
+		},
+		"gasStationId": {
+			"type": "string"
+		}
+	},
+	"validations": [],
+	"relations": {
+		"gasStation": {
+			"type": "belongsTo",
+			"model": "gasStation",
+			"foreignKey": "gasStationId"
+		}
+	},
+	"acls": [{
+		"accessType": "*",
+		"principalType": "ROLE",
+		"principalId": "$unauthenticated",
+		"permission": "DENY"
+	}, {
+		"accessType": "*",
+		"principalType": "ROLE",
+		"principalId": "$authenticated",
+		"permission": "ALLOW"
+	}],
+	"methods": {}
 }
