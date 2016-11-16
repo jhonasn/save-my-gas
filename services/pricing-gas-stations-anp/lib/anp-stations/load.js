@@ -35,10 +35,10 @@ module.exports.load = function(entitiesPath, callback) {
 					anpId: f.id
 				}, cb)
 			}, function(err) {
-				if (err) callback(err)
+				if (err) callback('error processing fuel types', err)
 
 				app.models.fuelType.find({}, function(err, dbFuelTypes) {
-					if (err) callback('error processing fuel types')
+					if (err) callback('error processing fuel types 2', err)
 
 					putStates(states, dbFuelTypes)
 				})
@@ -54,10 +54,10 @@ module.exports.load = function(entitiesPath, callback) {
 					fu: s.id
 				}, cb)
 			}, function(err) {
-				if (err) throw err
+				if (err) callback('error processing states', err)
 
 				app.models.state.find({}, function(err, dbStates) {
-					if (err) callback('error processing states')
+					if (err) callback('error processing states 2', err)
 
 					putCities(cities, dbStates, dbFuelTypes)
 				})
@@ -82,10 +82,10 @@ module.exports.load = function(entitiesPath, callback) {
 					stateId: dbState.id //fu
 				}, cb)
 			}, function(err) {
-				if(err) callback('error processing cities')
+				if(err) callback('error processing cities', err)
 
 				app.models.city.find({}, function(err, dbCities) {
-					if (err) callback(err)
+					if (err) callback('error processing cities 2', err)
 
 					putStations(stations, dbCities, dbFuelTypes)
 				})
@@ -148,9 +148,11 @@ module.exports.load = function(entitiesPath, callback) {
 					stateId: dbCity.stateId
 				}, cb)
 			}, function(err) {
-				if (err) callback('error processing gas stations')
+				if (err) callback('error processing gas stations', err)
 
 				app.models.gasStation.find({ fields: { id: true, companyName: true } }, function(err, dbGasStations) {
+					if (err) callback('error processing gas stations 2', err)
+
 					putFuelPrices(stations, dbFuelTypes, dbGasStations)
 				})
 			})
@@ -199,7 +201,7 @@ module.exports.load = function(entitiesPath, callback) {
 					gasStationId: dbGasStation.id
 				}, cb)
 			}, function(err) {
-				if (err) callback('error processing fuel prices')
+				if (err) callback('error processing fuel prices', err)
 
 				callback('load to database success')
 			})
