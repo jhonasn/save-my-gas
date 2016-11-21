@@ -11,7 +11,6 @@ gulp.task('min-login-js', function() {
 			'www/lib/jquery/dist/jquery.js',
 			'www/lib/materialize/dist/js/materialize.js',
 			'www/lib/angular/angular.js',
-			'www/lib/angular-route/angular-route.js',
 			'www/lib/ngstorage/ngStorage.js',
 			'www/lib/angular-materialize/src/angular-materialize.js',
 			'www/js/app-login.js',
