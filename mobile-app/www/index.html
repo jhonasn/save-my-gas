@@ -14,6 +14,8 @@
 
 	<title>Save my gas - Login</title>
 
+	<!-- build:css-login -->
+
 	<!-- libs css -->
 	<link rel="stylesheet" href="lib/roboto-and-material-icons-fonts/css/material-icons.css">
 	<link rel="stylesheet" href="lib/roboto-and-material-icons-fonts/css/roboto.css">
@@ -22,6 +24,8 @@
 
 	<!-- app css -->
 	<link href="css/login.css" rel="stylesheet">
+
+	<!-- endbuild -->
 </head>
 
 <body>
@@ -109,29 +113,22 @@
 		</div>
 	</div>
 
+	<!-- build:js-login -->
+
 	<!-- ### load scripts ### -->
 
 	<!-- libs -->
 	<script src="cordova.js" charset="utf-8"></script>
 	<script src="lib/jquery/dist/jquery.js" charset="utf-8"></script>
 	<script src="lib/materialize/dist/js/materialize.js" charset="utf-8"></script>
-	<!-- <script src="lib/hammerjs/hammer.js" charset="utf-8"></script> -->
 
 	<script src="lib/angular/angular.js" charset="utf-8"></script>
 	<script src="lib/angular-route/angular-route.js" charset="utf-8"></script>
-	<!-- <script src="lib/angular-cookies/angular-cookies.js" charset="utf-8"></script> -->
-	<!-- <script src="lib/angular-resource/angular-resource.js" charset="utf-8"></script> -->
 	<script src="lib/ngstorage/ngStorage.js" charset="utf-8"></script>
-	<!-- <script src="lib/ngCordova/dist/ng-cordova.js" charset="utf-8"></script> -->
 	<script src="lib/angular-materialize/src/angular-materialize.js" charset="utf-8"></script>
 
 	<!-- start app -->
-	<script type="text/javascript">
-	angular.module('save-my-gas', [
-		'ui.materialize',
-		'ngStorage'
-	])
-	</script>
+	<script src="js/app-login.js" charset="utf-8"></script>
 
 	<script src="js/config.js" charset="utf-8"></script>
 
@@ -144,6 +141,8 @@
 
 	<script src="js/bootstrap.js" charset="utf-8"></script>
 	<script src="js/services/root-route-service.js" charset="utf-8"></script>
+
+	<!-- endbuild -->
 
 </body>
 

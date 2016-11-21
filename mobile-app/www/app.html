@@ -15,6 +15,8 @@
 
 	<title>Save my gas</title>
 
+	<!-- build:css-app -->
+
 	<!-- libs css -->
 	<link rel="stylesheet" href="lib/roboto-and-material-icons-fonts/css/material-icons.css">
 	<link rel="stylesheet" href="lib/roboto-and-material-icons-fonts/css/roboto.css">
@@ -24,6 +26,8 @@
 
 	<!-- app css -->
 	<link href="css/main.css" rel="stylesheet">
+
+	<!-- endbuild -->
 </head>
 
 <body ng-controller="mainController">
@@ -72,13 +76,14 @@
 	<main ng-view>
 	</main>
 
+	<!-- build:js-app -->
+
 	<!-- ### load scripts ### -->
 
 	<!-- libs -->
 	<script src="cordova.js" charset="utf-8"></script>
 	<script src="lib/jquery/dist/jquery.js" charset="utf-8"></script>
 	<script src="lib/materialize/dist/js/materialize.js" charset="utf-8"></script>
-	<!-- <script src="lib/hammerjs/hammer.js" charset="utf-8"></script> -->
 
 	<!-- angular libs -->
 	<script src="lib/angular/angular.js" charset="utf-8"></script>
@@ -94,7 +99,6 @@
 	<script src="js/services/lb-services.js" charset="utf-8"></script>
 
 	<!-- app config -->
-	<!-- <script src="/config.js" charset="utf-8"></script> -->
 	<script src="js/app.js" charset="utf-8"></script>
 	<script src="js/config.js" charset="utf-8"></script>
 	<script src="js/routes.js" charset="utf-8"></script>
@@ -122,6 +126,8 @@
 	<!-- app start -->
 	<script src="js/bootstrap.js" charset="utf-8"></script>
 	<script src="js/services/root-route-service.js" charset="utf-8"></script>
+
+	<!-- endbuild -->
 
 </body>
 

@@ -64,9 +64,6 @@ angular.module('save-my-gas')
 								'Content-Type': undefined
 							},
 							transformRequest: angular.identity,
-							params: {
-								formData
-							},
 							// responseType: 'arraybuffer'
 						}
 					)

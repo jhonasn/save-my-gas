@@ -1,0 +1,16 @@
+<ul class="autocomplete-content dropdown-content"
+				role="listbox">
+	<li class="uib-typeahead-match"
+					ng-repeat="match in matches track by $index"
+					ng-class="{active: isActive($index) }"
+					ng-mouseenter="selectActive($index)"
+					ng-click="selectMatch($index)"
+					role="option"
+					id="{{::match.id}}">
+		<span uib-typeahead-match
+						index="$index"
+						match="match"
+						query="query"
+						template-url="autocompleteItemUrl"></span>
+	</li>
+</ul>
