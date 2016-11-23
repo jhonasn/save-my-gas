@@ -14,9 +14,9 @@
       "./mixins"
     ]
   },
-  "User": {
+  "user": {
     "dataSource": "mongodb",
-    "public": false
+    "public": true
   },
   "UserCredential": {
     "dataSource": "mongodb",
@@ -83,10 +83,6 @@
     "public": true,
     "$promise": {},
     "$resolved": true
-  },
-  "user": {
-    "dataSource": "mongodb",
-    "public": true
   },
   "vehicleBrand": {
     "dataSource": "mongodb",
