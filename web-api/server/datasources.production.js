@@ -1,12 +1,16 @@
 var fs = require('fs')
 
-if(fs.existsSync(process.env.FILESYSTEM_STORAGE_PATH)) {
+if (!fs.existsSync(process.env.FILESYSTEM_STORAGE_PATH)) {
+	fs.mkdirSync(process.env.FILESYSTEM_STORAGE_PATH)
+}
+
+if (fs.existsSync(process.env.FILESYSTEM_STORAGE_PATH)) {
 	var vehicleContainerPath = process.env.FILESYSTEM_STORAGE_PATH + "/vehicle-container"
 	var gasStationContainerPath = process.env.FILESYSTEM_STORAGE_PATH + "/gas-station-container"
-	if(!fs.existsSync(vehicleContainerPath)) {
+	if (!fs.existsSync(vehicleContainerPath)) {
 		fs.mkdirSync(vehicleContainerPath)
 	}
-	if(!fs.existsSync(gasStationContainerPath)) {
+	if (!fs.existsSync(gasStationContainerPath)) {
 		fs.mkdirSync(gasStationContainerPath)
 	}
 }
