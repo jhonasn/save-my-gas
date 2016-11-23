@@ -3,7 +3,7 @@ var serverPath = 'http://localhost:3000';
 
 var env = process.env.NODE_ENV;
 if(typeof env === 'string' && env.toLowerCase() === 'production') {
-	serverPath = 'https://rest-savemygas.getup.io';
+	serverPath = 'https://savemygas.com.br';
 }
 
 module.exports = {
