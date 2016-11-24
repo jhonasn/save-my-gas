@@ -39,10 +39,11 @@ node_modules/
 platforms/
 plugins/
 !plugins/fetch.json
-mobile-app/www/lib/
 .DS_Store
 npm-debug.log
 info.json
 lib/tempData
 publish
+mobile-app/www/lib/
+mobile-admin-app/www/lib/
 *~

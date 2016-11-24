@@ -1,0 +1,28 @@
+<div class="container">
+	<h1>Hi!</h1>
+	<br>
+	<h2 ng-bind="text"></h2>
+
+	<form novalidate name="initForm">
+		<div class="col s6">
+
+			<div class="file-field input-field">
+				<button type="button"
+								class="btn btn-large blue">
+						<i class="material-icons">attachment</i>
+						<input type="file"
+						name="anpZipField"
+						onchange="angular.element(this).scope().anpZipFieldChanged(this.files)">
+				</button>
+				<div class="file-path-wrapper">
+					<input class="file-path validate"
+									type="text"
+									placeholder="Escolha o arquivo zip da anp">
+				</div>
+			</div>
+		</div>
+	</form>
+
+	<hr>
+	<pre ng-bind="user | json"></pre>
+</div>

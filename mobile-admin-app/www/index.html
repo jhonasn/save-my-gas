@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="utf-8">
+
+	<meta name="format-detection" content="telephone=no">
+	<meta name="msapplication-tap-highlight" content="no">
+	<meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width">
+	<meta name="description" content="Save my gas">
+	<!-- inicial cordova -->
+	<meta http-equiv="Content-Security-Policy" content="default-src * data: gap: https://ssl.gstatic.com; style-src 'self' 'unsafe-inline'; script-src * 'unsafe-inline' 'unsafe-eval'">
+	<!-- <meta http-equiv="Content-Security-Policy"> -->
+
+	<title>Save my gas - Login</title>
+
+	<!-- build:css-login -->
+
+	<!-- libs css -->
+	<link rel="stylesheet" href="lib/roboto-and-material-icons-fonts/css/material-icons.css">
+	<link rel="stylesheet" href="lib/roboto-and-material-icons-fonts/css/roboto.css">
+	<link rel="stylesheet" href="lib/mdi/css/materialdesignicons.css">
+	<link rel="stylesheet" href="lib/materialize/dist/css/materialize.css">
+
+	<!-- app css -->
+	<link href="css/login.css" rel="stylesheet">
+
+	<!-- endbuild -->
+</head>
+
+<body>
+
+	<main class="container valign-wrapper center" ng-controller="authController" ng-style="{'min-height': screenHeight}">
+
+		<div class="valign">
+
+			<div class="row">
+				<button type="button"
+				class="indigo darken-3 waves-effect waves-light btn col s10 offset-s1 m6 offset-m3 l4 offset-l4"
+				ng-click="login('facebook')">
+					<i class="left mdi mdi-facebook-box" style="font-size: 2rem;"></i>Login com facebook
+				</button>
+			</div>
+
+			<div class="row">
+				<button type="button"
+				class="red darken-3 waves-effect waves-light btn col s10 offset-s1 m6 offset-m3 l4 offset-l4"
+				ng-click="login('google')">
+					<i class="left mdi mdi-google-plus-box" style="font-size: 2rem;"></i>Login com google
+				</button>
+			</div>
+
+			<div class="row">
+				<button type="button" class="amber darken-3 waves-effect waves-light btn col s10 offset-s1 m6 offset-m3 l4 offset-l4" ng-click="toggleShowLogin()">
+					<i class="left mdi mdi-email" style="font-size: 2rem;"></i>Login com save my gas
+				</button>
+			</div>
+
+			<form novalidate name="loginForm" ng-show="showLogin" ng-submit="login('email', isSignup, model)">
+
+				<h4 ng-bind="isSignup ? 'Cadastre-se:' : 'Login:'"></h4>
+
+				<div class="row">
+					<div class="input-field col s12">
+						<input type="email" id="email-field" class="validate" ng-model="model.email">
+						<label for="email-field">e-mail</label>
+					</div>
+				</div>
+
+				<div class="row">
+					<div class="input-field col s12">
+						<input type="password" id="password-field" class="validate" ng-model="model.password">
+						<label for="password-field">Senha</label>
+					</div>
+				</div>
+
+				<div class="row">
+					<button type="submit"
+					class="btn amber darken-1 waves-effect waves-light col s12"
+					ng-disabled="!loginForm.$valid || loginForm.$pristine"
+					ng-bind="isSignup ? 'Cadastrar-se' : 'Login'"></button>
+				</div>
+
+				<div class="row">
+					<a href="#"
+					ng-click="toggleIsSignup(model)"
+					ng-bind="!isSignup ? 'ainda não possui conta? cadastre-se aqui' : 'Fazer login'"></a>
+				</div>
+
+			</form>
+
+		</div>
+
+	</main>
+
+	<!-- for test pourposes -->
+	<div ng-show="false" class="col s12 m12 l12">
+		<hr>
+		<div class="row">
+			<a class="indigo darken-3 waves-effect waves-light btn col s10 offset-s1 m6 offset-m3 l4 offset-l4"
+			href="https://facebook.com">
+				<i class="left mdi mdi-facebook-box" style="font-size: 2rem;"></i>
+				Abrir o facebook
+			</a>
+		</div>
+
+		<div class="row">
+			<a class="red darken-3 waves-effect waves-light btn col s10 offset-s1 m6 offset-m3 l4 offset-l4"
+			href="https://google.com">
+				<i class="left mdi mdi-google-plus-box" style="font-size: 2rem;"></i>
+				Abrir o google
+			</a>
+		</div>
+	</div>
+
+	<!-- build:js-login -->
+
+	<!-- ### load scripts ### -->
+
+	<!-- libs -->
+	<script src="cordova.js" charset="utf-8"></script>
+	<script src="lib/jquery/dist/jquery.js" charset="utf-8"></script>
+	<script src="lib/materialize/dist/js/materialize.js" charset="utf-8"></script>
+
+	<script src="lib/angular/angular.js" charset="utf-8"></script>
+	<script src="lib/angular-route/angular-route.js" charset="utf-8"></script>
+	<script src="lib/ngstorage/ngStorage.js" charset="utf-8"></script>
+	<script src="lib/angular-materialize/src/angular-materialize.js" charset="utf-8"></script>
+
+	<!-- start app -->
+	<script src="js/app-login.js" charset="utf-8"></script>
+
+	<script src="js/config.js" charset="utf-8"></script>
+
+	<!-- services -->
+	<!-- <script src="js/services/lb-services.js" charset="utf-8"></script> -->
+	<script src="js/services/auth-service.js" charset="utf-8"></script>
+
+	<!-- controllers -->
+	<script src="js/controllers/auth-controller.js" charset="utf-8"></script>
+
+	<script src="js/bootstrap.js" charset="utf-8"></script>
+	<script src="js/services/root-route-service.js" charset="utf-8"></script>
+
+	<!-- endbuild -->
+
+</body>
+
+</html>

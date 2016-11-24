@@ -1,0 +1,8 @@
+body main {
+	min-height: 400px;
+	height: 100%;
+}
+
+main .valign {
+	width: 100%;
+}
