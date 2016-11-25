@@ -1,9 +1,0 @@
-{
-	"media": String,//float as string
-	"desvioPadrao": String,//float as string
-	"valorMinimo": String,//float as string
-	"valorMaximo": String,//float as string
-	"cityId": String,//int as string
-	"fuelTypeId": String,//int as string
-	"unit": String,
-}

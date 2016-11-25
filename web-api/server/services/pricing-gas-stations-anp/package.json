@@ -1,0 +1,17 @@
+{
+	"name": "save-my-gas",
+	"version": "1.0.0",
+	"description": "save-my-gas: Scratch project to get station data from country organizations that serve this purpouse",
+	"main": "./lib/main",
+	"scripts": {
+		"cli": "./lib/console"
+	},
+	"dependencies": {
+		"adm-zip": "^0.4.7",
+		"cheerio": "0.19.0",
+		"diacritics": "1.2.1"
+	},
+	"jshintConfig": {
+		"asi": true
+	}
+}

@@ -25,17 +25,5 @@
 		"principalId": "$everyone",
 		"permission": "ALLOW",
 		"property": "generateId"
-	}],
-	"methods": {
-		"generateId": {
-			"returns": {
-				"arg": "id",
-				"type": "string"
-			},
-			"http": {
-				"verb": "get"
-			},
-			"isStatic": true
-		}
-	}
+	}]
 }

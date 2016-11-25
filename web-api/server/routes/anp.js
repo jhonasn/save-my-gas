@@ -1,6 +1,6 @@
 module.exports = function(app) {
 	var formidable = require('formidable')
-	var anpPricingService = require('../../../services/pricing-gas-stations-anp')
+	var anpPricingService = require('../services/pricing-gas-stations-anp')
 
 	var router = app.loopback.Router()
 

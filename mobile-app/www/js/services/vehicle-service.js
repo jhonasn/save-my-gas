@@ -11,6 +11,7 @@ angular.module('save-my-gas')
 			VehicleBrand,
 			FuelType,
 			fileStorageService,
+			customRoutesService,
 			appConstants
 		) {
 			var _user = authService.getUser()
@@ -99,10 +100,9 @@ angular.module('save-my-gas')
 					if (model.id) {
 						defered.resolve(photoName(model))
 					} else {
-						User.generateId()
-							.$promise
+						customRoutesService.generateId()
 							.then(function(response) {
-								model.id = response.id
+								model.id = response.data.id
 								defered.resolve(photoName(model))
 							})
 							.catch(function(err) {

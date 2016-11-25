@@ -1,9 +1,0 @@
-{
-	"precoVenda": Float,
-	"precoCompra": Float,
-	"modalidadecompra": String,
-	"fornecedorBBranca": String,
-	"fuelTypeId": Integer,
-	"unit": String,
-	"dataColeta": Date//json string
-}
