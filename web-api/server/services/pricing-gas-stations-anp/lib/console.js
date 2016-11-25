@@ -7,7 +7,7 @@ var geolocation = require(path.resolve(rootPath, 'lib', 'anp-stations', 'geoloca
 var geolocationFix = require(path.resolve(rootPath, 'lib', 'anp-stations', 'geolocation-fix.js'))
 var dbLoadEntities = require(path.resolve(rootPath, 'lib', 'anp-stations', 'load'))
 var entities = require(path.resolve(rootPath, 'lib', 'anp-stations', 'entities'))
-var loopbackApp = require('../../../web-api/server/server')
+var loopbackApp = require('../../../server-offline')
 
 if (process.argv.length < 3) {
 	console.log('you need to specify the action:\n')

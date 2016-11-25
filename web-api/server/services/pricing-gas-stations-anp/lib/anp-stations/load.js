@@ -14,11 +14,12 @@ module.exports.load = function(app, entitiesPath, callback) {
 	module.unzip(entitiesPath, function(err) {
 		if (err) return callback(err)
 
-		console.log('mongodb ', app.datasources.mongodb)
 		if (app.datasources.mongodb.connected) {
 			module.loadConnected(app, entitiesPath, callback)
 		}
-		app.datasources.mongodb.on('connected', module.loadConnected)
+		app.datasources.mongodb.on('connected', function() {
+			module.loadConnected(app, entitiesPath, callback)
+		})
 	})
 }
 
@@ -27,8 +28,6 @@ module.unzip = function(path, cb) {
 
 	var zip = new AdmZip(path);
 	var zipEntries = zip.getEntries();
-
-
 
 	//validate
 	if (!zipEntries.some(function(z) {
@@ -134,7 +133,7 @@ module.loadConnected = function(app, entitiesPath, callback) {
 		var stationsUnique = stations.filter(function(s) {
 			return s.invoiceOk
 		}).reduce(function(prev, curr) {
-			if (i++ % 500 === 0) {
+			if (i++ % 1000 === 0) {
 				console.log('station reduce working: ', i, '/', stations.length)
 			}
 
