@@ -13,7 +13,7 @@
     "geolocation": {
       "type": "geopoint"
     },
-	"flag": {
+    "flag": {
       "type": "string"
     },
     "distributor": {

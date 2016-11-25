@@ -13,17 +13,45 @@ module.exports = function(app) {
 				if (files.file && files.file.size) {
 					var file = files.file
 
-					anpPricingService.load.load(app, file.path, function(err, res) {
-						if(err) next(err)
+					var anpLoadStatus = null
+					app.models.anpLoadStatus.create({
+						fileName: file.name,
+						notifications: [{
+							message: 'file received',
+							timestamp: new Date()
+						}],
+						date: new Date()
+					}, function(err, anpLoadStatus) {
+						if (err) next(err)
+
+						anpLoadStatus = anpLoadStatus
+
+						anpPricingService.load.load(app, file.path, function(err, res) {
+							if (err) next(err)
+
+							anpLoadStatus.notifications.push({
+								message: 'finished!',
+								timestamp: new Date()
+							})
+
+							app.models.anpLoadStatus.upsert(anpLoadStatus)
+
+						}, function(message) {
+							console.log(message)
+							anpLoadStatus.notifications.push()
+							anpLoadStatus.notifications.push({
+								message: message,
+								timestamp: new Date()
+							})
+							app.models.anpLoadStatus.upsert(anpLoadStatus)
+						})
 
 						res.send({
-							message: 'Ok, loaded to database ' + file.size
+							message: 'File received, size: ' + file.size,
+							statusId: anpLoadStatus.id
 						})
 					})
 
-					res.send({
-						message: 'ok, file length: ' + file.size
-					})
 				} else {
 					res.send({
 						message: 'send one file'

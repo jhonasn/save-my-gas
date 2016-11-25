@@ -1,7 +1,6 @@
 <div class="container">
-	<h1>Hi!</h1>
+	<h1>Init database</h1>
 	<br>
-	<h2 ng-bind="text"></h2>
 
 	<form novalidate name="initForm">
 		<div class="col s6">
@@ -23,6 +22,10 @@
 		</div>
 	</form>
 
+	<pre ng-bind="status | json"></pre>
+
+
+<br>
 	<hr>
 	<pre ng-bind="user | json"></pre>
 </div>

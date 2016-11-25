@@ -10,20 +10,21 @@ module.entities = {
 	stationsProcessed: null,
 }
 
-module.exports.load = function(app, entitiesPath, callback) {
+module.exports.load = function(app, entitiesPath, callback, notify) {
 	module.unzip(entitiesPath, function(err) {
 		if (err) return callback(err)
 
 		if (app.datasources.mongodb.connected) {
-			module.loadConnected(app, entitiesPath, callback)
+			module.loadConnected(app, entitiesPath, callback, notify)
 		}
 		app.datasources.mongodb.on('connected', function() {
-			module.loadConnected(app, entitiesPath, callback)
-		})
+				module.loadConnected(app, entitiesPath, callback, notify)
+			},
+			notify)
 	})
 }
 
-module.unzip = function(path, cb) {
+module.unzip = function(path, cb, notify) {
 	var AdmZip = require('adm-zip');
 
 	var zip = new AdmZip(path);
@@ -50,14 +51,18 @@ module.unzip = function(path, cb) {
 		} else {
 			module.entities[name] = JSON.parse(data)
 		}
-		console.log('unzipped ' + name + '\n')
+		if (notify) {
+			notify('unzipped ' + name)
+		}
 	})
 
 	cb(null)
 }
 
-module.loadConnected = function(app, entitiesPath, callback) {
-	console.log('starting db put')
+module.loadConnected = function(app, entitiesPath, callback, notify) {
+	if (notify) {
+		notify('starting db put')
+	}
 
 	var putFuelTypes = function(fuelTypes) {
 		async.each(fuelTypes, function(f, cb) {
@@ -75,7 +80,9 @@ module.loadConnected = function(app, entitiesPath, callback) {
 
 				putStates(module.entities.states, dbFuelTypes)
 			})
-			console.log('finished putFuelTypes')
+			if (notify) {
+				notify('finished putFuelTypes')
+			}
 		})
 	}
 
@@ -95,7 +102,10 @@ module.loadConnected = function(app, entitiesPath, callback) {
 
 				putCities(module.entities.cities, dbStates, dbFuelTypes)
 			})
-			console.log('finished putStates')
+
+			if (notify) {
+				notify('finished putStates')
+			}
 		})
 	}
 
@@ -124,7 +134,10 @@ module.loadConnected = function(app, entitiesPath, callback) {
 
 				putStations(module.entities.stations, dbCities, dbFuelTypes)
 			})
-			console.log('finished putCities')
+
+			if (notify) {
+				notify('finished putCities')
+			}
 		})
 	}
 
@@ -133,8 +146,8 @@ module.loadConnected = function(app, entitiesPath, callback) {
 		var stationsUnique = stations.filter(function(s) {
 			return s.invoiceOk
 		}).reduce(function(prev, curr) {
-			if (i++ % 1000 === 0) {
-				console.log('station reduce working: ', i, '/', stations.length)
+			if (i++ % 1000 === 0 && notify) {
+				notify('station reduce working: ' + i + '/' + stations.length)
 			}
 
 			if (!Array.isArray(prev)) {
@@ -154,9 +167,16 @@ module.loadConnected = function(app, entitiesPath, callback) {
 				return prev
 			}
 		})
-		console.log('### station reduce completed ### ')
+		if (notify) {
+			notify('### station reduce completed ### ')
+		}
+		i = 0
 
 		async.each(stationsUnique, function(s, cb) {
+			if (i++ % 1000 === 0 && notify) {
+				notify('gas station ' + i + ' / ' + stationsUnique.length)
+			}
+
 			var dbCity = dbCities.filter(function(dc) {
 				return dc.anpId === s.cityId
 			})
@@ -200,7 +220,9 @@ module.loadConnected = function(app, entitiesPath, callback) {
 				putFuelPrices(stations, dbFuelTypes, dbGasStations)
 			})
 
-			console.log('finished putStations')
+			if (notify) {
+				notify('finished putStations')
+			}
 		})
 	}
 
@@ -213,8 +235,8 @@ module.loadConnected = function(app, entitiesPath, callback) {
 			var dataColeta = brDateToDate(s.dataColeta)
 
 			var idxS = stations.indexOf(s)
-			if (idxS % 500 === 0) {
-				console.log('fuel price ', stations.indexOf(s), '/', stations.length)
+			if (idxS % 500 === 0 && notify) {
+				notify('fuel price ' + stations.indexOf(s) + '/' + stations.length)
 			}
 
 			var dbFuelType = dbFuelTypes.filter(function(f) {
@@ -254,7 +276,9 @@ module.loadConnected = function(app, entitiesPath, callback) {
 
 			callback('load to database success')
 		})
-		console.log('finished putFuelPrices')
+		if (notify) {
+			notify('finished putFuelPrices')
+		}
 	}
 
 	var notHiphen = function(word) {

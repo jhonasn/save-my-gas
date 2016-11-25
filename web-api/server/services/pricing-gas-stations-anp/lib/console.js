@@ -118,7 +118,7 @@ if (hasArgument('fix-geolocation') || hasArgument('-fg')) {
 
 if (hasArgument('-l') || hasArgument('load')) {
 	var path = process.argv[process.argv.length - 1]
-	if(!require('fs').existsSync(path)) {
+	if (!require('fs').existsSync(path)) {
 		console.log('the stations json path is invalid!')
 		process.exit()
 	}
@@ -130,5 +130,7 @@ if (hasArgument('-l') || hasArgument('load')) {
 
 		console.log('load process end response: ', res)
 		console.log('load process done.')
+	}, function(message) {
+		console.log(message)
 	})
 }

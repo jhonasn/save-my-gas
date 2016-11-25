@@ -107,5 +107,9 @@
   "gasStationPhoto": {
     "dataSource": "gasStationContainer",
     "public": true
+  },
+  "anpLoadStatus": {
+    "dataSource": "db",
+    "public": true
   }
 }
