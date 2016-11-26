@@ -2,7 +2,7 @@ angular.module('save-my-gas')
 	.controller('homeController',
 		function(
 			$scope,
-			$interval,
+			$timeout,
 			$http,
 			fileStorageService,
 			appConstants
@@ -37,7 +37,7 @@ angular.module('save-my-gas')
 				.then(function(res) {
 					if(res.data) {
 						$scope.status = res.data
-						viewStatus()
+						$timeout(viewStatus, 1000)
 					}
 				})
 			}

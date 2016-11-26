@@ -10,15 +10,15 @@ module.entities = {
 	stationsProcessed: null,
 }
 
-module.exports.load = function(app, entitiesPath, callback, notify) {
+module.exports.load = function(app, entitiesPath, anpLoadStatusId, callback, notify) {
 	module.unzip(entitiesPath, function(err) {
 		if (err) return callback(err)
 
 		if (app.datasources.mongodb.connected) {
-			module.loadConnected(app, entitiesPath, callback, notify)
+			module.loadConnected(app, entitiesPath, anpLoadStatusId, callback, notify)
 		}
 		app.datasources.mongodb.on('connected', function() {
-				module.loadConnected(app, entitiesPath, callback, notify)
+				module.loadConnected(app, entitiesPath, anpLoadStatusId, callback, notify)
 			},
 			notify)
 	})
@@ -59,11 +59,7 @@ module.unzip = function(path, cb, notify) {
 	cb(null)
 }
 
-module.loadConnected = function(app, entitiesPath, callback, notify) {
-	if (notify) {
-		notify('starting db put')
-	}
-
+module.loadConnected = function(app, entitiesPath, anpLoadStatusId, callback, notify) {
 	var putFuelTypes = function(fuelTypes) {
 		async.each(fuelTypes, function(f, cb) {
 			app.models.fuelType.findOrCreate({
@@ -147,6 +143,8 @@ module.loadConnected = function(app, entitiesPath, callback, notify) {
 			return s.invoiceOk
 		}).reduce(function(prev, curr) {
 			if (i++ % 1000 === 0 && notify) {
+				//just to keep mongo connection active
+				app.models.fuelType.count()
 				notify('station reduce working: ' + i + '/' + stations.length)
 			}
 
@@ -174,6 +172,8 @@ module.loadConnected = function(app, entitiesPath, callback, notify) {
 
 		async.each(stationsUnique, function(s, cb) {
 			if (i++ % 1000 === 0 && notify) {
+				//just to keep mongo connection active
+				app.models.fuelType.count()
 				notify('gas station ' + i + ' / ' + stationsUnique.length)
 			}
 
@@ -236,6 +236,8 @@ module.loadConnected = function(app, entitiesPath, callback, notify) {
 
 			var idxS = stations.indexOf(s)
 			if (idxS % 500 === 0 && notify) {
+				//just to keep mongo connection active
+				app.models.fuelType.count()
 				notify('fuel price ' + stations.indexOf(s) + '/' + stations.length)
 			}
 
@@ -274,7 +276,11 @@ module.loadConnected = function(app, entitiesPath, callback, notify) {
 		}, function(err) {
 			if (err) callback('error processing fuel prices', err)
 
-			callback('load to database success')
+			if(notify) {
+				notify('finished putFuelPrices')
+				notify('load to database success')
+			}
+			callback(null, 'load to database success')
 		})
 		if (notify) {
 			notify('finished putFuelPrices')
@@ -298,7 +304,17 @@ module.loadConnected = function(app, entitiesPath, callback, notify) {
 		return new Date(dt[2], (dt[1] - 1), dt[0])
 	}
 
-	putFuelTypes(module.entities.fuelTypes)
+	if (anpLoadStatusId) {
+		app.models.anpLoadStatus.findById(anpLoadStatusId, function(err, entity) {
+			if (err) callback('error on find anp load status', err)
+
+			notify('starting db put', entity)
+			putFuelTypes(module.entities.fuelTypes)
+		})
+	} else if (notify) {
+		notify('starting db put')
+		putFuelTypes(module.entities.fuelTypes)
+	}
 }
 
 module.getCityState = function(cityId, states) {
@@ -312,5 +328,25 @@ module.getCityState = function(cityId, states) {
 		return state[0]
 	} else {
 		return null
+	}
+}
+
+//useless after connectTimeoutMS
+module.waitingConnectionCbs = []
+module.mongoVerifyConnection = function(app, cb, callback) {
+	if (app.datasources.mongodb.connected) {
+		cb()
+	} else if (app.datasources.mongodb.connecting) {
+		module.waitingConnectionCbs.push(cb)
+	} else {
+		module.waitingConnectionCbs.push(cb)
+		app.datasources.mongodb.connect(function(err) {
+			if (err) callback(err)
+
+			module.waitingConnectionCbs.forEach(function(c) {
+				c()
+			})
+			module.waitingConnectionCbs.length = 0
+		})
 	}
 }

@@ -1,115 +1,116 @@
 {
-  "_meta": {
-    "sources": [
-      "loopback/common/models",
-      "loopback/server/models",
-      "../common/models",
-      "./models",
-      "./node_modules/loopback-component-passport/lib/models"
-    ],
-    "mixins": [
-      "loopback/common/mixins",
-      "loopback/server/mixins",
-      "../common/mixins",
-      "./mixins"
-    ]
-  },
-  "user": {
-    "dataSource": "mongodb",
-    "public": true
-  },
-  "UserCredential": {
-    "dataSource": "mongodb",
-    "public": false
-  },
-  "UserIdentity": {
-    "dataSource": "mongodb",
-    "public": true
-  },
-  "AccessToken": {
-    "dataSource": "mongodb",
-    "public": false
-  },
-  "ACL": {
-    "dataSource": "mongodb",
-    "public": false
-  },
-  "RoleMapping": {
-    "dataSource": "mongodb",
-    "public": false
-  },
-  "Role": {
-    "dataSource": "mongodb",
-    "public": false
-  },
-  "vehicle": {
-    "dataSource": "mongodb",
-    "public": true,
-    "$promise": {},
-    "$resolved": true
-  },
-  "vehicleType": {
-    "dataSource": "mongodb",
-    "public": true,
-    "$promise": {},
-    "$resolved": true
-  },
-  "fuelType": {
-    "dataSource": "mongodb",
-    "public": true,
-    "$promise": {},
-    "$resolved": true
-  },
-  "fuelPrice": {
-    "dataSource": "mongodb",
-    "public": true,
-    "$promise": {},
-    "$resolved": true
-  },
-  "gasStation": {
-    "dataSource": "mongodb",
-    "public": true,
-    "$promise": {},
-    "$resolved": true
-  },
-  "city": {
-    "dataSource": "mongodb",
-    "public": true,
-    "$promise": {},
-    "$resolved": true
-  },
-  "state": {
-    "dataSource": "mongodb",
-    "public": true,
-    "$promise": {},
-    "$resolved": true
-  },
-  "vehicleBrand": {
-    "dataSource": "mongodb",
-    "public": true,
-    "$promise": {},
-    "$resolved": true
-  },
-  "vehicleModel": {
-    "dataSource": "mongodb",
-    "public": true,
-    "$promise": {},
-    "$resolved": true
-  },
-  "vehicleEngine": {
-    "dataSource": "mongodb",
-    "public": true
-  },
-  "vehiclePhoto": {
-    "dataSource": "vehicleContainer",
-    "public": true
-  },
-  "gasStationPhoto": {
-    "dataSource": "gasStationContainer",
-    "public": true
-  },
-  "anpLoadStatus": {
-    "dataSource": "db",
-    "public": true
-  }
+	"_meta": {
+		"sources": [
+			"loopback/common/models",
+			"loopback/server/models",
+			"../common/models",
+			"./models",
+			"./node_modules/loopback-component-passport/lib/models"
+		],
+		"mixins": [
+			"loopback/common/mixins",
+			"loopback/server/mixins",
+			"../common/mixins",
+			"./mixins"
+		]
+	},
+	"user": {
+		"dataSource": "mongodb",
+		"public": true
+	},
+	"UserCredential": {
+		"dataSource": "mongodb",
+		"public": false
+	},
+	"UserIdentity": {
+		"dataSource": "mongodb",
+		"public": true
+	},
+	"AccessToken": {
+		"dataSource": "mongodb",
+		"public": false
+	},
+	"ACL": {
+		"dataSource": "mongodb",
+		"public": false
+	},
+	"RoleMapping": {
+		"dataSource": "mongodb",
+		"public": false
+	},
+	"Role": {
+		"dataSource": "mongodb",
+		"public": false
+	},
+	"vehicle": {
+		"dataSource": "mongodb",
+		"public": true,
+		"$promise": {},
+		"$resolved": true
+	},
+	"vehicleType": {
+		"dataSource": "mongodb",
+		"public": true,
+		"$promise": {},
+		"$resolved": true
+	},
+	"fuelType": {
+		"dataSource": "mongodb",
+		"public": true,
+		"$promise": {},
+		"$resolved": true
+	},
+	"fuelPrice": {
+		"dataSource": "mongodb",
+		"public": true,
+		"$promise": {},
+		"$resolved": true
+	},
+	"gasStation": {
+		"dataSource": "mongodb",
+		"public": true,
+		"$promise": {},
+		"$resolved": true
+	},
+	"city": {
+		"dataSource": "mongodb",
+		"public": true,
+		"$promise": {},
+		"$resolved": true
+	},
+	"state": {
+		"dataSource": "mongodb",
+		"public": true,
+		"$promise": {},
+		"$resolved": true
+	},
+	"vehicleBrand": {
+		"dataSource": "mongodb",
+		"public": true,
+		"$promise": {},
+		"$resolved": true
+	},
+	"vehicleModel": {
+		"dataSource": "mongodb",
+		"public": true,
+		"$promise": {},
+		"$resolved": true
+	},
+	"vehicleEngine": {
+		"dataSource": "mongodb",
+		"public": true
+	},
+	"anpLoadStatus": {
+		"dataSource": "mongodb",
+		"public": true
+	},
+
+	"vehiclePhoto": {
+		"dataSource": "vehicleContainer",
+		"public": true
+	},
+	"gasStationPhoto": {
+		"dataSource": "gasStationContainer",
+		"public": true
+	}
 }

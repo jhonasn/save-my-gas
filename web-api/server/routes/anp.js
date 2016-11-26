@@ -1,6 +1,6 @@
 module.exports = function(app) {
 	var formidable = require('formidable')
-	var anpPricingService = require('../services/pricing-gas-stations-anp')
+		// var anpPricingService = require('../services/pricing-gas-stations-anp')
 
 	var router = app.loopback.Router()
 
@@ -17,7 +17,7 @@ module.exports = function(app) {
 					app.models.anpLoadStatus.create({
 						fileName: file.name,
 						notifications: [{
-							message: 'file received',
+							message: 'file received: ' + file.name,
 							timestamp: new Date()
 						}],
 						date: new Date()
@@ -26,25 +26,54 @@ module.exports = function(app) {
 
 						anpLoadStatus = anpLoadStatus
 
-						anpPricingService.load.load(app, file.path, function(err, res) {
-							if (err) next(err)
-
-							anpLoadStatus.notifications.push({
-								message: 'finished!',
-								timestamp: new Date()
+						var anpLoadStatusNotify = function (msg) {
+							app.models.anpLoadStatus.findById(anpLoadStatus.id, function(err, entity) {
+								entity.notifications.push({
+									message: msg,
+									timestamp: new Date()
+								})
+								app.models.anpLoadStatus.upsert(entity)
 							})
+						}
 
-							app.models.anpLoadStatus.upsert(anpLoadStatus)
+						//separate service into a new process
+						var spawn = require('child_process').spawn
+						var service = spawn('node', [
+							'./server/services/pricing-gas-stations-anp/lib/console',
+							'-l',
+							file.path,
+							anpLoadStatus.id
+						])
 
-						}, function(message) {
-							console.log(message)
-							anpLoadStatus.notifications.push()
-							anpLoadStatus.notifications.push({
-								message: message,
-								timestamp: new Date()
-							})
-							app.models.anpLoadStatus.upsert(anpLoadStatus)
+						//listen process
+						service.stdout.on('data', function (data) {
+							anpLoadStatusNotify('log: ' + data)
 						})
+						service.stderr.on('data', function (data) {
+							anpLoadStatusNotify('error: ' + data)
+						})
+						service.on('close', function (code) {
+							anpLoadStatusNotify('child process exited with code' + code)
+						})
+
+						// anpPricingService.load.load(app, file.path, function(err, res) {
+						// 	if (err) next(err)
+						//
+						// 	anpLoadStatus.notifications.push({
+						// 		message: 'finished!',
+						// 		timestamp: new Date()
+						// 	})
+						//
+						// 	app.models.anpLoadStatus.upsert(anpLoadStatus)
+						//
+						// }, function(message) {
+						// 	console.log(message)
+						// 	anpLoadStatus.notifications.push({
+						// 		message: message,
+						// 		timestamp: new Date()
+						// 	})
+						// 	app.models.anpLoadStatus.upsert(anpLoadStatus)
+						// })
 
 						res.send({
 							message: 'File received, size: ' + file.size,

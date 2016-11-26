@@ -117,12 +117,27 @@ if (hasArgument('fix-geolocation') || hasArgument('-fg')) {
 }
 
 if (hasArgument('-l') || hasArgument('load')) {
-	var path = process.argv[process.argv.length - 1]
+	var path = process.argv[3]
 	if (!require('fs').existsSync(path)) {
 		console.log('the stations json path is invalid!')
 		process.exit()
 	}
-	dbLoadEntities.load(loopbackApp, path, function(err, res) {
+
+	var anpLoadStatus = null
+	var anpLoadStatusId = process.argv[4]
+	if (anpLoadStatusId && !isNaN(anpLoadStatusId)) {
+		anpLoadStatusId = Number(anpLoadStatusId)
+	}
+
+	var notifyAnpLoadStatus = function(message, exit) {
+		anpLoadStatus.notifications.push({
+			message: message,
+			timestamp: new Date()
+		})
+		loopbackApp.models.anpLoadStatus.upsert(anpLoadStatus)
+	}
+
+	dbLoadEntities.load(loopbackApp, path, anpLoadStatusId, function(err, res) {
 		if (err) {
 			console.log('there are some errors on load entities to database')
 			console.log(err)
@@ -130,7 +145,17 @@ if (hasArgument('-l') || hasArgument('load')) {
 
 		console.log('load process end response: ', res)
 		console.log('load process done.')
-	}, function(message) {
-		console.log(message)
+
+		process.exit()
+	}, function(message, anpNotifyEntity) {
+		if (anpLoadStatusId) {
+			//loading...
+			if (!anpLoadStatus && anpNotifyEntity) {
+				anpLoadStatus = anpNotifyEntity
+			}
+			notifyAnpLoadStatus(message)
+		} else {
+			console.log(message)
+		}
 	})
 }

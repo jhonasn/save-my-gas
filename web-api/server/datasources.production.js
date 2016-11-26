@@ -21,12 +21,15 @@ module.exports = {
 		"connector": "memory"
 	},
 	"mongodb": {
+		"name": "mongodb",
 		"connector": "mongodb",
 		"hostname": process.env.DB_HOST || "localhost",
 		"port": process.env.DB_PORT || 27017,
+		"database": process.env.DB_NAME || "savemygas",
 		"user": process.env.DB_USER,
 		"password": process.env.DB_PASSWORD,
-		"database": process.env.DB_NAME || "savemygas",
+		"connectTimeoutMS": 3600000,
+		"socketTimeoutMS": 600000
 	},
 	"vehicleContainer": {
 		"name": "vehicleContainer",
