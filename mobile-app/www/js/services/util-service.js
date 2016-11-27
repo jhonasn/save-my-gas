@@ -2,6 +2,10 @@ angular.module('save-my-gas')
 	.factory('utilService',
 		function($q) {
 			return {
+				isObjectId: function(id) {
+					return /^(?=[a-f\d]{24}$)(\d+[a-f]|[a-f]+\d)/i.test(id)
+				},
+
 				fileToB64: function(file) {
 					var defered = $q.defer()
 

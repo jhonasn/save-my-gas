@@ -120,9 +120,17 @@ angular.module('save-my-gas')
 		}
 
 		//remove relations to get the relation of fk selected by the autocomplete
-		delete model.vehicleBrand
-		delete model.vehicleModel
-		delete model.vehicleType
-		delete model.vehicleEngine
-		delete model.fuelType
+		delete $scope.model.vehicleBrand
+		delete $scope.model.vehicleModel
+		delete $scope.model.vehicleType
+		delete $scope.model.vehicleEngine
+		delete $scope.model.fuelType
+
+		$scope.model.vehicleBrand = { noResults: null }
+		$scope.model.vehicleModel = { noResults: null }
+		$scope.model.vehicleEngine = {
+			power: null,
+			valve: null,
+			noResults: null 
+		}
 	})

@@ -2,15 +2,15 @@
 
 module.exports = function(VehicleBrand) {
 	//not expose crud methods
-	VehicleBrand.disableRemoteMethod('create', true)
-	VehicleBrand.disableRemoteMethod('upsert', true)
+	// VehicleBrand.disableRemoteMethod('create', true)
+	// VehicleBrand.disableRemoteMethod('upsert', true)
 	VehicleBrand.disableRemoteMethod('deleteById', true)
-	VehicleBrand.disableRemoteMethod('updateById', true)
+	// VehicleBrand.disableRemoteMethod('updateById', true)
 	VehicleBrand.disableRemoteMethod('updateAll', true)
-	VehicleBrand.disableRemoteMethod('updateAttributes', false)
-	VehicleBrand.disableRemoteMethod('createChangeStream', true)
-	VehicleBrand.disableRemoteMethod('replaceOrCreate', true)
-	VehicleBrand.disableRemoteMethod('replaceById', true)
+	// VehicleBrand.disableRemoteMethod('updateAttributes', false)
+	// VehicleBrand.disableRemoteMethod('createChangeStream', true)
+	// VehicleBrand.disableRemoteMethod('replaceOrCreate', true)
+	// VehicleBrand.disableRemoteMethod('replaceById', true)
 	VehicleBrand.disableRemoteMethod('upsertWithWhere', true)
 
 	//not expose crud related models methods

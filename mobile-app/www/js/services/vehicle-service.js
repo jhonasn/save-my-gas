@@ -9,9 +9,11 @@ angular.module('save-my-gas')
 			VehicleType,
 			VehicleModel,
 			VehicleBrand,
+			VehicleEngine,
 			FuelType,
 			fileStorageService,
 			customRoutesService,
+			utilService,
 			appConstants
 		) {
 			var _user = authService.getUser()
@@ -59,21 +61,76 @@ angular.module('save-my-gas')
 					})
 				},
 
-				save: function(model) {
-					if (model.$save) {
-						model.$save()
-					} else {
-						model = User.vehicles.create({
-							id: model.ownerId
-						}, model)
+				save: function(viewModel) {
+					//preserve model from view
+					var model = angular.copy(viewModel)
+
+					var relatedEntitiesPromises = {}
+
+					if (!utilService.isObjectId(model.vehicleModelId)) {
+						var vehicleModel = { name: angular.copy(model.vehicleModelId) }
+						delete model.vehicleModelId
+
+						vehicleModel = VehicleModel.save(vehicleModel)
+						relatedEntitiesPromises.vehicleModel = vehicleModel.$promise
 					}
-					model.$promise.then(function() {
-							Materialize.toast('Veículo salvo')
-							$location.path('/vehicle')
-						})
-						.catch(function(err) {
-							Materialize.toast('Não foi possível salvar o veículo')
-						})
+					delete model.vehicleModel.noResults
+					delete model.vehicleModel
+
+					if (!utilService.isObjectId(model.vehicleBrandId)) {
+						var vehicleBrand = { name: angular.copy(model.vehicleBrandId) }
+						delete model.vehicleBrandId
+
+						vehicleBrand = VehicleBrand.save(vehicleBrand)
+						relatedEntitiesPromises.vehicleBrand = vehicleBrand.$promise
+					}
+					delete model.vehicleBrand.noResults
+					delete model.vehicleBrand
+
+					if (!utilService.isObjectId(model.vehicleEngineId)) {
+						var vehicleEngine = angular.copy(model.vehicleEngine)
+						delete model.vehicleEngineId
+
+						vehicleEngine = VehicleEngine.save(vehicleEngine)
+						relatedEntitiesPromises.vehicleEngine = vehicleEngine.$promise
+					}
+					delete model.vehicleEngine.noResults
+					delete model.vehicleEngine
+
+					var errorMessage = function(err) {
+						Materialize.toast('Não foi possível salvar o veículo')
+						defered.reject(err)
+					}
+
+					var defered = $q.defer()
+
+					$q.all(relatedEntitiesPromises).then(function(results) {
+						if(!model.vehicleBrandId) {
+							model.vehicleBrandId = results.vehicleBrand.id
+						}
+						if(!model.vehicleModelId) {
+							model.vehicleModelId = results.vehicleModel.id
+						}
+						if (!model.vehicleEngineId) {
+							model.vehicleEngineId = results.vehicleEngine.id
+						}
+
+						if (model.$save) {
+							model.$save()
+						} else {
+							model = User.vehicles.create({
+								id: model.ownerId
+							}, model)
+						}
+						model.$promise.then(function() {
+								Materialize.toast('Veículo salvo')
+								$location.path('/vehicle')
+								defered.resolve()
+							})
+							.catch(errorMessage)
+					}).catch(errorMessage)
+
+					return defered.promise
 				},
 
 				deleteById: function(id) {

@@ -65,6 +65,7 @@
 								on-select="vehicleModelSelected"
 								url-params="{ filter: { where: { name: { regexp: searchTerm } }, include: [ 'vehicleBrand', 'vehicleType', 'vehicleEngine' ] } }"
 								init-with="model.vehicleModel"
+								no-results="model.vehicleModel.noResults"
 								ng-model="model.vehicleModelId"
 								ng-required="true"></autocomplete>
 				<label for="vehicle-model-id-field">Modelo</label>
@@ -83,6 +84,7 @@
 								label="name"
 								url="/vehiclebrands"
 								init-with="model.vehicleBrand"
+								no-results="model.vehicleBrand.noResults"
 								ng-model="model.vehicleBrandId"
 								ng-required="true"></autocomplete>
 				<label for="vehicle-brand-id-field">Marca</label>
@@ -101,6 +103,7 @@
 								label="type"
 								url="/vehicletypes"
 								init-with="model.vehicleType"
+								is-editable="false"
 								ng-model="model.vehicleTypeId"
 								ng-required="true"></autocomplete>
 				<label for="vehicle-type-id-field">Categoria</label>
@@ -120,6 +123,7 @@
 								url="/fueltypes"
 								url-params="{ filter: { where: { name: { regexp: searchTerm }, clientShow: true } } }"
 								init-with="model.fuelType"
+								is-editable="false"
 								ng-model="model.fuelTypeId"
 								ng-required="true"></autocomplete>
 				<label for="fuel-type-id-field">Combustível</label>
@@ -176,16 +180,54 @@
 								url-params-make="vehicleEngineParamsMake"
 								format="formatEngine"
 								init-with="model.vehicleEngine"
+								no-results="model.vehicleEngine.noResults"
 								ng-model="model.vehicleEngineId"
-								ng-required="true"></autocomplete>
+								ng-required="!vehicleEngine.power && !vehicleEngine.valve"></autocomplete>
 				<label for="vehicle-engine-id-field">Motor</label>
 				<div ng-if="modelForm.vehicleEngineIdField.$dirty || modelForm.$submitted"
 								ng-messages="modelForm.vehicleEngineIdField.$error"
 								role="alert">
 					<span class="invalid"
 									ng-message="required">Obrigatório</span>
-					<span class="invalid"
-									ng-message="min">Mínimo aceito 0</span>
+				</div>
+			</div>
+
+			<div ng-show="model.vehicleEngine.noResults">
+				<p>
+					Não encontrou o motor do seu carro acima? Insira essas informações aqui:
+				</p>
+
+				<div class="input-field">
+					<input type="number"
+									id="power-field"
+									name="powerField"
+									ng-model="model.vehicleEngine.power"
+									ng-required="model.vehicleEngine.noResults"
+									ng-min="1">
+					<label for="power-field">Potência</label>
+					<div ng-if="modelForm.powerField.$dirty || modelForm.$submitted"
+									ng-messages="modelForm.powerField.$error"
+									role="alert">
+						<span class="invalid"
+										ng-message="required">Obrigatório</span>
+						<span class="invalid"
+										ng-message="min">Selecione um valor maior que 0</span>
+					</div>
+				</div>
+
+				<div class="input-field">
+					<input type="number"
+									id="valve-field"
+									name="valveField"
+									ng-model="model.vehicleEngine.valve"
+									ng-min="0">
+					<label for="valve-field">Válvulas</label>
+					<div ng-if="modelForm.valveField.$dirty || modelForm.$submitted"
+									ng-messages="modelForm.valveField.$error"
+									role="alert">
+						<span class="invalid"
+										ng-message="min">Selecione um valor maior que 0</span>
+					</div>
 				</div>
 			</div>
 
