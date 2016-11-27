@@ -41,8 +41,12 @@
 					typeahead-loading="loading"
 					typeahead-popup-template-url="autocomplete-popup.html"
 					typeahead-input-formatter="formatLabel($model)"
+					typeahead-show-hint="true"
+					typeahead-no-results="noResults"
+					typeahead-editable="isEditable"
 					autocomplete="off" />
-	<a href="#" ng-click="clear()"
+	<a href="#"
+					ng-click="clear()"
 					ng-disabled="loading"
 					style="position: absolute; top: 0; right: 0">
 		<i class="material-icons grey-text text-darken-3">backspace</i>
