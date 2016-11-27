@@ -12,6 +12,9 @@
     },
     "anpId": {
       "type": "string"
+    },
+    "clientShow": {
+      "type": "boolean"
     }
   },
   "validations": [],
