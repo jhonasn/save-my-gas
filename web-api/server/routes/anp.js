@@ -6,6 +6,7 @@ module.exports = function(app) {
 
 	router
 	//post the file to initiate database
+	/* route closed by useless after first publish (we can get this by mongorestore now)
 		.post('/init', function(req, res, next) {
 			var form = new formidable.IncomingForm()
 
@@ -56,25 +57,6 @@ module.exports = function(app) {
 							anpLoadStatusNotify('child process exited with code' + code)
 						})
 
-						// anpPricingService.load.load(app, file.path, function(err, res) {
-						// 	if (err) next(err)
-						//
-						// 	anpLoadStatus.notifications.push({
-						// 		message: 'finished!',
-						// 		timestamp: new Date()
-						// 	})
-						//
-						// 	app.models.anpLoadStatus.upsert(anpLoadStatus)
-						//
-						// }, function(message) {
-						// 	console.log(message)
-						// 	anpLoadStatus.notifications.push({
-						// 		message: message,
-						// 		timestamp: new Date()
-						// 	})
-						// 	app.models.anpLoadStatus.upsert(anpLoadStatus)
-						// })
-
 						res.send({
 							message: 'File received, size: ' + file.size,
 							statusId: anpLoadStatus.id
@@ -88,6 +70,7 @@ module.exports = function(app) {
 				}
 			})
 		})
+		*/
 		//update database from anp site
 		.post('/update', function(req, res, next) {
 			res.send('updated!')
