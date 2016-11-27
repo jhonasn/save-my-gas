@@ -118,6 +118,7 @@
 								ng-class="{ invalid: modelForm.fuelTypeIdField.$invalid }"
 								label="name"
 								url="/fueltypes"
+								url-params="{ filter: { where: { name: { regexp: searchTerm }, clientShow: true } } }"
 								init-with="model.fuelType"
 								ng-model="model.fuelTypeId"
 								ng-required="true"></autocomplete>
