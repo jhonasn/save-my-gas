@@ -15,7 +15,9 @@ angular.module('save-my-gas')
 				urlParamsMake: '=',
 				initWith: '=',
 				onSelect: '=',
-				onClear: '='
+				onClear: '=',
+				noResults: '=',
+				isEditable: '='
 			},
 			link: function(scope, element, attributes, ngModelController) {
 				var _results = []
