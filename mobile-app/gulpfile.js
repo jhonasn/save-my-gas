@@ -5,6 +5,14 @@ var ngAnnotate = require('gulp-ng-annotate')
 var cleanCSS = require('gulp-clean-css')
 var htmlreplace = require('gulp-html-replace')
 var replace = require('gulp-replace')
+var del = require('del')
+
+gulp.task('clean', function() {
+	return del([
+		'../web-app/js/*',
+		'../web-app/css/*',
+	])
+})
 
 gulp.task('min-login-js', function() {
 	return gulp.src([
@@ -28,17 +36,16 @@ gulp.task('min-login-js', function() {
 
 gulp.task('min-login-css', function() {
 	return gulp.src([
-			// 'www/lib/roboto-and-material-icons-fonts/css/material-icons.css',
-			// 'www/lib/roboto-and-material-icons-fonts/css/roboto.css',
-			'www/lib/mdi/css/materialdesignicons.css',
+			'www/lib/roboto-and-material-icons-fonts/css/material-icons.css',
+			'www/lib/roboto-and-material-icons-fonts/css/roboto.css',
 			'www/lib/materialize/dist/css/materialize.css',
 			'www/css/login.css',
 		])
+		.pipe(concat('/css/login.css'))
+		.pipe(replace('fonts/roboto/', 'fonts/'))
 		.pipe(cleanCSS({
 			compatibility: 'ie8'
 		}))
-		.pipe(concat('/css/login.css'))
-		.pipe(replace('fonts/roboto/', 'fonts/'))
 		.pipe(gulp.dest('../web-app'))
 })
 
@@ -71,23 +78,29 @@ gulp.task('min-app-css', function() {
 			'www/lib/angular-bootstrap/ui-bootstrap-csp.css',
 			'www/css/main.css',
 		])
+		.pipe(concat('/css/main.css'))
+		.pipe(replace('fonts/roboto/', 'fonts/'))
 		.pipe(cleanCSS({
 			compatibility: 'ie8'
 		}))
-		.pipe(concat('/css/main.css'))
-		.pipe(replace('fonts/roboto/', 'fonts/'))
 		.pipe(gulp.dest('../web-app'))
 })
 
 gulp.task('copy', function() {
 	return gulp.src([
-			'www/*.*',
 			'www/*img/*',
+			'www/*img/icons/*',
 			'www/*templates/*',
 			'www/*views/*',
 			'www/*views/**/*',
-			'www/lib/mdi/*fonts/*',
 			'www/lib/roboto-and-material-icons-fonts/*fonts/*',
+		])
+		.pipe(gulp.dest('../web-app'))
+})
+
+gulp.task('html-build', function() {
+	return gulp.src([
+			'www/*.*',
 		])
 		.pipe(htmlreplace({
 			'css-login': 'css/login.css',
@@ -99,9 +112,11 @@ gulp.task('copy', function() {
 })
 
 gulp.task('default', [
+	// 'clean',
 	'min-login-js',
 	'min-login-css',
 	'min-app-js',
 	'min-app-css',
-	'copy'
+	'copy',
+	'html-build'
 ])
