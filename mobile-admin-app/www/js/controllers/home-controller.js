@@ -7,8 +7,6 @@ angular.module('save-my-gas')
 			fileStorageService,
 			appConstants
 		) {
-			var statusId = null
-
 			$scope.anpZipFieldChanged = function(files) {
 				if (files.length) {
 					var file = files[0]
@@ -23,8 +21,7 @@ angular.module('save-my-gas')
 								Materialize.toast(res.data.message)
 
 								if(res.data.statusId) {
-									statusId = res.data.statusId
-									viewStatus()
+									$scope.viewStatus(res.data.statusId)
 								}
 							}
 						})
@@ -32,12 +29,12 @@ angular.module('save-my-gas')
 				}
 			}
 
-			var viewStatus = function() {
-				$http.get(appConstants.urlApi + '/anpLoadStatuses/' + statusId)
+			$scope.viewStatus = function(id) {
+				$http.get(appConstants.urlApi + '/anpLoadStatuses/' + id)
 				.then(function(res) {
 					if(res.data) {
 						$scope.status = res.data
-						$timeout(viewStatus, 1000)
+						$timeout(function() { $scope.viewStatus(id) }, 1000)
 					}
 				})
 			}

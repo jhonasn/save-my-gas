@@ -2,7 +2,8 @@
 	<h1>Init database</h1>
 	<br>
 
-	<form novalidate name="initForm">
+	<form novalidate
+					name="initForm">
 		<div class="col s6">
 
 			<div class="file-field input-field">
@@ -20,12 +21,27 @@
 				</div>
 			</div>
 		</div>
+		<br>
+
+		<div class="col s6">
+			<p>View another anp load status</p>
+
+			<div class="input-field">
+				<label for="view-status-id-field">id</label>
+				<input type="text"
+								id="view-status-id-field"
+								ng-model="viewStatusId">
+				<button type="button"
+								class="btn"
+								ng-click="viewStatus(viewStatusId)">View</button>
+			</div>
+		</div>
 	</form>
 
 	<pre ng-bind="status | json"></pre>
 
 
-<br>
+	<br>
 	<hr>
 	<pre ng-bind="user | json"></pre>
 </div>
