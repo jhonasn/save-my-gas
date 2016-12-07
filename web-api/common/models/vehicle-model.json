@@ -28,8 +28,8 @@
       "model": "vehicleBrand",
       "foreignKey": "vehicleBrandId"
     },
-    "vehicleEngine": {
-      "type": "belongsTo",
+    "vehicleEngines": {
+      "type": "hasAndBelongsToMany",
       "model": "vehicleEngine",
       "foreignKey": "vehicleEngineId"
     }

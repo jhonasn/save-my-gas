@@ -23,9 +23,9 @@
       "foreignKey": "vehicleEngineId"
     },
     "vehicleModels": {
-      "type": "hasMany",
+      "type": "hasAndBelongsToMany",
       "model": "vehicleModel",
-      "foreignKey": "vehicleEngineId"
+      "foreignKey": "vehicleModelId"
     }
   },
   "acls": [

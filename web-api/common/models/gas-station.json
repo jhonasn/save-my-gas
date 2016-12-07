@@ -1,58 +1,61 @@
 {
-	"name": "gasStation",
-	"base": "PersistedModel",
-	"strict": false,
-	"idInjection": false,
-	"options": {
-		"validateUpsert": true
-	},
-	"properties": {
-		"companyName": {
-			"type": "string"
-		},
-		"geolocation": {
-			"type": "geopoint"
-		},
-		"flag": {
-			"type": "string"
-		},
-		"distributor": {
-			"type": "string"
-		},
-		"invoiceOk": {
-			"type": "boolean"
-		},
-		"address": {
-			"type": "string"
-		},
-		"neighborhood": {
-			"type": "string"
-		},
-		"cityId": {
-			"type": "string"
-		},
-		"stateId": {
-			"type": "string"
-		}
-	},
-	"validations": [],
-	"relations": {
-		"fuelPrices": {
-			"type": "hasMany",
-			"model": "fuelPrice",
-			"foreignKey": "gasStationId"
-		}
-	},
-	"acls": [{
-		"accessType": "*",
-		"principalType": "ROLE",
-		"principalId": "$unauthenticated",
-		"permission": "DENY"
-	}, {
-		"accessType": "*",
-		"principalType": "ROLE",
-		"principalId": "$authenticated",
-		"permission": "ALLOW"
-	}],
-	"methods": {}
+  "name": "gasStation",
+  "base": "PersistedModel",
+  "strict": false,
+  "idInjection": false,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "companyName": {
+      "type": "string"
+    },
+    "geolocation": {
+      "type": "geopoint"
+    },
+    "flag": {
+      "type": "string"
+    },
+    "distributor": {
+      "type": "string"
+    },
+    "invoiceOk": {
+      "type": "boolean"
+    },
+    "address": {
+      "type": "string"
+    },
+    "neighborhood": {
+      "type": "string"
+    },
+    "cityId": {
+      "type": "string"
+    },
+    "stateId": {
+      "type": "string"
+    }
+  },
+  "validations": [],
+  "relations": {
+    "fuelPrices": {
+      "type": "hasMany",
+      "model": "fuelPrice",
+      "foreignKey": "gasStationId"
+    }
+  },
+  "acls": [
+    {
+      "accessType": "*",
+      "principalType": "ROLE",
+      "principalId": "$unauthenticated",
+      "permission": "DENY"
+    },
+    {
+      "accessType": "*",
+      "principalType": "ROLE",
+      "principalId": "$authenticated",
+      "permission": "ALLOW"
+    }
+  ],
+  "methods": {}
 }
