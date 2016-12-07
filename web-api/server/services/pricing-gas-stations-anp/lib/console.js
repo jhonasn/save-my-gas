@@ -11,7 +11,8 @@ var loopbackApp = require('../../../server-offline')
 
 if (process.argv.length < 3) {
 	console.log('you need to specify the action:\n')
-	console.log('update [-u] - to update stations lookin on anp site')
+	console.log('update [-u] - to update stations lookin on anp site [-r] to update regions too')
+	console.log('verify [-v] - to verify if there are updates')
 	console.log('postprocess [-pp] - to process results of anp update')
 	console.log('geolocation [-g] - to get geolocation of current ppStations, -f to try to get stations geolocations that failed before')
 	console.log('fix-geolocation [-fg] - to start console application to try to fix stations geolocations that failed before')
@@ -52,7 +53,7 @@ if (hasArgument('-v') || hasArgument('verify')) {
 
 if (hasArgument('update') || hasArgument('-u')) {
 	console.log('Started ANP Update\n\n')
-	updateStations.anpUpdate(true, function(err, res) {
+	updateStations.anpUpdate(hasArgument('-r'), function(err, res) {
 		if (err && Array.isArray(err) && err.length > 0) {
 			console.log('there was some errors on scratching, see anp-update-errors.log (it\'s a json)')
 			try {

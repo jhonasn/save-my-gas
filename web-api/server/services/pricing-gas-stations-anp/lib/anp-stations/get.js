@@ -17,7 +17,7 @@ module.stationScratchProgress = {
 module.exports.anpUpdate = function(updateRegions, cb) {
 	//make sure that create storage folder
 	anpEntities.readStationsFiles()
-	anpEntities.deleteOldFiles()
+	// anpEntities.deleteOldFiles()
 
 	if(updateRegions) {
 		module.updateRegions(cb)
@@ -266,8 +266,9 @@ module.getCaptcha = function(city, diaSemana, cb) {
 
 			var $ = cheerio.load(res)
 
+			var img = $('#frmCaptcha').find('img')
 			var values = {
-				captcha: $('#frmCaptcha').attr('action').match(/'.*'/g)[0].replace(/'/g, ''),
+				captcha: captch,
 				tipo: $('[name=Tipo]').val(),
 				selSemana: $('[name=selSemana]').val(),
 				codSemana: $('[name=cod_Semana]').val()
