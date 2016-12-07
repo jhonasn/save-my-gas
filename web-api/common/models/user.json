@@ -12,6 +12,11 @@
       "type": "hasMany",
       "model": "vehicle",
       "foreignKey": "ownerId"
+    },
+    "fuelPriceSuggestions": {
+      "type": "hasMany",
+      "model": "fuelPriceSuggestion",
+      "foreignKey": "userId"
     }
   },
   "acls": [

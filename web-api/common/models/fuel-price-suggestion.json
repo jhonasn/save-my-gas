@@ -1,0 +1,61 @@
+{
+  "name": "fuelPriceSuggestion",
+  "plural": "fuelPriceSuggestions",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "price": {
+      "type": "number",
+      "required": true
+    },
+    "date": {
+      "type": "date",
+      "required": true,
+      "default": "$now"
+    },
+    "likes": {
+      "type": [
+        "string"
+      ]
+    },
+    "dislikes": {
+      "type": [
+        "string"
+      ]
+    },
+    "userId": {
+      "type": "string",
+      "required": true
+    },
+    "gasStationId": {
+      "type": "string",
+      "required": true
+    }
+  },
+  "validations": [],
+  "relations": {},
+  "acls": [
+    {
+      "accessType": "*",
+      "principalType": "ROLE",
+      "principalId": "$unauthenticated",
+      "permission": "DENY"
+    },
+    {
+      "accessType": "READ",
+      "principalType": "ROLE",
+      "principalId": "$authenticated",
+      "permission": "ALLOW"
+    },
+    {
+      "accessType": "*",
+      "principalType": "ROLE",
+      "principalId": "$owner",
+      "permission": "ALLOW"
+    }
+  ],
+  "methods": {}
+}

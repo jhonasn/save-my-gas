@@ -18,4 +18,21 @@ module.exports = function(GasStation) {
 	GasStation.disableRemoteMethod('__delete__fuelPrices', false)
 	GasStation.disableRemoteMethod('__destroyById__fuelPrices', false)
 	GasStation.disableRemoteMethod('__updateById__fuelPrices', false)
+
+	GasStation.disableRemoteMethod('__create__vehicles', false)
+	GasStation.disableRemoteMethod('__delete__vehicles', false)
+	GasStation.disableRemoteMethod('__destroyById__vehicles', false)
+	GasStation.disableRemoteMethod('__updateById__vehicles', false)
+	GasStation.disableRemoteMethod('__link__vehicles', false)
+	GasStation.disableRemoteMethod('__unlink__vehicles', false)
+
+	GasStation.disableRemoteMethod('__create__vehicleRefuels', false)
+	GasStation.disableRemoteMethod('__delete__vehicleRefuels', false)
+	GasStation.disableRemoteMethod('__destroyById__vehicleRefuels', false)
+	GasStation.disableRemoteMethod('__updateById__vehicleRefuels', false)
+
+	GasStation.disableRemoteMethod('__create__fuelPriceSuggestions', false)
+	GasStation.disableRemoteMethod('__delete__fuelPriceSuggestions', false)
+	GasStation.disableRemoteMethod('__destroyById__fuelPriceSuggestions', false)
+	GasStation.disableRemoteMethod('__updateById__fuelPriceSuggestions', false)
 };

@@ -74,6 +74,17 @@
       "type": "belongsTo",
       "model": "fuelType",
       "foreignKey": "fuelTypeId"
+    },
+    "gasStations": {
+      "type": "hasMany",
+      "model": "gasStation",
+      "foreignKey": "gasStationId",
+      "through": "vehicleRefuel"
+    },
+    "vehicleRefuels": {
+      "type": "hasMany",
+      "model": "vehicleRefuel",
+      "foreignKey": "vehicleId"
     }
   },
   "acls": [

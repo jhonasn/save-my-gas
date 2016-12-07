@@ -111,5 +111,13 @@
   "gasStationPhoto": {
     "dataSource": "gasStationContainer",
     "public": true
+  },
+  "vehicleRefuel": {
+    "dataSource": "mongodb",
+    "public": true
+  },
+  "fuelPriceSuggestion": {
+    "dataSource": "mongodb",
+    "public": true
   }
 }

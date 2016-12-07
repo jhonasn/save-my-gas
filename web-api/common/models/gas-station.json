@@ -41,6 +41,22 @@
       "type": "hasMany",
       "model": "fuelPrice",
       "foreignKey": "gasStationId"
+    },
+    "vehicles": {
+      "type": "hasMany",
+      "model": "vehicle",
+      "foreignKey": "vehicleId",
+      "through": "vehicleRefuel"
+    },
+    "vehicleRefuels": {
+      "type": "hasMany",
+      "model": "vehicleRefuel",
+      "foreignKey": "gasStationId"
+    },
+    "fuelPriceSuggestions": {
+      "type": "hasMany",
+      "model": "fuelPriceSuggestion",
+      "foreignKey": "gasStationId"
     }
   },
   "acls": [
