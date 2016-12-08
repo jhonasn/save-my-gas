@@ -57,6 +57,16 @@
       "type": "hasMany",
       "model": "fuelPriceSuggestion",
       "foreignKey": "gasStationId"
+    },
+    "ratings": {
+      "type": "embedsMany",
+      "model": "rating",
+      "property": "ratings"
+    },
+	"comments": {
+      "type": "embedsMany",
+      "model": "comment",
+      "property": "comments"
     }
   },
   "acls": [

@@ -119,5 +119,17 @@
   "fuelPriceSuggestion": {
     "dataSource": "mongodb",
     "public": true
+  },
+  "vote": {
+    "dataSource": "mongodb",
+    "public": false
+  },
+  "rating": {
+    "dataSource": "mongodb",
+    "public": false
+  },
+  "comment": {
+    "dataSource": "mongodb",
+    "public": false
   }
 }
