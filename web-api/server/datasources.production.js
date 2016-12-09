@@ -31,6 +31,10 @@ module.exports = {
 		"connectTimeoutMS": 3600000,
 		"socketTimeoutMS": 600000
 	},
+	"transient": {
+		"name": "transient",
+		"connector": "transient"
+	},
 	"vehicleContainer": {
 		"name": "vehicleContainer",
 		"connector": "loopback-component-storage",

@@ -121,15 +121,15 @@
     "public": true
   },
   "vote": {
-    "dataSource": "mongodb",
+    "dataSource": "transient",
     "public": false
   },
   "rating": {
-    "dataSource": "mongodb",
+    "dataSource": "transient",
     "public": false
   },
   "comment": {
-    "dataSource": "mongodb",
+    "dataSource": "transient",
     "public": false
   }
 }
