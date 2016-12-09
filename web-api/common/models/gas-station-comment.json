@@ -1,13 +1,23 @@
 {
-  "name": "rating",
+  "name": "gasStationComment",
+  "plural": "gasStationComments",
   "base": "PersistedModel",
   "idInjection": true,
   "options": {
     "validateUpsert": true
   },
   "properties": {
-    "rating": {
-      "type": "number",
+    "comment": {
+      "type": "string",
+      "required": true
+    },
+    "date": {
+      "type": "date",
+      "required": true,
+      "default": "$now"
+    },
+    "gasStationId": {
+      "type": "string",
       "required": true
     },
     "userId": {
@@ -17,6 +27,11 @@
   },
   "validations": [],
   "relations": {
+    "gasStation": {
+      "type": "belongsTo",
+      "model": "gasStation",
+      "foreignKey": "gasStationId"
+    },
     "user": {
       "type": "belongsTo",
       "model": "user",

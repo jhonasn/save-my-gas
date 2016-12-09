@@ -1,35 +1,35 @@
 {
-  "name": "fuelPriceSuggestion",
-  "plural": "fuelPriceSuggestions",
+  "name": "fuelPriceSuggestionVote",
+  "plural": "fuelPriceSuggestionVotes",
   "base": "PersistedModel",
   "idInjection": true,
   "options": {
     "validateUpsert": true
   },
   "properties": {
-    "price": {
-      "type": "number",
+    "positive": {
+      "type": "boolean",
       "required": true
     },
-    "date": {
-      "type": "date",
-      "required": true,
-      "default": "$now"
-    },
-    "userId": {
+    "fuelPriceSuggestionId": {
       "type": "string",
       "required": true
     },
-    "gasStationId": {
+    "userId": {
       "type": "string",
       "required": true
     }
   },
   "validations": [],
   "relations": {
-    "fuelPriceSuggestionVotes": {
-      "type": "hasMany",
-      "model": "fuelPriceSuggestionVote",
+    "user": {
+      "type": "belongsTo",
+      "model": "user",
+      "foreignKey": "userId"
+    },
+    "fuelPriceSuggestion": {
+      "type": "belongsTo",
+      "model": "fuelPriceSuggestion",
       "foreignKey": "fuelPriceSuggestionId"
     }
   },
@@ -38,6 +38,12 @@
       "accessType": "*",
       "principalType": "ROLE",
       "principalId": "$unauthenticated",
+      "permission": "DENY"
+    },
+    {
+      "accessType": "*",
+      "principalType": "ROLE",
+      "principalId": "$authenticated",
       "permission": "DENY"
     },
     {

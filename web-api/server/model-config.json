@@ -120,16 +120,16 @@
     "dataSource": "mongodb",
     "public": true
   },
-  "vote": {
-    "dataSource": "transient",
-    "public": false
+  "fuelPriceSuggestionVote": {
+    "dataSource": "mongodb",
+    "public": true
   },
-  "rating": {
-    "dataSource": "transient",
-    "public": false
+  "gasStationRating": {
+    "dataSource": "mongodb",
+    "public": true
   },
-  "comment": {
-    "dataSource": "transient",
-    "public": false
+  "gasStationComment": {
+    "dataSource": "mongodb",
+    "public": true
   }
 }

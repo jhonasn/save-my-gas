@@ -1,13 +1,18 @@
 {
-  "name": "vote",
+  "name": "gasStationRating",
+  "plural": "gasStationRatings",
   "base": "PersistedModel",
   "idInjection": true,
   "options": {
     "validateUpsert": true
   },
   "properties": {
-    "positive": {
-      "type": "boolean",
+    "rating": {
+      "type": "number",
+      "required": true
+    },
+    "gasStationId": {
+      "type": "string",
       "required": true
     },
     "userId": {
@@ -17,6 +22,11 @@
   },
   "validations": [],
   "relations": {
+    "gasStation": {
+      "type": "belongsTo",
+      "model": "gasStation",
+      "foreignKey": "gasStationId"
+    },
     "user": {
       "type": "belongsTo",
       "model": "user",
