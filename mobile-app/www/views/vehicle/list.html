@@ -1,6 +1,6 @@
 <div class="container">
-	<h3 class="header text-amber"
-					ng-bind="!collection ? 'Carregando...' : (collection.$resolved && collection.length ? 'Seus veículos cadastrados:' : 'Nenhum veículo cadastrado ainda')"></h3>
+	<h5 class="header grey-text text-lighten-1"
+					ng-bind="!collection ? 'Carregando...' : (collection.$resolved && collection.length ? 'Seus veículos cadastrados:' : 'Nenhum veículo cadastrado ainda')"></h5>
 
 	<div class="row"
 					ng-repeat="m in collection">
@@ -74,7 +74,7 @@
 
 	<div class="fixed-action-btn">
 		<a href="/vehicle/create"
-						class="btn-floating btn-large waves-effect waves-light red">
+						class="btn-floating btn-large waves-effect waves-light">
 			<i class="material-icons">add</i>
 		</a>
 	</div>

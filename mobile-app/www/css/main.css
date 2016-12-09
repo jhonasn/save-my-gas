@@ -171,3 +171,22 @@ body {
 .toast:active {
 	cursor: move;
 }
+
+.nav-wrapper ul.side-nav li.logo {
+	height: 200px;
+	width: 100%;
+}
+.nav-wrapper ul.side-nav li.logo a.brand-logo {
+	height: 200px;
+	width: 100%;
+}
+.nav-wrapper ul.side-nav li.logo a.brand-logo img.logo {
+	height: 100%;
+}
+
+.nav-wrapper ul.hide-on-med-and-down li.logo a.brand-logo {
+	height: 64px;
+}
+.nav-wrapper ul.hide-on-med-and-down img.logo {
+	height: 100%;
+}

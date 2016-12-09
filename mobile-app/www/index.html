@@ -26,8 +26,10 @@
 					href="lib/roboto-and-material-icons-fonts/css/material-icons.css">
 	<link rel="stylesheet"
 					href="lib/roboto-and-material-icons-fonts/css/roboto.css">
+	<!-- <link rel="stylesheet" href="lib/materialize/dist/css/materialize.css"> -->
+	<!-- custom generated css -->
 	<link rel="stylesheet"
-					href="lib/materialize/dist/css/materialize.css">
+					href="css/materialize.css">
 
 	<!-- app css -->
 	<link href="css/login.css"
@@ -64,7 +66,7 @@
 
 			<div class="row">
 				<button type="button"
-								class="amber darken-3 waves-effect waves-light btn col s10 offset-s1 m6 offset-m3 l4 offset-l4"
+								class="orange waves-effect waves-light btn col s10 offset-s1 m6 offset-m3 l4 offset-l4"
 								ng-click="toggleShowLogin()">
 					<img class="left icon" src="img/icons/email.svg">Login com save my gas
 				</button>
@@ -99,7 +101,7 @@
 
 				<div class="row">
 					<button type="submit"
-									class="btn amber darken-1 waves-effect waves-light col s12"
+									class="btn orange waves-effect waves-light col s12"
 									ng-disabled="!loginForm.$valid || loginForm.$pristine"
 									ng-bind="isSignup ? 'Cadastrar-se' : 'Login'"></button>
 				</div>
