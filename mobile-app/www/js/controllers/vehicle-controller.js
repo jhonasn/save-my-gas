@@ -1,19 +1,20 @@
 angular.module('save-my-gas')
-	.controller('vehicleController',
-		function(
-			$scope,
-			vehicleService,
-			collection
-		) {
-			$scope.collection = collection
 
-			$scope.delete = function(id) {
-				vehicleService.deleteById(id)
-					.then(function() {
-						$scope.collection = vehicleService.getCollection()
-					})
-			}
-		})
+.controller('vehicleController',
+	function(
+		$scope,
+		vehicleService,
+		collection
+	) {
+		$scope.collection = collection
+
+		$scope.delete = function(id) {
+			vehicleService.deleteById(id)
+				.then(function() {
+					$scope.collection = vehicleService.getCollection()
+				})
+		}
+	})
 
 .controller('vehicleEditController',
 	function(
@@ -70,7 +71,7 @@ angular.module('save-my-gas')
 			$cordovaCamera.getPicture(options).then(function(imageData) {
 				$scope.vehiclePhoto = "data:image/jpeg;base64," + imageData
 				var file = utilService.B64ToFile($scope.vehiclePhoto)
-				vehicleService.uploadPhoto(file, $scope.model, $scope.model.id )
+				vehicleService.uploadPhoto(file, $scope.model, $scope.model.id)
 			}, function(err) {
 				if (typeof err === 'string' && err.indexOf('cancelled') > -1) {
 					console.info('tirar foto cancelado')
@@ -126,11 +127,15 @@ angular.module('save-my-gas')
 		delete $scope.model.vehicleEngine
 		delete $scope.model.fuelType
 
-		$scope.model.vehicleBrand = { noResults: null }
-		$scope.model.vehicleModel = { noResults: null }
+		$scope.model.vehicleBrand = {
+			noResults: null
+		}
+		$scope.model.vehicleModel = {
+			noResults: null
+		}
 		$scope.model.vehicleEngine = {
 			power: null,
 			valve: null,
-			noResults: null 
+			noResults: null
 		}
 	})

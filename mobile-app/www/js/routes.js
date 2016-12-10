@@ -39,6 +39,11 @@ angular.module('save-my-gas')
 		}
 	})
 
+	.when('/simulator', {
+		templateUrl: SaveMyGas.rootRoute.getPath('/views/simulator/list.html'),
+		controller: 'simulatorController'
+	})
+
 	.when('/gas-station', {
 		templateUrl: SaveMyGas.rootRoute.getPath('/views/gas-station/list.html'),
 		controller: 'gasStationController'
@@ -47,6 +52,11 @@ angular.module('save-my-gas')
 	.when('/gas-station/edit', {
 		templateUrl: SaveMyGas.rootRoute.getPath('/views/gas-station/edit.html'),
 		controller: 'gasStationEditController'
+	})
+
+	.when('/reports', {
+		templateUrl: SaveMyGas.rootRoute.getPath('/views/reports/list.html'),
+		controller: 'reportsController'
 	})
 
 	// .when('/login', {

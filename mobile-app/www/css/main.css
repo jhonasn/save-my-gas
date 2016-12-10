@@ -184,9 +184,9 @@ body {
 	height: 100%;
 }
 
-.nav-wrapper ul.hide-on-med-and-down li.logo a.brand-logo {
-	height: 64px;
+.nav-wrapper a.brand-logo {
+	height: 100%;
 }
-.nav-wrapper ul.hide-on-med-and-down img.logo {
+.nav-wrapper a.brand-logo img.logo {
 	height: 100%;
 }

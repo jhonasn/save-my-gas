@@ -1,4 +1,5 @@
 angular.module('save-my-gas')
+
 .controller('mainController',
 function (
 	$scope,
