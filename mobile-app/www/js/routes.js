@@ -39,6 +39,21 @@ angular.module('save-my-gas')
 		}
 	})
 
+	.when('/vehicle-refuel', {
+		templateUrl: SaveMyGas.rootRoute.getPath('/views/vehicle-refuel/list.html'),
+		controller: 'vehicleRefuelController',
+		resolve: {
+			vehicles: function (vehicleService) {
+				return vehicleService.getCollection().$promise
+			}
+		}
+	})
+
+	.when('/vehicle-refuel/create', {
+		templateUrl: SaveMyGas.rootRoute.getPath('/views/vehicle-refuel/edit.html'),
+		controller: 'vehicleRefuelEditController'
+	})
+
 	.when('/simulator', {
 		templateUrl: SaveMyGas.rootRoute.getPath('/views/simulator/list.html'),
 		controller: 'simulatorController'

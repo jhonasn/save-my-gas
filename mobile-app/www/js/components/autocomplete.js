@@ -46,7 +46,8 @@ angular.module('save-my-gas')
 					}
 
 					_urlParams.filter.where[scope.label] = {
-						regexp: ''
+						like: '',
+						options: 'i'
 					}
 				} else {
 					_urlParams = scope.urlParams
@@ -95,7 +96,7 @@ angular.module('save-my-gas')
 							searchTerm = ''
 						}
 						if (!scope.urlParamsMake) {
-							_urlParams.filter.where[scope.label].regexp = searchTerm
+							_urlParams.filter.where[scope.label].like = searchTerm
 						} else {
 							_urlParams = scope.urlParamsMake(searchTerm)
 						}

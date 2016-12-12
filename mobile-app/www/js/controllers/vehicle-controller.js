@@ -93,10 +93,6 @@ angular.module('save-my-gas')
 			}
 		}
 
-		$scope.formatEngine = function(vehicleEngine) {
-			return vehicleEngine.power + ' - ' + vehicleEngine.valve + 'v'
-		}
-
 		$scope.save = function(model) {
 			vehicleService.save(model)
 		}
@@ -118,6 +114,35 @@ angular.module('save-my-gas')
 					limit: 10
 				}
 			}
+		}
+
+		$scope.vehicleRefuelGasStationParamsMake = function(searchTerm) {
+			return {
+				filter: {
+					where: {
+						and: [{
+							or: [{
+								companyName: {
+									like: searchTerm,
+									options: 'i'
+								}
+							}, {
+								flag: {
+									like: searchTerm,
+									options: 'i'
+								}
+							}]
+						}, {
+							cityId: $scope.model.cityId
+						}]
+					},
+					limit: 10
+				}
+			}
+		}
+
+		$scope.formatEngine = function(vehicleEngine) {
+			return vehicleEngine.power + ' - ' + vehicleEngine.valve + 'v'
 		}
 
 		//remove relations to get the relation of fk selected by the autocomplete

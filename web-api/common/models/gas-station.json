@@ -37,6 +37,11 @@
   },
   "validations": [],
   "relations": {
+    "city": {
+        "type": "belongsTo",
+        "model": "city",
+        "foreignKey": "cityId"
+    },
     "fuelPrices": {
       "type": "hasMany",
       "model": "fuelPrice",

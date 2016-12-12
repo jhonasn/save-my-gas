@@ -38,6 +38,12 @@ angular.module('save-my-gas')
 					});
 				},
 
+				toTitleCase: function(text) {
+					return text.replace(/\w\S*/g, function(txt) {
+						return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase()
+					})
+				}
+
 				// resizeImg: function(img, width) {
 				// 	/// set size proportional to image
 				// 	canvas.height = canvas.width * (img.height / img.width)

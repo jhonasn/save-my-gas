@@ -28,7 +28,7 @@
     },
     "gasStationId": {
       "type": "string",
-      "required": true
+      "required": false
     }
   },
   "validations": [],
@@ -54,8 +54,8 @@
     {
       "accessType": "*",
       "principalType": "ROLE",
-      "principalId": "$everyone",
-      "permission": "DENY"
+      "principalId": "$authenticated",
+      "permission": "ALLOW"
     },
     {
       "accessType": "*",

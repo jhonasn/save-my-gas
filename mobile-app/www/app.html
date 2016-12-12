@@ -88,6 +88,7 @@
 						</a>
 					</li>
 					<li><a href="/vehicle">Meus veículos</a></li>
+					<li><a href="/vehicle-refuel">Abastecimentos</a></li>
 					<li><a href="/simulator">Simular gastos de viagem</a></li>
 					<li><a href="/gas-station">Postos de combustível</a></li>
 					<li><a href="/reports">Relatórios</a></li>
@@ -96,6 +97,7 @@
 				<!-- Barra para celulares no modo horizontal, tablets e computadores -->
 				<ul class="right hide-on-med-and-down">
 					<li><a href="/vehicle">Meus veículos</a></li>
+					<li><a href="/vehicle-refuel">Abastecimentos</a></li>
 					<li><a href="/simulator">Simular gastos de viagem</a></li>
 					<li><a href="/gas-station">Postos de combustível</a></li>
 					<li><a href="/reports">Relatórios</a></li>
@@ -119,6 +121,8 @@
 					charset="utf-8"></script>
 	<script src="lib/materialize/dist/js/materialize.js"
 					charset="utf-8"></script>
+	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA_AhTj6nK_jhmNKKrcglg28JNv7OmmYjA"
+					type="text/javascript"></script>
 
 	<!-- angular libs -->
 	<script src="lib/angular/angular.js"
@@ -161,13 +165,11 @@
 					charset="utf-8"></script>
 	<script src="js/services/custom-routes-service.js"
 					charset="utf-8"></script>
-	<script src="js/services/converter-services.js"
-					charset="utf-8"></script>
-	<script src="js/services/stations-service.js"
-					charset="utf-8"></script>
 	<script src="js/services/vehicle-service.js"
 					charset="utf-8"></script>
 	<script src="js/services/vehicle-service.js"
+					charset="utf-8"></script>
+	<script src="js/services/vehicle-refuel-service.js"
 					charset="utf-8"></script>
 
 	<!-- components -->
@@ -182,6 +184,8 @@
 	<script src="js/controllers/home-controller.js"
 					charset="utf-8"></script>
 	<script src="js/controllers/vehicle-controller.js"
+					charset="utf-8"></script>
+	<script src="js/controllers/vehicle-refuel-controller.js"
 					charset="utf-8"></script>
 	<script src="js/controllers/simulator-controller.js"
 					charset="utf-8"></script>
