@@ -2,6 +2,12 @@ angular.module('save-my-gas')
 
 .config(function($routeProvider, $locationProvider) {
 
+	var vehiclesResolve = {
+		vehicles: function (vehicleService) {
+			return vehicleService.getCollection().$promise
+		}
+	}
+
 	$routeProvider
 
 	// .when('/', {
@@ -42,11 +48,7 @@ angular.module('save-my-gas')
 	.when('/vehicle-refuel', {
 		templateUrl: SaveMyGas.rootRoute.getPath('/views/vehicle-refuel/list.html'),
 		controller: 'vehicleRefuelController',
-		resolve: {
-			vehicles: function (vehicleService) {
-				return vehicleService.getCollection().$promise
-			}
-		}
+		resolve: vehiclesResolve
 	})
 
 	.when('/vehicle-refuel/create/:vehicleId', {
@@ -56,7 +58,8 @@ angular.module('save-my-gas')
 
 	.when('/simulator', {
 		templateUrl: SaveMyGas.rootRoute.getPath('/views/simulator/list.html'),
-		controller: 'simulatorController'
+		controller: 'simulatorController',
+		resolve: vehiclesResolve
 	})
 
 	.when('/gas-station', {
