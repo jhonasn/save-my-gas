@@ -1,7 +1,7 @@
 {
 	"name": "save-my-gas",
 
-	"env": "production",
+	"env": "dev-local",
 
 	"dev": {
 		"urlDomain": "http://192.168.2.116:3000",
@@ -9,8 +9,8 @@
 	},
 
 	"production": {
-		"urlApi": "http://savemygas.com.br/api",
-		"urlDomain": "http://savemygas.com.br"
+		"urlApi": "https://rest-savemygas.getup.io/api",
+		"urlDomain": "https://rest-savemygas.getup.io"
 	},
 
 	"dev-local": {

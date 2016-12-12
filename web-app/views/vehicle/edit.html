@@ -63,7 +63,7 @@
 								label="name"
 								url="/vehiclemodels"
 								on-select="vehicleModelSelected"
-								url-params="{ filter: { where: { name: { regexp: searchTerm } }, include: [ 'vehicleBrand', 'vehicleType', 'vehicleEngine' ] } }"
+								url-params="{ filter: { where: { name: { like: searchTerm, options: 'i' } }, include: [ 'vehicleBrand', 'vehicleType' ] } }"
 								init-with="model.vehicleModel"
 								no-results="model.vehicleModel.noResults"
 								ng-model="model.vehicleModelId"

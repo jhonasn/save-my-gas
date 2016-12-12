@@ -1,0 +1,82 @@
+<form name="modelForm"
+				ng-submit="modelForm.$valid && save(model)"
+				novalidate>
+
+	<div class="container">
+
+		<div class="row">
+			<div id="#vehicle-refuels">
+				<div class="input-field">
+					<autocomplete id="gas-station-city-field"
+									name="gasStationCityIdField"
+									ng-class="{ invalid: modelForm.gasStationCityIdField.$invalid }"
+									url="/cities"
+									label="name"
+									format="formatCity"
+									init-with="model.cityId"
+									is-editable="false"
+									no-results="cityNoResults"
+									required="true"
+									ng-model="model.cityId"></autocomplete>
+					<label for="gas-station-city-field">Cidade do posto de combustível</label>
+					<div ng-if="modelForm.gasStationCityIdField.$dirty || modelForm.$submitted"
+									ng-messages="modelForm.gasStationCityIdField.$error"
+									role="alert">
+						<span class="invalid"
+										ng-message="required">Obrigatório</span>
+					</div>
+				</div>
+				<div class="input-field">
+					<autocomplete id="gas-station-field"
+									name="gasStationIdField"
+									ng-class="{ invalid: modelForm.gasStationIdField.$invalid }"
+									url="/gasStations"
+									url-params-make="gasStationParamsMake"
+									label="companyName"
+									init-with="model.gasStation"
+									is-editable="false"
+									format="formatGasStation"
+									no-results="gasStationNoResults"
+									ng-model="model.gasStationId"
+									required="true"
+									ng-disabled="!model.cityId"></autocomplete>
+					<label for="gas-station-field">Posto de combustível</label>
+					<div ng-if="modelForm.gasStationIdField.$dirty || modelForm.$submitted"
+									ng-messages="modelForm.gasStationIdField.$error"
+									role="alert">
+						<span class="invalid"
+										ng-message="required">Obrigatório</span>
+					</div>
+				</div>
+				<div class="input-field">
+					<input type="number"
+									id="value-field"
+									name="valueField"
+									ng-class="{ invalid: modelForm.valueField.$invalid }"
+									ng-model="model.value"
+									ng-required="true"
+									ng-min="0">
+					<label for="value-field">Valor</label>
+					<div ng-if="modelForm.valueField.$dirty || modelForm.$submitted"
+									ng-messages="modelForm.valueField.$error"
+									role="alert">
+						<span class="invalid"
+										ng-message="required">Obrigatório</span>
+						<span class="invalid"
+										ng-message="min">Selecione um valor maior que 0</span>
+					</div>
+				</div>
+			</div>
+
+		</div>
+
+		<div class="row">
+			<button type="submit"
+							class="btn waves-effect waves-light right">
+				<i class="material-icons right">done</i>Salvar
+			</button>
+		</div>
+
+	</div>
+
+</form>

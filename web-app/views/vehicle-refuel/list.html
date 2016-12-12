@@ -1,0 +1,48 @@
+<div class="container">
+	<div input-field>
+		<select class=""
+						ng-model="vehicle"
+						material-select
+						ng-change="vehicleSelected(vehicle)"
+						ng-options="vehicle as vehicle.name for vehicle in vehicles"
+						watch>
+						<option value="">Selecione um veículo</option>
+						<option ng-bind="vehicle.name"></option>
+		</select>
+	</div>
+
+	<table ng-show="collection.$resolved">
+		<thead>
+			<tr>
+				<th data-field="gasStation">Posto de combustível</th>
+				<th data-field="gasStation.city">Cidade</th>
+				<th data-field="value">Valor</th>
+				<th data-field="actions">Ações</th>
+			</tr>
+		</thead>
+
+		<tbody>
+			<tr ng-repeat="m in collection">
+				<td ng-bind="formatGasStation(m.gasStation)"></td>
+				<td ng-bind="formatCity(m.gasStation.city)"></td>
+				<td ng-bind="m.value"></td>
+				<td>
+					<a href="#"
+									ng-click="delete(m.id)">Remover</a>
+				</td>
+			</tr>
+
+			<tr ng-show="collection.$resolved && !collection.length">
+				<td colspan="3">Nenhum abastecimento cadastrado para este veículo</td>
+			</tr>
+		</tbody>
+	</table>
+</div>
+
+<div class="fixed-action-btn">
+	<a ng-href="/vehicle-refuel/create/{{vehicleId}}"
+					class="btn-floating btn-large waves-effect waves-light"
+					ng-disabled="!vehicleId">
+		<i class="material-icons">add</i>
+	</a>
+</div>
