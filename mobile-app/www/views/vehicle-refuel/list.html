@@ -6,7 +6,7 @@
 						ng-change="vehicleSelected(vehicle)"
 						ng-options="vehicle as vehicle.name for vehicle in vehicles"
 						watch>
-						<option value="">Selecione</option>
+						<option value="">Selecione um veículo</option>
 						<option ng-bind="vehicle.name"></option>
 		</select>
 	</div>
@@ -15,6 +15,7 @@
 		<thead>
 			<tr>
 				<th data-field="gasStation">Posto de combustível</th>
+				<th data-field="gasStation.city">Cidade</th>
 				<th data-field="value">Valor</th>
 				<th data-field="actions">Ações</th>
 			</tr>
@@ -23,6 +24,7 @@
 		<tbody>
 			<tr ng-repeat="m in collection">
 				<td ng-bind="formatGasStation(m.gasStation)"></td>
+				<td ng-bind="formatCity(m.gasStation.city)"></td>
 				<td ng-bind="m.value"></td>
 				<td>
 					<a href="#"
@@ -38,8 +40,9 @@
 </div>
 
 <div class="fixed-action-btn">
-	<a href="/vehicle-refuel/create"
-					class="btn-floating btn-large waves-effect waves-light">
+	<a ng-href="/vehicle-refuel/create/{{vehicleId}}"
+					class="btn-floating btn-large waves-effect waves-light"
+					ng-disabled="!vehicleId">
 		<i class="material-icons">add</i>
 	</a>
 </div>

@@ -4,5 +4,5 @@ angular.module('save-my-gas')
 function (
 	$scope
 ) {
-	$scope.title = "reports controller"
+	$scope.title = 'relatórios'
 })

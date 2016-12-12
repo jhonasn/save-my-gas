@@ -45,35 +45,44 @@ angular.module('save-my-gas')
 				if (model.$save) {
 					model.$save()
 				} else {
-					model = User.vehicleRefuels.create({
-						id: model.ownerId
-					}, model)
+					model = VehicleRefuel.create(model)
 				}
 
 				model.$promise.then(function() {
-						Materialize.toast('Veículo salvo')
-						$location.path('/vehicle')
-						defered.resolve()
+						Materialize.toast('Abastecimento salvo')
+						$location.path('/vehicle-refuel')
 					})
 					.catch(function() {
-						Materialize.toast('Não foi possível salvar o veículo')
+						Materialize.toast('Não foi possível salvar o abastecimento')
 					})
 
 				return model.$promise
 			},
 
 			deleteById: function(id) {
-				return User.vehicles.destroyById({
+				return VehicleRefuel.destroyById({
 						id: _userId,
 						fk: id
 					})
 					.$promise
 					.then(function() {
-						Materialize.toast('Veículo deletado')
+						Materialize.toast('Abastecimento deletado')
 					})
 					.catch(function(err) {
-						Materialize.toast('Não foi possível deletar o veículo')
+						Materialize.toast('Não foi possível deletar o abastecimento')
 					})
+			},
+
+			formatCity: function(city) {
+				return utilService.toTitleCase(city.name)
+			},
+
+			formatGasStation: function(gasStation) {
+				return utilService.toTitleCase(
+					gasStation.flag ?
+					gasStation.flag + ' - ' + gasStation.companyName :
+					gasStation.companyName
+				)
 			}
 		}
 

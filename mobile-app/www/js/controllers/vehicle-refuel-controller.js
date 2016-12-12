@@ -4,14 +4,15 @@ angular.module('save-my-gas')
 	function(
 		$scope,
 		VehicleRefuel,
+		vehicleRefuelService,
 		vehicles
 	) {
-		vehicles.forEach(function (vehicle) {
+		vehicles.forEach(function(vehicle) {
 			vehicle.name = vehicle.nickName.trim() || vehicle.vehicleModel.name
 		})
 
 		$scope.vehicles = vehicles
-		// $scope.vehicleId = null
+			// $scope.vehicleId = null
 
 		$scope.delete = function(id) {
 			VehicleRefuel.deleteById(id)
@@ -21,45 +22,43 @@ angular.module('save-my-gas')
 		}
 
 		$scope.vehicleSelected = function(vehicle) {
-			$scope.vehicleId = vehicle.id
-			$scope.collection = VehicleRefuel.find({
-				id: $scope.vehicleId,
-				filter: {
-					include: { gasStation: ['city'] }
-				}
-			})
+			if (vehicle && vehicle.id) {
+				$scope.vehicleId = vehicle.id
+				$scope.collection = VehicleRefuel.find({
+					filter: {
+						where: {
+							vehicleId: $scope.vehicleId
+						},
+						include: {
+							gasStation: ['city']
+						}
+					}
+				})
+			} else {
+				$scope.vehicleId = $scope.collection = null
+			}
 		}
 
-		$scope.formatGasStationName = function(gasStation) {
-
-		}
-
-		$scope.formatCity = function(city) {
-			return utilService.toTitleCase(city.name)
-		}
-
-		$scope.formatGasStation = function(gasStation) {
-			return utilService.toTitleCase(
-				gasStation.flag ?
-				gasStation.flag + ' - ' + gasStation.companyName :
-				gasStation.companyName
-			)
-		}
+		$scope.formatCity = vehicleRefuelService.formatCity
+		$scope.formatGasStation = vehicleRefuelService.formatGasStation
 	})
 
-.controller('vehicleEditController',
+.controller('vehicleRefuelEditController',
 	function(
 		$scope,
+		$routeParams,
 		utilService,
-		VehicleRefuel
+		vehicleRefuelService
 	) {
-		$scope.model = model
-
-		$scope.save = function(model) {
-
+		$scope.model = {
+			vehicleId: $routeParams.vehicleId
 		}
 
-		$scope.vehicleRefuelGasStationParamsMake = function(searchTerm) {
+		$scope.save = function(model) {
+			vehicleRefuelService.save(model)
+		}
+
+		$scope.gasStationParamsMake = function(searchTerm) {
 			return {
 				filter: {
 					where: {
@@ -83,4 +82,7 @@ angular.module('save-my-gas')
 				}
 			}
 		}
+
+		$scope.formatCity = vehicleRefuelService.formatCity
+		$scope.formatGasStation = vehicleRefuelService.formatGasStation
 	})

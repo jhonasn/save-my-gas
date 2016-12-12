@@ -4,10 +4,10 @@ angular.module('save-my-gas')
 
 	$routeProvider
 
-	.when('/', {
-		templateUrl: SaveMyGas.rootRoute.getPath('/views/home.html'),
-		controller: 'homeController'
-	})
+	// .when('/', {
+	// 	templateUrl: SaveMyGas.rootRoute.getPath('/views/home.html'),
+	// 	controller: 'homeController'
+	// })
 
 	.when('/vehicle', {
 		templateUrl: SaveMyGas.rootRoute.getPath('/views/vehicle/list.html'),
@@ -49,7 +49,7 @@ angular.module('save-my-gas')
 		}
 	})
 
-	.when('/vehicle-refuel/create', {
+	.when('/vehicle-refuel/create/:vehicleId', {
 		templateUrl: SaveMyGas.rootRoute.getPath('/views/vehicle-refuel/edit.html'),
 		controller: 'vehicleRefuelEditController'
 	})

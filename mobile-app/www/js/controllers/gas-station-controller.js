@@ -4,7 +4,7 @@ angular.module('save-my-gas')
 function(
 	$scope
 ) {
-
+	$scope.title = 'busca de preços de postoso de combustível'
 })
 
 .controller('gasStationViewController',
