@@ -9,8 +9,8 @@
 	},
 
 	"production": {
-		"urlApi": "https://rest-savemygas.getup.io/api",
-		"urlDomain": "https://rest-savemygas.getup.io"
+		"urlApi": "http://savemygas.com.br/api",
+		"urlDomain": "http://savemygas.com.br"
 	},
 
 	"dev-local": {

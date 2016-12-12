@@ -31,7 +31,7 @@ gulp.task('min-login-js', function() {
         ])
         .pipe(concat('/js/app-login.js'))
         .pipe(ngAnnotate())
-        // .pipe(uglify())
+        .pipe(uglify())
         .pipe(gulp.dest('../web-app'))
 })
 
@@ -68,7 +68,7 @@ gulp.task('min-app-js', function() {
         ])
         .pipe(concat('/js/app.js'))
         .pipe(ngAnnotate())
-        // .pipe(uglify())
+        .pipe(uglify())
         .pipe(gulp.dest('../web-app'))
 })
 
