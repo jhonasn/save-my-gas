@@ -1,17 +1,41 @@
 <div class="container">
-	<h5 class="header grey-text text-lighten-1">Desculpe, a tela de simulação de gastos de combustível ainda está em desenvolvimento</h1>
+	<h5 class="header grey-text text-lighten-1">Simulador de gasto entre rotas</h5>
 </div>
 
-<div id="map" data-tap-disabled="true"></div>
+<div id="map-inputs" class="row">
+	<div input-field>
+		<select class=""
+						ng-model="vehicle"
+						material-select
+						ng-change="vehicleSelected(vehicle)"
+						ng-options="vehicle as vehicle.nickName for vehicle in vehicles"
+						watch>
+						<option value="">Selecione um veículo</option>
+						<option ng-bind="vehicle.nickName"></option>
+		</select>
+	</div>
 
-<div input-field>
-	<select class=""
-					ng-model="vehicle"
-					material-select
-					ng-change="vehicleSelected(vehicle)"
-					ng-options="vehicle as vehicle.name for vehicle in vehicles"
-					watch>
-					<option value="">Selecione um veículo</option>
-					<option ng-bind="vehicle.name"></option>
-	</select>
+	<div class="input-field">
+		<input type="text"
+						name="originField"
+						id="origin-field"
+						ng-class="{ invalid: modelForm.originField.$invalid }"
+						ng-model="model.originField"
+						placeholder=""
+						ng-disabled="!vehicleId">
+		<label for="origin-field">Origem</label>
+	</div>
+
+	<div class="input-field">
+		<input type="text"
+						name="destinationField"
+						id="destination-field"
+						ng-class="{ invalid: modelForm.originField.$invalid }"
+						ng-model="model.destinationField"
+						placeholder=""
+						ng-disabled="!vehicleId || model.origin">
+		<label for="destination-field">Destino</label>
+	</div>
 </div>
+<div id="map"
+				data-tap-disabled="true"></div>

@@ -77,6 +77,10 @@ top: 50px;*/
     height: 100%;
 }
 
-#map-inputs input {
-	background-color: white;
+a.clear-button.disabled {
+    pointer-events: none;
+}
+
+a.clear-button.disabled i {
+    color: grey !important;
 }

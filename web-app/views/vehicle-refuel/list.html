@@ -1,13 +1,15 @@
 <div class="container">
+	<h5 class="header grey-text text-lighten-1">Cadastro de abastecimentos de veículo</h5>
+
 	<div input-field>
 		<select class=""
 						ng-model="vehicle"
 						material-select
 						ng-change="vehicleSelected(vehicle)"
-						ng-options="vehicle as vehicle.name for vehicle in vehicles"
+						ng-options="vehicle as vehicle.nickName for vehicle in vehicles"
 						watch>
 						<option value="">Selecione um veículo</option>
-						<option ng-bind="vehicle.name"></option>
+						<option ng-bind="vehicle.nickName"></option>
 		</select>
 	</div>
 
@@ -28,7 +30,7 @@
 				<td ng-bind="m.value"></td>
 				<td>
 					<a href="#"
-									ng-click="delete(m.id)">Remover</a>
+									ng-click="delete(m)">Remover</a>
 				</td>
 			</tr>
 

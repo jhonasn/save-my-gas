@@ -64,14 +64,52 @@ angular.module('save-my-gas')
 			},
 
 			verifyVehicleRefuels: function(vehicleId) {
+				var defered = $q.defer()
+
 				vehicleRefuelService.getCount(vehicleId)
 					.$promise
 					.then(function(res) {
 						if (!res.count) {
 							Materialize.toast('O veículo selecionado não possui abastecimentos cadastrados, cadastre um para fazer a simulação')
+							defered.reject('no vehicle refuels')
 							$location.path('/vehicle-refuel/' + vehicleId)
+						} else {
+							defered.resolve(res.count)
 						}
-					})
+					}).catch(defered.reject)
+
+				return defered.promise
+			},
+
+			getLastRefuelValue: function(vehicleId) {
+				var defered = $q.defer()
+
+				Vehicle.vehicleRefuels({
+					id: vehicleId,
+					filter: {
+						order: 'date DESC',
+						limit: 1,
+						fields: 'value'
+					}
+				})
+				.$promise
+				.then(function(refuels) {
+					if(refuels.length && refuels[0].value) {
+						defered.resolve(refuels[0].value)
+					} else {
+						Materialize.toast('Ocorreu um problema ao recuperar os abastecimentos do veículo selecionado')
+						defered.reject('no refuels')
+					}
+				})
+				.catch(defered.reject)
+
+				return defered.promise
+			},
+
+			getVehicleById: function(vehicleId) {
+				return Vehicle.findById({
+					id: vehicleId
+				})
 			},
 
 			formatCity: function(city) {
