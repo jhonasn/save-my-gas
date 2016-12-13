@@ -89,13 +89,13 @@ angular.module('save-my-gas')
 					filter: {
 						order: 'date DESC',
 						limit: 1,
-						fields: 'value'
+						fields: 'amountUnit'
 					}
 				})
 				.$promise
 				.then(function(refuels) {
-					if(refuels.length && refuels[0].value) {
-						defered.resolve(refuels[0].value)
+					if(refuels.length && refuels[0].amountUnit) {
+						defered.resolve(refuels[0].amountUnit)
 					} else {
 						Materialize.toast('Ocorreu um problema ao recuperar os abastecimentos do veículo selecionado')
 						defered.reject('no refuels')

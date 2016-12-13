@@ -48,6 +48,25 @@
 										ng-message="required">Obrigatório</span>
 					</div>
 				</div>
+
+				<div class="input-field">
+					<input type="number"
+									id="amount-unit-field"
+									name="amountUnitField"
+									ng-class="{ invalid: modelForm.amountUnitField.$invalid }"
+									ng-model="model.amountUnit"
+									ng-required="true"
+									ng-min="0">
+					<label for="amount-unit-field">Valor litro do combustível</label>
+					<div ng-if="modelForm.amountUnitField.$dirty || modelForm.$submitted"
+									ng-messages="modelForm.amountUnitField.$error"
+									role="alert">
+						<span class="invalid"
+										ng-message="required">Obrigatório</span>
+						<span class="invalid"
+										ng-message="min">Selecione um valor maior que 0</span>
+					</div>
+				</div>
 				<div class="input-field">
 					<input type="number"
 									id="value-field"
@@ -56,7 +75,7 @@
 									ng-model="model.value"
 									ng-required="true"
 									ng-min="0">
-					<label for="value-field">Valor</label>
+					<label for="value-field">Valor abastecido</label>
 					<div ng-if="modelForm.valueField.$dirty || modelForm.$submitted"
 									ng-messages="modelForm.valueField.$error"
 									role="alert">

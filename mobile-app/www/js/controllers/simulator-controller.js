@@ -170,7 +170,7 @@ angular.module('save-my-gas')
 
 							var liters = distance / (selectedVehicle.consumption * 1000)
 
-							var cost = liters / lastRefuelValue
+							var cost = liters * lastRefuelValue
 
 							liters = liters.toFixed(3) + ' L'
 							cost = $filter('currency')(cost, 'R$ ', 2)
