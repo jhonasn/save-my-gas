@@ -1,79 +1,57 @@
 <div class="container">
-	<h5 class="header grey-text text-lighten-1">Desculpe, a tela de {{title}} ainda está em desenvolvimento</h1>
+	<!-- <h5 class="header grey-text text-lighten-1">Desculpe, a tela de {{title}} ainda está em desenvolvimento</h1> -->
+	<h5 class="header grey-text text-lighten-1">Desculpe, a tela de busca de preços de postoso de combustível ainda está em desenvolvimento</h1>
 </div>
 
-<!-- <ion-view view-title="Gas Stations">
-	<ion-content on-scroll="scroll()">
+<!-- <div class="container">
+	<h5 class="header grey-text text-lighten-1">
+		{{
+			(collection.$resolved && collection.length) || !vehicleId
+			?
+			'Postos de combustível próximos'
+			:
+			'Carregando postos de combustível próximos...'
+		}}
+	</h5>
 
-		<ion-refresher pulling-text="Pull to update gas near stations" on-refresh="updateStations(radius)">
-		</ion-refresher>
+	<div input-field>
+		<select class=""
+						ng-model="vehicle"
+						material-select
+						ng-change="vehicleSelected(vehicle)"
+						ng-options="vehicle as vehicle.nickName for vehicle in vehicles"
+						watch>
+						<option value="">Selecione um veículo</option>
+						<option ng-bind="vehicle.nickName"></option>
+		</select>
+	</div>
 
-		<div class="card" ng-show="!connected">
-			<div class="item item-text-wrap">
-				You are disconnected!
-			</div>
-		</div>
+	<table ng-show="collection.$resolved">
+		<thead>
+			<tr>
+				<th data-field="gasStation">Posto de combustível</th>
+				<th data-field="gasStation.city">Cidade</th>
+				<th data-field="arriveValue">Valor para chegar</th>
+				<th data-field="amountUnit">Valor combustível</th>
+				<th data-field="actions">Ações</th>
+			</tr>
+		</thead>
 
-		<div class="card" ng-show="geolocationError">
-			<div class="item item-text-wrap">
-				There was an error trying to get your geolocation!
-			</div>
-		</div>
+		<tbody>
+			<tr ng-repeat="m in collection">
+				<td ng-bind="formatGasStation(m.gasStation)"></td>
+				<td ng-bind="formatCity(m.gasStation.city)"></td>
+				<td ng-bind="m.arriveValue | currency"></td>
+				<td ng-bind="m.curretPrice | currency"></td>
+				<td>
+					<a href="#"
+									ng-click="delete(m)">Remover</a>
+				</td>
+			</tr>
 
-		<div class="card" ng-show="gmapsError">
-			<div class="item item-text-wrap">
-				There was an error trying to get the gas stations!
-			</div>
-		</div>
-
-		<label for="range">Search Radius</label>
-		<div class="range">
-			<input type="range" id="range" ng-model="radius" min="0" max="50000">
-		</div>
-		<span>{{radius/1000}} Km</span>
-		<br>
-		<span>scroll: {{scrollPosition}}</span>
-
-		<ion-list>
-
-			<ion-item ng-show="loading">
-				...Loading...
-			</ion-item>
-
-			<ion-item ng-repeat="station in gasStations | orderBy: 'distance.value'" ui-sref="app.station-view({id: station.id})">
-				<h3>{{station.name}}</h3>
-				<ul>
-					<li>{{station.address}}</li>
-					<li>precise address: {{station.addressPrecise}}</li>
-					<li>distance: {{station.distance.text}}</li>
-					<li>time to arrive: {{station.duration.text}}</li>
-					<li>gallons: {{station.fuelSpend.toFixed(3)}}</li>
-					<ul>
-						prices: i don't know if i can do this
-						<li>gas: </li>
-						<li>diesel: </li>
-						<li>oxy gas: </li>
-					</ul>
-				</ul>
-
-				<button class="button col" ng-show="station.location && geolocation.coords" ng-click="openUrl('http://maps.google.com/maps?saddr={0},{1}&daddr={2},{3}'.replace('{0}',geolocation.coords.latitude).replace('{1}',geolocation.coords.longitude).replace('{2}',station.location.lat).replace('{3}',station.location.lng))">Open route to this gas station</button>
-			</ion-item>
-
-			<ion-item>
-				<button class="button col" ng-show="geolocation.coords" ng-click="openUrl('geo:' + geolocation.coords.latitude + ',' + geolocation.coords.longitude)">Open my Geolocation</button>
-			</ion-item>
-
-		</ion-list>
-
-
-		<ion-infinite-scroll ng-if="gasStations.nextPage && !loading" distance="1%" on-infinite="nextResults(radius, gasStations)">
-			<ion-spinner></ion-spinner>
-		</ion-infinite-scroll>
-
-	</ion-content>
-
-	<!-- ng-show="scrollPosition.top > 100" --
-	<a id="fixed-to-top" title="scroll to top" class="button button-dark scroll-show-hide hide" show-percent="50" scroll-top="true"><i class="ion-arrow-up-a"></i></scroll-fixed>
-    <a id="fixed-to-up" show-percent="30" title="scroll bunch upper" class="button button-dark scroll-show-hide hide"><i class="ion-chevron-up"></i></a>
-
-</ion-view> -->
+			<tr ng-show="collection.$resolved && !collection.length">
+				<td colspan="5">Nenhum posto de combustível encontrado na região (raio 50 km)</td>
+			</tr>
+		</tbody>
+	</table>
+</div> -->
