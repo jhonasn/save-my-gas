@@ -2,7 +2,7 @@
 	<h5 class="header grey-text text-lighten-1">Simulador de gasto entre rotas</h5>
 </div>
 
-<div class="row">
+<div id="map-inputs" class="row">
 	<div input-field>
 		<select class=""
 						ng-model="vehicle"
@@ -13,6 +13,28 @@
 						<option value="">Selecione um veículo</option>
 						<option ng-bind="vehicle.nickName"></option>
 		</select>
+	</div>
+
+	<div class="input-field">
+		<input type="text"
+						name="originField"
+						id="origin-field"
+						ng-class="{ invalid: modelForm.originField.$invalid }"
+						ng-model="model.originField"
+						placeholder=""
+						ng-disabled="!vehicleId">
+		<label for="origin-field">Origem</label>
+	</div>
+
+	<div class="input-field">
+		<input type="text"
+						name="destinationField"
+						id="destination-field"
+						ng-class="{ invalid: modelForm.originField.$invalid }"
+						ng-model="model.destinationField"
+						placeholder=""
+						ng-disabled="!vehicleId || model.origin">
+		<label for="destination-field">Destino</label>
 	</div>
 </div>
 <div id="map"

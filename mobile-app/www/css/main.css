@@ -76,3 +76,7 @@ top: 50px;*/
     width: 100%;
     height: 100%;
 }
+
+#map-inputs input {
+	background-color: white;
+}
