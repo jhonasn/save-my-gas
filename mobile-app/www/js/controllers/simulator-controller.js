@@ -15,7 +15,7 @@ angular.module('save-my-gas')
 		$scope.vehicles = vehicles
 		$scope.model = {}
 		var selectedVehicle = null
-		var lastRefuelValue = 0
+		var lastRefuelValue = null
 
 		var originPlaceId = null
 		var destinationPlaceId = null
