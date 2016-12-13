@@ -3,13 +3,11 @@ angular.module('save-my-gas')
 .factory('vehicleRefuelService',
 	function(
 		$location,
-		$q,
 		User,
 		Vehicle,
 		// FuelType,
 		authService,
-		utilService,
-		appConstants
+		utilService
 	) {
 		var _user = authService.getUser()
 		var _userId = authService.getUser().userId

@@ -4,7 +4,6 @@ angular.module('save-my-gas')
 	function(
 		$scope,
 		$routeParams,
-		VehicleRefuel,
 		vehicleRefuelService,
 		vehicles
 	) {

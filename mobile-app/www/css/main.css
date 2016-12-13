@@ -1,15 +1,13 @@
 /*old ionic proj css*/
 
-html {
-	height: 100%;
-}
-
-body {
-	height: 100%;
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
 }
 
 body main {
-	height: 100%;
+    height: 100%;
 }
 
 [role="alert"] .invalid {
@@ -77,6 +75,4 @@ top: 50px;*/
 #map {
     width: 100%;
     height: 100%;
-    margin: 0;
-    padding: 0;
 }
