@@ -3,8 +3,8 @@ angular.module('save-my-gas')
 .config(function($routeProvider, $locationProvider) {
 
 	var vehiclesResolve = {
-		vehicles: function (vehicleService) {
-			return vehicleService.getCollection().$promise
+		vehicles: function (vehicleRefuelService) {
+			return vehicleRefuelService.getUserVehicles().$promise
 		}
 	}
 
@@ -45,7 +45,7 @@ angular.module('save-my-gas')
 		}
 	})
 
-	.when('/vehicle-refuel', {
+	.when('/vehicle-refuel/:vehicleId?', {
 		templateUrl: SaveMyGas.rootRoute.getPath('/views/vehicle-refuel/list.html'),
 		controller: 'vehicleRefuelController',
 		resolve: vehiclesResolve

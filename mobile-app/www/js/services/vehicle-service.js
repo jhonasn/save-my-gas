@@ -39,7 +39,8 @@ angular.module('save-my-gas')
 					collection.forEach(function(m) {
 						m.photo = m.photo || {}
 						m.photo.thumb = m.photo.thumb || SaveMyGas.rootRoute.getPath('/img/default-car.png')
-						m.nickName = m.nickName || '\xa0'
+							// m.nickName = m.nickName || '\xa0'
+						m.nickName = m.nickName && m.nickName.trim() ? m.nickName : m.vehicleModel.name
 						m.img = vehicleService.getVehiclePhotoPath(m)
 					})
 				})

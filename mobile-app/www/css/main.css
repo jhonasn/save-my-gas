@@ -8,6 +8,10 @@ body {
 	height: 100%;
 }
 
+body main {
+	height: 100%;
+}
+
 [role="alert"] .invalid {
     /*color: #B71C1C;*/
     /*from materialize ::after*/

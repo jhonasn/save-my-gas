@@ -1,17 +1,18 @@
-<div class="container">
+<!-- <div class="container">
 	<h5 class="header grey-text text-lighten-1">Desculpe, a tela de simulação de gastos de combustível ainda está em desenvolvimento</h1>
+</div> -->
+<div class="row">
+	<div input-field>
+		<select class=""
+						ng-model="vehicle"
+						material-select
+						ng-change="vehicleSelected(vehicle)"
+						ng-options="vehicle as vehicle.name for vehicle in vehicles"
+						watch>
+						<option value="">Selecione um veículo</option>
+						<option ng-bind="vehicle.name"></option>
+		</select>
+	</div>
 </div>
-
-<div id="map" data-tap-disabled="true"></div>
-
-<div input-field>
-	<select class=""
-					ng-model="vehicle"
-					material-select
-					ng-change="vehicleSelected(vehicle)"
-					ng-options="vehicle as vehicle.name for vehicle in vehicles"
-					watch>
-					<option value="">Selecione um veículo</option>
-					<option ng-bind="vehicle.name"></option>
-	</select>
-</div>
+<div id="map"
+				data-tap-disabled="true"></div>

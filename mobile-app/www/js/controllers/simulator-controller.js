@@ -6,13 +6,13 @@ angular.module('save-my-gas')
 		$q,
 		authService,
 		Vehicle,
-		VehicleRefuel,
 		vehicles
 	) {
 		$scope.title = "simulator controller"
 		$scope.geolocation = null
 		$scope.map = null
 		$scope.vehicleId = null
+		$scope.vehicles = vehicles
 
 		$scope.vehicleSelected = function(vehicle) {
 			if (vehicle && vehicle.id) {
@@ -29,67 +29,37 @@ angular.module('save-my-gas')
 			}
 		}
 
+		var verifyRefuels = function(vehicleId) {
+			Vehicle.VehicleRefuels.count({
+				filter: {
+					where: {
+						vehicleId: vehicleId
+					}
+				}
+			})
+		}
+
 		var initMap = function(coords) {
 			var mapDiv = document.getElementById('map')
 
-			// google.maps.event.addDomListener(window, 'load', function() {
-				var options = {
-					zoom: 8,
-					mapTypeId: google.maps.MapTypeId.ROADMAP
-				}
+			var options = {
+				zoom: 8,
+				mapTypeId: google.maps.MapTypeId.ROADMAP
+			}
 
-				if(coords && coords.latitude && coords.longitude) {
-					options.center = new google.maps.LatLng(coords.latitude, coords.longitude)
-				}
+			if (coords && coords.latitude && coords.longitude) {
+				options.center = new google.maps.LatLng(coords.latitude, coords.longitude)
+			}
 
-				$scope.map = new google.maps.Map(mapDiv, options)
-			// })
+			$scope.map = new google.maps.Map(mapDiv, options)
 		}
-		//
-		// var verifyRefuels = function(vehicleId) {
-		// 	vehicleRefuel.count({
-		// 		filter: {
-		// 			where: {
-		// 				vehicleId: vehicleId
-		// 			}
-		// 		}
-		// 	})
-		// }
-
-		// var verifyUserVehiclesRefuels = function() {
-		// 	var _user = authService.getUser()
-		// 	var _userId = authService.getUser().userId
-		//
-		// 	var collection = User.vehicles({
-		// 		id: _userId,
-		// 		filter: {
-		// 			include: [
-		// 				'vehicleBrand',
-		// 				'vehicleModel',
-		// 				'vehicleType',
-		// 				'vehicleEngine',
-		// 				'fuelType'
-		// 			]
-		// 		}
-		// 	})
-		//
-		// 	collection.$promise.then(function(collection) {
-		// 		collection.forEach(function(m) {
-		// 			m.photo = m.photo || {}
-		// 			m.photo.thumb = m.photo.thumb || SaveMyGas.rootRoute.getPath('/img/default-car.png')
-		// 			m.nickName = m.nickName || '\xa0'
-		// 			m.img = vehicleService.getVehiclePhotoPath(m)
-		// 		})
-		// 	})
-		//
-		// }
 
 		if (navigator.geolocation) {
 			var positionSuccess = function(pos) {
 				$scope.geolocation = pos.coords
-				// $scope.geolocation = {}
-				// $scope.geolocation.lat = pos.coords.latitude
-				// $scope.geolocation.lng = pos.coords.longitude
+					// $scope.geolocation = {}
+					// $scope.geolocation.lat = pos.coords.latitude
+					// $scope.geolocation.lng = pos.coords.longitude
 
 				initMap($scope.geolocation)
 			}

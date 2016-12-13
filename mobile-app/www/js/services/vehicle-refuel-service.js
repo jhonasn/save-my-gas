@@ -5,9 +5,9 @@ angular.module('save-my-gas')
 		$location,
 		$q,
 		User,
-		authService,
-		VehicleRefuel,
+		Vehicle,
 		// FuelType,
+		authService,
 		utilService,
 		appConstants
 	) {
@@ -16,24 +16,73 @@ angular.module('save-my-gas')
 
 		var vehicleRefuelService = {
 			getCollection: function(vehicleId) {
-				var collection = VehicleRefuel.find({
-					id: vehicleId
+				var collection = Vehicle.vehicleRefuels({
+					id: vehicleId,
+					filter: {
+						include: {
+							relation: 'gasStation',
+							scope: {
+								fields: [
+									'flag',
+									'companyName',
+									'cityId',
+								],
+								include: {
+									relation: 'city',
+									scope: {
+										fields: [
+											'name'
+										]
+									}
+								}
+							}
+						},
+						fields: [
+							'id',
+							'value',
+							'gasStationId'
+						]
+					}
 				})
-
-				// collection.$promise.then(function(collection) {
-				// 	collection.forEach(function(m) {
-				// 		m.photo = m.photo || {}
-				// 		m.photo.thumb = m.photo.thumb || SaveMyGas.rootRoute.getPath('/img/default-car.png')
-				// 		m.nickName = m.nickName || '\xa0'
-				// 		m.img = vehicleService.getVehiclePhotoPath(m)
-				// 	})
-				// })
 
 				return collection
 			},
 
+			getCount: function(vehicleId) {
+				return Vehicle.vehicleRefuels.count({
+					id: vehicleId
+				})
+			},
+
+			getUserVehicles: function() {
+				var vehicles = User.vehicles({
+					id: _userId,
+					filter: {
+						include: {
+							relation: 'vehicleModel',
+							scope: {
+								fields: ['name']
+							}
+						},
+						fields: [
+							'id',
+							'nickName',
+							'vehicleModelId'
+						]
+					}
+				})
+
+				vehicles.$promise.then(function(vehicles) {
+					vehicles.forEach(function(vehicle) {
+						vehicle.nickName = vehicle.nickName && vehicle.nickName.trim() ? vehicle.nickName : vehicle.vehicleModel.name
+					})
+				})
+
+				return vehicles
+			},
+
 			findById: function(id) {
-				return Vehicle.findById({
+				return VehicleRefuel.findById({
 					id: id
 				})
 			},
@@ -45,12 +94,14 @@ angular.module('save-my-gas')
 				if (model.$save) {
 					model.$save()
 				} else {
-					model = VehicleRefuel.create(model)
+					model = Vehicle.vehicleRefuels.create({
+						id: model.vehicleId
+					}, model)
 				}
 
-				model.$promise.then(function() {
+				model.$promise.then(function(model) {
 						Materialize.toast('Abastecimento salvo')
-						$location.path('/vehicle-refuel')
+						$location.path('/vehicle-refuel/' + model.vehicleId)
 					})
 					.catch(function() {
 						Materialize.toast('Não foi possível salvar o abastecimento')
@@ -59,10 +110,10 @@ angular.module('save-my-gas')
 				return model.$promise
 			},
 
-			deleteById: function(id) {
-				return VehicleRefuel.destroyById({
-						id: _userId,
-						fk: id
+			delete: function(model) {
+				return Vehicle.vehicleRefuels.destroyById({
+						id: model.vehicleId,
+						fk: model.id
 					})
 					.$promise
 					.then(function() {

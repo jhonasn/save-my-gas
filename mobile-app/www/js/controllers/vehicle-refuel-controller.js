@@ -3,39 +3,40 @@ angular.module('save-my-gas')
 .controller('vehicleRefuelController',
 	function(
 		$scope,
+		$routeParams,
 		VehicleRefuel,
 		vehicleRefuelService,
 		vehicles
 	) {
-		vehicles.forEach(function(vehicle) {
-			vehicle.name = vehicle.nickName.trim() || vehicle.vehicleModel.name
-		})
-
 		$scope.vehicles = vehicles
-			// $scope.vehicleId = null
+		$scope.vehicle = null
 
-		$scope.delete = function(id) {
-			VehicleRefuel.deleteById(id)
+		$scope.delete = function(model) {
+			model.vehicleId = $scope.vehicleId
+			vehicleRefuelService.delete(model)
 				.then(function() {
-					$scope.collection = vehicleRefuelService.getCollection()
+					$scope.collection = vehicleRefuelService.getCollection($scope.vehicleId)
 				})
 		}
 
 		$scope.vehicleSelected = function(vehicle) {
 			if (vehicle && vehicle.id) {
 				$scope.vehicleId = vehicle.id
-				$scope.collection = VehicleRefuel.find({
-					filter: {
-						where: {
-							vehicleId: $scope.vehicleId
-						},
-						include: {
-							gasStation: ['city']
-						}
-					}
-				})
+				$scope.collection = vehicleRefuelService.getCollection(vehicle.id)
 			} else {
 				$scope.vehicleId = $scope.collection = null
+			}
+		}
+
+		if ($routeParams.vehicleId) {
+			var vehicle = vehicles.filter(function(vehicle) {
+				return vehicle.id === $routeParams.vehicleId
+			})
+
+			if (vehicle.length) {
+				$scope.vehicle = vehicle[0]
+				$scope.vehicleId = $routeParams.vehicleId
+				$scope.vehicleSelected($scope.vehicle)
 			}
 		}
 
