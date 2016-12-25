@@ -74,14 +74,13 @@ function(
 					},
 					relation: 'city'
 				}
-			}
 		})
 
 		$scope.collection.then(function(collection) {
-			collection.forEatch(function(gasStation) {
-				gasStation.curretPrice = null
+			collection.forEach(function(gasStation) {
+				gasStation.currentPrice = null
 				if(gasStation.fuelPrices && gasStation.fuelPrices.length) {
-					gasStation.curretPrice = gasStation.fuelPrices[0].sale
+					gasStation.currentPrice = gasStation.fuelPrices[0].sale
 				}
 
 				//calculation
