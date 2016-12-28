@@ -85,23 +85,23 @@ angular.module('save-my-gas')
 				var defered = $q.defer()
 
 				Vehicle.vehicleRefuels({
-					id: vehicleId,
-					filter: {
-						order: 'date DESC',
-						limit: 1,
-						fields: 'amountUnit'
-					}
-				})
-				.$promise
-				.then(function(refuels) {
-					if(refuels.length && refuels[0].amountUnit) {
-						defered.resolve(refuels[0].amountUnit)
-					} else {
-						Materialize.toast('Ocorreu um problema ao recuperar os abastecimentos do veículo selecionado')
-						defered.reject('no refuels')
-					}
-				})
-				.catch(defered.reject)
+						id: vehicleId,
+						filter: {
+							order: 'date DESC',
+							limit: 1,
+							fields: 'amountUnit'
+						}
+					})
+					.$promise
+					.then(function(refuels) {
+						if (refuels.length && refuels[0].amountUnit) {
+							defered.resolve(refuels[0].amountUnit)
+						} else {
+							Materialize.toast('Ocorreu um problema ao recuperar os abastecimentos do veículo selecionado')
+							defered.reject('no refuels')
+						}
+					})
+					.catch(defered.reject)
 
 				return defered.promise
 			},

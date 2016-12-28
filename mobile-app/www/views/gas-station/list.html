@@ -1,8 +1,3 @@
-<div class="container">
-	<!-- <h5 class="header grey-text text-lighten-1">Desculpe, a tela de {{title}} ainda está em desenvolvimento</h1> -->
-	<h5 class="header grey-text text-lighten-1">Desculpe, a tela de busca de preços de postoso de combustível ainda está em desenvolvimento</h1>
-</div>
-
  <div class="container">
 	<h5 class="header grey-text text-lighten-1">
 		{{
@@ -30,6 +25,7 @@
 		<thead>
 			<tr>
 				<th data-field="gasStation">Posto de combustível</th>
+				<th data-field="gasStation.distance">Distância</th>
 				<th data-field="gasStation.city">Cidade</th>
 				<th data-field="arriveValue">Valor para chegar</th>
 				<th data-field="amountUnit">Valor combustível</th>
@@ -39,8 +35,9 @@
 
 		<tbody>
 			<tr ng-repeat="m in collection">
-				<td ng-bind="formatGasStation(m.gasStation)"></td>
-				<td ng-bind="formatCity(m.gasStation.city)"></td>
+				<td ng-bind="formatGasStation(m)"></td>
+				<td ng-bind="m.distance"></td>
+				<td ng-bind="formatCity(m.city)"></td>
 				<td ng-bind="m.arriveValue | currency"></td>
 				<td ng-bind="m.currentPrice | currency"></td>
 				<td>
@@ -54,4 +51,4 @@
 			</tr>
 		</tbody>
 	</table>
-</div> -->
+</div>
