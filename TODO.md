@@ -16,8 +16,8 @@
         - http://www.anp.gov.br/ <- i can't found WS of that shit
         - https://api.apontador.com.br <- maybe useful to get phone number of stations
 - [x] scratch data from anp.gov
-- [ ] implement data from anp.gov with geolocation - *doing this*
-- [ ] make db for stations info with scratched anp data
+- [x] implement data from anp.gov with geolocation - *doing this*
+- [x] make db for stations info with scratched anp data
 - [ ] implement service to auto update station from anp scratch
 - [x] implement back to top button with an directive
 - [x] make the computation to transform distance galons consumption in money
@@ -36,16 +36,17 @@
         - http://www.kbb.com/jsdata/2.1.37.1_40678/_modelsyears?vehicleclass=UsedCar
         - http://www.webservices.nl/en/product/vehicle-specificationsaccessories/
         - http://www.dataonesoftware.com/;
-- [ ] fix error messages, don't forget google response errors
-- [ ] on vehicle edit save errors isn't threated
+- [x] on vehicle edit save errors isn't threated
 - [x] verify if register vehicles is really needed
     - yes it is
 - [x] fix vehicles not deleting vehicles
 - [x] put consumption field at vehicle entity
 - [x] put auto calculate fuel consumption field at vehicle entity
-- [ ] implement vehicle consumption field on edit, problem when enter with comma
-- [ ] put google search with distance filter and radius select on one popup option
+- [x] implement vehicle consumption field on edit, problem when enter with comma
 - [x] order station list with angular/ionic orderby
+
+- [ ] implement field into gas station model containing fuel types and last update from fuel price in order to make better searches on gas station screen
+    - [ ] implement updater for these fields
 
 ### Medium Priority
 *Tasks that maybe will be implemented or don't have high priority*
@@ -63,15 +64,15 @@
 *Those tasks will be implemented on versions later 1.0*
 
 - [ ] implement vehicle reorder
-- [ ] implement search to another place in order to show how much fuel will spend to locations
-- [ ] make places list in order to make a comparation where how much it will be spend
-- [ ] save vehicle in the cloud
+- [x] implement search to another place in order to show how much fuel will spend to locations
+- [x] make places list in order to make a comparation where how much it will be spend
+- [x] save vehicle in the cloud
 
 ## Later Tasks
 *Tasks that will be implemented after the app goes to production or apply for the last*
 
 - [ ] implement android native scroll
-- [ ] verify if is a good to use Crosswalk instead WebView
+- [x] verify if is a good to use Crosswalk instead WebView
 - [ ] when application goes to production implement android google admob/adsense api
-- [ ] enable billing of google console
-- [ ] review design
+- [x] enable billing of google console
+- [x] review design

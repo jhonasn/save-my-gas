@@ -4,10 +4,12 @@ angular.module('save-my-gas')
 	function(
 		$scope,
 		GasStation,
+		FuelType,
 		simulatorService,
 		vehicleService,
 		vehicleRefuelService,
 		geolocationService,
+		utilService,
 		vehicles
 	) {
 		$scope.title = 'busca de preços de postoso de combustível'
@@ -65,53 +67,94 @@ angular.module('save-my-gas')
 		}
 
 		var getNearGasStations = function(geolocation) {
-			$scope.collection = GasStation.find({
-				filter: {
-					where: {
-						geolocation: {
-							near: {
-								lat: geolocation.latitude,
-								lng: geolocation.longitude
-							},
-							maxDistance: radius,
-							unit: 'kilometers'
-						}
-					},
-					limit: 10,
-					include: {
-						relation: 'fuelPrices',
-						scope: {
-							order: 'date DESC',
-							limit: 1
+			//get fuel type ids for gas station query
+			FuelType.find({
+					filter: {
+						where: {
+							clientShow: true
 						},
-						relation: 'city'
+						fields: 'id'
 					}
-				}
-			})
-
-			$scope.collection
+				})
 				.$promise
-				.then(function(collection) {
-					collection.forEach(function(gasStation) {
-						gasStation.currentPrice = null
-						if (gasStation.fuelPrices && gasStation.fuelPrices.length) {
-							gasStation.currentPrice = gasStation.fuelPrices[0].sale
+				.then(function(fuelTypeIds) {
+					var fuelTypeIdsQuery = fuelTypeIds.map(function(o) {
+						return {
+							fuelTypeId: o.id
 						}
-
-						gasStation.distance = geolocationService.distanceBetween(
-							$scope.geolocation,
-							gasStation.geolocation
-						)
-
-						if (gasStation.distance < 1) {
-							gasStation.distance = gasStation.distance.toFixed(3).substr(2) + ' m'
-						} else {
-							gasStation.distance = gasStation.distance.toFixed(1) + ' km'
-						}
-
-						//due calculation
-						gasStation.arriveValue = null
 					})
+
+					//get gas stations
+					$scope.collection = GasStation.find({
+						filter: {
+							where: {
+								geolocation: {
+									near: {
+										lat: geolocation.latitude,
+										lng: geolocation.longitude
+									},
+									maxDistance: radius,
+									unit: 'kilometers'
+								}
+							},
+							limit: 10,
+							include: [{
+									relation: 'fuelPrices',
+									scope: {
+										order: 'date DESC',
+										limit: 1,
+										where: {
+											or: fuelTypeIdsQuery
+										}
+									}
+								},
+								{
+									relation: 'city'
+								}
+							]
+						}
+					})
+
+					$scope.collection
+						.$promise
+						.then(function(collection) {
+							collection.forEach(function(gasStation) {
+								gasStation.currentPrice = null
+								if (gasStation.fuelPrices && gasStation.fuelPrices.length) {
+									gasStation.currentPrice = gasStation.fuelPrices[0].sale
+								}
+
+								gasStation.distance = geolocationService.distanceBetween(
+									$scope.geolocation,
+									gasStation.geolocation
+								)
+
+								//distance in meters like gmaps
+								gasStation.distance *= 1000
+
+								gasStation.liters = gasStation.distance / (selectedVehicle.consumption * 1000)
+
+								//due calculation
+								gasStation.arriveValue = gasStation.liters * lastRefuelValue
+
+								//using 60 km/h as default car speed
+								gasStation.time = (gasStation.distance / 1000) / 60
+								//to ms
+								gasStation.time = (gasStation.time * 60 * 60 * 1000)
+
+								//format
+								//distance
+								if (gasStation.distance < 1000) {
+									gasStation.distance = Math.round(gasStation.distance) + ' m'
+								} else {
+									gasStation.distance = (gasStation.distance / 1000).toFixed(1) + ' km'
+								}
+								//liters
+								gasStation.liters = gasStation.liters.toFixed(3) + ' L'
+								//time
+								gasStation.time = utilService.time.milisToTime(gasStation.time)
+							})
+						})
 				})
 		}
 
