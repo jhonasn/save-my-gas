@@ -16,12 +16,23 @@ module.getWeekBeginDate = function(date) {
 	return new Date(timeToSubtract)
 }
 
-module.upsertGasStation = function(app, gasStation) {
+module.upsertGasStation = function(app, gasStation, gasStations, notify) {
 	app.models.gasStation.upsert(gasStation, function(err, gs) {
 		if (err) callback(err)
 
-		notify(gs.companyName + ' completed!')
+		module.notifyProgress('completed progress', gasStations, gasStation, notify, true)
 	})
+}
+
+module.notifyProgress = function (message, gasStations, gasStation, notify, exit) {
+	var idx = gasStations.indexOf(gasStation)
+
+	if(idx % 1000 === 0) {
+		var pc = (idx * 100) / (gasStations.length - 1)
+		notify(message + ' - ' + pc.toFixed(1) + '%')
+	} else if(exit && idx === (gasStations.length - 1)) {
+		process.exit()
+	}
 }
 
 module.exports.updateGasStations = function(app, callback, notify) {
@@ -38,42 +49,36 @@ module.exports.updateGasStations = function(app, callback, notify) {
 				limit: 1
 			}, function(err, fuelPrices) {
 				gasStation.hasPrices = !!fuelPrices.length
-				notify('gas station: ' + gasStation.companyName + ' hasPrices: ' + gasStation.hasPrices)
+				gasStation.fuelTypeIds = []
+
+				module.notifyProgress('has prices progress', gasStations, gasStation, notify)
 
 				if (gasStation.hasPrices) {
 					var beginDate = fuelPrices[0].date
-					notify('last fuel price date: ' + beginDate)
-						//search for week begin date
+					//search for week begin date
 					beginDate = module.getWeekBeginDate(beginDate)
-					notify('begin week date: ' + beginDate)
 
-					app.models.fuelPrice.find({
-							where: {
-								and: [{
-										gasStationId: gasStation.id
-									},
-									{
-										date: {
-											gte: beginDate
-										}
+					app.datasources.mongodb.connector.collection('fuelPrice')
+						.distinct('fuelTypeId', {
+							$and: [{
+									gasStationId: gasStation.id
+								},
+								{
+									date: {
+										$gte: beginDate
 									}
-								],
-								fields: ['id']
-							}
-						}, function(err, fuelPrices) {
+								}
+							]
+						}, function(err, fuelTypeIds) {
 							if (err) callback(err)
 
-							gasStation.fuelTypeIds = fuelPrices.map(function(fp) {
-								return fp.id
-							})
+							module.notifyProgress('get fuel types ids progress', gasStations, gasStation, notify)
 
-							notify('fuel types ids: ' + gasStation.fuelTypeIds)
-
-							//module.upsertGasStation(app, gasStation)
+							gasStation.fuelTypeIds = fuelTypeIds
+							module.upsertGasStation(app, gasStation, gasStations, notify)
 						})
-						//currentPrices = gasStation.fuelPrices
 				} else {
-					// module.upsertGasStation(app, gasStation)
+					module.upsertGasStation(app, gasStation, gasStations, notify)
 				}
 			})
 		})
