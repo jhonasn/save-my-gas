@@ -28,6 +28,14 @@
     "neighborhood": {
       "type": "string"
     },
+    "fuelTypeIds": {
+      "type": [
+        "string"
+      ]
+    },
+    "hasPrices": {
+      "type": "boolean"
+    },
     "cityId": {
       "type": "string"
     },

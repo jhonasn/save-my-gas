@@ -6,6 +6,7 @@ var stationsTransform = require(path.resolve(rootPath, 'lib', 'anp-stations', 't
 var geolocation = require(path.resolve(rootPath, 'lib', 'anp-stations', 'geolocation'))
 var geolocationFix = require(path.resolve(rootPath, 'lib', 'anp-stations', 'geolocation-fix.js'))
 var dbLoadEntities = require(path.resolve(rootPath, 'lib', 'anp-stations', 'load'))
+var updateAnp = require(path.resolve(rootPath, 'lib', 'anp-stations', 'update'))
 var entities = require(path.resolve(rootPath, 'lib', 'anp-stations', 'entities'))
 var loopbackApp = require('../../../server-offline')
 
@@ -17,6 +18,7 @@ if (process.argv.length < 3) {
 	console.log('geolocation [-g] - to get geolocation of current ppStations, -f to try to get stations geolocations that failed before')
 	console.log('fix-geolocation [-fg] - to start console application to try to fix stations geolocations that failed before')
 	console.log('load [-l] /path/of/stations/folder to load json files of entities to database')
+	console.log('updatestationsquery [-usq] to update fields used by querys')
 	console.log('\nshutdown [-sh] - if you want to shutdown computer after process end (only update)')
 	process.exit()
 }
@@ -25,6 +27,23 @@ var hasArgument = function(arg) {
 	return process.argv.some(function(a) {
 		return a == arg
 	})
+}
+
+var waitDbConnection = function (cb) {
+	if (loopbackApp.datasources.mongodb.connected) {
+		cb(null, loopbackApp)
+	}
+	loopbackApp.datasources.mongodb.on('connected', function(err) {
+		cb(err, loopbackApp)
+	})
+}
+
+var notifyAnpLoadStatus = function(message) {
+	anpLoadStatus.notifications.push({
+		message: message,
+		timestamp: new Date()
+	})
+	loopbackApp.models.anpLoadStatus.upsert(anpLoadStatus)
 }
 
 var isRoot = process.env.SUDO_UID
@@ -130,14 +149,6 @@ if (hasArgument('-l') || hasArgument('load')) {
 		anpLoadStatusId = Number(anpLoadStatusId)
 	}
 
-	var notifyAnpLoadStatus = function(message, exit) {
-		anpLoadStatus.notifications.push({
-			message: message,
-			timestamp: new Date()
-		})
-		loopbackApp.models.anpLoadStatus.upsert(anpLoadStatus)
-	}
-
 	dbLoadEntities.load(loopbackApp, path, anpLoadStatusId, function(err, res) {
 		if (err) {
 			console.log('there are some errors on load entities to database')
@@ -158,5 +169,22 @@ if (hasArgument('-l') || hasArgument('load')) {
 		} else {
 			console.log(message)
 		}
+	})
+}
+
+if(hasArgument('-usq') || hasArgument('updatestationsquery')) {
+	waitDbConnection(function (err, app) {
+		if(err) console.error(err)
+
+		updateAnp.updateGasStations(app, function (err, res) {
+			if(err) {
+				console.error('there are some errors on updating gas stations')
+				throw err
+			}
+
+			console.log('gas stations updated successfully')
+		}, function(notifyMessage) {
+			console.log(notifyMessage)
+		})
 	})
 }
