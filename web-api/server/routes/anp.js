@@ -74,7 +74,7 @@ module.exports = function(app) {
 	*/
 
 	//update database from anp site
-	.post('/update', function(req, res, next) {
+		.post('/update', function(req, res, next) {
 		//separate service into a new process
 		var spawn = require('child_process').spawn
 		var service = spawn('node', [
@@ -83,6 +83,30 @@ module.exports = function(app) {
 			file.path,
 			anpLoadStatus.id
 		])
+	})
+
+	.post('/update-gas-stations-query', function(req, res, next) {
+		//separate service into a new process
+		var spawn = require('child_process').spawn
+		var service = spawn('node', [
+			'./server/services/pricing-gas-stations-anp/lib/console',
+			'-usq'
+		])
+
+		var log = []
+
+		service.stdout.on('data', function(data) {
+			// log.push({ error: false, message: data.toString()})
+			console.log(data.toString())
+		})
+		service.stderr.on('data', function(data) {
+			console.error(data.toString())
+		})
+		service.on('close', function(code) {
+			console.info('end of update gas stations query process')
+		})
+
+		res.send({message: 'The update gas stations query process was initiated'})
 	})
 
 	return router

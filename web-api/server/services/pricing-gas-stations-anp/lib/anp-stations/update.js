@@ -16,22 +16,22 @@ module.getWeekBeginDate = function(date) {
 	return new Date(timeToSubtract)
 }
 
-module.upsertGasStation = function(app, gasStation, gasStations, notify) {
+module.upsertGasStation = function(app, gasStation, gasStations, notify, callback) {
 	app.models.gasStation.upsert(gasStation, function(err, gs) {
 		if (err) callback(err)
 
-		module.notifyProgress('completed progress', gasStations, gasStation, notify, true)
+		module.notifyProgress('completed progress', gasStations, gasStation, notify, callback)
 	})
 }
 
-module.notifyProgress = function (message, gasStations, gasStation, notify, exit) {
+module.notifyProgress = function (message, gasStations, gasStation, notify, callback) {
 	var idx = gasStations.indexOf(gasStation)
 
 	if(idx % 1000 === 0) {
 		var pc = (idx * 100) / (gasStations.length - 1)
 		notify(message + ' - ' + pc.toFixed(1) + '%')
-	} else if(exit && idx === (gasStations.length - 1)) {
-		process.exit()
+	} else if(callback && idx === (gasStations.length - 1)) {
+		callback()
 	}
 }
 
@@ -75,10 +75,10 @@ module.exports.updateGasStations = function(app, callback, notify) {
 							module.notifyProgress('get fuel types ids progress', gasStations, gasStation, notify)
 
 							gasStation.fuelTypeIds = fuelTypeIds
-							module.upsertGasStation(app, gasStation, gasStations, notify)
+							module.upsertGasStation(app, gasStation, gasStations, notify, callback)
 						})
 				} else {
-					module.upsertGasStation(app, gasStation, gasStations, notify)
+					module.upsertGasStation(app, gasStation, gasStations, notify. callback)
 				}
 			})
 		})

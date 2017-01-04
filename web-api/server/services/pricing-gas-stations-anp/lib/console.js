@@ -183,6 +183,7 @@ if(hasArgument('-usq') || hasArgument('updatestationsquery')) {
 			}
 
 			console.log('gas stations updated successfully')
+			process.exit()
 		}, function(notifyMessage) {
 			console.log(notifyMessage)
 		})
