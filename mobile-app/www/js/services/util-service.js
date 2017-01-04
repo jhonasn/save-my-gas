@@ -180,6 +180,40 @@ angular.module('save-my-gas')
 
 					return formated
 				}
+			},
+
+			geoToString: function(geo) {
+				if(geo.lat && geo.lng) {
+					return geo.lat + ',' + geo.lng
+				} else if(geo.latitude && geo.longitude) {
+					return geo.latitude + ',' + geo.lng
+				} else if(Array.isArray(geo) && geo.length === 2 && !isNaN(geo[0]) && !isNaN(geo[1])) {
+					return geo[0] + ',' + geo[1]
+				}
+				return geo
+			},
+
+			formatDistance: function (distance) {
+				if(isNaN(distance)) {
+					return distance
+				}
+
+				if (distance < 1000) {
+					return Math.round(distance) + ' m'
+				} else {
+					return (distance / 1000).toFixed(1) + ' km'
+				}
+			},
+
+			formatLiters: function (liters, decimal) {
+				if(isNaN(liters)) {
+					return liters
+				}
+
+				if(!decimal) {
+					decimal = 1
+				}
+				return liters.toFixed(decimal) + ' L'
 			}
 
 			// resizeImg: function(img, width) {

@@ -1,4 +1,5 @@
 <div class="container">
+
 	<h5 class="header grey-text text-lighten-1">
 		{{
 			(collection.$resolved && collection.length) || !vehicleId
@@ -30,7 +31,8 @@
 							ng-class="{ invalid: modelForm.yearField.$invalid }"
 							ng-model="refuelValue"
 							ng-min="1"
-							ng-max="200" />
+							ng-max="200"
+							ng-change="refuelValueChanged()" />
 			<label for="refuel-value-field">Quanto vai abastecer?</label>
 			<div ng-if="modelForm.refuelValueField.$dirty || modelForm.$submitted"
 							ng-messages="modelForm.refuelValueField.$error"
@@ -42,36 +44,59 @@
 			</div>
 		</div>
 
+		<label for="radius-field">Raio de busca {{ (radius * 1000) | distance }}</label>
+		<p class="range-field">
+			<input id="radius-field"
+							name="radiusField"
+							type="range"
+							ng-model="radius"
+							ng-change="radiusChanged()"
+							ng-model-options="{ debounce: 500 }"
+							min="1"
+							max="300" />
+		</p>
+
 	</form>
 
-	<table ng-show="collection.$resolved">
+	<table class="responsive-table highlight" ng-show="collection.$resolved">
 		<thead>
 			<tr>
 				<th data-field="gasStation">Posto de combustível</th>
 				<th data-field="gasStation.distance">Distância</th>
-				<th data-field="gasStation.city">Cidade</th>
+				<!-- <th data-field="gasStation.city">Cidade</th> -->
 				<th data-field="amountUnit">Valor combustível</th>
-				<th data-field="time">Tempo para chegar</th>
+				<!-- <th data-field="time">Tempo para chegar</th> -->
 				<th data-field="liters">Litros para chegar</th>
-				<th data-field="arriveValue">Valor para chegar</th>
+				<!-- <th data-field="arriveValue">Valor para chegar</th> -->
+				<th data-field="fuelBought">Litros abastecimento</th>
+				<th data-field="distanceAvailableAfterRefuel">Kms após abastecimento</th>
+				<th data-field="distanceAvailableAfterRefuelReturn">Kms após abastecimento ida e volta</th>
 				<th data-field="actions">Ações</th>
 			</tr>
 		</thead>
 
 		<tbody>
-			<tr ng-repeat="m in collection">
+			<tr ng-repeat="m in collection | orderBy: '-distanceAvailableAfterRefuel'">
 				<td ng-bind="formatGasStation(m)"></td>
-				<td ng-bind="m.distance"></td>
-				<td ng-bind="formatCity(m.city)"></td>
+				<td ng-bind="m.distance | distance"></td>
+				<!-- <td ng-bind="formatCity(m.city)"></td> -->
 				<td ng-bind="m.currentPrice | currency : ' R$' : 2"></td>
-				<td ng-bind="m.time"></td>
-				<td ng-bind="m.liters"></td>
-				<td ng-bind="m.arriveValue | currency : ' R$' : 2"></td>
+				<!-- <td ng-bind="m.time | time"></td> -->
+				<td ng-bind="m.liters | liters"></td>
+				<!-- <td ng-bind="m.arriveValue | currency : ' R$' : 2"></td> -->
+				<td ng-bind="m.fuelBought | liters"></td>
+				<td ng-bind="m.distanceAvailableAfterRefuel | distance"></td>
+				<td ng-bind="m.distanceAvailableAfterRefuelReturn | distance"></td>
 				<td>
-					<a href="#"
-									ng-click="showOnMap(m)">Ver no mapa</a>
-						<a href="#"
-										ng-click="delete(m)">Remover</a>
+					<a class="waves-effect waves-orange orange-text btn-flat"
+					ng-href="https://maps.google.com/maps?saddr={{geolocation | geoString}}&daddr={{m.geolocation | geoString}}&dirflg=d"
+					target="_blank">Rota GPS</a>
+					<a class="waves-effect waves-orange orange-text btn-flat"
+					href="#"
+					ng-click="detail(m)">Detalhes</a>
+					<a class="waves-effect waves-orange orange-text btn-flat"
+					href="#"
+					ng-click="refuel(m)">Abastecer</a>
 				</td>
 			</tr>
 
@@ -80,4 +105,5 @@
 			</tr>
 		</tbody>
 	</table>
+
 </div>

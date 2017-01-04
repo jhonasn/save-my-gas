@@ -12,13 +12,11 @@ angular.module('save-my-gas')
 		utilService,
 		vehicles
 	) {
-		$scope.title = 'busca de preços de postoso de combustível'
-
 		$scope.vehicles = vehicles
 		$scope.refuelValue = null
 		var lastRefuelValue = null
 		var selectedVehicle = null
-		var radius = 50
+		$scope.radius = 50
 
 		simulatorService.verifyVehiclesRefuels()
 
@@ -83,7 +81,7 @@ angular.module('save-my-gas')
 								lat: geolocation.latitude,
 								lng: geolocation.longitude
 							},
-							maxDistance: radius,
+							maxDistance: $scope.radius,
 							unit: 'kilometers'
 						},
 						hasPrices: true,
@@ -133,6 +131,18 @@ angular.module('save-my-gas')
 				})
 		}
 
+		var gasStattionRefuelValueCalculations = function (gasStation) {
+			gasStation.fuelBought = $scope.refuelValue / gasStation.currentPrice
+
+			//distance need to be in meters for distance filter
+			gasStation.distanceAvailableAfterRefuel =  (
+				(gasStation.fuelBought - gasStation.liters) * selectedVehicle.consumption
+			) * 1000
+			gasStation.distanceAvailableAfterRefuelReturn = (
+				(gasStation.fuelBought - (gasStation.liters * 2)) * selectedVehicle.consumption
+			) * 1000
+		}
+
 		var gasStationDoCalculations = function(gasStation) {
 			gasStation.currentPrice = null
 			if (gasStation.fuelPrices && gasStation.fuelPrices.length) {
@@ -157,30 +167,31 @@ angular.module('save-my-gas')
 			//to ms
 			gasStation.time = (gasStation.time * 60 * 60 * 1000)
 
-			//format
-			//distance
-			if (gasStation.distance < 1000) {
-				gasStation.distance = Math.round(gasStation.distance) + ' m'
-			} else {
-				gasStation.distance = (gasStation.distance / 1000).toFixed(1) + ' km'
-			}
-			//liters
-			gasStation.liters = gasStation.liters.toFixed(3) + ' L'
-			//time
-			gasStation.time = utilService.time.milisToTime(gasStation.time)
-
 			if($scope.refuelValue) {
-				gasStation.fuelBought = $scope.refuelValue / gasStation.currentPrice
-				gasStation.fuelBoughtDisplay = gasStation.fuelBought.toFixed(3) + ' L'
-
-				//order by arriveValue < and > fuelBought
+				gasStattionRefuelValueCalculations(gasStation)
 			}
 		}
 
 		$scope.refuelValueChanged = function() {
 			if($scope.collection.$resolved && $scope.collection.length) {
 				//redo gas stations fuelBought calculation
+				$scope.collection.forEach(function (gs) {
+					gasStattionRefuelValueCalculations(gs)
+				})
 			}
+		}
+
+		$scope.radiusChanged = function () {
+			getNearGasStations($scope.geolocation, [selectedVehicle.fuelTypeId])
+			alert('deveria mostrar buscar postos no raio selecionado (' + $scope.radius + ' km)')
+		}
+
+		$scope.detail = function (gasStation) {
+			alert('deveria mostrar detalhes do posto ' + $scope.formatGasStation(gasStation))
+		}
+
+		$scope.refuel = function (gasStation) {
+			alert('deveria mostrar tela de abastecimento o posto ' + $scope.formatGasStation(gasStation) + ' selecionado')
 		}
 
 		$scope.formatCity = vehicleRefuelService.formatCity
