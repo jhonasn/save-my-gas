@@ -1,0 +1,31 @@
+module.exports = {
+	"db": {
+		"name": "db",
+		"connector": "memory"
+	},
+	"mongodb": {
+		"host": "localhost",
+		"port": 27017,
+		"database": "savemygas",
+		"name": "mongodb",
+		"connector": "mongodb",
+		"connectTimeoutMS": 3600000,
+		"socketTimeoutMS": 600000
+	},
+	"transient": {
+		"name": "transient",
+		"connector": "transient"
+	},
+	"vehicleContainer": {
+		"name": "vehicleContainer",
+		"connector": "loopback-component-storage",
+		"provider": "filesystem",
+		"root": (process.env.FILESYSTEM_STORAGE_PATH || "/home/jhonasn/tmp/lb-file-storage") + "/vehicle-container"
+	},
+	"gasStationContainer": {
+		"name": "gasStationContainer",
+		"connector": "loopback-component-storage",
+		"provider": "filesystem",
+		"root": (process.env.FILESYSTEM_STORAGE_PATH || "/home/jhonasn/tmp/lb-file-storage") + "/gas-station-container"
+	}
+}
