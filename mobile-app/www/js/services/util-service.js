@@ -159,19 +159,19 @@ angular.module('save-my-gas')
 						}
 
 						if (time.minutes > 0) {
-							formated += ' e ' + time.minutes + ' minuto'
+							formated += ' e ' + time.minutes + ' min'
 						}
 						if (time.minutes > 1) {
 							formated += 's'
 						}
 					} else if (time.minutes > 0) {
-						formated += time.minutes + ' minuto'
+						formated += time.minutes + ' min'
 
 						if (time.minutes > 1) {
 							formated += 's'
 						}
 					} else {
-						formated += time.seconds + ' segundo'
+						formated += time.seconds + ' seg'
 
 						if (time.seconds > 0) {
 							formated += 's'

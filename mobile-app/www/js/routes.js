@@ -62,9 +62,9 @@ angular.module('save-my-gas')
 		resolve: vehiclesResolve
 	})
 
-	.when('/gas-station', {
-		templateUrl: SaveMyGas.rootRoute.getPath('/views/gas-station/list.html'),
-		controller: 'gasStationController',
+	.when('/search-cheaper-refuel', {
+		templateUrl: SaveMyGas.rootRoute.getPath('/views/gas-station/search-cheaper-refuel.html'),
+		controller: 'SearchCheaperRefuelController',
 		resolve: vehiclesResolve
 	})
 
