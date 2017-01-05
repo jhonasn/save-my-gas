@@ -2,6 +2,7 @@ angular.module('save-my-gas')
 
 .controller('SearchCheaperRefuelController', function(
 	$scope,
+	orderByFilter,
 	GasStation,
 	FuelPrice,
 	simulatorService,
@@ -43,8 +44,8 @@ angular.module('save-my-gas')
 
 	var initGeolocation = function() {
 		//test cl: -25.4561845,-49.5620424
-		//$scope.geolocation = { lat: -25.4561845, lng: -49.5620424, latitude: -25.4561845, longitude: -49.5620424 }
-		if (navigator.geolocation) {
+		$scope.geolocation = { lat: -25.4561845, lng: -49.5620424, latitude: -25.4561845, longitude: -49.5620424 }
+		if (!$scope.geolocation && navigator.geolocation) {
 			var positionSuccess = function(pos) {
 				$scope.geolocation = pos.coords
 
@@ -58,6 +59,8 @@ angular.module('save-my-gas')
 				Materialize.toast('Não foi possível obter sua localização')
 			}
 			navigator.geolocation.getCurrentPosition(positionSuccess, positionError)
+		} else if($scope.geolocation) {
+			getNearGasStations($scope.geolocation, [selectedVehicle.fuelTypeId])
 		} else {
 			Materialize.toast('Não foi possível obter sua localização porque seu navegador não suporta essa funcionalidade')
 				// initMap()
@@ -127,18 +130,40 @@ angular.module('save-my-gas')
 							gasStationDoCalculations(gasStation)
 						})
 				})
+				gasStationsCalulateEconomy()
 			})
+	}
+
+	var gasStationsCalulateEconomy = function () {
+		var collection = orderByFilter($scope.collection, 'litersAvailableAfterRefuel')
+		var gasStationLessEconomy = collection[0]
+
+		$scope.collection.forEach(function(gs) {
+			gs.economyLitersRefuel = gs.litersAvailableAfterRefuel - gasStationLessEconomy.litersAvailableAfterRefuel
+
+			gs.economyLitersRefuelReturn = gs.litersAvailableAfterRefuelReturn - gasStationLessEconomy.litersAvailableAfterRefuelReturn
+
+			gs.economyDistanceRefuel = gs.distanceAvailableAfterRefuel - gasStationLessEconomy.distanceAvailableAfterRefuel
+
+			gs.economyDistanceRefuelReturn = gs.distanceAvailableAfterRefuelReturn - gasStationLessEconomy.distanceAvailableAfterRefuelReturn
+
+			gs.economyRefuel = gs.economyDistanceRefuel * gs.currentPrice
+			gs.economyRefuelReturn = gs.economyDistanceRefuelReturn * gs.currentPrice
+		})
 	}
 
 	var gasStattionRefuelValueCalculations = function(gasStation) {
 		gasStation.fuelBought = $scope.refuelValue / gasStation.currentPrice
 
+		gasStation.litersAvailableAfterRefuel = gasStation.fuelBought - gasStation.liters
+		gasStation.litersAvailableAfterRefuelReturn = gasStation.fuelBought - (gasStation.liters * 2)
+
 		//distance need to be in meters for distance filter
 		gasStation.distanceAvailableAfterRefuel = (
-			(gasStation.fuelBought - gasStation.liters) * selectedVehicle.consumption
+			gasStation.litersAvailableAfterRefuel * selectedVehicle.consumption
 		) * 1000
 		gasStation.distanceAvailableAfterRefuelReturn = (
-			(gasStation.fuelBought - (gasStation.liters * 2)) * selectedVehicle.consumption
+			gasStation.litersAvailableAfterRefuelReturn * selectedVehicle.consumption
 		) * 1000
 	}
 
@@ -182,6 +207,7 @@ angular.module('save-my-gas')
 			$scope.collection.forEach(function(gs) {
 				gasStattionRefuelValueCalculations(gs)
 			})
+			gasStationsCalulateEconomy()
 		}
 	}
 

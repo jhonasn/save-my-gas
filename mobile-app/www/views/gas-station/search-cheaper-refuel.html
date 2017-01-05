@@ -1,3 +1,8 @@
+<style>
+	a.btn-flat {
+		padding: 0 10px;
+	}
+</style>
 <div class="container">
 
 	<h5 class="header grey-text text-lighten-1">
@@ -66,13 +71,19 @@
 				<th data-field="gasStation">Posto de combustível</th>
 				<th data-field="gasStation.distance">Distância</th>
 				<!-- <th data-field="gasStation.city">Cidade</th> -->
-				<th data-field="amountUnit">Valor combustível</th>
+				<th data-field="amountUnit">Preço combustível</th>
 				<!-- <th data-field="time">Tempo para chegar</th> -->
-				<th data-field="liters">Litros para chegar</th>
-				<!-- <th data-field="arriveValue">Valor para chegar</th> -->
-				<th data-field="fuelBought">Litros abastecimento</th>
-				<th data-field="distanceAvailableAfterRefuel">Kms após abastecimento</th>
-				<th data-field="distanceAvailableAfterRefuelReturn">Kms após abastecimento ida e volta</th>
+				<!-- <th data-field="liters">Litros para chegar</th> -->
+				<th data-field="arriveValue">Custo locomoção</th>
+				<th data-field="fuelBought">
+					<i class="material-icons tiny">attach_money</i>
+					<i class="material-icons tiny">arrow_forward</i>
+					Litros
+				</th>
+				<!-- <th data-field="litersAvailableAfterRefuel">Sobra L</th> -->
+				<!-- <th data-field="distanceAvailableAfterRefuel">Kms após abastecimento</th> -->
+				<!-- <th data-field="distanceAvailableAfterRefuelReturn">Kms após abastecimento ida e volta</th> -->
+				<th data-field="economyRefuel">Economia</th>
 				<th data-field="actions">Ações</th>
 			</tr>
 		</thead>
@@ -84,11 +95,13 @@
 				<!-- <td ng-bind="m.city | city"></td> -->
 				<td ng-bind="m.currentPrice | currency : ' R$' : 2"></td>
 				<!-- <td ng-bind="m.time | time"></td> -->
-				<td ng-bind="m.liters | liters"></td>
-				<!-- <td ng-bind="m.arriveValue | currency : ' R$' : 2"></td> -->
+				<!-- <td ng-bind="m.liters | liters"></td> -->
+				<td ng-bind="m.arriveValue | currency : ' R$' : 2"></td>
 				<td ng-bind="m.fuelBought | liters"></td>
-				<td ng-bind="m.distanceAvailableAfterRefuel | distance"></td>
-				<td ng-bind="m.distanceAvailableAfterRefuelReturn | distance"></td>
+				<!-- <td ng-bind="m.litersAvailableAfterRefuel | liters"></td> -->
+				<!-- <td ng-bind="m.distanceAvailableAfterRefuel | distance"></td> -->
+				<!-- <td ng-bind="m.distanceAvailableAfterRefuelReturn | distance"></td> -->
+				<td ng-bind="m.economyRefuel | currency : ' R$' : 2"></td>
 				<td>
 					<a class="waves-effect waves-orange btn-flat"
 									ng-href="https://maps.google.com/maps?saddr={{geolocation | geoString}}&daddr={{m.geolocation | geoString}}&dirflg=d"
