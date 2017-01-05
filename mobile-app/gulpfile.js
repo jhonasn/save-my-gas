@@ -117,7 +117,7 @@ gulp.task('html-build', function() {
 gulp.task('materialize-sass', function() {
     return gulp.src('./www/lib/materialize/sass/materialize.scss')
         .pipe(sass().on('error', sass.logError))
-        .pipe(gulp.dest('./www/css/'))
+        .pipe(gulp.dest('./www/lib/materialize/dist/css/'))
 })
 
 gulp.task('default', [
