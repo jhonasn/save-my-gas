@@ -13,7 +13,7 @@
 		</select>
 	</div>
 
-	<table ng-show="collection.$resolved">
+	<table class="responsive-table highlight" ng-show="collection.$resolved">
 		<thead>
 			<tr>
 				<th data-field="gasStation">Posto de combustível</th>
@@ -25,8 +25,8 @@
 
 		<tbody>
 			<tr ng-repeat="m in collection">
-				<td ng-bind="formatGasStation(m.gasStation)"></td>
-				<td ng-bind="formatCity(m.gasStation.city)"></td>
+				<td ng-bind="m.gasStation | gasStation"></td>
+				<td ng-bind="m.gasStation.city | city"></td>
 				<td ng-bind="m.value"></td>
 				<td>
 					<a href="#"

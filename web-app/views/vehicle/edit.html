@@ -3,7 +3,7 @@
 				novalidate>
 
 	<div class="parallax-container">
-		<div parallax><img ng-src="{{ vehiclePhoto }}"></div>
+		<div parallax><img ng-src="{{ vehiclePhoto }}" onerror="this.src = '/img/default-car.svg'"></div>
 	</div>
 
 	<div class="container">

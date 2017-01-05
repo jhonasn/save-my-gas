@@ -1,0 +1,183 @@
+<style>
+	a.btn-flat {
+		padding: 0 10px;
+	}
+</style>
+<div class="container">
+
+	<h5 class="header grey-text text-lighten-1">
+		{{
+			(collection.$resolved && collection.length) || !vehicleId
+			?
+			'Postos de combustível próximos'
+			:
+			'Carregando postos de combustível próximos...'
+		}}
+	</h5>
+
+	<form name="modelForm">
+
+		<div input-field>
+			<select class=""
+							ng-model="vehicle"
+							material-select
+							ng-change="vehicleSelected(vehicle)"
+							ng-options="vehicle as vehicle.nickName for vehicle in vehicles"
+							watch>
+				<option value="">Selecione um veículo</option>
+				<option ng-bind="vehicle.nickName"></option>
+			</select>
+		</div>
+
+		<p>
+			<input type="radio"
+				id="money-field"
+				name="moneyField"
+				class="with-gap"
+				ng-model="unit"
+				ng-value="'money'"
+				ng-change="((unit === 'money' && refuelMoneyValue) || (unit === 'liter' && refuelLiterValue)) && refuelValueChanged()" />
+			<label for="money-field">R$</label>
+
+			<input type="radio"
+				id="liter-field"
+				name="literField"
+				class="with-gap"
+				ng-model="unit"
+				ng-value="'liter'"
+				ng-change="((unit === 'money' && refuelMoneyValue) || (unit === 'liter' && refuelLiterValue)) && refuelValueChanged()" />
+			<label for="liter-field">L</label>
+		</p>
+
+		<div class="input-field" ng-show="unit === 'money'">
+			<i class="material-icons prefix">attach_money</i>
+			<input type="number"
+							name="refuelMoneyValueField"
+							id="refuel-money-value-field"
+							ng-class="{ invalid: modelForm.refuelMoneyValueField.$invalid }"
+							ng-model="refuelMoneyValue"
+							ng-required="true"
+							ng-min="1"
+							ng-max="1000"
+							ng-change="modelForm.refuelMoneyValueField.$valid && refuelValueChanged()" />
+			<label for="refuel-money-value-field">Quanto vai abastecer?</label>
+			<div ng-if="modelForm.refuelMoneyValueField.$dirty || modelForm.$submitted"
+							ng-messages="modelForm.refuelMoneyValueField.$error"
+							role="alert">
+				<span class="invalid"
+								ng-message="required">Informe quanto vai abastecer para verificar a economia dos postos</span>
+				<span class="invalid"
+								ng-message="min">Mínimo aceito R$ 1</span>
+				<span class="invalid"
+								ng-message="max">Maximo aceito R$ 1000,00</span>
+			</div>
+		</div>
+
+		<div class="input-field" ng-show="unit === 'liter'">
+			<i class="material-icons prefix">L</i>
+			<input type="number"
+							name="refuelLiterValueField"
+							id="refuel-liter-value-field"
+							ng-class="{ invalid: modelForm.refuelLiterValueField.$invalid }"
+							ng-model="refuelLiterValue"
+							ng-required="true"
+							ng-min="0.1"
+							ng-max="300"
+							ng-change="modelForm.refuelLiterValueField.$valid && refuelValueChanged()" />
+			<label for="refuel-liter-value-field">Quanto vai abastecer?</label>
+			<div ng-if="modelForm.refuelLiterValueField.$dirty || modelForm.$submitted"
+							ng-messages="modelForm.refuelLiterValueField.$error"
+							role="alert">
+				<span class="invalid"
+								ng-message="required">Informe quanto vai abastecer para verificar a economia dos postos</span>
+				<span class="invalid"
+								ng-message="min">Mínimo aceito 0.1 L</span>
+				<span class="invalid"
+								ng-message="max">Maximo aceito 300 L</span>
+			</div>
+		</div>
+
+		<label for="radius-field">Raio de busca de postos {{ (radius * 1000) | distance }}</label>
+		<p class="range-field">
+			<input id="radius-field"
+							name="radiusField"
+							type="range"
+							ng-model="radius"
+							ng-change="radiusChanged()"
+							ng-model-options="{ debounce: 500 }"
+							min="1"
+							max="300" />
+		</p>
+
+	</form>
+
+	<table class="responsive-table highlight"
+					ng-show="collection.$resolved">
+		<thead>
+			<tr>
+				<th data-field="gasStation">Posto de combustível</th>
+				<th data-field="gasStation.distance">Distância</th>
+				<!-- <th data-field="gasStation.city">Cidade</th> -->
+				<th data-field="amountUnit">Preço combustível</th>
+				<!-- <th data-field="time">Tempo para chegar</th> -->
+				<!-- <th data-field="liters">Litros para chegar</th> -->
+				<th data-field="arriveValue">Custo locomoção</th>
+				<th data-field="fuelBought" ng-if="unit === 'money' && refuelMoneyValue">
+					{{ refuelMoneyValue | currency : ' R$' : 2 }} compra
+				</th>
+				<th data-field="fuelCost" ng-if="unit === 'liter' && refuelLiterValue">
+					{{ refuelLiterValue | liters }} custa
+				</th>
+				<!-- <th data-field="litersAvailableAfterRefuel">Sobra L</th> -->
+				<!-- <th data-field="distanceAvailableAfterRefuel">Kms após abastecimento</th> -->
+				<!-- <th data-field="distanceAvailableAfterRefuelReturn">Kms após abastecimento ida e volta</th> -->
+				<th data-field="economy" ng-if="(unit === 'money' && refuelMoneyValue) || (unit === 'liter' && refuelLiterValue)">Economia</th>
+				<th data-field="actions">Ações</th>
+			</tr>
+		</thead>
+
+		<tbody>
+			<tr ng-repeat="m in collection | orderBy: ( unit === 'money' ? '-distanceAvailableAfterRefuel' : 'fuelCostAfterRefuel')">
+				<td ng-bind="m | gasStation"></td>
+				<td ng-bind="m.distance | distance"></td>
+				<!-- <td ng-bind="m.city | city"></td> -->
+				<td ng-bind="m.currentPrice | currency : ' R$' : 2"></td>
+				<!-- <td ng-bind="m.time | time"></td> -->
+				<!-- <td ng-bind="m.liters | liters"></td> -->
+				<td ng-bind="m.arriveValue | currency : ' R$' : 2"></td>
+				<td ng-bind="m.fuelBought | liters" ng-if="unit === 'money' && refuelMoneyValue"></td>
+				<td ng-bind="m.fuelCost | currency : ' R$' : 2" ng-if="unit === 'liter' && refuelLiterValue"></td>
+				<!-- <td ng-bind="m.litersAvailableAfterRefuel | liters"></td> -->
+				<!-- <td ng-bind="m.distanceAvailableAfterRefuel | distance"></td> -->
+				<!-- <td ng-bind="m.distanceAvailableAfterRefuelReturn | distance"></td> -->
+				<!-- <td ng-bind="m.economyRefuel | currency : ' R$' : 2"></td> -->
+				<td ng-bind="m.economyLitersRefuel | liters" ng-if="unit === 'money' && refuelMoneyValue"></td>
+				<td ng-bind="m.economyRefuel | currency : ' R$' : 2" ng-if="unit === 'liter' && refuelLiterValue"></td>
+				<td>
+					<a class="waves-effect waves-orange btn-flat"
+									ng-href="https://maps.google.com/maps?saddr={{geolocation | geoString}}&daddr={{m.geolocation | geoString}}&dirflg=d"
+									target="_blank">
+									<i class="material-icons" title="Rota GPS">navigation</i>
+								</a>
+					<a class="waves-effect waves-orange btn-flat"
+									href="#"
+									ng-click="detail(m)">
+									<i class="material-icons" title="Detalhes">view_list</i>
+								</a>
+					<a class="waves-effect waves-orange btn-flat"
+									href="#"
+									ng-click="refuel(m)">
+									<i class="material-icons" title="Abastecer">local_gas_station</i>
+								</a>
+				</td>
+			</tr>
+
+			<tr ng-show="collection.$resolved && !collection.length">
+				<td colspan="5">
+					Nenhum posto de combustível encontrado na região (raio 50 km)
+				</td>
+			</tr>
+		</tbody>
+	</table>
+
+</div>
