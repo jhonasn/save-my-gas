@@ -1,6 +1,8 @@
 var gulp = require('gulp')
 var concat = require('gulp-concat')
 var uglify = require('gulp-uglify')
+var uglifyjs = require('uglify-js')
+var minifier = require('gulp-uglify/minifier')
 var ngAnnotate = require('gulp-ng-annotate')
 var cleanCSS = require('gulp-clean-css')
 var htmlreplace = require('gulp-html-replace')
@@ -30,8 +32,9 @@ gulp.task('min-login-js', function() {
 			'www/js/services/root-route-service.js',
 		])
 		.pipe(concat('/js/app-login.js'))
-		.pipe(ngAnnotate())
-		.pipe(uglify())
+		.pipe(ngAnnotate({ single_quotes: true }))
+		// .pipe(minifier({ output: { quote_style: 3 } }, uglifyjs))
+		// .pipe(uglify())
 		.pipe(gulp.dest('../web-app'))
 })
 
@@ -39,8 +42,7 @@ gulp.task('min-login-css', function() {
 	return gulp.src([
 			'www/lib/roboto-and-material-icons-fonts/css/material-icons.css',
 			'www/lib/roboto-and-material-icons-fonts/css/roboto.css',
-			// 'www/lib/materialize/dist/css/materialize.css',
-			'www/css/materialize.css',
+			'www/lib/materialize/dist/css/materialize.css',
 			'www/css/login.css',
 		])
 		.pipe(concat('/css/login.css'))
@@ -67,8 +69,9 @@ gulp.task('min-app-js', function() {
 			'www/js/**/*.js',
 		])
 		.pipe(concat('/js/app.js'))
-		.pipe(ngAnnotate())
-		.pipe(uglify())
+		.pipe(ngAnnotate({ single_quotes: true }))
+		// .pipe(minifier({ output: { quote_style: 3 } }, uglifyjs))
+		// .pipe(uglify())
 		.pipe(gulp.dest('../web-app'))
 })
 
@@ -76,8 +79,7 @@ gulp.task('min-app-css', function() {
 	return gulp.src([
 			'www/lib/roboto-and-material-icons-fonts/css/material-icons.css',
 			'www/lib/roboto-and-material-icons-fonts/css/roboto.css',
-			// 'www/lib/materialize/dist/css/materialize.css',
-			'www/css/materialize.css',
+			'www/lib/materialize/dist/css/materialize.css',
 			'www/lib/angular-bootstrap/ui-bootstrap-csp.css',
 			'www/css/main.css',
 		])
@@ -97,6 +99,7 @@ gulp.task('copy', function() {
 			'www/*views/*',
 			'www/*views/**/*',
 			'www/lib/roboto-and-material-icons-fonts/*fonts/*',
+			'hooks/before_prepare/*nginx-cfg/*'
 		])
 		.pipe(gulp.dest('../web-app'))
 })
