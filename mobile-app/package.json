@@ -2,6 +2,8 @@
   "name": "save-my-gas",
   "version": "1.0.0",
   "description": "save-my-gas, one app to save your money",
+  "repository": "https://github.com/jhonasn/save-my-gas",
+  "license": "MIT",
   "dependencies": {},
   "main": "./lib/main",
   "devDependencies": {
