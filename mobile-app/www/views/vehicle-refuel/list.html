@@ -25,8 +25,8 @@
 
 		<tbody>
 			<tr ng-repeat="m in collection">
-				<td ng-bind="formatGasStation(m.gasStation)"></td>
-				<td ng-bind="formatCity(m.gasStation.city)"></td>
+				<td ng-bind="m.gasStation | gasStation"></td>
+				<td ng-bind="m.gasStation.city | city"></td>
 				<td ng-bind="m.value"></td>
 				<td>
 					<a href="#"

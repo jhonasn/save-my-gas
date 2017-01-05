@@ -1,29 +1,37 @@
 angular.module('save-my-gas')
 
-.filter('geoString',
-	function(utilService) {
-		return function(geo) {
-			return utilService.geoToString(geo)
-		}
-	})
+.filter('geoString', function(formatService) {
+	return function(geo) {
+		return formatService.toGeoString(geo)
+	}
+})
 
-.filter('distance',
-	function(utilService) {
-		return function(distance) {
-			return utilService.formatDistance(distance)
-		}
-	})
+.filter('distance', function(formatService) {
+	return function(distance) {
+		return formatService.distance(distance)
+	}
+})
 
-.filter('liters',
-	function(utilService) {
-		return function(liters, decimal) {
-			return utilService.formatLiters(liters, decimal)
-		}
-	})
+.filter('liters', function(formatService) {
+	return function(liters, decimal) {
+		return formatService.liters(liters, decimal)
+	}
+})
 
-.filter('time',
-	function(utilService) {
-		return function(time, format) {
-			return utilService.time.milisToTime(time, format)
-		}
-	})
+.filter('time', function(formatService) {
+	return function(time, format) {
+		return formatService.time(time, format)
+	}
+})
+
+.filter('gasStation', function(formatService) {
+	return function(gasStation) {
+		return formatService.gasStation(gasStation)
+	}
+})
+
+.filter('city', function(formatService) {
+	return function(city) {
+		return formatService.city(city)
+	}
+})

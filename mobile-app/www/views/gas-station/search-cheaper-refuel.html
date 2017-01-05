@@ -10,7 +10,7 @@
 		}}
 	</h5>
 
-	<form action="modelForm">
+	<form name="modelForm">
 
 		<div input-field>
 			<select class=""
@@ -21,26 +21,27 @@
 							watch>
 				<option value="">Selecione um veículo</option>
 				<option ng-bind="vehicle.nickName"></option>
-				</select>
+			</select>
 		</div>
 
 		<div class="input-field">
+			<i class="material-icons prefix">attach_money</i>
 			<input type="number"
 							name="refuelValueField"
 							id="refuel-value-field"
-							ng-class="{ invalid: modelForm.yearField.$invalid }"
+							ng-class="{ invalid: modelForm.refuelValueField.$invalid }"
 							ng-model="refuelValue"
 							ng-min="1"
-							ng-max="200"
-							ng-change="refuelValueChanged()" />
+							ng-max="1000"
+							ng-change="modelForm.refuelValueField.$valid && refuelValueChanged()" />
 			<label for="refuel-value-field">Quanto vai abastecer?</label>
 			<div ng-if="modelForm.refuelValueField.$dirty || modelForm.$submitted"
 							ng-messages="modelForm.refuelValueField.$error"
 							role="alert">
 				<span class="invalid"
-								ng-message="min">Mínimo aceito 1 R$</span>
+								ng-message="min">Mínimo aceito R$ 1</span>
 					<span class="invalid"
-									ng-message="max">Maximo aceito 200 R$</span>
+									ng-message="max">Maximo aceito R$ 1000,00</span>
 			</div>
 		</div>
 
@@ -58,7 +59,8 @@
 
 	</form>
 
-	<table class="responsive-table highlight" ng-show="collection.$resolved">
+	<table class="responsive-table highlight"
+					ng-show="collection.$resolved">
 		<thead>
 			<tr>
 				<th data-field="gasStation">Posto de combustível</th>
@@ -77,9 +79,9 @@
 
 		<tbody>
 			<tr ng-repeat="m in collection | orderBy: '-distanceAvailableAfterRefuel'">
-				<td ng-bind="formatGasStation(m)"></td>
+				<td ng-bind="m | gasStation"></td>
 				<td ng-bind="m.distance | distance"></td>
-				<!-- <td ng-bind="formatCity(m.city)"></td> -->
+				<!-- <td ng-bind="m.city | city"></td> -->
 				<td ng-bind="m.currentPrice | currency : ' R$' : 2"></td>
 				<!-- <td ng-bind="m.time | time"></td> -->
 				<td ng-bind="m.liters | liters"></td>
@@ -88,20 +90,28 @@
 				<td ng-bind="m.distanceAvailableAfterRefuel | distance"></td>
 				<td ng-bind="m.distanceAvailableAfterRefuelReturn | distance"></td>
 				<td>
-					<a class="waves-effect waves-orange orange-text btn-flat"
-					ng-href="https://maps.google.com/maps?saddr={{geolocation | geoString}}&daddr={{m.geolocation | geoString}}&dirflg=d"
-					target="_blank">Rota GPS</a>
-					<a class="waves-effect waves-orange orange-text btn-flat"
-					href="#"
-					ng-click="detail(m)">Detalhes</a>
-					<a class="waves-effect waves-orange orange-text btn-flat"
-					href="#"
-					ng-click="refuel(m)">Abastecer</a>
+					<a class="waves-effect waves-orange btn-flat"
+									ng-href="https://maps.google.com/maps?saddr={{geolocation | geoString}}&daddr={{m.geolocation | geoString}}&dirflg=d"
+									target="_blank">
+									<i class="material-icons" title="Rota GPS">navigation</i>
+								</a>
+					<a class="waves-effect waves-orange btn-flat"
+									href="#"
+									ng-click="detail(m)">
+									<i class="material-icons" title="Detalhes">view_list</i>
+								</a>
+					<a class="waves-effect waves-orange btn-flat"
+									href="#"
+									ng-click="refuel(m)">
+									<i class="material-icons" title="Abastecer">local_gas_station</i>
+								</a>
 				</td>
 			</tr>
 
 			<tr ng-show="collection.$resolved && !collection.length">
-				<td colspan="5">Nenhum posto de combustível encontrado na região (raio 50 km)</td>
+				<td colspan="5">
+					Nenhum posto de combustível encontrado na região (raio 50 km)
+				</td>
 			</tr>
 		</tbody>
 	</table>

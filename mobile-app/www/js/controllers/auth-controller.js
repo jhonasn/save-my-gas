@@ -1,7 +1,6 @@
 angular.module('save-my-gas')
 
-.controller('authController',
-function(
+.controller('authController', function(
 	$scope,
 	authService
 ) {
@@ -11,7 +10,7 @@ function(
 	$scope.showLogin = false
 	$scope.isSignup = false
 
-	$scope.toggleShowLogin = function () {
+	$scope.toggleShowLogin = function() {
 		$scope.showLogin = !$scope.showLogin
 	}
 	$scope.toggleIsSignup = function(model) {
@@ -20,8 +19,8 @@ function(
 	}
 
 	$scope.login = function(provider, isSignup, model) {
-		if(provider === 'email') {
-			if(isSignup) {
+		if (provider === 'email') {
+			if (isSignup) {
 				authService.signup(model)
 			} else {
 				authService.login(provider, model)
@@ -32,8 +31,7 @@ function(
 	}
 })
 
-.controller('authLogoutController',
-function(
+.controller('authLogoutController', function(
 	$scope,
 	authService
 ) {
