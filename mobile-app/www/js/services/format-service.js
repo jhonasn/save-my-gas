@@ -120,7 +120,7 @@ angular.module('save-my-gas')
 				if (geo.lat && geo.lng) {
 					return geo.lat + ',' + geo.lng
 				} else if (geo.latitude && geo.longitude) {
-					return geo.latitude + ',' + geo.lng
+					return geo.latitude + ',' + geo.longitude
 				} else if (Array.isArray(geo) && geo.length === 2 && !isNaN(geo[0]) && !isNaN(geo[1])) {
 					return geo[0] + ',' + geo[1]
 				}

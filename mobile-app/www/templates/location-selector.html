@@ -1,0 +1,27 @@
+<div class="location-selector-container">
+	<input type="text"
+					id="location-selector-field"
+					ng-model="ngModel.formattedAddress"
+					ng-disabled="loading || ngDisabled"
+					placeholder="">
+					<div class="location-selector-buttons-container" style="position: absolute; top: 0; right: 0; margin-right: 10.5px;">
+						<a href="#"
+										class="clear-button grey-text text-darken-3"
+										ng-class="{ disabled: ngDisabled }"
+										ng-click="clear()"
+										ng-disabled="loading || ngDisabled"
+										title="Limpar campo">
+							<i class="material-icons">backspace</i>
+						</a>
+						<a href="#"
+										class="clear-button grey-text text-darken-3"
+										ng-class="{ disabled: ngDisabled }"
+										ng-click="getGeolocation()"
+										ng-disabled="loading || ngDisabled"
+										style="margin-left: 5px;"
+										title="Obter localização {{ cordova ? 'por GPS' : '' }}">
+							<i class="material-icons grey-text text-darken-3"
+								ng-bind="geolocationStatus"></i>
+						</a>
+					</div>
+</div>

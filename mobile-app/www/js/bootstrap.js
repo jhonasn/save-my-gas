@@ -46,6 +46,13 @@ var SaveMyGas = {
 					return
 				}
 
+				//import common to config.env
+				if(config.common) {
+					for (var key in config.common) {
+						config[config.env][key] = config.common[key]
+					}
+				}
+
 				// SaveMyGas.config = config;
 				angular.module('save-my-gas')
 					.constant('appConstants', config[config.env])

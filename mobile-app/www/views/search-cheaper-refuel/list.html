@@ -17,16 +17,38 @@
 
 	<form name="modelForm">
 
+		<div class="input-field">
+			<location-selector id="origin-field"
+				name="originField"
+				ng-class="{ invalid: modelForm.originField.$invalid }"
+				ng-required="true"
+				on-change="originChanged"
+				ng-model="origin"></location-selector>
+			<label for="origin-field">Origem</label>
+			<div ng-messages="modelForm.originField.$error"
+							role="alert">
+				<span class="invalid"
+								ng-message="required">Selecione a origem</span>
+			</div>
+		</div>
+
 		<div input-field>
 			<select class=""
 							ng-model="vehicle"
-							material-select
+							name="vehicleSelectedField"
 							ng-change="vehicleSelected(vehicle)"
 							ng-options="vehicle as vehicle.nickName for vehicle in vehicles"
+							ng-required="true"
+							material-select
 							watch>
 				<option value="">Selecione um veículo</option>
 				<option ng-bind="vehicle.nickName"></option>
 			</select>
+			<div ng-messages="modelForm.vehicleSelectedField.$error"
+							role="alert">
+				<span class="invalid"
+								ng-message="required">Selecione o veículo</span>
+			</div>
 		</div>
 
 		<p>
@@ -61,8 +83,7 @@
 							ng-max="1000"
 							ng-change="modelForm.refuelMoneyValueField.$valid && refuelValueChanged()" />
 			<label for="refuel-money-value-field">Quanto vai abastecer?</label>
-			<div ng-if="modelForm.refuelMoneyValueField.$dirty || modelForm.$submitted"
-							ng-messages="modelForm.refuelMoneyValueField.$error"
+			<div ng-messages="modelForm.refuelMoneyValueField.$error"
 							role="alert">
 				<span class="invalid"
 								ng-message="required">Informe quanto vai abastecer para verificar a economia dos postos</span>
@@ -155,7 +176,7 @@
 				<td ng-bind="m.economyRefuel | currency : ' R$' : 2" ng-if="unit === 'liter' && refuelLiterValue"></td>
 				<td>
 					<a class="waves-effect waves-orange btn-flat"
-									ng-href="https://maps.google.com/maps?saddr={{geolocation | geoString}}&daddr={{m.geolocation | geoString}}&dirflg=d"
+									ng-href="https://maps.google.com/maps?saddr={{origin.geolocation | geoString}}&daddr={{m.geolocation | geoString}}&dirflg=d"
 									target="_blank">
 									<i class="material-icons" title="Rota GPS">navigation</i>
 								</a>

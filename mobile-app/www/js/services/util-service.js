@@ -81,6 +81,22 @@ angular.module('save-my-gas')
 				seconds: s,
 				milis: mi
 			}
+		},
+
+		toGeoPoint: function (geolocation) {
+			if(Array.isArray(geolocation) && geolocation.length >= 2) {
+				return {
+					lat: geolocation[0],
+					lng: geolocation[1]
+				}
+			} else if(typeof geolocation === 'object' && geolocation.latitude && geolocation.longitude) {
+				return {
+					lat: geolocation.latitude,
+					lng: geolocation.longitude
+				}
+			} else {
+				return geolocation
+			}
 		}
 
 		// resizeImg: function(img, width) {

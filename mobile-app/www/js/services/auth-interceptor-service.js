@@ -11,8 +11,10 @@ angular.module('save-my-gas')
 			var authService = $injector.get('authService')
 
 			var user = authService.getUser()
-			if (user) {
+			if (!authService.isAnonymous && user) {
 				config.headers.Authorization = user.access_token
+			} else {
+				authService.isAnonymous = false
 			}
 
 			return config

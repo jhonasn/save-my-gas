@@ -208,6 +208,12 @@ angular.module('save-my-gas')
 
 		requestsWithoutMessageCompleted: function() {
 			_nextRequestWithoutMessage = false
+		},
+
+		isAnonymous: false,
+
+		setAnonymousRequest: function() {
+			authService.isAnonymous = true
 		}
 	}
 

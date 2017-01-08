@@ -84,6 +84,9 @@ angular.module('save-my-gas')
 					lat: Number(data[0]),
 					lng: Number(data[1]),
 				}
+			} else if (typeof geolocation === 'object' && geolocation.latitude && geolocation.longitude) {
+				data.lat = geolocation.latitude
+				data.lng = geolocation.longitude
 			} else {
 				data.lng = Number(data.lng)
 				data.lat = Number(data.lat)
