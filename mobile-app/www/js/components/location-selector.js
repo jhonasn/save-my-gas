@@ -26,11 +26,29 @@ angular.module('save-my-gas')
 		link: function(scope, element, attributes, ngModelController) {
 			var directionsService = new google.maps.DirectionsService()
 			var locationField = element.find('#location-selector-field')
+			var labelEl = null
 			scope.geolocationStatus = null
 			scope.loading = false
 
+			var previousLabelContent = null
+			var setLabel = function (text) {
+				previousLabelContent = labelEl.html()
+				if(labelEl.length) {
+					labelEl.html(text)
+				} else {
+					locationField.attr('placeholder', text)
+				}
+			}
+			var resetLabel = function() {
+				if(labelEl.length) {
+					labelEl.html(previousLabelContent)
+				} else {
+					locationField.removeAttr('placeholder')
+				}
+			}
+
 			var initGettingLocation = true
-			if(typeof scope.initGettingLocation === 'boolean') {
+			if (typeof scope.initGettingLocation === 'boolean') {
 				initGettingLocation = scope.initGettingLocation
 			}
 
@@ -38,20 +56,20 @@ angular.module('save-my-gas')
 			if (attributes.id) {
 				locationField.attr('id', attributes.id)
 				element.attr('id', attributes.id + '-container')
-				var labelEl = angular.element('[for="' + attributes.id + '"]')
+				labelEl = angular.element('[for="' + attributes.id + '"]')
 				if (labelEl.length > 0) {
 					angular.element('#' + attributes.id)
 						.after(labelEl)
 				}
 			}
 
-			var changed = function () {
-				if(scope.onChange) {
+			var changed = function() {
+				if (scope.onChange) {
 					scope.onChange(scope.ngModel)
 				}
 			}
 
-			var expandViewportToFitPlace = function (map, place) {
+			var expandViewportToFitPlace = function(map, place) {
 				if (place.geometry.viewport) {
 					map.fitBounds(place.geometry.viewport);
 				} else {
@@ -64,13 +82,15 @@ angular.module('save-my-gas')
 				var locationAutocomplete = new google.maps.places.Autocomplete(locationField[0])
 				locationField.data('autocomplete', locationAutocomplete)
 
-				var removePlaceholder = function() { locationField.removeAttr('placeholder') }
+				var removePlaceholder = function() {
+					locationField.removeAttr('placeholder')
+				}
 
 				setTimeout(removePlaceholder, 200)
 				setTimeout(removePlaceholder, 500)
 				setTimeout(removePlaceholder, 1000)
 
-				if(scope.map) {
+				if (scope.map) {
 					locationAutocomplete.bindTo('bounds', scope.map)
 				}
 
@@ -81,7 +101,7 @@ angular.module('save-my-gas')
 						Materialize.toast('O local selecionado não é válido')
 						return
 					}
-					if(scope.map) {
+					if (scope.map) {
 						expandViewportToFitPlace(scope.map, place)
 					}
 
@@ -109,10 +129,11 @@ angular.module('save-my-gas')
 				// }
 				scope.loading = true
 				scope.geolocationStatus = 'gps_not_fixed'
+				setLabel('Carregando localização...')
 
 				if (navigator.geolocation) {
 					var positionSuccess = function(pos) {
-						if(initGettingLocation && scope.hasMap) {
+						if (initGettingLocation && scope.hasMap) {
 							var geolocation = utilService.toGeoPoint(pos.coords)
 							scope.map.setCenter(geolocation)
 							scope.map.setZoom(18)
@@ -129,15 +150,41 @@ angular.module('save-my-gas')
 						getGeolocationAddress(pos.coords)
 							.then(function() {
 								scope.loading = false
+								resetLabel()
 								scope.ngModel.geolocationStatus = scope.geolocationStatus = 'gps_fixed'
 								changed()
 							})
 					}
 					var positionError = function(err) {
 						scope.loading = false
-						Materialize.toast('Não foi possível obter sua localização')
+						resetLabel()
+						scope.clear()
+
+						var defaultMessage = 'Não foi possível obter sua localização' +
+						' verifique se está conectado a internet'
+						if(scope.$parent.cordova) {
+							defaultMessage += ' ou se está com o GPS ligado'
+						}
+
+						switch (err.code) {
+							case err.PERMISSION_DENIED:
+								Materialize.toast('Ative a permissão de acesso a sua localização para continuar')
+								break
+							case err.POSITION_UNAVAILABLE:
+								Materialize.toast(defaultMessage)
+								break
+							case err.TIMEOUT:
+								Materialize.toast(defaultMessage)
+								break
+							default:
+								Materialize.toast(defaultMessage)
+						}
 					}
-					navigator.geolocation.getCurrentPosition(positionSuccess, positionError)
+					navigator.geolocation.getCurrentPosition(
+						positionSuccess,
+						positionError,
+						{ timeout: 5000}
+					)
 				} else {
 					Materialize.toast('Não foi possível obter sua localização porque seu navegador não suporta essa funcionalidade')
 				}
@@ -185,18 +232,18 @@ angular.module('save-my-gas')
 				changed()
 			}
 
-			var init = function () {
+			var init = function() {
 				initAutocomplete()
-				if(initGettingLocation) {
+				if (initGettingLocation) {
 					scope.getGeolocation()
 				}
 			}
 
 			scope.clear()
 
-			if(scope.hasMap) {
+			if (scope.hasMap) {
 				var promise = $interval(function() {
-					if(scope.map) {
+					if (scope.map) {
 						init()
 						$interval.cancel(promise)
 					}

@@ -84,3 +84,10 @@ a.clear-button.disabled {
 a.clear-button.disabled i {
     color: grey !important;
 }
+
+.btn-flat.big-icon {
+	padding: 0 5px;
+}
+.btn-flat.big-icon i {
+	font-size: 24px;
+}

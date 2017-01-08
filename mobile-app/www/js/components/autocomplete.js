@@ -9,6 +9,7 @@ angular.module('save-my-gas')
 		require: 'ngModel',
 		scope: {
 			ngModel: '=',
+			ngDisabled: '=',
 			url: '@',
 			urlParams: '=',
 			label: '@',
@@ -24,6 +25,7 @@ angular.module('save-my-gas')
 			var _results = []
 			var _urlParams = null
 			var _isInitialized = false
+			scope.loading = false
 
 			//fix label
 			if (attributes.id) {
@@ -90,6 +92,7 @@ angular.module('save-my-gas')
 			}
 
 			scope.search = function(searchTerm) {
+				scope.loading = true
 				if (_isInitialized) {
 					var defered = $q.defer()
 
@@ -118,6 +121,8 @@ angular.module('save-my-gas')
 					}).catch(function(err) {
 						console.error('Error on autocomplete', err)
 						defered.reject(err)
+					}).finally(function() {
+						scope.loading = false
 					})
 
 					return defered.promise

@@ -45,8 +45,18 @@
 - [x] implement vehicle consumption field on edit, problem when enter with comma
 - [x] order station list with angular/ionic orderby
 
-- [ ] implement field into gas station model containing fuel types and last update from fuel price in order to make better searches on gas station screen
-    - [ ] implement updater for these fields
+- [x] implement field into gas station model containing fuel types and last update from fuel price in order to make better searches on gas station screen
+    - [x] implement updater for these fields
+
+*** search for cheaper refuel screen
+- [ ] Implement location selector component to get (and ask) cordova gps_off
+- [ ] Implement open plugin to choose wich application to open gps to the gas station
+- [ ] Implement details button
+- [ ] Implement refuel button
+- [ ] Exchange table by list to display gas stations
+
+*** gas station screen
+- [ ] all...
 
 ### Medium Priority
 *Tasks that maybe will be implemented or don't have high priority*
