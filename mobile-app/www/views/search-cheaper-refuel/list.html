@@ -1,6 +1,15 @@
 <style>
-	a.btn-flat {
-		padding: 0 10px;
+	ul.collapsible li .row {
+		margin-bottom: 0;
+	}
+
+	ul.collapsible li .row:last-child {
+		margin-bottom: 10px;
+	}
+
+	.collapsible-header button.btn-flat i {
+		margin: 0;
+		line-height: normal;
 	}
 </style>
 <div class="container">
@@ -132,16 +141,16 @@
 
 	</form>
 
-	<table class="responsive-table highlight"
+	<!-- <table class="responsive-table highlight"
 					ng-show="collection.$resolved">
 		<thead>
 			<tr>
 				<th data-field="gasStation">Posto de combustível</th>
 				<th data-field="gasStation.distance">Distância</th>
-				<!-- <th data-field="gasStation.city">Cidade</th> -->
+				<!-- <th data-field="gasStation.city">Cidade</th> --
 				<th data-field="amountUnit">Preço combustível</th>
-				<!-- <th data-field="time">Tempo para chegar</th> -->
-				<!-- <th data-field="liters">Litros para chegar</th> -->
+				<!-- <th data-field="time">Tempo para chegar</th> --
+				<!-- <th data-field="liters">Litros para chegar</th> --
 				<th data-field="arriveValue">Custo locomoção</th>
 				<th data-field="fuelBought" ng-if="unit === 'money' && refuelMoneyValue">
 					{{ refuelMoneyValue | currency : ' R$' : 2 }} compra
@@ -149,9 +158,9 @@
 				<th data-field="fuelCost" ng-if="unit === 'liter' && refuelLiterValue">
 					{{ refuelLiterValue | liters }} custa
 				</th>
-				<!-- <th data-field="litersAvailableAfterRefuel">Sobra L</th> -->
-				<!-- <th data-field="distanceAvailableAfterRefuel">Kms após abastecimento</th> -->
-				<!-- <th data-field="distanceAvailableAfterRefuelReturn">Kms após abastecimento ida e volta</th> -->
+				<!-- <th data-field="litersAvailableAfterRefuel">Sobra L</th> --
+				<!-- <th data-field="distanceAvailableAfterRefuel">Kms após abastecimento</th> --
+				<!-- <th data-field="distanceAvailableAfterRefuelReturn">Kms após abastecimento ida e volta</th> --
 				<th data-field="economy" ng-if="(unit === 'money' && refuelMoneyValue) || (unit === 'liter' && refuelLiterValue)">Economia</th>
 				<th data-field="actions">Ações</th>
 			</tr>
@@ -161,22 +170,22 @@
 			<tr ng-repeat="m in collection | orderBy: ( unit === 'money' ? '-distanceAvailableAfterRefuel' : 'fuelCostAfterRefuel')">
 				<td ng-bind="m | gasStation"></td>
 				<td ng-bind="m.distance | distance"></td>
-				<!-- <td ng-bind="m.city | city"></td> -->
+				<!-- <td ng-bind="m.city | city"></td> --
 				<td ng-bind="m.currentPrice | currency : ' R$' : 2"></td>
-				<!-- <td ng-bind="m.time | time"></td> -->
-				<!-- <td ng-bind="m.liters | liters"></td> -->
+				<!-- <td ng-bind="m.time | time"></td> --
+				<!-- <td ng-bind="m.liters | liters"></td> --
 				<td ng-bind="m.arriveValue | currency : ' R$' : 2"></td>
 				<td ng-bind="m.fuelBought | liters" ng-if="unit === 'money' && refuelMoneyValue"></td>
 				<td ng-bind="m.fuelCost | currency : ' R$' : 2" ng-if="unit === 'liter' && refuelLiterValue"></td>
-				<!-- <td ng-bind="m.litersAvailableAfterRefuel | liters"></td> -->
-				<!-- <td ng-bind="m.distanceAvailableAfterRefuel | distance"></td> -->
-				<!-- <td ng-bind="m.distanceAvailableAfterRefuelReturn | distance"></td> -->
-				<!-- <td ng-bind="m.economyRefuel | currency : ' R$' : 2"></td> -->
+				<!-- <td ng-bind="m.litersAvailableAfterRefuel | liters"></td> --
+				<!-- <td ng-bind="m.distanceAvailableAfterRefuel | distance"></td> --
+				<!-- <td ng-bind="m.distanceAvailableAfterRefuelReturn | distance"></td> --
+				<!-- <td ng-bind="m.economyRefuel | currency : ' R$' : 2"></td> --
 				<td ng-bind="m.economyLitersRefuel | liters" ng-if="unit === 'money' && refuelMoneyValue"></td>
 				<td ng-bind="m.economyRefuel | currency : ' R$' : 2" ng-if="unit === 'liter' && refuelLiterValue"></td>
 				<td>
 					<a class="waves-effect waves-orange btn-flat"
-									ng-href="https://maps.google.com/maps?saddr={{origin.geolocation | geoString}}&daddr={{m.geolocation | geoString}}&dirflg=d"
+									ng-href="openGPSRoute({{origin.geolocation | geoString}}, {{m.geolocation | geoString}})"
 									target="_blank">
 									<i class="material-icons" title="Rota GPS">navigation</i>
 								</a>
@@ -199,6 +208,103 @@
 				</td>
 			</tr>
 		</tbody>
-	</table>
+	</table> -->
+
+	<ul class="collapsible popout" data-collapsible="accordion">
+		<li ng-repeat="m in collection | orderBy: ( unit === 'money' ? '-distanceAvailableAfterRefuel' : 'fuelCostAfterRefuel')">
+			<div class="collapsible-header">
+				<div class="row">
+					<div class="col s2"><strong>Posto</strong></div>
+					<div class="col s10" ng-bind="m | gasStation"></div>
+				</div>
+				<div class="row">
+					<div class="col s6"><strong>Distância</strong></div>
+					<div class="col s6" ng-bind="m.distance | distance"></div>
+				</div>
+				<div class="row">
+					<div class="col s6"><strong>Preço combustível</strong></div>
+					<div class="col s6" ng-bind="m.currentPrice | currency : ' R$' : 2"></div>
+				</div>
+				<div class="row">
+					<div class="col s6"><strong>Custo locomoção</strong></div>
+					<div class="col s6" ng-bind="m.arriveValue | currency : ' R$' : 2"></div>
+				</div>
+				<div class="row" ng-if="unit === 'money' && refuelMoneyValue">
+					<div class="col s6"><strong>{{ refuelMoneyValue | currency : ' R$' : 2 }} compra</strong></div>
+					<div class="col s6" ng-bind="m.fuelBought | liters"></div>
+				</div>
+				<div class="row" ng-if="unit === 'liter' && refuelLiterValue">
+					<div class="col s6"><strong>{{ refuelLiterValue | liters }} custa</strong></div>
+					<div class="col s6" ng-bind="m.fuelCost | currency : ' R$' : 2"></div>
+				</div>
+				<div class="row" ng-if="unit === 'money' && refuelMoneyValue">
+					<div class="col s6"><strong>Economia</strong></div>
+					<div class="col s6" ng-bind="m.economyLitersRefuel | liters"></div>
+				</div>
+				<div class="row" ng-if="unit === 'liter' && refuelLiterValue">
+					<div class="col s6"><strong>Economia</strong></div>
+					<div class="col s6" ng-bind="m.economyRefuel | currency : ' R$' : 2"></div>
+				</div>
+				<div class="row">
+					<div class="col s4"><strong>Ações</strong></div>
+					<div class="col s8">
+						<button type="button" class="waves-effect waves-orange btn-flat big-icon"
+										ng-href="openGPSRoute('{{origin.geolocation | geoString}}', '{{m.geolocation | geoString}}')"
+										target="_blank">
+										<i class="material-icons" title="Rota GPS">navigation</i>
+									</button>
+						<button type="button" class="waves-effect waves-orange btn-flat big-icon"
+										href="#"
+										ng-click="detail(m)">
+										<i class="material-icons" title="Detalhes">view_list</i>
+									</button>
+						<button type="button" class="waves-effect waves-orange btn-flat big-icon"
+										href="#"
+										ng-click="refuel(m)">
+										<i class="material-icons" title="Abastecer">local_gas_station</i>
+									</button>
+					</div>
+				</div>
+			</div>
+			<div class="collapsible-body">
+				<div class="row">
+					<div class="col s6"><strong>Cidade</strong></div>
+					<div class="col s6" ng-bind="m.city | city"></div>
+				</div>
+				<div class="row">
+					<div class="col s6"><strong>Tempo locomoção</strong></div>
+					<div class="col s6" ng-bind="m.time | time"></div>
+				</div>
+				<div class="row">
+					<div class="col s6"><strong>Litros locomoção</strong></div>
+					<div class="col s6" ng-bind="m.liters | liters"></div>
+				</div>
+				<div class="row">
+					<div class="col s6"><strong>Litros sobra após ida</strong></div>
+					<div class="col s6" ng-bind="m.litersAvailableAfterRefuel | liters"></div>
+				</div>
+				<div class="row">
+					<div class="col s6"><strong>Litros sobra após ida e volta</strong></div>
+					<div class="col s6" ng-bind="m.litersAvailableAfterRefuelReturn | liters"></div>
+				</div>
+				<div class="row">
+					<div class="col s6"><strong>Distância sobra para andar após ida</strong></div>
+					<div class="col s6" ng-bind="m.distanceAvailableAfterRefuel | distance"></div>
+				</div>
+				<div class="row">
+					<div class="col s6"><strong>Distância sobra para andar após ida e volta</strong></div>
+					<div class="col s6" ng-bind="m.distanceAvailableAfterRefuelReturn | distance"></div>
+				</div>
+				<div class="row">
+					<div class="col s6"><strong>Economia em dinheiro</strong></div>
+					<div class="col s6" ng-bind="m.economyRefuel | currency : ' R$' : 2"></div>
+				</div>
+				<div class="row">
+					<div class="col s6"><strong>Economia em dinheiro ida e volta</strong></div>
+					<div class="col s6" ng-bind="m.economyRefuelReturn | currency : ' R$' : 2"></div>
+				</div>
+			</div>
+		</li>
+	</ul>
 
 </div>

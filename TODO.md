@@ -49,8 +49,8 @@
     - [x] implement updater for these fields
 
 *** search for cheaper refuel screen
-- [ ] Implement location selector component to get (and ask) cordova gps_off
-- [ ] Implement open plugin to choose wich application to open gps to the gas station
+- [x] Implement location selector component to get (and ask) cordova gps_off
+- [ ] Implement open plugin to choose which application to open gps to the gas station
 - [ ] Implement details button
 - [ ] Implement refuel button
 - [ ] Exchange table by list to display gas stations

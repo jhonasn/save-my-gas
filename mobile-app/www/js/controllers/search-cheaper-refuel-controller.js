@@ -227,8 +227,24 @@ angular.module('save-my-gas')
 		}
 	}
 
+	$scope.openGPSRoute = function(origin, destination) {
+		if(cordova) {
+			launchnavigator.navigate(destination, {
+				start: origin
+			})
+		} else {
+			window.open(
+				(
+					'https://maps.google.com/maps?saddr=' + origin +
+					'&daddr=' + destination +
+					'&dirflg=d'
+				),
+				'_blank')
+		}
+	}
+
 	$scope.detail = function(gasStation) {
-		alert('deveria mostrar detalhes do posto ' + formatService.gasStation(gasStation))
+		// alert('deveria mostrar detalhes do posto ' + formatService.gasStation(gasStation))
 	}
 
 	$scope.refuel = function(gasStation) {
