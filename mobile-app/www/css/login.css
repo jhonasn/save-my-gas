@@ -11,6 +11,10 @@ body main {
     height: 100%;
 }
 
+body main.container {
+	margin-top: 20px;
+}
+
 main .valign {
     width: 100%;
 }
@@ -21,4 +25,8 @@ main .valign {
 
 .logo {
 	width: 100%;
+}
+
+[role="alert"] .invalid {
+    color: #F44336;
 }

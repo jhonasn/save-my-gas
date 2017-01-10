@@ -14,7 +14,9 @@ angular.module('save-my-gas')
 		$scope.showLogin = !$scope.showLogin
 	}
 	$scope.toggleIsSignup = function(model) {
+		var prevEmail = $scope.model.email
 		delete $scope.model
+		$scope.model = { email: prevEmail }
 		$scope.isSignup = !$scope.isSignup
 	}
 

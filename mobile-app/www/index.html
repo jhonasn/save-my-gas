@@ -37,95 +37,167 @@
 
 <body>
 
-	<main class="container valign-wrapper center"
-					ng-controller="authController"
-					ng-style="{'min-height': screenHeight}">
+	<main class="container center"
+					ng-controller="authController">
 
-		<div class="valign">
+		<div class="row">
 
-			<div class="row">
-				<img class="logo"
-								src="img/icons/logo-college.svg" />
-			</div>
-
-			<div class="row">
-				<button type="button"
-								class="indigo darken-3 waves-effect waves-light btn col s10 offset-s1 m6 offset-m3 l4 offset-l4"
-								ng-click="login('facebook')">
-					<img class="left icon" src="img/icons/facebook.svg">
-					Login com facebook
-				</button>
-			</div>
-
-			<div class="row">
-				<button type="button"
-								class="red darken-3 waves-effect waves-light btn col s10 offset-s1 m6 offset-m3 l4 offset-l4"
-								ng-click="login('google')">
-					<img class="left icon" src="img/icons/google.svg">
-					Login com google
-				</button>
-			</div>
-
-			<div class="row">
-				<button type="button"
-								class="orange waves-effect waves-light btn col s10 offset-s1 m6 offset-m3 l4 offset-l4"
-								ng-click="toggleShowLogin()">
-					<img class="left icon" src="img/icons/email.svg">Login por e-mail
-				</button>
-			</div>
-
-			<form novalidate
-							name="loginForm"
-							ng-show="showLogin"
-							ng-submit="login('email', isSignup, model)">
-
-				<h4 ng-bind="isSignup ? 'Cadastre-se:' : 'Login:'"></h4>
+			<div class="col s10 offset-s1 m8 offset-m2 l6 offset-l3">
 
 				<div class="row">
-					<div class="input-field col s12">
-						<input type="email"
-										id="email-field"
-										class="validate"
-										ng-model="model.email">
-						<label for="email-field">e-mail</label>
+					<img class="logo"
+									src="img/icons/logo-title.svg" />
+				</div>
+
+				<div class="row">
+					<button type="button"
+									class="indigo darken-3 waves-effect waves-light btn col s10 offset-s1"
+									ng-click="login('facebook')">
+						<img class="left icon"
+										src="img/icons/facebook.svg">
+							Login com facebook
+							</button>
+				</div>
+
+				<div class="row">
+					<button type="button"
+									class="red darken-3 waves-effect waves-light btn col s10 offset-s1"
+									ng-click="login('google')">
+						<img class="left icon"
+										src="img/icons/google.svg">
+							Login com google
+							</button>
+				</div>
+
+				<div class="row">
+					<button type="button"
+									class="orange waves-effect waves-light btn col s10 offset-s1"
+									ng-click="toggleShowLogin()">
+						<img class="left icon"
+										src="img/icons/email.svg">Login por e-mail
+							</button>
+				</div>
+
+				<form novalidate
+								name="loginForm"
+								ng-show="showLogin"
+								ng-submit="login('email', isSignup, model)"
+								class="col s12">
+
+					<h4 ng-bind="isSignup ? 'Cadastre-se:' : 'Login:'"></h4>
+
+					<div class="row">
+						<div class="input-field col s10 offset-s1">
+							<input type="email"
+											name="emailField"
+											id="email-field"
+											class="validate"
+											ng-required="true"
+											ng-model="model.email">
+								<label for="email-field">e-mail</label>
+
+								<div role="alert">
+									<span class="invalid" ng-show="loginForm.emailField.$error.required && !loginForm.emailField.$pristine">
+										Informe o e-mail
+									</span>
+									<span class="invalid" ng-show="loginForm.emailField.$error.email">
+										e-mail inválido
+									</span>
+								</div>
+						</div>
 					</div>
-				</div>
 
-				<div class="row">
-					<div class="input-field col s12">
-						<input type="password"
-										id="password-field"
-										class="validate"
-										ng-model="model.password">
-						<label for="password-field">Senha</label>
+					<!-- para informar o username seria necessário validar se já não existe na base de dados -->
+					<!-- <div class="row" ng-show="isSignup">
+						<div class="input-field col s10 offset-s1">
+							<input type="text"
+											name="userNameField"
+											id="username-field"
+											class="validate"
+											ng-model="model.username">
+								<label for="email-field">Nome de usuário</label>
+						</div>
+					</div> -->
+
+					<div class="row">
+						<div class="input-field col s10 offset-s1">
+							<input type="password"
+											name="passwordField"
+											id="password-field"
+											class="validate"
+											ng-class="{ invalid: passwordField.$invalid }"
+											ng-required="true"
+											ng-minlength="4"
+											ng-maxlength="56"
+											ng-model="model.password">
+								<label for="password-field">Senha</label>
+
+								<div role="alert">
+									<span class="invalid" ng-show="loginForm.passwordField.$error.required && !loginForm.passwordField.$pristine">
+										Informe a senha
+									</span>
+									<span class="invalid" ng-show="loginForm.passwordField.$error.minlength">
+										A senha deve ter ao menos 4 caracteres
+									</span>
+									<span class="invalid" ng-show="loginForm.passwordField.$error.maxlength">
+										O comprimento máximo da senha é de 56 caracteres
+									</span>
+								</div>
+						</div>
 					</div>
-				</div>
 
-				<div class="row">
-					<button type="submit"
-									class="btn orange waves-effect waves-light col s12"
-									ng-disabled="!loginForm.$valid || loginForm.$pristine"
-									ng-bind="isSignup ? 'Cadastrar-se' : 'Login'"></button>
-				</div>
+					<div class="row" ng-show="isSignup">
+						<div class="input-field col s10 offset-s1">
+							<input type="password"
+											id="password-confirm-field"
+											name="passwordConfirmField"
+											class="validate"
+											ng-required="true"
+											ng-class="{ invalid: passwordConfirmField.$invalid || model.password != model.confirmPassword }"
+											ng-model="model.confirmPassword">
+								<label for="password-field">Confirme a Senha</label>
 
-				<div class="row">
-					<a href="#"
-									ng-click="toggleIsSignup(model)"
-									ng-bind="!isSignup ? 'ainda não possui conta? cadastre-se aqui' : 'Fazer login'"></a>
-				</div>
+								 <div role="alert">
+									 <span class="invalid" ng-show="loginForm.passwordConfirmField.$error.required && !loginForm.passwordConfirmField.$pristine">
+ 										Confirme a senha
+ 									</span>
+									 <span class="invalid" ng-show="loginForm.passwordConfirmField.$dirty && model.password != model.confirmPassword">
+ 										As senhas digitadas não conferem
+ 									</span>
+								 </div>
+						</div>
+					</div>
 
-			</form>
+					<div class="row">
+						<button type="submit"
+										class="btn orange waves-effect waves-light col s8 offset-s2"
+										ng-disabled="!loginForm.$valid || loginForm.$pristine || model.password != model.confirmPassword"
+										ng-bind="isSignup ? 'Cadastrar-se' : 'Login'"></button>
+					</div>
+
+					<div class="row">
+						<button type="button"
+										class="waves-effect waves-orange btn-flat teal-text"
+										ng-click="toggleIsSignup(model)"
+										ng-bind="!isSignup ? 'ainda não possui conta? cadastre-se aqui' : 'Fazer login'"
+										style="text-transform: none;"></button>
+					</div>
+
+				</form>
+
+			</div>
 
 		</div>
+
 
 	</main>
 
 	<!-- for test pourposes -->
 	<div ng-show="false"
-					class="col s12 m12 l12">
+					class="col s10 offset-s1 m6 offset-m3 l4 offset-l4">
 		<hr>
 		<div class="row">
-			<a class="indigo darken-3 waves-effect waves-light btn col s10 offset-s1 m6 offset-m3 l4 offset-l4"
+			<a class="indigo darken-3 waves-effect waves-light btn col s12"
 							href="https://facebook.com">
 				<img class="left icon"
 								src="img/icons/facebook.svg"> Abrir o facebook
@@ -133,7 +205,7 @@
 		</div>
 
 		<div class="row">
-			<a class="red darken-3 waves-effect waves-light btn col s10 offset-s1 m6 offset-m3 l4 offset-l4"
+			<a class="red darken-3 waves-effect waves-light btn col s12"
 							href="https://google.com">
 				<img class="left icon"
 								src="img/icons/google.svg"> Abrir o google
