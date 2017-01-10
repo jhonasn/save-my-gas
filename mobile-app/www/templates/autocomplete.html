@@ -44,13 +44,14 @@
 					typeahead-no-results="noResults"
 					typeahead-editable="isEditable"
 					autocomplete="off" />
-	<button type="button"
-					class="clear-button grey-text text-darken-3 waves-effect waves-orange btn-flat big-icon"
-					ng-class="{ disabled: loading || ngDisabled }"
-					ng-disabled="loading || ngDisabled"
-					ng-click="clear()"
-					style="position: absolute; top: 0; right: 0"
-					title="Limpar campo">
-		<i class="material-icons">backspace</i>
-	</button>
+		<div class="autocomplete-buttons-container" style="position: absolute; top: 0; right: 0; background-color: white;">
+			<button type="button"
+						class="clear-button grey-text text-darken-3 waves-effect waves-orange btn-flat big-icon"
+						ng-class="{ disabled: loading || ngDisabled }"
+						ng-disabled="loading || ngDisabled"
+						ng-click="clear()"
+						title="Limpar campo">
+						<i class="material-icons">backspace</i>
+					</button>
+		</div>
 </div>
