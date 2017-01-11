@@ -50,10 +50,11 @@
 
 *** search for cheaper refuel screen
 - [x] Implement location selector component to get (and ask) cordova gps_off
-- [ ] Implement open plugin to choose which application to open gps to the gas station
-- [ ] Implement details button
-- [ ] Implement refuel button
-- [ ] Exchange table by list to display gas stations
+- [x] Implement open plugin to choose which application to open gps to the gas station
+- [ ] Implement details button - **not important, postponed**
+- [x] Implement refuel button
+- [ ] Implement refuel button, when clicked fill all refuel information form - **not important, postponed**
+- [ ] Exchange table by list to display gas stations - **not important, postponed**
 
 *** gas station screen
 - [ ] all...
@@ -81,7 +82,7 @@
 ## Later Tasks
 *Tasks that will be implemented after the app goes to production or apply for the last*
 
-- [ ] implement android native scroll
+- [x] implement android native scroll
 - [x] verify if is a good to use Crosswalk instead WebView
 - [ ] when application goes to production implement android google admob/adsense api
 - [x] enable billing of google console

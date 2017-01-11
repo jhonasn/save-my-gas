@@ -43,10 +43,33 @@ angular.module('save-my-gas')
 	$scope,
 	$routeParams,
 	formatService,
-	vehicleRefuelService
+	vehicleRefuelService,
+	GasStation
 ) {
 	$scope.model = {
 		vehicleId: $routeParams.vehicleId
+	}
+
+	if ($routeParams.gasStationId) {
+		GasStation.findById({
+				id: $routeParams.gasStationId,
+				filter: {
+					fields: ['cityId', 'companyName', 'flag'],
+					include: {
+						relation: 'city',
+						scope: {
+							fields: ['id', 'name']
+						}
+					}
+				}
+			})
+			.$promise
+			.then(function(gasStation) {
+				//autocomplete needs the id
+				gasStation.id = $routeParams.gasStationId
+				$scope.model.gasStationId = gasStation
+				$scope.model.cityId = gasStation.city
+			})
 	}
 
 	$scope.save = function(model) {

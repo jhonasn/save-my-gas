@@ -51,7 +51,7 @@ angular.module('save-my-gas')
 		resolve: vehiclesResolve
 	})
 
-	.when('/vehicle-refuel/create/:vehicleId', {
+	.when('/vehicle-refuel/create/:vehicleId/:gasStationId?', {
 		templateUrl: SaveMyGas.rootRoute.getPath('/views/vehicle-refuel/edit.html'),
 		controller: 'vehicleRefuelEditController'
 	})

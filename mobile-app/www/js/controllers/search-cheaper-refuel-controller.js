@@ -228,7 +228,9 @@ angular.module('save-my-gas')
 	}
 
 	$scope.openGPSRoute = function(origin, destination) {
-		if(cordova) {
+		origin = formatService.toGeoString(origin)
+		destination = formatService.toGeoString(destination)
+		if($scope.cordova) {
 			launchnavigator.navigate(destination, {
 				start: origin
 			})
@@ -247,7 +249,7 @@ angular.module('save-my-gas')
 		// alert('deveria mostrar detalhes do posto ' + formatService.gasStation(gasStation))
 	}
 
-	$scope.refuel = function(gasStation) {
-		alert('deveria mostrar tela de abastecimento o posto ' + formatService.gasStation(gasStation) + ' selecionado')
-	}
+	// $scope.refuel = function(gasStation) {
+	// 	alert('deveria mostrar tela de abastecimento o posto ' + formatService.gasStation(gasStation) + ' selecionado')
+	// }
 })

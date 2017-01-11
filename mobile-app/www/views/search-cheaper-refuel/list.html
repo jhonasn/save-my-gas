@@ -141,16 +141,13 @@
 
 	</form>
 
-	<!-- <table class="responsive-table highlight"
+	<table class="responsive-table highlight"
 					ng-show="collection.$resolved">
 		<thead>
 			<tr>
-				<th data-field="gasStation">Posto de combustível</th>
+				<th data-field="gasStation">Posto</th>
 				<th data-field="gasStation.distance">Distância</th>
-				<!-- <th data-field="gasStation.city">Cidade</th> --
 				<th data-field="amountUnit">Preço combustível</th>
-				<!-- <th data-field="time">Tempo para chegar</th> --
-				<!-- <th data-field="liters">Litros para chegar</th> --
 				<th data-field="arriveValue">Custo locomoção</th>
 				<th data-field="fuelBought" ng-if="unit === 'money' && refuelMoneyValue">
 					{{ refuelMoneyValue | currency : ' R$' : 2 }} compra
@@ -158,9 +155,6 @@
 				<th data-field="fuelCost" ng-if="unit === 'liter' && refuelLiterValue">
 					{{ refuelLiterValue | liters }} custa
 				</th>
-				<!-- <th data-field="litersAvailableAfterRefuel">Sobra L</th> --
-				<!-- <th data-field="distanceAvailableAfterRefuel">Kms após abastecimento</th> --
-				<!-- <th data-field="distanceAvailableAfterRefuelReturn">Kms após abastecimento ida e volta</th> --
 				<th data-field="economy" ng-if="(unit === 'money' && refuelMoneyValue) || (unit === 'liter' && refuelLiterValue)">Economia</th>
 				<th data-field="actions">Ações</th>
 			</tr>
@@ -170,32 +164,25 @@
 			<tr ng-repeat="m in collection | orderBy: ( unit === 'money' ? '-distanceAvailableAfterRefuel' : 'fuelCostAfterRefuel')">
 				<td ng-bind="m | gasStation"></td>
 				<td ng-bind="m.distance | distance"></td>
-				<!-- <td ng-bind="m.city | city"></td> --
 				<td ng-bind="m.currentPrice | currency : ' R$' : 2"></td>
-				<!-- <td ng-bind="m.time | time"></td> --
-				<!-- <td ng-bind="m.liters | liters"></td> --
 				<td ng-bind="m.arriveValue | currency : ' R$' : 2"></td>
 				<td ng-bind="m.fuelBought | liters" ng-if="unit === 'money' && refuelMoneyValue"></td>
 				<td ng-bind="m.fuelCost | currency : ' R$' : 2" ng-if="unit === 'liter' && refuelLiterValue"></td>
-				<!-- <td ng-bind="m.litersAvailableAfterRefuel | liters"></td> --
-				<!-- <td ng-bind="m.distanceAvailableAfterRefuel | distance"></td> --
-				<!-- <td ng-bind="m.distanceAvailableAfterRefuelReturn | distance"></td> --
-				<!-- <td ng-bind="m.economyRefuel | currency : ' R$' : 2"></td> --
 				<td ng-bind="m.economyLitersRefuel | liters" ng-if="unit === 'money' && refuelMoneyValue"></td>
 				<td ng-bind="m.economyRefuel | currency : ' R$' : 2" ng-if="unit === 'liter' && refuelLiterValue"></td>
 				<td>
-					<a class="waves-effect waves-orange btn-flat"
-									ng-href="openGPSRoute({{origin.geolocation | geoString}}, {{m.geolocation | geoString}})"
+					<button type="button" class="waves-effect waves-orange btn-flat big-icon"
+									ng-click="openGPSRoute(origin.geolocation, m.geolocation)"
 									target="_blank">
 									<i class="material-icons" title="Rota GPS">navigation</i>
-								</a>
-					<a class="waves-effect waves-orange btn-flat"
+								</button>
+					<!-- <button type="button" class="waves-effect waves-orange btn-flat big-icon"
 									href="#"
 									ng-click="detail(m)">
 									<i class="material-icons" title="Detalhes">view_list</i>
-								</a>
-					<a class="waves-effect waves-orange btn-flat"
-									href="#"
+								</button> -->
+					<a class="waves-effect waves-orange btn-flat big-icon"
+									ng-href="/vehicle-refuel/create/{{vehicleId}}/{{m.id}}"
 									ng-click="refuel(m)">
 									<i class="material-icons" title="Abastecer">local_gas_station</i>
 								</a>
@@ -208,9 +195,9 @@
 				</td>
 			</tr>
 		</tbody>
-	</table> -->
+	</table>
 
-	<ul class="collapsible popout" data-collapsible="accordion">
+	<!-- <ul class="collapsible popout" data-collapsible="accordion">
 		<li ng-repeat="m in collection | orderBy: ( unit === 'money' ? '-distanceAvailableAfterRefuel' : 'fuelCostAfterRefuel')">
 			<div class="collapsible-header">
 				<div class="row">
@@ -305,6 +292,6 @@
 				</div>
 			</div>
 		</li>
-	</ul>
+	</ul> -->
 
 </div>
