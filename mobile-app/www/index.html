@@ -152,7 +152,7 @@
 											id="password-confirm-field"
 											name="passwordConfirmField"
 											class="validate"
-											ng-required="true"
+											ng-required="isSignup"
 											ng-class="{ invalid: passwordConfirmField.$invalid || model.password != model.confirmPassword }"
 											ng-model="model.confirmPassword">
 								<label for="password-field">Confirme a Senha</label>
@@ -171,7 +171,7 @@
 					<div class="row">
 						<button type="submit"
 										class="btn orange waves-effect waves-light col s8 offset-s2"
-										ng-disabled="!loginForm.$valid || loginForm.$pristine || model.password != model.confirmPassword"
+										ng-disabled="!loginForm.$valid || loginForm.$pristine || (isSignup && model.password != model.confirmPassword)"
 										ng-bind="isSignup ? 'Cadastrar-se' : 'Login'"></button>
 					</div>
 
