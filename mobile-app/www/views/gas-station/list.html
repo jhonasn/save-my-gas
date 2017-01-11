@@ -1,0 +1,100 @@
+<div class="container">
+
+	<form name="modelForm">
+
+		<div class="input-field">
+			<location-selector id="origin-field"
+				name="originField"
+				ng-class="{ invalid: modelForm.originField.$invalid }"
+				ng-required="true"
+				on-change="originChanged"
+				ng-model="origin"></location-selector>
+			<label for="origin-field">Ponto referência</label>
+			<div ng-messages="modelForm.originField.$error"
+							role="alert">
+				<span class="invalid"
+								ng-message="required">Selecione a origem</span>
+			</div>
+		</div>
+
+		<label for="radius-field">
+			Raio de busca de postos {{ (radius * 1000) | distance }}
+		</label>
+		<p class="range-field">
+			<input id="radius-field"
+							name="radiusField"
+							type="range"
+							ng-model="radius"
+							ng-change="radiusChanged()"
+							ng-model-options="{ debounce: 500 }"
+							min="1"
+							max="300" />
+		</p>
+
+		<!-- do a ng-repeat on fueltypes -->
+		<p>
+			<input type="checkbox"
+				id="money-field"
+				name="moneyField"
+				ng-model="gas" />
+			<label for="money-field">Gasolina</label>
+
+			<input type="checkbox"
+				id="liter-field"
+				name="literField"
+				ng-model="ethanol" />
+			<label for="liter-field">Alcool</label>
+		</p>
+
+		<div class="input-field">
+			<input type="text"
+							name="nickNameField"
+							id="nick-name-field"
+							ng-class="{ invalid: modelForm.nickNameField.$invalid }"
+							ng-model="model.nickName">
+			<label for="nick-name-field">Nome do posto</label>
+		</div>
+
+	</form>
+
+	<!-- make an option to order by price -->
+	<ul class="collection">
+		<li class="collection-item avatar">
+			<img src="/img/icons/logo.svg"
+							onerror="this.src = '/img/icons/logo.svg'"
+							alt="Logo do posto de combustível"
+							class="circle" />
+			<span class="title">Nome Posto de gasolina</span>
+			<p>
+				Valor combustível: x <br> Distancia: y km
+			</p>
+
+			<div class="secondary-content">
+				<rating read-only="true" ng-model="rating" class="right"></rating>
+				<br />
+				<button class="waves-effect waves-orange btn-flat right">
+					<i class="material-icons">send</i>
+				</button>
+			</div>
+		</li>
+
+		<li class="collection-item avatar">
+			<img src="/img/icons/logo.svg"
+							onerror="this.src = '/img/icons/logo.svg'"
+							alt="Logo do posto de combustível"
+							class="circle" />
+			<span class="title">Nome Posto de gasolina</span>
+			<p>
+				Valor combustível: x <br> Distancia: y km
+			</p>
+
+			<div class="secondary-content">
+				<rating read-only="true" ng-model="rating" class="right"></rating>
+				<br />
+				<button class="waves-effect waves-orange btn-flat right">
+					<i class="material-icons">send</i>
+				</button>
+			</div>
+		</li>
+	</ul>
+</div>

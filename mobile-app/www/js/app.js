@@ -5,7 +5,8 @@ angular.module('save-my-gas', [
 	'lbServices',
 	'ngStorage',
 	'ngCordova',
-	'ui.bootstrap'
+	'ui.bootstrap',
+	'angular-star-rating'
 	// 'ui.bootstrap.typeahead'
 ])
 

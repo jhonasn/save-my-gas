@@ -25,7 +25,7 @@ angular.module('save-my-gas')
 	if (model.photo) {
 		$scope.vehiclePhoto = vehicleService.getVehiclePhotoPath(model)
 	} else {
-		$scope.vehiclePhoto = SaveMyGas.rootRoute.getPath('/img/default-car.png')
+		$scope.vehiclePhoto = SaveMyGas.rootRoute.getPath('/img/default-car.svg')
 	}
 
 	model.photo = model.photo || {

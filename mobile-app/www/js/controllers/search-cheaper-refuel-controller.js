@@ -87,7 +87,7 @@ angular.module('save-my-gas')
 						inq: fuelTypeIds
 					}
 				},
-				limit: 10,
+				// limit: 10,
 				fields: [
 					'id',
 					'companyName',

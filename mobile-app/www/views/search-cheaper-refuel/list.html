@@ -127,7 +127,9 @@
 			</div>
 		</div>
 
-		<label for="radius-field">Raio de busca de postos {{ (radius * 1000) | distance }}</label>
+		<label for="radius-field">
+			Raio de busca de postos {{ (radius * 1000) | distance }}
+		</label>
 		<p class="range-field">
 			<input id="radius-field"
 							name="radiusField"
@@ -191,7 +193,7 @@
 
 			<tr ng-show="collection.$resolved && !collection.length">
 				<td colspan="5">
-					Nenhum posto de combustível encontrado na região (raio 50 km)
+					Nenhum posto de combustível encontrado na região (raio {{ (radius * 1000) | distance }})
 				</td>
 			</tr>
 		</tbody>
