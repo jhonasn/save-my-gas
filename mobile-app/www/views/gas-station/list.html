@@ -1,4 +1,25 @@
-<div class="container">
+<style media="screen">
+	ul.collection .row .col {
+		padding: 0;
+	}
+	@media only screen and (max-width: 600px) {
+		ul.collection .row .col rating i.material-icons {
+			font-size: 12px;
+		}
+	}
+	@media only screen and (min-width: 600px) {
+		ul.collection .row .col rating i.material-icons {
+			font-size: 21px;
+		}
+	}
+	@media only screen and (min-width: 992px) {
+		ul.collection .row .col rating i.material-icons {
+			font-size: 24px;
+		}
+	}
+	/*m - <= 992px. l - > 992px*/
+</style>
+<div class="container" ng-class="{ med: window.outerWidth < 900 }">
 
 	<form name="modelForm">
 
@@ -59,42 +80,28 @@
 
 	<!-- make an option to order by price -->
 	<ul class="collection">
-		<li class="collection-item avatar">
-			<img src="/img/icons/logo.svg"
-							onerror="this.src = '/img/icons/logo.svg'"
-							alt="Logo do posto de combustível"
-							class="circle" />
-			<span class="title">Nome Posto de gasolina</span>
-			<p>
-				Valor combustível: x <br> Distancia: y km
-			</p>
-
-			<div class="secondary-content">
-				<rating read-only="true" ng-model="rating" class="right"></rating>
-				<br />
-				<button class="waves-effect waves-orange btn-flat right">
-					<i class="material-icons">send</i>
-				</button>
-			</div>
-		</li>
 
 		<li class="collection-item avatar">
 			<img src="/img/icons/logo.svg"
 							onerror="this.src = '/img/icons/logo.svg'"
 							alt="Logo do posto de combustível"
 							class="circle" />
-			<span class="title">Nome Posto de gasolina</span>
-			<p>
-				Valor combustível: x <br> Distancia: y km
-			</p>
-
-			<div class="secondary-content">
-				<rating read-only="true" ng-model="rating" class="right"></rating>
-				<br />
-				<button class="waves-effect waves-orange btn-flat right">
-					<i class="material-icons">send</i>
-				</button>
+			<div class="row">
+				<div class="col s9">
+					<span class="title">Nome Posto de gasolina</span>
+					<p>
+						Valor combustível: x <br> Distancia: y km
+					</p>
+				</div>
+				<div class="col s3">
+					<rating class="right" read-only="true" ng-model="rating"></rating>
+					<br />
+					<button class="waves-effect waves-orange btn-flat col s12 m6 offset-m6 l4 offset-l8">
+						<i class="material-icons">send</i>
+					</button>
+				</div>
 			</div>
 		</li>
+		
 	</ul>
 </div>
