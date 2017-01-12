@@ -33,8 +33,7 @@
       "foreignKey": "userId"
     }
   },
-  "acls": [
-    {
+  "acls": [{
       "accessType": "*",
       "principalType": "ROLE",
       "principalId": "$unauthenticated",
@@ -59,5 +58,20 @@
       "permission": "ALLOW"
     }
   ],
-  "methods": {}
+  "methods": {
+    "average": {
+      "isStatic": true,
+      "http": {
+        "verb": "get"
+      },
+      "accepts": {
+        "arg": "gasStationId",
+        "type": "string"
+      },
+      "returns": {
+        "arg": "average",
+        "type": "number"
+      }
+    }
+  }
 }

@@ -5,6 +5,8 @@ angular.module('save-my-gas')
 	GasStation,
 	FuelType,
 	FuelPrice,
+	GasStationRating,
+	GasStationComment,
 	utilService,
 	geolocationService
 ) {
@@ -135,7 +137,7 @@ angular.module('save-my-gas')
 				})
 				.$promise
 				.then(function(gasStations) {
-					var fuelPricePromises = []
+					var gasStationPromises = []
 					gasStations.forEach(function(gasStation) {
 						//calc distance and put value in meters
 						if(geolocation && geolocation.latitude && geolocation.longitude) {
@@ -145,6 +147,7 @@ angular.module('save-my-gas')
 							) * 1000
 						}
 
+						//get fuel prices
 						var fuelPriceFilter = {
 							order: 'date DESC',
 							fields: ['sale', 'gasStationId'],
@@ -181,11 +184,25 @@ angular.module('save-my-gas')
 										gasStation.fuelPrices.push(fuelPrice)
 									}
 								})
-							fuelPricePromises.push(promise)
+							gasStationPromises.push(promise)
 						})
+
+						//get ratings
+						var ratingsFilter = {
+							filter: {
+								where: {
+									gasStationId: gasStation.id
+								}
+							}
+						}
+
+						gasStation.ratingCount = GasStationRating.count(ratingsFilter)
+						gasStationPromises.push(gasStation.positiveRatings.$promise)
+
+						
 					})
 
-					$q.all(fuelPricePromises)
+					$q.all(gasStationPromises)
 						.then(function(fuelPrices) {
 							defered.resolve(gasStations)
 						})
