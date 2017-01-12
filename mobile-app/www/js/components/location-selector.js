@@ -211,6 +211,7 @@ angular.module('save-my-gas')
 									info: res.data.results[0],
 									geolocation: geolocation
 								}
+								ngModelController.$setViewValue(scope.ngModel)
 
 								defered.resolve()
 							} else {

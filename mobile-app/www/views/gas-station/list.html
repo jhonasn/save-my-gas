@@ -17,9 +17,18 @@
 			font-size: 24px;
 		}
 	}
-	/*m - <= 992px. l - > 992px*/
 </style>
-<div class="container" ng-class="{ med: window.outerWidth < 900 }">
+<div class="container">
+
+	<h5 class="header grey-text text-lighten-1">
+		{{
+			collection
+			?
+			'Busca de postos de combustível'
+			:
+			'Carregando postos de combustível...'
+		}}
+	</h5>
 
 	<form name="modelForm">
 
@@ -27,7 +36,7 @@
 			<location-selector id="origin-field"
 				name="originField"
 				ng-class="{ invalid: modelForm.originField.$invalid }"
-				ng-required="true"
+				ng-required="!name"
 				on-change="originChanged"
 				ng-model="origin"></location-selector>
 			<label for="origin-field">Ponto referência</label>
@@ -49,31 +58,34 @@
 							ng-change="radiusChanged()"
 							ng-model-options="{ debounce: 500 }"
 							min="1"
-							max="300" />
+							max="100" />
 		</p>
 
-		<!-- do a ng-repeat on fueltypes -->
 		<p>
-			<input type="checkbox"
-				id="money-field"
-				name="moneyField"
-				ng-model="gas" />
-			<label for="money-field">Gasolina</label>
-
-			<input type="checkbox"
-				id="liter-field"
-				name="literField"
-				ng-model="ethanol" />
-			<label for="liter-field">Alcool</label>
+			<div class="fuel-type" ng-repeat="ft in fuelTypes">
+				<input type="checkbox"
+					id="{{ft.name.toLowerCase()}}-field"
+					ng-change="fuelTypeChanged()"
+					ng-model-options="{ debounce: 2000 }"
+					ng-model="ft.selected" />
+				<label for="{{ft.name.toLowerCase()}}-field" ng-bind="ft.name"></label>
+			</div>
 		</p>
 
 		<div class="input-field">
 			<input type="text"
-							name="nickNameField"
-							id="nick-name-field"
-							ng-class="{ invalid: modelForm.nickNameField.$invalid }"
-							ng-model="model.nickName">
-			<label for="nick-name-field">Nome do posto</label>
+							name="nameField"
+							id="name-field"
+							ng-required="!origin"
+							ng-change="nameChanged()"
+							ng-model-options="{ debounce: 800 }"
+							ng-model="name">
+			<label for="name-field">Nome do posto</label>
+			<div ng-messages="modelForm.nameField.$error"
+							role="alert">
+				<span class="invalid"
+								ng-message="required">Informe o nome do posto</span>
+			</div>
 		</div>
 
 	</form>
@@ -81,27 +93,44 @@
 	<!-- make an option to order by price -->
 	<ul class="collection">
 
-		<li class="collection-item avatar">
-			<img src="/img/icons/logo.svg"
+		<li class="collection-item avatar" ng-repeat="m in collection">
+			<img ng-src="{{m.logo || '/img/icons/logo.svg'}}"
 							onerror="this.src = '/img/icons/logo.svg'"
 							alt="Logo do posto de combustível"
 							class="circle" />
 			<div class="row">
 				<div class="col s9">
-					<span class="title">Nome Posto de gasolina</span>
+					<span class="title" ng-bind="m | gasStation"></span>
 					<p>
-						Valor combustível: x <br> Distancia: y km
+						<span ng-repeat="fp in m.fuelPrices">
+							<strong>{{fp.fuelType.name}}:</strong> {{fp.sale | currency : ' R$' : 2}} <br>
+						</span>
+						<span ng-if="origin && origin.geolocation">
+							<strong>Distância:</strong> {{m.distance | distance}} <br>
+						</span>
 					</p>
 				</div>
-				<div class="col s3">
-					<rating class="right" read-only="true" ng-model="rating"></rating>
+				<div class="col s3 right-align">
+					<div class="rating right" ng-if="m.rating === 0 || m.rating">
+						<rating read-only="true" ng-model="m.rating"></rating>
+						<br>
+						{{m.ratingCount}} avaliações
+					</div>
+					<span class="rating" ng-if="m.rating !== 0 && !m.rating">
+						<rating read-only="true" ng-model="0"></rating><br>
+						Sem avaliações
+					</span>
 					<br />
-					<button class="waves-effect waves-orange btn-flat col s12 m6 offset-m6 l4 offset-l8">
-						<i class="material-icons">send</i>
+					<button class="waves-effect waves-orange btn-flat col s12 m6 offset-m6 l4 offset-l8" title="Página do posto">
+						<i class="material-icons">store</i>
 					</button>
 				</div>
 			</div>
 		</li>
-		
+
+		<li class="collection-item center" ng-show="collection && !collection.length">
+			<h4 class="grey-text text-lighten-1">Nenhum posto encontrado</h4>
+		</li>
+
 	</ul>
 </div>

@@ -70,7 +70,12 @@ angular.module('save-my-gas')
 
 	.when('/gas-station', {
 		templateUrl: SaveMyGas.rootRoute.getPath('/views/gas-station/list.html'),
-		controller: 'gasStationController'
+		controller: 'gasStationController',
+		resolve: {
+			fuelTypes: function (gasStationService) {
+				return gasStationService.getFuelTypes().$promise
+			}
+		}
 	})
 
 	.when('/gas-station/edit', {
