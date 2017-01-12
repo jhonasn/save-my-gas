@@ -26,7 +26,8 @@
       "type": "string"
     },
     "fuelTypeId": {
-      "type": "string"
+      "type": "string",
+	  "required": true
     },
     "gasStationId": {
       "type": "string"
@@ -38,10 +39,14 @@
       "type": "belongsTo",
       "model": "gasStation",
       "foreignKey": "gasStationId"
+    },
+    "fuelType": {
+      "type": "belongsTo",
+      "model": "fuelType",
+      "foreignKey": "fuelTypeId"
     }
   },
-  "acls": [
-    {
+  "acls": [{
       "accessType": "*",
       "principalType": "ROLE",
       "principalId": "$unauthenticated",
