@@ -60,13 +60,13 @@
   ],
   "methods": {
     "average": {
-      "isStatic": true,
       "http": {
         "verb": "get"
       },
       "accepts": {
         "arg": "gasStationId",
-        "type": "string"
+        "type": "string",
+		"required": true
       },
       "returns": {
         "arg": "average",
