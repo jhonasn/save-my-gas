@@ -113,7 +113,7 @@ angular.module('save-my-gas')
 						info: place,
 						geolocation: {
 							latitude: place.geometry.location.lat(),
-							longitude: place.geometry.location.lng()
+							longitude: place.geometry.location.lng(),
 						}
 					}
 					ngModelController.$setViewValue(scope.ngModel)
@@ -209,7 +209,11 @@ angular.module('save-my-gas')
 									formattedAddress: res.data.results[0].formatted_address,
 									placeId: res.data.results[0].place_id,
 									info: res.data.results[0],
-									geolocation: geolocation
+									geolocation: {
+										latitude: geolocation.latitude,
+										longitude: geolocation.longitude,
+										// altitude: geolocation.altitude
+									}
 								}
 								ngModelController.$setViewValue(scope.ngModel)
 

@@ -52,5 +52,10 @@ angular.module('save-my-gas')
 
 .controller('gasStationPageController', function(
 	$scope,
-	gasStationService
-) {})
+	gasStationService,
+	model
+) {
+	model.gasStationPhoto = model.gasStationPhoto || '/img/icons/logo-title.svg'
+
+	$scope.model = model
+})

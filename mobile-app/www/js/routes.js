@@ -3,7 +3,7 @@ angular.module('save-my-gas')
 .config(function($routeProvider, $locationProvider) {
 
 	var vehiclesResolve = {
-		vehicles: function (vehicleRefuelService) {
+		vehicles: function(vehicleRefuelService) {
 			return vehicleRefuelService.getUserVehicles().$promise
 		}
 	}
@@ -15,11 +15,11 @@ angular.module('save-my-gas')
 	// 	controller: 'homeController'
 	// })
 
-	.when('/vehicle', {
+		.when('/vehicle', {
 		templateUrl: SaveMyGas.rootRoute.getPath('/views/vehicle/list.html'),
 		controller: 'vehicleController',
 		resolve: {
-			collection: function (vehicleService) {
+			collection: function(vehicleService) {
 				return vehicleService.getCollection().$promise
 			}
 		}
@@ -30,7 +30,9 @@ angular.module('save-my-gas')
 		controller: 'vehicleEditController',
 		resolve: {
 			model: function(authService) {
-				return { ownerId: authService.getUser().userId }
+				return {
+					ownerId: authService.getUser().userId
+				}
 			}
 		}
 	})
@@ -39,8 +41,8 @@ angular.module('save-my-gas')
 		templateUrl: SaveMyGas.rootRoute.getPath('/views/vehicle/edit.html'),
 		controller: 'vehicleEditController',
 		resolve: {
-			model: function ($route, vehicleService) {
-				return  vehicleService.findById($route.current.params.id).$promise
+			model: function($route, vehicleService) {
+				return vehicleService.findById($route.current.params.id).$promise
 			}
 		}
 	})
@@ -72,15 +74,29 @@ angular.module('save-my-gas')
 		templateUrl: SaveMyGas.rootRoute.getPath('/views/gas-station/list.html'),
 		controller: 'gasStationController',
 		resolve: {
-			fuelTypes: function (gasStationService) {
+			fuelTypes: function(gasStationService) {
 				return gasStationService.getFuelTypes().$promise
 			}
 		}
 	})
 
-	.when('/gas-station/page/:gasStationId', {
+	.when('/gas-station/page/:id/:geolocation?', {
 		templateUrl: SaveMyGas.rootRoute.getPath('/views/gas-station/page.html'),
-		controller: 'gasStationPageController'
+		controller: 'gasStationPageController',
+		resolve: {
+			model: function($route, gasStationService) {
+				var geolocation = $route.current.params.geolocation
+				if (typeof geolocation === 'string' && geolocation.length) {
+					try {
+						geolocation = JSON.parse(geolocation)
+					} catch (e) {}
+				}
+				return gasStationService.findById(
+					$route.current.params.id,
+					geolocation
+				)
+			}
+		}
 	})
 
 	.when('/reports', {
