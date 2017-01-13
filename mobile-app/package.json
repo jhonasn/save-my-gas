@@ -4,7 +4,10 @@
   "description": "save-my-gas, one app to save your money",
   "repository": "https://github.com/jhonasn/save-my-gas",
   "license": "MIT",
-  "dependencies": {},
+  "dependencies": {
+    "gulp-mobile-icons": "^1.2.0",
+    "gulp-mobile-splashscreens": "^1.1.0"
+  },
   "main": "./lib/main",
   "devDependencies": {
     "bower": "^1.8.0",

@@ -1,7 +1,7 @@
 {
 	"name": "save-my-gas",
 
-	"env": "dev-local",
+	"env": "production",
 
 	"dev-local": {
 		"urlDomain": "http://localhost:3000",

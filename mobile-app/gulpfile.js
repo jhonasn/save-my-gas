@@ -9,6 +9,8 @@ var htmlreplace = require('gulp-html-replace')
 var replace = require('gulp-replace')
 var del = require('del')
 var sass = require('gulp-sass')
+var mobileIcons = require('gulp-mobile-icons')
+var mobileSplashscreens = require('gulp-mobile-splashscreens')
 
 gulp.task('clean', function() {
 	return del([
@@ -32,7 +34,9 @@ gulp.task('min-login-js', function() {
 			'www/js/services/root-route-service.js',
 		])
 		.pipe(concat('/js/app-login.js'))
-		.pipe(ngAnnotate({ single_quotes: true }))
+		.pipe(ngAnnotate({
+			single_quotes: true
+		}))
 		// .pipe(minifier({ output: { quote_style: 3 } }, uglifyjs))
 		// .pipe(uglify())
 		.pipe(gulp.dest('../web-app'))
@@ -69,7 +73,9 @@ gulp.task('min-app-js', function() {
 			'www/js/**/*.js',
 		])
 		.pipe(concat('/js/app.js'))
-		.pipe(ngAnnotate({ single_quotes: true }))
+		.pipe(ngAnnotate({
+			single_quotes: true
+		}))
 		// .pipe(minifier({ output: { quote_style: 3 } }, uglifyjs))
 		// .pipe(uglify())
 		.pipe(gulp.dest('../web-app'))
@@ -132,6 +138,24 @@ gulp.task('materialize-sass', [
 	'materialize-copy-sass',
 	'materialize-compile-sass'
 ])
+
+gulp.task('generate-icons', function() {
+	return gulp.src('./www/img/icons/logo.svg')
+		.pipe(mobileIcons())
+		.pipe(gulp.dest('images'))
+})
+
+gulp.task('generate-splash-screens', function() {
+	return gulp.src('./www/img/icons/logo-title.svg')
+		.pipe(mobileSplashscreens())
+		.pipe(gulp.dest('images'))
+})
+
+gulp.task('svg-gen', [
+	'generate-icons',
+	'generate-splash-screens'
+])
+
 
 gulp.task('default', [
 	// 'clean',
