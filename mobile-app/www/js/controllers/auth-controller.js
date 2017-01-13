@@ -9,6 +9,7 @@ angular.module('save-my-gas')
 
 	$scope.showLogin = false
 	$scope.isSignup = false
+	$scope.model = {}
 
 	$scope.toggleShowLogin = function() {
 		$scope.showLogin = !$scope.showLogin

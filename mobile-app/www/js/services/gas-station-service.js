@@ -188,18 +188,29 @@ angular.module('save-my-gas')
 						})
 
 						//get ratings
-						var ratingsFilter = {
-							filter: {
-								where: {
-									gasStationId: gasStation.id
-								}
+						var ratingCountPromise = GasStationRating.count({
+							where: {
+								gasStationId: gasStation.id
 							}
-						}
+						})
+						.$promise
+						.then(function (result) {
+							gasStation.ratingCount = result.count
+						})
 
-						gasStation.ratingCount = GasStationRating.count(ratingsFilter)
-						gasStationPromises.push(gasStation.positiveRatings.$promise)
+						var averagePromise = GasStationRating.average({ gasStationId: gasStation.id })
+						.$promise
+						.then(function (result) {
+							gasStation.rating = result.average
+							//the plugin counts +1 if number is greater then the floor
+							//so...
+							if(gasStation.rating >= 0  && gasStation.rating % 1 < 0.5) {
+								gasStation.rating = Math.floor(gasStation.rating)
+							}
+						})
 
-						
+						gasStationPromises.push(ratingCountPromise)
+						gasStationPromises.push(averagePromise)
 					})
 
 					$q.all(gasStationPromises)

@@ -78,9 +78,9 @@ angular.module('save-my-gas')
 		}
 	})
 
-	.when('/gas-station/edit', {
-		templateUrl: SaveMyGas.rootRoute.getPath('/views/gas-station/edit.html'),
-		controller: 'gasStationEditController'
+	.when('/gas-station/page/:gasStationId', {
+		templateUrl: SaveMyGas.rootRoute.getPath('/views/gas-station/page.html'),
+		controller: 'gasStationPageController'
 	})
 
 	.when('/reports', {

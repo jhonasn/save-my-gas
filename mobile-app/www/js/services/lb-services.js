@@ -6869,6 +6869,12 @@ if (typeof module !== 'undefined' && typeof exports !== 'undefined' &&
               url: urlBase + "/vehicles/:id/fuelType",
               method: "GET",
             },
+
+            // INTERNAL. Use FuelPrice.fuelType() instead.
+            "::get::FuelPrice::fuelType": {
+              url: urlBase + "/fuelPrices/:id/fuelType",
+              method: "GET",
+            },
           }
         );
 
@@ -7159,6 +7165,12 @@ if (typeof module !== 'undefined' && typeof exports !== 'undefined' &&
           { 'id': '@id' },
           {
 
+            // INTERNAL. Use FuelPrice.fuelType() instead.
+            "prototype$__get__fuelType": {
+              url: urlBase + "/fuelPrices/:id/fuelType",
+              method: "GET",
+            },
+
             // INTERNAL. Use FuelPrice.gasStation() instead.
             "prototype$__get__gasStation": {
               url: urlBase + "/fuelPrices/:id/gasStation",
@@ -7393,6 +7405,42 @@ if (typeof module !== 'undefined' && typeof exports !== 'undefined' &&
 
             /**
              * @ngdoc method
+             * @name lbServices.FuelPrice#fuelType
+             * @methodOf lbServices.FuelPrice
+             *
+             * @description
+             *
+             * Fetches belongsTo relation fuelType.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `id` – `{*}` - PersistedModel id
+             *
+             *  - `refresh` – `{boolean=}` -
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * <em>
+             * (The remote method definition does not provide any description.
+             * This usually means the response is a `FuelType` object.)
+             * </em>
+             */
+        R.fuelType = function() {
+          var TargetResource = $injector.get("FuelType");
+          var action = TargetResource["::get::FuelPrice::fuelType"];
+          return action.apply(R, arguments);
+        };
+
+            /**
+             * @ngdoc method
              * @name lbServices.FuelPrice#gasStation
              * @methodOf lbServices.FuelPrice
              *
@@ -7464,6 +7512,12 @@ if (typeof module !== 'undefined' && typeof exports !== 'undefined' &&
                 'fk': '@fk',
               },
               url: urlBase + "/gasStations/:id/fuelPrices/:fk",
+              method: "GET",
+            },
+
+            // INTERNAL. Use GasStation.city() instead.
+            "prototype$__get__city": {
+              url: urlBase + "/gasStations/:id/city",
               method: "GET",
             },
 
@@ -8058,6 +8112,42 @@ if (typeof module !== 'undefined' && typeof exports !== 'undefined' &&
         R.fuelPrices.findById = function() {
           var TargetResource = $injector.get("FuelPrice");
           var action = TargetResource["::findById::GasStation::fuelPrices"];
+          return action.apply(R, arguments);
+        };
+
+            /**
+             * @ngdoc method
+             * @name lbServices.GasStation#city
+             * @methodOf lbServices.GasStation
+             *
+             * @description
+             *
+             * Fetches belongsTo relation city.
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `id` – `{*}` - PersistedModel id
+             *
+             *  - `refresh` – `{boolean=}` -
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * <em>
+             * (The remote method definition does not provide any description.
+             * This usually means the response is a `City` object.)
+             * </em>
+             */
+        R.city = function() {
+          var TargetResource = $injector.get("City");
+          var action = TargetResource["::get::GasStation::city"];
           return action.apply(R, arguments);
         };
     /**
@@ -9284,6 +9374,12 @@ if (typeof module !== 'undefined' && typeof exports !== 'undefined' &&
              */
             "count": {
               url: urlBase + "/cities/count",
+              method: "GET",
+            },
+
+            // INTERNAL. Use GasStation.city() instead.
+            "::get::GasStation::city": {
+              url: urlBase + "/gasStations/:id/city",
               method: "GET",
             },
 
@@ -17407,6 +17503,40 @@ if (typeof module !== 'undefined' && typeof exports !== 'undefined' &&
             "createChangeStream": {
               url: urlBase + "/gasStationRatings/change-stream",
               method: "POST",
+            },
+
+            /**
+             * @ngdoc method
+             * @name lbServices.GasStationRating#average
+             * @methodOf lbServices.GasStationRating
+             *
+             * @description
+             *
+             * <em>
+             * (The remote method definition does not provide any description.)
+             * </em>
+             *
+             * @param {Object=} parameters Request parameters.
+             *
+             *  - `gasStationId` – `{string}` -
+             *
+             * @param {function(Object,Object)=} successCb
+             *   Success callback with two arguments: `value`, `responseHeaders`.
+             *
+             * @param {function(Object)=} errorCb Error callback with one argument:
+             *   `httpResponse`.
+             *
+             * @returns {Object} An empty reference that will be
+             *   populated with the actual data once the response is returned
+             *   from the server.
+             *
+             * Data properties:
+             *
+             *  - `average` – `{number=}` -
+             */
+            "average": {
+              url: urlBase + "/gasStationRatings/average",
+              method: "GET",
             },
 
             // INTERNAL. Use User.gasStationRatings.findById() instead.

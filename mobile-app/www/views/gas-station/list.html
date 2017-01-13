@@ -111,19 +111,13 @@
 					</p>
 				</div>
 				<div class="col s3 right-align">
-					<div class="rating right" ng-if="m.rating === 0 || m.rating">
-						<rating read-only="true" ng-model="m.rating"></rating>
-						<br>
-						{{m.ratingCount}} avaliações
-					</div>
-					<span class="rating" ng-if="m.rating !== 0 && !m.rating">
-						<rating read-only="true" ng-model="0"></rating><br>
-						Sem avaliações
-					</span>
+					<rating read-only="true" ng-model="m.rating"></rating>
+					<br>
+					<small>{{m.ratingCount}} avaliações</small>
 					<br />
-					<button class="waves-effect waves-orange btn-flat col s12 m6 offset-m6 l4 offset-l8" title="Página do posto">
+					<a ng-href="/gas-station/page/{{m.id}}" class="waves-effect waves-orange btn-flat col s12 m6 offset-m6 l4 offset-l8" title="Página do posto">
 						<i class="material-icons">store</i>
-					</button>
+					</a>
 				</div>
 			</div>
 		</li>

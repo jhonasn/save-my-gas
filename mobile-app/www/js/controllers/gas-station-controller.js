@@ -50,7 +50,7 @@ angular.module('save-my-gas')
 		$scope.nameChanged = filter
 })
 
-.controller('gasStationEditController', function(
+.controller('gasStationPageController', function(
 	$scope,
 	gasStationService
 ) {})
