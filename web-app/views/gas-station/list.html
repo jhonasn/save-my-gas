@@ -1,0 +1,130 @@
+<style media="screen">
+	ul.collection .row .col {
+		padding: 0;
+	}
+	@media only screen and (max-width: 600px) {
+		ul.collection .row .col rating i.material-icons {
+			font-size: 12px;
+		}
+	}
+	@media only screen and (min-width: 600px) {
+		ul.collection .row .col rating i.material-icons {
+			font-size: 21px;
+		}
+	}
+	@media only screen and (min-width: 992px) {
+		ul.collection .row .col rating i.material-icons {
+			font-size: 24px;
+		}
+	}
+</style>
+<div class="container">
+
+	<h5 class="header grey-text text-lighten-1">
+		{{
+			collection
+			?
+			'Busca de postos de combustível'
+			:
+			'Carregando postos de combustível...'
+		}}
+	</h5>
+
+	<form name="modelForm">
+
+		<div class="input-field">
+			<location-selector id="origin-field"
+				name="originField"
+				ng-class="{ invalid: modelForm.originField.$invalid }"
+				ng-required="!name"
+				on-change="originChanged"
+				ng-model="origin"></location-selector>
+			<label for="origin-field">Ponto referência</label>
+			<div ng-messages="modelForm.originField.$error"
+							role="alert">
+				<span class="invalid"
+								ng-message="required">Selecione a origem</span>
+			</div>
+		</div>
+
+		<label for="radius-field">
+			Raio de busca de postos {{ (radius * 1000) | distance }}
+		</label>
+		<p class="range-field">
+			<input id="radius-field"
+							name="radiusField"
+							type="range"
+							ng-model="radius"
+							ng-change="radiusChanged()"
+							ng-model-options="{ debounce: 500 }"
+							min="1"
+							max="100" />
+		</p>
+
+		<p>
+			<div class="fuel-type" ng-repeat="ft in fuelTypes">
+				<input type="checkbox"
+					id="{{ft.name.toLowerCase()}}-field"
+					ng-change="fuelTypeChanged()"
+					ng-model-options="{ debounce: 2000 }"
+					ng-model="ft.selected" />
+				<label for="{{ft.name.toLowerCase()}}-field" ng-bind="ft.name"></label>
+			</div>
+		</p>
+
+		<div class="input-field">
+			<input type="text"
+							name="nameField"
+							id="name-field"
+							ng-required="!origin"
+							ng-change="nameChanged()"
+							ng-model-options="{ debounce: 800 }"
+							ng-model="name">
+			<label for="name-field">Nome do posto</label>
+			<div ng-messages="modelForm.nameField.$error"
+							role="alert">
+				<span class="invalid"
+								ng-message="required">Informe o nome do posto</span>
+			</div>
+		</div>
+
+	</form>
+
+	<!-- make an option to order by price -->
+	<ul class="collection">
+
+		<li class="collection-item avatar" ng-repeat="m in collection">
+			<img src="{{m.logo || SaveMyGas.rootRoute.getPath('/img/icons/logo.svg')}}"
+							onerror="this.src = SaveMyGas.rootRoute.getPath('/img/icons/logo.svg')"
+							alt="Logo do posto de combustível"
+							class="circle" />
+			<div class="row">
+				<div class="col s9">
+					<span class="title" ng-bind="m | gasStation"></span>
+					<p>
+						<span ng-repeat="fp in m.fuelPrices">
+							<strong>{{fp.fuelType.name}}:</strong> {{fp.sale | currency : ' R$' : 2}} <br>
+						</span>
+						<span ng-if="origin && origin.geolocation">
+							<strong>Distância:</strong> {{m.distance | distance}} <br>
+						</span>
+					</p>
+				</div>
+				<div class="col s3 right-align">
+					<rating read-only="true" ng-model="m.rating"></rating>
+					<br>
+					<small>{{m.ratingCount}} avaliações</small>
+					<br />
+					<!-- <a ng-href="/gas-station/page/{{ m.id }}/{{ origin.geolocation }}" class="waves-effect waves-orange btn col s12 m6 offset-m6 l4 offset-l8 big-icon center" title="Página do posto">
+						<i class="material-icons">store</i>
+					</a> -->
+				</div>
+			</div>
+		</li>
+
+		<li class="collection-item center" ng-show="collection && !collection.length">
+			<h4 class="grey-text text-lighten-1">Nenhum posto encontrado</h4>
+		</li>
+
+	</ul>
+</div>

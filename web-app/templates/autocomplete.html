@@ -33,22 +33,25 @@
 					id="initial-autocomplete-element"
 					class="autocomplete"
 					ng-model="ngModel"
+					ng-disabled="ngDisabled"
 					uib-typeahead="o.id as o[label] for o in search($viewValue)"
 					typeahead-on-select="select($item, $model, $label, $event)"
 					typeahead-show-hint="true"
 					typeahead-min-length="0"
 					typeahead-wait-ms="500"
-					typeahead-loading="loading"
 					typeahead-popup-template-url="autocomplete-popup.html"
 					typeahead-input-formatter="formatLabel($model)"
-					typeahead-show-hint="true"
 					typeahead-no-results="noResults"
 					typeahead-editable="isEditable"
 					autocomplete="off" />
-	<a href="#"
-					ng-click="clear()"
-					ng-disabled="loading"
-					style="position: absolute; top: 0; right: 0">
-		<i class="material-icons grey-text text-darken-3">backspace</i>
-	</a>
+		<div class="autocomplete-buttons-container" style="position: absolute; top: 0; right: 0; background-color: white;">
+			<button type="button"
+						class="clear-button grey-text text-darken-3 waves-effect waves-orange btn-flat big-icon"
+						ng-class="{ disabled: loading || ngDisabled }"
+						ng-disabled="loading || ngDisabled"
+						ng-click="clear()"
+						title="Limpar campo">
+						<i class="material-icons">backspace</i>
+					</button>
+		</div>
 </div>

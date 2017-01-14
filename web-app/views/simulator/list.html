@@ -16,42 +16,42 @@
 	</div>
 
 	<div class="input-field col s12">
-		<input type="text"
-						name="originField"
-						id="origin-field"
-						ng-class="{ invalid: modelForm.originField.$invalid }"
-						ng-model="model.origin"
-						placeholder=""
-						ng-disabled="!vehicleId">
+		<location-selector id="origin-field"
+			name="originField"
+			ng-class="{ invalid: modelForm.originField.$invalid }"
+			ng-required="true"
+			ng-disabled="!vehicleId"
+			on-change="traceRoute"
+			has-map="true"
+			map="map"
+			ng-model="model.origin"></location-selector>
 		<label for="origin-field">Origem</label>
-		<a href="#"
-						class="clear-button"
-						ng-class="{ disabled: !vehicleId }"
-						ng-click="clearOrigin()"
-						ng-disabled="loading"
-						style="position: absolute; top: 0; right: 0; margin-right: 10.5px;">
-			<i class="material-icons grey-text text-darken-3">backspace</i>
-		</a>
+		<div ng-messages="modelForm.originField.$error"
+						role="alert">
+			<span class="invalid"
+							ng-message="required">Selecione a origem</span>
+		</div>
 	</div>
 
 	<div class="input-field col s12">
-		<input type="text"
-						name="destinationField"
-						id="destination-field"
-						ng-class="{ invalid: modelForm.originField.$invalid }"
-						ng-model="model.destination"
-						placeholder=""
-						ng-disabled="!vehicleId">
+		<location-selector id="destination-field"
+			name="destinationField"
+			ng-class="{ invalid: modelForm.destinationField.$invalid }"
+			ng-required="true"
+			ng-disabled="!vehicleId"
+			on-change="traceRoute"
+			has-map="true"
+			map="map"
+			init-getting-location="false"
+			ng-model="model.destination"></location-selector>
 		<label for="destination-field">Destino</label>
-		<a href="#"
-						class="clear-button"
-						ng-class="{ disabled: !vehicleId }"
-						ng-click="clearDestination()"
-						ng-disabled="loading"
-						style="position: absolute; top: 0; right: 0; margin-right: 10.5px;">
-			<i class="material-icons grey-text text-darken-3">backspace</i>
-		</a>
+		<div ng-messages="modelForm.destinationField.$error"
+						role="alert">
+			<span class="invalid"
+							ng-message="required">Selecione o destino</span>
+		</div>
 	</div>
+
 </div>
 
 <div id="map"
