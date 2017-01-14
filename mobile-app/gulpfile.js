@@ -69,6 +69,7 @@ gulp.task('min-app-js', function() {
 			'www/lib/ngCordova/dist/ng-cordova.js',
 			'www/lib/angular-materialize/src/angular-materialize.js',
 			'www/lib/angular-bootstrap/ui-bootstrap-tpls.js',
+			'www/lib/angular-star-rating/angular-star-rating.js',
 			'www/js/*.js',
 			'www/js/**/*.js',
 		])
