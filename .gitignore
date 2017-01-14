@@ -47,4 +47,5 @@ publish
 mobile-app/www/lib/
 mobile-admin-app/www/lib/
 mobile-app/images
+mobile-app/savemygas.keystore
 *~
