@@ -19,7 +19,8 @@ module.exports.anpUpdate = function(updateRegions, cb) {
 	anpEntities.readStationsFiles()
 	// anpEntities.deleteOldFiles()
 
-	if(updateRegions) {
+	//if there's no cities get them
+	if(updateRegions || !anpEntities.entities.cities.length) {
 		module.updateRegions(cb)
 	} else if(anpEntities.readStationsFiles()) {
 		module.updateAllStations(cb)

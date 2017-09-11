@@ -1,14 +1,14 @@
 {
-  "name": "vehiclePhoto",
-  "plural": "vehiclesPhotos",
-  "base": "Model",
-  "idInjection": true,
-  "options": {
-    "validateUpsert": true
-  },
-  "properties": {},
-  "validations": [],
-  "relations": {},
-  "acls": [],
-  "methods": {}
+	"name": "vehiclePhoto",
+	"plural": "vehiclesPhotos",
+	"base": "Model",
+	"idInjection": true,
+	"options": {
+		"validateUpsert": true
+	},
+	"properties": {},
+	"validations": [],
+	"relations": {},
+	"acls": [],
+	"methods": {}
 }

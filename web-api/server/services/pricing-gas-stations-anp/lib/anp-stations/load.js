@@ -276,7 +276,7 @@ module.loadConnected = function(app, entitiesPath, anpLoadStatusId, callback, no
 		}, function(err) {
 			if (err) callback('error processing fuel prices', err)
 
-			if(notify) {
+			if (notify) {
 				notify('finished putFuelPrices')
 				notify('load to database success')
 			}

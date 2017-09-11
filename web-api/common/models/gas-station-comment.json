@@ -1,68 +1,67 @@
 {
-  "name": "gasStationComment",
-  "plural": "gasStationComments",
-  "base": "PersistedModel",
-  "idInjection": true,
-  "options": {
-    "validateUpsert": true
-  },
-  "properties": {
-    "comment": {
-      "type": "string",
-      "required": true
-    },
-    "date": {
-      "type": "date",
-      "required": true,
-      "default": "$now"
-    },
-    "gasStationId": {
-      "type": "string",
-      "required": true
-    },
-    "userId": {
-      "type": "string",
-      "required": true
-    }
-  },
-  "validations": [],
-  "relations": {
-    "gasStation": {
-      "type": "belongsTo",
-      "model": "gasStation",
-      "foreignKey": "gasStationId"
-    },
-    "user": {
-      "type": "belongsTo",
-      "model": "user",
-      "foreignKey": "userId"
-    }
-  },
-  "acls": [
-    {
-      "accessType": "*",
-      "principalType": "ROLE",
-      "principalId": "$unauthenticated",
-      "permission": "DENY"
-    },
-    {
-      "accessType": "*",
-      "principalType": "ROLE",
-      "principalId": "$authenticated",
-      "permission": "DENY"
-    },
-    {
-      "accessType": "READ",
-      "principalType": "ROLE",
-      "principalId": "$authenticated",
-      "permission": "ALLOW"
-    },
-    {
-      "accessType": "*",
-      "principalType": "ROLE",
-      "principalId": "$owner",
-      "permission": "ALLOW"
-    }
-  ],
-  "methods": {}
+	"name": "gasStationComment",
+	"plural": "gasStationComments",
+	"base": "PersistedModel",
+	"idInjection": true,
+	"options": {
+		"validateUpsert": true
+	},
+	"properties": {
+		"comment": {
+			"type": "string",
+			"required": true
+		},
+		"date": {
+			"type": "date",
+			"required": true,
+			"default": "$now"
+		},
+		"gasStationId": {
+			"type": "string",
+			"required": true
+		},
+		"userId": {
+			"type": "string",
+			"required": true
+		}
+	},
+	"validations": [],
+	"relations": {
+		"gasStation": {
+			"type": "belongsTo",
+			"model": "gasStation",
+			"foreignKey": "gasStationId"
+		},
+		"user": {
+			"type": "belongsTo",
+			"model": "user",
+			"foreignKey": "userId"
+		}
+	},
+	"acls": [{
+			"accessType": "*",
+			"principalType": "ROLE",
+			"principalId": "$unauthenticated",
+			"permission": "DENY"
+		},
+		{
+			"accessType": "*",
+			"principalType": "ROLE",
+			"principalId": "$authenticated",
+			"permission": "DENY"
+		},
+		{
+			"accessType": "READ",
+			"principalType": "ROLE",
+			"principalId": "$authenticated",
+			"permission": "ALLOW"
+		},
+		{
+			"accessType": "*",
+			"principalType": "ROLE",
+			"principalId": "$owner",
+			"permission": "ALLOW"
+		}
+	],
+	"methods": {}
 }

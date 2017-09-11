@@ -1,43 +1,42 @@
 {
-  "name": "vehicleType",
-  "base": "PersistedModel",
-  "strict": false,
-  "idInjection": false,
-  "options": {
-    "validateUpsert": true
-  },
-  "properties": {
-    "type": {
-      "type": "string",
-      "required": true
-    }
-  },
-  "validations": [],
-  "relations": {
-    "vehicles": {
-      "type": "hasMany",
-      "model": "vehicle",
-      "foreignKey": "vehicleTypeId"
-    },
-    "vehicleModels": {
-      "type": "hasMany",
-      "model": "vehicleModel",
-      "foreignKey": "vehicleModelId"
-    }
-  },
-  "acls": [
-    {
-      "accessType": "*",
-      "principalType": "ROLE",
-      "principalId": "$unauthenticated",
-      "permission": "DENY"
-    },
-    {
-      "accessType": "*",
-      "principalType": "ROLE",
-      "principalId": "$authenticated",
-      "permission": "ALLOW"
-    }
-  ],
-  "methods": {}
+	"name": "vehicleType",
+	"base": "PersistedModel",
+	"strict": false,
+	"idInjection": false,
+	"options": {
+		"validateUpsert": true
+	},
+	"properties": {
+		"type": {
+			"type": "string",
+			"required": true
+		}
+	},
+	"validations": [],
+	"relations": {
+		"vehicles": {
+			"type": "hasMany",
+			"model": "vehicle",
+			"foreignKey": "vehicleTypeId"
+		},
+		"vehicleModels": {
+			"type": "hasMany",
+			"model": "vehicleModel",
+			"foreignKey": "vehicleModelId"
+		}
+	},
+	"acls": [{
+			"accessType": "*",
+			"principalType": "ROLE",
+			"principalId": "$unauthenticated",
+			"permission": "DENY"
+		},
+		{
+			"accessType": "*",
+			"principalType": "ROLE",
+			"principalId": "$authenticated",
+			"permission": "ALLOW"
+		}
+	],
+	"methods": {}
 }

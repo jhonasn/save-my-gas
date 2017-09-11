@@ -1,6 +1,6 @@
 var PassportConfigurator = require('loopback-component-passport').PassportConfigurator;
 
-module.exports = function (app) {
+module.exports = function(app) {
 	var passportConfigurator = new PassportConfigurator(app);
 
 	passportConfigurator.init();

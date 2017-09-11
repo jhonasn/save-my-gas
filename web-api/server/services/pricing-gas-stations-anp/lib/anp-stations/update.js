@@ -24,13 +24,13 @@ module.upsertGasStation = function(app, gasStation, gasStations, notify, callbac
 	})
 }
 
-module.notifyProgress = function (message, gasStations, gasStation, notify, callback) {
+module.notifyProgress = function(message, gasStations, gasStation, notify, callback) {
 	var idx = gasStations.indexOf(gasStation)
 
-	if(idx % 1000 === 0) {
+	if (idx % 1000 === 0) {
 		var pc = (idx * 100) / (gasStations.length - 1)
 		notify(message + ' - ' + pc.toFixed(1) + '%')
-	} else if(callback && idx === (gasStations.length - 1)) {
+	} else if (callback && idx === (gasStations.length - 1)) {
 		callback()
 	}
 }
@@ -78,7 +78,7 @@ module.exports.updateGasStations = function(app, callback, notify) {
 							module.upsertGasStation(app, gasStation, gasStations, notify, callback)
 						})
 				} else {
-					module.upsertGasStation(app, gasStation, gasStations, notify. callback)
+					module.upsertGasStation(app, gasStation, gasStations, notify.callback)
 				}
 			})
 		})

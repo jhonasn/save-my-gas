@@ -1,77 +1,77 @@
 {
-  "name": "gasStationRating",
-  "plural": "gasStationRatings",
-  "base": "PersistedModel",
-  "idInjection": true,
-  "options": {
-    "validateUpsert": true
-  },
-  "properties": {
-    "rating": {
-      "type": "number",
-      "required": true
-    },
-    "gasStationId": {
-      "type": "string",
-      "required": true
-    },
-    "userId": {
-      "type": "string",
-      "required": true
-    }
-  },
-  "validations": [],
-  "relations": {
-    "gasStation": {
-      "type": "belongsTo",
-      "model": "gasStation",
-      "foreignKey": "gasStationId"
-    },
-    "user": {
-      "type": "belongsTo",
-      "model": "user",
-      "foreignKey": "userId"
-    }
-  },
-  "acls": [{
-      "accessType": "*",
-      "principalType": "ROLE",
-      "principalId": "$unauthenticated",
-      "permission": "DENY"
-    },
-    {
-      "accessType": "*",
-      "principalType": "ROLE",
-      "principalId": "$authenticated",
-      "permission": "DENY"
-    },
-    {
-      "accessType": "READ",
-      "principalType": "ROLE",
-      "principalId": "$authenticated",
-      "permission": "ALLOW"
-    },
-    {
-      "accessType": "*",
-      "principalType": "ROLE",
-      "principalId": "$owner",
-      "permission": "ALLOW"
-    }
-  ],
-  "methods": {
-    "average": {
-      "http": {
-        "verb": "get"
-      },
-      "accepts": {
-        "arg": "gasStationId",
-        "type": "string",
-		"required": true
-      },
-      "returns": {
-        "arg": "average",
-        "type": "number"
-      }
-    }
-  }
+	"name": "gasStationRating",
+	"plural": "gasStationRatings",
+	"base": "PersistedModel",
+	"idInjection": true,
+	"options": {
+		"validateUpsert": true
+	},
+	"properties": {
+		"rating": {
+			"type": "number",
+			"required": true
+		},
+		"gasStationId": {
+			"type": "string",
+			"required": true
+		},
+		"userId": {
+			"type": "string",
+			"required": true
+		}
+	},
+	"validations": [],
+	"relations": {
+		"gasStation": {
+			"type": "belongsTo",
+			"model": "gasStation",
+			"foreignKey": "gasStationId"
+		},
+		"user": {
+			"type": "belongsTo",
+			"model": "user",
+			"foreignKey": "userId"
+		}
+	},
+	"acls": [{
+			"accessType": "*",
+			"principalType": "ROLE",
+			"principalId": "$unauthenticated",
+			"permission": "DENY"
+		},
+		{
+			"accessType": "*",
+			"principalType": "ROLE",
+			"principalId": "$authenticated",
+			"permission": "DENY"
+		},
+		{
+			"accessType": "READ",
+			"principalType": "ROLE",
+			"principalId": "$authenticated",
+			"permission": "ALLOW"
+		},
+		{
+			"accessType": "*",
+			"principalType": "ROLE",
+			"principalId": "$owner",
+			"permission": "ALLOW"
+		}
+	],
+	"methods": {
+		"average": {
+			"http": {
+				"verb": "get"
+			},
+			"accepts": {
+				"arg": "gasStationId",
+				"type": "string",
+				"required": true
+			},
+			"returns": {
+				"arg": "average",
+				"type": "number"
+			}
+		}
+	}
 }
