@@ -45,6 +45,19 @@ module.exports.test = function (cb) {
 			 )
 }
 
+//waits admin type the captcha
+module.exports.getCaptcha = function (cb) {
+	var request = require('request').defaults({jar: true})
+	var img = null,
+		imgB64 = null
+	request.get('http://www.anp.gov.br/preco/prc/Resumo_Por_Estado_Index.asp', function(err, res, body) {
+		request.get('http://www.anp.gov.br/preco/prc/imagem.asp', function (err, res, body) {
+			img = body
+			imgB64 = 'data:image/gif;base64,' + (new Buffer(body, 'binary').toString('base64'))
+		}, true)
+	})
+}
+
 module.exports.anpUpdated = function (cb) {
 	if(!anpEntities.readStationsFiles()) {
 		module.updateRegions(cb)
