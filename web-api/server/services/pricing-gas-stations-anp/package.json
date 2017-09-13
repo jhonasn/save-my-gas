@@ -13,8 +13,7 @@
     "async": "^2.1.4",
     "cheerio": "0.19.0",
     "diacritics": "1.2.1",
-    "iconv": "^2.2.1",
-    "request": "^2.81.0"
+    "iconv": "^2.2.1"
   },
   "jshintConfig": {
     "asi": true
