@@ -1,63 +1,88 @@
 var http = require('http')
 var https = require('https')
+var StreamTransform = require('stream').Transform
 
-module.resquestCommon = function(res, cb) {
-    // var iconv = new require('iconv').Iconv('latin1', 'utf-8')
-    var iconv = new require('iconv').Iconv('ISO-8859-1', 'UTF8')
+module.resquestCommon = function(req, cb, convert = true) {
+	// var iconv = new require('iconv').Iconv('latin1', 'utf-8')
+	var iconv = new require('iconv').Iconv('ISO-8859-1', 'UTF8')
 
-    res.on('response', function(res) {
-            var chunks = []
-            var totalLength = 0
-            res.on('data', function(data) {
-                chunks.push(data)
-                totalLength += data.length
-            })
-            res.on('end', function() {
-                var results = new Buffer(totalLength)
-                var pos = 0
-                for (var i = 0; i < chunks.length; i++) {
-                    chunks[i].copy(results, pos)
-                    pos += chunks[i].length
-                }
-                cb(null, iconv.convert(results))
-            })
-            res.on('error', function(err) {
-                cb(err)
-            })
-        })
-        .on('error', function(err) {
-            cb(err)
-        })
+	return req.on('response', function(res) {
+			var chunks = new StreamTransform()
+			res.on('data', function(data) {
+				chunks.push(data)
+			})
+			res.on('end', function() {
+				chunks = chunks.read()
+				if(convert)
+					cb(null, iconv.convert(chunks), res)
+				else
+					cb(null, chunks, res)
+			})
+			res.on('error', function(err) {
+				cb(err, chunks, res)
+			})
+		})
+		.on('error', function(err) {
+			cb(err)
+		})
 }
 
-module.exports.get = function(url, cb) {
-    var req = module.protocol(url).get(url)
-    module.resquestCommon(req, cb)
+module.exports.get = function(url, cb, options) {
+	options = module.initOptions(url, options)
+	options.method = 'GET'
+
+	var convert = module.getConvert(options)
+
+	var req = module.protocol(url).request(options)
+	module.resquestCommon(req, cb, convert)
+	req.end()
+
+	return req
 }
 
-module.exports.post = function(url, formData, cb) {
-    url = require('url').parse(url)
-    formData = require('querystring').stringify(formData)
-    var options = {
-        hostname: url.hostname,
-        path: url.path,
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/x-www-form-urlencoded',
-            'Content-Length': formData.length
-        }
-    }
+module.exports.post = function(url, formData, cb, options) {
+	formData = require('querystring').stringify(formData)
 
-    var req = module.protocol(url.protocol).request(options)
-    module.resquestCommon(req, cb)
-    req.write(formData)
-    req.end()
+	options = module.initOptions(url, options)
+
+	var convert = module.getConvert(options)
+
+	options.method = 'POST'
+	options.headers['Content-Type'] = 'application/x-www-form-urlencoded'
+	options.headers['Content-Length'] = formData.length
+
+	var req = module.protocol(url).request(options)
+	module.resquestCommon(req, cb, convert)
+	req.write(formData)
+	req.end()
+
+	return req
 }
 
 module.protocol = function(url) {
-	if(url.split(':')[0] == 'https') {
+	if (url.split(':')[0] == 'https') {
 		return https
 	} else {
 		return http
 	}
+}
+
+module.initOptions = function (url, options) {
+	if(!options)
+		options = { headers: {} }
+	else if (!options.headers)
+		options.headers = {}
+
+	url = require('url').parse(url)
+
+	options.hostname = url.hostname
+	options.path = url.path
+
+	return options
+}
+
+module.getConvert = function (options) {
+	var convert = options.convert
+	delete options.convert
+	return convert
 }

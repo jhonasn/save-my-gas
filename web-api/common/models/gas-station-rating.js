@@ -21,7 +21,7 @@ module.exports = function(GasStationRating) {
 				}
 			], function(err, gasStationAvg) {
 				if (err) return callback(err)
-				if(gasStationAvg && gasStationAvg.length) {
+				if (gasStationAvg && gasStationAvg.length) {
 					cb(null, gasStationAvg[0].average)
 				} else {
 					cb(null, -1)

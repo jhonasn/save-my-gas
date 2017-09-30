@@ -114,13 +114,13 @@ module.exports.getStationState = function(station) {
 }
 
 module.exports.getCityState = function(city) {
-	var state = module.exports.entities.states.filter(function (st) {
-		return st.cities.some(function (c) {
+	var state = module.exports.entities.states.filter(function(st) {
+		return st.cities.some(function(c) {
 			return c.id = city.id
 		})
 	})
 
-	if(state.length) {
+	if (state.length) {
 		return state[0]
 	} else {
 		return null

@@ -1,74 +1,73 @@
 {
-  "name": "vehicleRefuel",
-  "plural": "vehicleRefuels",
-  "base": "PersistedModel",
-  "idInjection": true,
-  "options": {
-    "validateUpsert": true
-  },
-  "properties": {
-    "date": {
-      "type": "date",
-      "required": true,
-      "default": "$now"
-    },
-    "value": {
-      "type": "number",
-      "required": true
-    },
-    "unit": {
-      "type": "string"
-    },
-    "amountUnit": {
-      "type": "number"
-    },
-    "vehicleId": {
-      "type": "string",
-      "required": true
-    },
-    "gasStationId": {
-      "type": "string",
-      "required": false
-    }
-  },
-  "validations": [],
-  "relations": {
-    "gasStation": {
-      "type": "belongsTo",
-      "model": "gasStation",
-      "foreignKey": "gasStationId"
-    },
-    "vehicle": {
-      "type": "belongsTo",
-      "model": "vehicle",
-      "foreignKey": "vehicleId"
-    }
-  },
-  "acls": [
-	  {
-        "accessType": "*",
-        "principalType": "ROLE",
-        "principalId": "$unauthenticated",
-        "permission": "DENY"
-      },
-      {
-        "accessType": "*",
-        "principalType": "ROLE",
-        "principalId": "$authenticated",
-        "permission": "DENY"
-      },
-      {
-        "accessType": "READ",
-        "principalType": "ROLE",
-        "principalId": "$authenticated",
-        "permission": "ALLOW"
-      },
-      {
-        "accessType": "*",
-        "principalType": "ROLE",
-        "principalId": "$owner",
-        "permission": "ALLOW"
-      }
-  ],
-  "methods": {}
+	"name": "vehicleRefuel",
+	"plural": "vehicleRefuels",
+	"base": "PersistedModel",
+	"idInjection": true,
+	"options": {
+		"validateUpsert": true
+	},
+	"properties": {
+		"date": {
+			"type": "date",
+			"required": true,
+			"default": "$now"
+		},
+		"value": {
+			"type": "number",
+			"required": true
+		},
+		"unit": {
+			"type": "string"
+		},
+		"amountUnit": {
+			"type": "number"
+		},
+		"vehicleId": {
+			"type": "string",
+			"required": true
+		},
+		"gasStationId": {
+			"type": "string",
+			"required": false
+		}
+	},
+	"validations": [],
+	"relations": {
+		"gasStation": {
+			"type": "belongsTo",
+			"model": "gasStation",
+			"foreignKey": "gasStationId"
+		},
+		"vehicle": {
+			"type": "belongsTo",
+			"model": "vehicle",
+			"foreignKey": "vehicleId"
+		}
+	},
+	"acls": [{
+			"accessType": "*",
+			"principalType": "ROLE",
+			"principalId": "$unauthenticated",
+			"permission": "DENY"
+		},
+		{
+			"accessType": "*",
+			"principalType": "ROLE",
+			"principalId": "$authenticated",
+			"permission": "DENY"
+		},
+		{
+			"accessType": "READ",
+			"principalType": "ROLE",
+			"principalId": "$authenticated",
+			"permission": "ALLOW"
+		},
+		{
+			"accessType": "*",
+			"principalType": "ROLE",
+			"principalId": "$owner",
+			"permission": "ALLOW"
+		}
+	],
+	"methods": {}
 }

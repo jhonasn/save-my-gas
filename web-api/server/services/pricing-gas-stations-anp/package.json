@@ -2,9 +2,11 @@
   "name": "save-my-gas",
   "version": "1.0.0",
   "description": "save-my-gas: Scratch project to get station data from country organizations that serve this purpouse",
-  "main": "./lib/main",
+  "main": "./lib/console",
   "scripts": {
-    "cli": "./lib/console"
+    "update": "./lib/console -u",
+    "check": "./lib/console -v",
+    "fix-geolocation": "./lib/console -fg"
   },
   "dependencies": {
     "adm-zip": "^0.4.7",

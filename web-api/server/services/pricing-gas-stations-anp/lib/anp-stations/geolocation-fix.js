@@ -11,7 +11,7 @@ module.stations = []
 var rl = null
 
 module.exports.start = function(cb) {
-	if(entity.readStationsFiles()) {
+	if (entity.readStationsFiles()) {
 		module.updateStations()
 
 		module.improveArray()
@@ -36,38 +36,37 @@ module.menu = function(cb) {
 	console.log()
 	rl.question('make your choice and press enter: ', function(answer) {
 		module.clearConsole()
-		switch(answer) {
+		switch (answer) {
 			case 'c':
 				console.log('Current Station:\n', module.stringJsonColor(module.stations.current()))
-			break;
+				break;
 			case 'n':
 				console.log('Next Station (current now):\n', module.stringJsonColor(module.stations.next()))
-			break;
+				break;
 			case 'p':
 				console.log('Previous Station (current now):\n', module.stringJsonColor(module.stations.back()))
-			break;
+				break;
 			case 'e':
 				module.menuEditStation()
-			break;
+				break;
 			case 'i':
 				module.insertGeolocation()
-			break;
+				break;
 			case 'q':
 				//process.exit()
 				break;
 			default:
-				if(answer !== undefined) {
-				module.clearConsole()
-				console.log('\n\033[31mPlease enter with an valid key as menu ask\033[91m.\n')
-				module.clearConsole()
-			}
-			break;
+				if (answer !== undefined) {
+					module.clearConsole()
+					console.log('\n\033[31mPlease enter with an valid key as menu ask\033[91m.\n')
+					module.clearConsole()
+				}
+				break;
 		}
-		if(answer === 'q') {
+		if (answer === 'q') {
 			//cb(null, 'just quit :)')
 			rl.close()
-		} else if(answer === 'e' || answer === 'i') {
-		} else {
+		} else if (answer === 'e' || answer === 'i') {} else {
 			module.menu()
 		}
 	})
@@ -98,17 +97,17 @@ module.menuEditStation = function() {
 				console.log('\ngoogle response:\n')
 				console.log(module.stringJsonColor(jsonResponse))
 
-				if(typeof station.geolocation === 'string') {
+				if (typeof station.geolocation === 'string') {
 					rl.question('It was possible to get geolocation, do you wanna save it into station? (yes, y or no, n)', function(answer) {
-						if(answer.toLowerCase() === 'yes' || answer.toLocaleLowerCase() === 'y') {
+						if (answer.toLowerCase() === 'yes' || answer.toLocaleLowerCase() === 'y') {
 							module.saveEntities()
 							module.updateStations()
-						} 
+						}
 						module.menu()
 					})
 				} else {
 					rl.question('The address input failed to get geolocation, do you wanna try again with this station? (yes, y or no, n)', function(answer) {
-						if(answer.toLowerCase() === 'yes' || answer.toLocaleLowerCase() === 'y') {
+						if (answer.toLowerCase() === 'yes' || answer.toLocaleLowerCase() === 'y') {
 							//i dont know how to repeat this.
 							module.menuEditStation()
 						} else {
@@ -132,14 +131,15 @@ module.insertGeolocation = function() {
 		module.stations.current().geolocation = geolocation
 
 		rl.question('the geolocation passed ({g}) is correct, do u wanna save? (y or yes, n or no): '
-		.replace('{g}',geolocation), function(answer){
-			if(answer === 'y' || answer === 'yes') {
-				module.saveEntities()
-				module.menu()
-			} else {
-				module.insertGeolocation()
-			}
-		})
+			.replace('{g}', geolocation),
+			function(answer) {
+				if (answer === 'y' || answer === 'yes') {
+					module.saveEntities()
+					module.menu()
+				} else {
+					module.insertGeolocation()
+				}
+			})
 	})
 }
 
@@ -177,14 +177,18 @@ module.consoleStart = function() {
 module.clearConsole = function() {
 	var lines = process.stdout.getWindowSize()[1];
 	var lineJumpString = ''
-	for(var i = 0; i < lines; i++) {
+	for (var i = 0; i < lines; i++) {
 		lineJumpString += '\r\n'
 	}
 	console.log(lineJumpString)
 }
 
-module.stringJsonColor = function (obj) {
-	var inspectOptions = { showHidden: false, depth: null, colors: true }
+module.stringJsonColor = function(obj) {
+	var inspectOptions = {
+		showHidden: false,
+		depth: null,
+		colors: true
+	}
 	return util.inspect(obj, inspectOptions)
 }
 
@@ -194,13 +198,13 @@ module.getAddressStation = function(station) {
 		state: entity.getStationState(station),
 		neighboorhood: station.bairro,
 		street: station.endereco
-		.replace('S/n', '')
-		.replace('º', '')
-		.split(', '),
+			.replace('S/n', '')
+			.replace('º', '')
+			.split(', '),
 		number: ''
 	}
 
-	if(address.street.length > 1) {
+	if (address.street.length > 1) {
 		address.number = address.street[1].trim()
 		address.street = address.street[0].trim()
 	} else {
@@ -211,9 +215,9 @@ module.getAddressStation = function(station) {
 }
 
 module.sendStation = function(params, station, cb) {
-	req.get('https://maps.googleapis.com/maps/api/geocode/json?' + qs.stringify(params), 
+	req.get('https://maps.googleapis.com/maps/api/geocode/json?' + qs.stringify(params),
 		function(err, data) {
-			if(err) {
+			if (err) {
 				err.myMsg = 'request error'
 				cb(err, data)
 			}
@@ -227,15 +231,15 @@ module.sendStation = function(params, station, cb) {
 			 */
 
 			var response = null
-			try{
+			try {
 				response = JSON.parse(data)
 
-				if(response.status === 'OK') {
+				if (response.status === 'OK') {
 					//response.results[0].geometry.location_type
 					var location = response.results[0].geometry.location
 					station.geolocation = '{0},{1}'
-					.replace('{0}', location.lat)
-					.replace('{1}', location.lng)
+						.replace('{0}', location.lat)
+						.replace('{1}', location.lng)
 				}
 			} catch (ex) {
 				ex.myMsg = 'Exception error'

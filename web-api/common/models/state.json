@@ -1,47 +1,46 @@
 {
-  "name": "state",
-  "base": "PersistedModel",
-  "strict": false,
-  "idInjection": false,
-  "options": {
-    "validateUpsert": true
-  },
-  "properties": {
-    "name": {
-      "type": "string",
-      "required": true
-    },
-    "fu": {
-      "type": "string",
-      "required": true
-    }
-  },
-  "validations": [],
-  "relations": {
-    "cities": {
-      "type": "hasMany",
-      "model": "city",
-      "foreignKey": "stateId"
-    },
-    "gasStations": {
-      "type": "hasMany",
-      "model": "gasStation",
-      "foreignKey": "stateId"
-    }
-  },
-  "acls": [
-    {
-      "accessType": "*",
-      "principalType": "ROLE",
-      "principalId": "$unauthenticated",
-      "permission": "DENY"
-    },
-    {
-      "accessType": "*",
-      "principalType": "ROLE",
-      "principalId": "$authenticated",
-      "permission": "ALLOW"
-    }
-  ],
-  "methods": {}
+	"name": "state",
+	"base": "PersistedModel",
+	"strict": false,
+	"idInjection": false,
+	"options": {
+		"validateUpsert": true
+	},
+	"properties": {
+		"name": {
+			"type": "string",
+			"required": true
+		},
+		"fu": {
+			"type": "string",
+			"required": true
+		}
+	},
+	"validations": [],
+	"relations": {
+		"cities": {
+			"type": "hasMany",
+			"model": "city",
+			"foreignKey": "stateId"
+		},
+		"gasStations": {
+			"type": "hasMany",
+			"model": "gasStation",
+			"foreignKey": "stateId"
+		}
+	},
+	"acls": [{
+			"accessType": "*",
+			"principalType": "ROLE",
+			"principalId": "$unauthenticated",
+			"permission": "DENY"
+		},
+		{
+			"accessType": "*",
+			"principalType": "ROLE",
+			"principalId": "$authenticated",
+			"permission": "ALLOW"
+		}
+	],
+	"methods": {}
 }

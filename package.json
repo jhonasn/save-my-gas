@@ -9,7 +9,10 @@
 		"arc": "slc arc ./web-api",
 		"lb-ng": "lb-ng ./web-api/server/server.js ./mobile-app/www/js/services/lb-services.js",
 		"test": "echo \"Error: no test specified\" && exit 1",
-		"preinstall": "cd mobile-admin && npm install && bower install && cd ../mobile-app && npm install && bower install && cd ../web-api && npm install"
+		"preinstall": "cd mobile-admin-app && npm install && bower install && cd ../mobile-app && npm install && bower install && cd ../web-api && npm install && cd server/services/pricing-gas-stations-anp && npm install",
+		"debug-service-anp": "node --inspect-brk ./web-api/server/services/pricing-gas-stations-anp -u",
+		"debug-api": "node --inspect ./web-api",
+		"debug-api-brk": "node --inspect-brk ./web-api"
 	},
 	"repository": {
 		"type": "git",

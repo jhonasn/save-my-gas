@@ -1,100 +1,99 @@
 {
-  "name": "gasStation",
-  "base": "PersistedModel",
-  "strict": false,
-  "idInjection": false,
-  "options": {
-    "validateUpsert": true
-  },
-  "properties": {
-    "companyName": {
-      "type": "string"
-    },
-    "geolocation": {
-      "type": "geopoint"
-    },
-    "flag": {
-      "type": "string"
-    },
-    "distributor": {
-      "type": "string"
-    },
-    "invoiceOk": {
-      "type": "boolean"
-    },
-    "address": {
-      "type": "string"
-    },
-    "neighborhood": {
-      "type": "string"
-    },
-    "fuelTypeIds": {
-      "type": [
-        "string"
-      ]
-    },
-    "hasPrices": {
-      "type": "boolean"
-    },
-    "cityId": {
-      "type": "string"
-    },
-    "stateId": {
-      "type": "string"
-    }
-  },
-  "validations": [],
-  "relations": {
-    "city": {
-        "type": "belongsTo",
-        "model": "city",
-        "foreignKey": "cityId"
-    },
-    "fuelPrices": {
-      "type": "hasMany",
-      "model": "fuelPrice",
-      "foreignKey": "gasStationId"
-    },
-    "vehicles": {
-      "type": "hasMany",
-      "model": "vehicle",
-      "foreignKey": "vehicleId",
-      "through": "vehicleRefuel"
-    },
-    "vehicleRefuels": {
-      "type": "hasMany",
-      "model": "vehicleRefuel",
-      "foreignKey": "gasStationId"
-    },
-    "fuelPriceSuggestions": {
-      "type": "hasMany",
-      "model": "fuelPriceSuggestion",
-      "foreignKey": "gasStationId"
-    },
-    "gasStationComments": {
-      "type": "hasMany",
-      "model": "gasStationComment",
-      "foreignKey": "gasStationId"
-    },
-    "gasStationRatings": {
-      "type": "hasMany",
-      "model": "gasStationRating",
-      "foreignKey": "gasStationId"
-    }
-  },
-  "acls": [
-    {
-      "accessType": "*",
-      "principalType": "ROLE",
-      "principalId": "$unauthenticated",
-      "permission": "DENY"
-    },
-    {
-      "accessType": "*",
-      "principalType": "ROLE",
-      "principalId": "$authenticated",
-      "permission": "ALLOW"
-    }
-  ],
-  "methods": {}
+	"name": "gasStation",
+	"base": "PersistedModel",
+	"strict": false,
+	"idInjection": false,
+	"options": {
+		"validateUpsert": true
+	},
+	"properties": {
+		"companyName": {
+			"type": "string"
+		},
+		"geolocation": {
+			"type": "geopoint"
+		},
+		"flag": {
+			"type": "string"
+		},
+		"distributor": {
+			"type": "string"
+		},
+		"invoiceOk": {
+			"type": "boolean"
+		},
+		"address": {
+			"type": "string"
+		},
+		"neighborhood": {
+			"type": "string"
+		},
+		"fuelTypeIds": {
+			"type": [
+				"string"
+			]
+		},
+		"hasPrices": {
+			"type": "boolean"
+		},
+		"cityId": {
+			"type": "string"
+		},
+		"stateId": {
+			"type": "string"
+		}
+	},
+	"validations": [],
+	"relations": {
+		"city": {
+			"type": "belongsTo",
+			"model": "city",
+			"foreignKey": "cityId"
+		},
+		"fuelPrices": {
+			"type": "hasMany",
+			"model": "fuelPrice",
+			"foreignKey": "gasStationId"
+		},
+		"vehicles": {
+			"type": "hasMany",
+			"model": "vehicle",
+			"foreignKey": "vehicleId",
+			"through": "vehicleRefuel"
+		},
+		"vehicleRefuels": {
+			"type": "hasMany",
+			"model": "vehicleRefuel",
+			"foreignKey": "gasStationId"
+		},
+		"fuelPriceSuggestions": {
+			"type": "hasMany",
+			"model": "fuelPriceSuggestion",
+			"foreignKey": "gasStationId"
+		},
+		"gasStationComments": {
+			"type": "hasMany",
+			"model": "gasStationComment",
+			"foreignKey": "gasStationId"
+		},
+		"gasStationRatings": {
+			"type": "hasMany",
+			"model": "gasStationRating",
+			"foreignKey": "gasStationId"
+		}
+	},
+	"acls": [{
+			"accessType": "*",
+			"principalType": "ROLE",
+			"principalId": "$unauthenticated",
+			"permission": "DENY"
+		},
+		{
+			"accessType": "*",
+			"principalType": "ROLE",
+			"principalId": "$authenticated",
+			"permission": "ALLOW"
+		}
+	],
+	"methods": {}
 }

@@ -2,7 +2,7 @@
 var serverPath = 'http://localhost:3000';
 
 var env = process.env.NODE_ENV;
-if(typeof env === 'string' && env.toLowerCase() === 'production') {
+if (typeof env === 'string' && env.toLowerCase() === 'production') {
 	serverPath = 'http://savemygas.com.br';
 }
 

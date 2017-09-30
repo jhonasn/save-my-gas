@@ -1,48 +1,47 @@
 {
-  "name": "user",
-  "base": "User",
-  "idInjection": true,
-  "options": {
-    "validateUpsert": true
-  },
-  "properties": {},
-  "validations": [],
-  "relations": {
-    "vehicles": {
-      "type": "hasMany",
-      "model": "vehicle",
-      "foreignKey": "ownerId"
-    },
-    "fuelPriceSuggestions": {
-      "type": "hasMany",
-      "model": "fuelPriceSuggestion",
-      "foreignKey": "userId"
-    },
-    "gasStationComments": {
-      "type": "hasMany",
-      "model": "gasStationComment",
-      "foreignKey": "userId"
-    },
-    "gasStationRatings": {
-      "type": "hasMany",
-      "model": "gasStationRating",
-      "foreignKey": "userId"
-    }
-  },
-  "acls": [
-    {
-      "accessType": "*",
-      "principalType": "ROLE",
-      "principalId": "$owner",
-      "permission": "ALLOW"
-    },
-    {
-      "accessType": "EXECUTE",
-      "principalType": "ROLE",
-      "principalId": "$everyone",
-      "permission": "ALLOW",
-      "property": "generateId"
-    }
-  ],
-  "methods": {}
+	"name": "user",
+	"base": "User",
+	"idInjection": true,
+	"options": {
+		"validateUpsert": true
+	},
+	"properties": {},
+	"validations": [],
+	"relations": {
+		"vehicles": {
+			"type": "hasMany",
+			"model": "vehicle",
+			"foreignKey": "ownerId"
+		},
+		"fuelPriceSuggestions": {
+			"type": "hasMany",
+			"model": "fuelPriceSuggestion",
+			"foreignKey": "userId"
+		},
+		"gasStationComments": {
+			"type": "hasMany",
+			"model": "gasStationComment",
+			"foreignKey": "userId"
+		},
+		"gasStationRatings": {
+			"type": "hasMany",
+			"model": "gasStationRating",
+			"foreignKey": "userId"
+		}
+	},
+	"acls": [{
+			"accessType": "*",
+			"principalType": "ROLE",
+			"principalId": "$owner",
+			"permission": "ALLOW"
+		},
+		{
+			"accessType": "EXECUTE",
+			"principalType": "ROLE",
+			"principalId": "$everyone",
+			"permission": "ALLOW",
+			"property": "generateId"
+		}
+	],
+	"methods": {}
 }

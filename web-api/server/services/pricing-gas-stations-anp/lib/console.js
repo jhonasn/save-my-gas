@@ -8,7 +8,7 @@ var geolocationFix = require(path.resolve(rootPath, 'lib', 'anp-stations', 'geol
 var dbLoadEntities = require(path.resolve(rootPath, 'lib', 'anp-stations', 'load'))
 var updateAnp = require(path.resolve(rootPath, 'lib', 'anp-stations', 'update'))
 var entities = require(path.resolve(rootPath, 'lib', 'anp-stations', 'entities'))
-var loopbackApp = require('../../../server-offline')
+//var loopbackApp = require('../../../server-offline')
 
 if (process.argv.length < 3) {
 	console.log('you need to specify the action:\n')
@@ -29,7 +29,7 @@ var hasArgument = function(arg) {
 	})
 }
 
-var waitDbConnection = function (cb) {
+var waitDbConnection = function(cb) {
 	if (loopbackApp.datasources.mongodb.connected) {
 		cb(null, loopbackApp)
 	}
@@ -172,12 +172,12 @@ if (hasArgument('-l') || hasArgument('load')) {
 	})
 }
 
-if(hasArgument('-usq') || hasArgument('updatestationsquery')) {
-	waitDbConnection(function (err, app) {
-		if(err) console.error(err)
+if (hasArgument('-usq') || hasArgument('updatestationsquery')) {
+	waitDbConnection(function(err, app) {
+		if (err) console.error(err)
 
-		updateAnp.updateGasStations(app, function (err, res) {
-			if(err) {
+		updateAnp.updateGasStations(app, function(err, res) {
+			if (err) {
 				console.error('there are some errors on updating gas stations')
 				throw err
 			}
