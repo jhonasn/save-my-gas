@@ -1,7 +1,16 @@
 <div class="parallax-container">
 	<div parallax><img ng-src="{{ model.gasStationPhoto }}" onerror="this.src = '/img/icons/logo-title.svg'"></div>
+	<div class="col s3 right-align">
+		<rating read-only="true" ng-model="m.rating"></rating>
+		<br>
+		<small>{{m.ratingCount}} avaliações</small>
+		<br />
+		<a ng-href="/gas-station/page/{{ m.id }}/{{ origin.geolocation }}" class="waves-effect waves-orange btn col s12 m6 offset-m6 l4 offset-l8 big-icon center" title="Página do posto">
+			<i class="material-icons">store</i>
+		</a>
+	</div>
 </div>
 
 <div class="container">
-	Informações: {{ model | json }}
+
 </div>
